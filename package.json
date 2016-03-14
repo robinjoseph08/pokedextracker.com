@@ -1,0 +1,60 @@
+{
+  "name": "pokedextracker.com",
+  "version": "0.0.1",
+  "description": "A website to track your completion of a Living Pokedex",
+  "main": "./app/boot.ts",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "webpack",
+    "postinstall": "typings install",
+    "lint": "tslint app/*.ts app/**/*.ts",
+    "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
+    "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
+    "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
+    "start": "webpack-dev-server --inline --hot --progress",
+    "test": "karma start",
+    "typings": "typings"
+  },
+  "dependencies": {
+    "angular2": "^2.0.0-beta.9",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.13",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "^5.0.0-beta.2",
+    "zone.js": "^0.5.15"
+  },
+  "devDependencies": {
+    "css-loader": "^0.23.1",
+    "generate-changelog": "^1.0.0",
+    "istanbul-instrumenter-loader": "^0.1.3",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-sourcemap-loader": "^0.3.6",
+    "karma-spec-reporter": "0.0.23",
+    "karma-webpack": "^1.7.0",
+    "node-sass": "^3.4.2",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "ts-loader": "^0.7.2",
+    "tslint": "^3.2.1",
+    "typescript": "^1.8.2",
+    "typings": "^0.6.8",
+    "webpack": "^1.12.10",
+    "webpack-dev-server": "^1.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robinjoseph08/rmj.io.git"
+  },
+  "author": "Robin Joseph <robin.joseph@me.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/robinjoseph08/rmj.io/issues"
+  },
+  "homepage": "https://github.com/robinjoseph08/rmj.io#readme"
+}
