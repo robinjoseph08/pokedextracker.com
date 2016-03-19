@@ -1,0 +1,47 @@
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *:before, *:after {
+  @include border-box();
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-text;
+}
+
+app {
+  @include flexbox();
+  @include flex-direction(column);
+
+  height: 100vh;
+
+  tracker,
+  home {
+    @include flex-grow(1);
+  }
+}
+
+nav {
+  @include flexbox();
+  @include justify-content(space-between);
+
+  background-color: $brand-primary;
+  font-family: $font-accent;
+
+  a {
+    padding: 17px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+
+    color: $brand-secondary;
+
+    &:hover {
+      background-color: lighten($brand-primary, 10%);
+    }
+  }
+}

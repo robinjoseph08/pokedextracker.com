@@ -1,0 +1,25 @@
+tracker {
+  @include flexbox();
+}
+
+info {
+  background-color: pink;
+  width: 500px;
+}
+
+dex {
+  @include flex-grow(1);
+
+  background-color: lightgreen;
+}
+
+@media (max-width: 1000px) {
+  tracker {
+    @include flex-direction(column);
+  }
+
+  info {
+    width: 100%;
+    height: 300px;
+  }
+}
