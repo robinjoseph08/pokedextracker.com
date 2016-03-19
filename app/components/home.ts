@@ -5,6 +5,7 @@ const HTML = require('../views/home.html');
 
 @Component({
   providers: [Title],
+  selector: 'home',
   template: HTML
 })
 export class HomeComponent {

@@ -9,6 +9,7 @@
     "removeComments": false,
     "noImplicitAny": false
   },
+  "compileOnSave": false,
   "exclude": [
     "node_modules",
     "typings/main",
