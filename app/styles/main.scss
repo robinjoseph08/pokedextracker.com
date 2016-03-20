@@ -9,7 +9,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-text;
+  font-family: $font-primary;
 }
 
 app {
@@ -28,8 +28,9 @@ nav {
   @include flexbox();
   @include justify-content(space-between);
 
+  min-height: 49px;
   background-color: $brand-primary;
-  font-family: $font-accent;
+  font-family: $font-secondary;
 
   a {
     @include transition(all .1s ease-out);
