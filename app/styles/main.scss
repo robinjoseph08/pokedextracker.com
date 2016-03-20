@@ -32,8 +32,11 @@ nav {
   font-family: $font-accent;
 
   a {
+    @include transition(all .1s ease-out);
+
     padding: 17px;
     font-size: 12px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     text-decoration: none;
