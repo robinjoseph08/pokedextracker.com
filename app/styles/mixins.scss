@@ -13,11 +13,11 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-@mixin transition ($property, $time: 500ms) {
-  -webkit-transition: $property $time ease;
-  -moz-transition:    $property $time ease;
-  -o-transition:      $property $time ease;
-  transition:         $property $time ease;
+@mixin transition ($string) {
+  transition: $string;
+  -o-transition: $string;
+  -webkit-transition: $string;
+  -moz-transition: $string;
 }
 
 @mixin flexbox() {
@@ -59,4 +59,9 @@
 @mixin flex-grow($string) {
   -webkit-flex-grow: $string;
   flex-grow: $string;
+}
+
+@mixin align-self($string) {
+  -webkit-align-self: $string;
+  align-self: $string;
 }

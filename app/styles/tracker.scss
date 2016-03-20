@@ -3,14 +3,104 @@ tracker {
 }
 
 info {
-  background-color: pink;
-  width: 500px;
+  @include flexbox();
+  @include flex-direction(column);
+
+  background-color: $brand-secondary;
+  width: 400px;
+
+  .info-header {
+    @include flexbox();
+    @include align-items(center);
+
+    padding: 17px 17px 17px 8px;
+    border-bottom: 2px solid $brand-secondary-dark;
+    color: #fff;
+
+    img {
+      margin-right: 3px;
+    }
+
+    h1 {
+      @include flex-grow(1);
+
+      margin: 0;
+      font-size: 32px;
+      font-weight: 500;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: $font-accent;
+      font-size: 17px;
+      font-weight: 400;
+    }
+  }
+
+  .info-body {
+    @include flex-grow(1);
+
+    overflow-y: scroll;
+    padding: 30px;
+    color: #fff;
+
+    h3 {
+      margin: 0;
+      font-family: $font-accent;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    ul {
+      margin: 10px 0 20px;
+      padding-left: 33px;
+      font-size: 16px;
+      line-height: 1.4;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .info-footer {
+    @include transition(all .1s ease-out);
+
+    display: block;
+    text-align: center;
+    padding: 20px;
+    background-color: $brand-secondary-dark;
+    color: #fff;
+    font-family: $font-accent;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+
+    .fa {
+      @include transition(all .1s ease-out);
+
+      font-size: 10px;
+      margin-left: 3px;
+    }
+
+    &:hover {
+      background-color: darken($brand-secondary-dark, 3%);
+
+      .fa {
+        margin-left: 7px;
+      }
+    }
+  }
 }
 
 dex {
   @include flex-grow(1);
 
-  background-color: lightgreen;
+  background-color: #fff;
 }
 
 @media (max-width: 1000px) {
