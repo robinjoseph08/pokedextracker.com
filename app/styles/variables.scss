@@ -1,6 +1,10 @@
 $font-primary: 'Alegreya Sans', 'Helvetica', sans-serif;
 $font-secondary: 'Montserrat', 'Helvetica', sans-serif;
 
-$brand-primary: #ffcb05;
+$brand-primary: #ffd924;
+$brand-primary-light: lighten($brand-primary, 20%);
 $brand-secondary: #18447d;
 $brand-secondary-dark: darken($brand-secondary, 7%);
+$light-gray: #f1f1f1;
+
+$pokemon-box-size: 110px;
