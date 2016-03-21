@@ -16,13 +16,17 @@ const HTML = require('../views/tracker.html');
 })
 export class TrackerComponent {
 
+  public active: Pokemon;
   public pokemon: Pokemon[] = [];
 
   constructor (_pokemonService: PokemonService, _title: Title) {
     _title.setTitle('My Pokédex Tracker');
 
     _pokemonService.list()
-    .subscribe((pokemon: Pokemon[]) => this.pokemon = pokemon);
+    .subscribe((pokemon: Pokemon[]) => {
+      this.pokemon = pokemon;
+      this.active = pokemon[0];
+    });
   }
 
 }

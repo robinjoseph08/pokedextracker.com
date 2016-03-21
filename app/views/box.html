@@ -1,5 +1,5 @@
 <h1>{{pokemon[0].national_id | NumberPipe : 3}} - {{pokemon[pokemon.length - 1].national_id | NumberPipe : 3}}</h1>
 <div class="box-container">
-  <pokemon *ngFor="#p of pokemon" [pokemon]="p"></pokemon>
+  <pokemon *ngFor="#p of pokemon" (pokemonHover)="pokemonHover.emit($event)" [pokemon]="p"></pokemon>
   <pokemon *ngFor="#p of empties" [pokemon]="p"></pokemon>
 </div>

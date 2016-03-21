@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, EventEmitter } from 'angular2/core';
 
 import { BoxComponent }    from './box';
 import { GroupPipe }       from '../pipes/group';
@@ -9,6 +9,7 @@ const HTML = require('../views/dex.html');
 
 @Component({
   directives: [HeaderComponent, BoxComponent],
+  events: ['pokemonHover'],
   inputs: ['pokemon'],
   pipes: [GroupPipe],
   selector: 'dex',
@@ -17,5 +18,7 @@ const HTML = require('../views/dex.html');
 export class DexComponent {
 
   public pokemon: Pokemon[];
+
+  public pokemonHover = new EventEmitter<Pokemon>();
 
 }

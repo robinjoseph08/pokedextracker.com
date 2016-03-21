@@ -4,7 +4,7 @@
   <p>#{{pokemon.national_id | NumberPipe : 3}}</p>
 </div>
 
-<div *ngIf="pokemon" class="pokemon-toggle">
+<div *ngIf="pokemon" class="pokemon-toggle" (mouseover)="pokemonHover.emit(pokemon)">
   <h4>{{pokemon.name}}</h4>
   <img [src]="pokemon.icon_url">
   <p>#{{pokemon.national_id | NumberPipe : 3}}</p>
