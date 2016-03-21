@@ -7,7 +7,7 @@ info {
   @include flex-direction(column);
 
   background-color: $brand-secondary;
-  width: 400px;
+  width: 350px;
 
   .info-header {
     @include flexbox();
@@ -97,7 +97,8 @@ info {
       display: none;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: darken($brand-secondary-dark, 3%);
 
       .fa-long-arrow-right {
@@ -110,7 +111,7 @@ info {
 dex {
   @include flex-grow(1);
   @include overflow-y-scroll;
-  
+
   padding: 100px 0;
 }
 
@@ -154,7 +155,7 @@ header {
       letter-spacing: 1px;
 
       &.active {
-        background-color: lighten($brand-secondary, 7%);
+        background-color: $brand-secondary-light;
         color: #fff;
       }
 
@@ -189,7 +190,7 @@ header {
       @include flexbox();
       @include justify-content(space-between);
 
-      background-color: lighten($brand-secondary, 7%);
+      background-color: $brand-secondary-light;
       color: #fff;
     }
 
@@ -348,7 +349,7 @@ box {
   }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1020px) {
   tracker {
     @include flex-direction(column);
   }
