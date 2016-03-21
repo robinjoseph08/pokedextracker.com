@@ -4,7 +4,9 @@ $font-secondary: 'Montserrat', 'Helvetica', sans-serif;
 $brand-primary: #ffd924;
 $brand-primary-light: lighten($brand-primary, 20%);
 $brand-secondary: #18447d;
+$brand-secondary-light: lighten($brand-secondary, 7%);
 $brand-secondary-dark: darken($brand-secondary, 7%);
+$error: #ff0000;
 $gray-light: #f1f1f1;
 $gray-medium: #d2d2d2;
 

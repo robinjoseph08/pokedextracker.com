@@ -6,6 +6,10 @@ html {
   @include border-box();
 }
 
+*:focus {
+  outline: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,7 +23,9 @@ app {
   height: 100vh;
 
   tracker,
-  home {
+  home,
+  register,
+  login {
     @include flex-grow(1);
   }
 }
@@ -44,8 +50,106 @@ nav {
 
     color: $brand-secondary;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: lighten($brand-primary, 10%);
+    }
+  }
+}
+
+register,
+login {
+  @include flexbox();
+  @include align-items(center);
+  @include justify-content(center);
+}
+
+form {
+  width: 300px;
+
+  .form-alert {
+    height: 43px;
+    padding: 11px;
+    margin-bottom: 35px;
+    border: 2px solid $error;
+    text-align: center;
+    font-size: 14px;
+    color: $error;
+  }
+
+  .form-group {
+    position: relative;
+    margin-bottom: 25px;
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-family: $font-secondary;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    input {
+      width: 100%;
+      -webkit-appearance: none;
+      border: 2px solid $brand-secondary-light;
+      border-radius: 0;
+      height: 43px;
+      padding: 10px;
+      font-family: $font-primary;
+      font-size: 15px;
+
+      &[type="password"] {
+        font-size: 25px;
+      }
+
+      &:focus {
+        border-color: $brand-secondary-dark;
+      }
+    }
+
+    .fa-asterisk {
+      position: absolute;
+      top: 38px;
+      right: 15px;
+      font-size: 10px;
+      color: $brand-primary;
+    }
+  }
+
+  button {
+    @include transition(all .1s ease-out);
+
+    display: block;
+    width: 100%;
+    height: 43px;
+    margin-top: 40px;
+    border: 0;
+    background-color: $brand-secondary-light;
+    font-family: $font-secondary;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+
+    .fa {
+      @include transition(all .1s ease-out);
+
+      font-size: 10px;
+      margin-left: 3px;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: $brand-secondary;
+      cursor: pointer;
+
+      .fa-long-arrow-right {
+        margin-left: 7px;
+      }
     }
   }
 }
