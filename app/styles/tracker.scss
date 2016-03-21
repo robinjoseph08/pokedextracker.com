@@ -45,8 +45,8 @@ info {
 
   .info-body {
     @include flex-grow(1);
+    @include overflow-y-scroll;
 
-    overflow-y: scroll;
     padding: 30px;
     color: #fff;
 
@@ -109,9 +109,9 @@ info {
 
 dex {
   @include flex-grow(1);
-
+  @include overflow-y-scroll;
+  
   padding: 100px 0;
-  overflow-y: scroll;
 }
 
 header {
