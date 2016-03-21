@@ -1,10 +1,2 @@
 <header></header>
-
-<box></box>
-<box></box>
-<box></box>
-<box></box>
-<box></box>
-<box></box>
-<box></box>
-<box></box>
+<box *ngFor="#p of pokemon | GroupPipe : 30" [pokemon]="p"></box>

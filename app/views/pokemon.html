@@ -1,13 +1,13 @@
-<div class="pokemon-info">
-  <img src="http://cdn.bulbagarden.net/upload/e/ec/001MS.png">
-  <h4>Fletchinder</h4>
-  <p>#001</p>
+<div *ngIf="pokemon" class="pokemon-info">
+  <img [src]="pokemon.icon_url">
+  <h4>{{pokemon.name}}</h4>
+  <p>#{{pokemon.national_id | NumberPipe : 3}}</p>
 </div>
 
-<div class="pokemon-toggle">
-  <h4>Fletchinder</h4>
-  <img src="http://cdn.bulbagarden.net/upload/e/ec/001MS.png">
-  <p>#001</p>
+<div *ngIf="pokemon" class="pokemon-toggle">
+  <h4>{{pokemon.name}}</h4>
+  <img [src]="pokemon.icon_url">
+  <p>#{{pokemon.national_id | NumberPipe : 3}}</p>
 
   <i class="fa fa-check"></i>
 </div>
