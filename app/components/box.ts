@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, EventEmitter } from 'angular2/core';
 
 import { NumberPipe }       from '../pipes/number';
 import { Pokemon }          from '../classes/pokemon';
@@ -8,6 +8,7 @@ const HTML = require('../views/box.html');
 
 @Component({
   directives: [PokemonComponent],
+  events: ['pokemonHover'],
   inputs: ['pokemon'],
   pipes: [NumberPipe],
   selector: 'box',
@@ -16,6 +17,8 @@ const HTML = require('../views/box.html');
 export class BoxComponent {
 
   public pokemon: Pokemon[];
+
+  public pokemonHover = new EventEmitter<Pokemon>();
 
   private boxSize = 30;
 

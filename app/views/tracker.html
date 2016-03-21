@@ -1,2 +1,2 @@
-<dex [pokemon]="pokemon"></dex>
-<info></info>
+<dex (pokemonHover)="active = $event" [pokemon]="pokemon"></dex>
+<info [pokemon]="active"></info>
