@@ -37,6 +37,12 @@ info {
     }
   }
 
+  .info-main {
+    @include flexbox();
+    @include flex-direction(column);
+    @include flex-grow(1);
+  }
+
   .info-body {
     @include flex-grow(1);
 
@@ -87,10 +93,14 @@ info {
       margin-left: 3px;
     }
 
+    .fa-external-link {
+      display: none;
+    }
+
     &:hover {
       background-color: darken($brand-secondary-dark, 3%);
 
-      .fa {
+      .fa-long-arrow-right {
         margin-left: 7px;
       }
     }
@@ -119,42 +129,98 @@ header {
     font-size: 17px;
     font-family: $font-secondary;
     font-weight: 400;
+
+    span.fc-missing {
+      color: $gray-light;
+    }
   }
 
   .region-filter {
     @include flexbox();
 
-    margin: 30px 0;
+    margin: 30px 0 20px;
 
-    a {
+    div {
       @include transition(all .1s ease-out);
       @include flex-grow(1);
 
       padding: 10px;
       text-align: center;
-      background-color: $light-gray;
+      background-color: $gray-light;
       font-family: $font-secondary;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
-      text-decoration: none;
-
-      color: #000;
 
       &.active {
         background-color: lighten($brand-secondary, 7%);
         color: #fff;
       }
 
-      &:hover:not(.active) {
-        background-color: darken($light-gray, 5%);
+      &:hover {
+        cursor: pointer;
+
+        &:not(.active) {
+          background-color: darken($gray-light, 5%);
+        }
       }
     }
   }
 
+  .region-filter-mobile {
+    display: none;
+    position: relative;
+    min-width: 100px;
+    margin-left: 10px;
+
+    .dropdown > div,
+    .active {
+      padding: 7px;
+      text-align: left;
+      font-family: $font-secondary;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .active {
+      @include flexbox();
+      @include justify-content(space-between);
+
+      background-color: lighten($brand-secondary, 7%);
+      color: #fff;
+    }
+
+    .dropdown {
+      position: absolute;
+      width: 100px;
+      z-index: 1;
+
+      div {
+        border-bottom: 1px solid darken($gray-light, 5%);
+        background-color: $gray-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   .percentage {
-    text-align: center;
+    @include flexbox();
+    @include justify-content(space-between);
+  }
+
+  .progress-container {
+    width: 100%;
+    height: 28px;
 
     h3 {
       margin: 10px 0;
@@ -167,7 +233,8 @@ header {
   }
 
   .progress-outer {
-    height: 25px;
+    width: 100%;
+    height: 100%;
     background-color: #fff;
     border: 2px solid $brand-primary;
 
@@ -195,19 +262,45 @@ box {
     @include flexbox();
     @include flex-wrap(wrap);
 
-    border: 1px solid $light-gray;
+    border: 1px solid $gray-light;
   }
 
   pokemon {
+    @include flexbox();
+
+    width: $pokemon-box-size;
+    height: $pokemon-box-size;
+    border: 1px solid $gray-light;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.captured {
+      background-color: $brand-primary-light;
+      border-color: darken($brand-primary-light, 5%);
+
+      .pokemon-toggle .fa-check {
+        color: $brand-secondary;
+      }
+    }
+
+    &.disabled {
+      opacity: .1;
+
+      &:hover {
+        cursor: default;
+      }
+    }
+  }
+
+  .pokemon-toggle {
+    @include flex-grow(1);
     @include flexbox();
     @include flex-direction(column);
     @include align-items(center);
     @include justify-content(center);
     @include transition(all .1s ease-out);
-
-    width: $pokemon-box-size;
-    height: $pokemon-box-size;
-    border: 1px solid $light-gray;
 
     h4 {
       margin: 0;
@@ -220,24 +313,37 @@ box {
       font-family: $font-secondary;
       font-size: 12px;
       font-weight: 400;
-      text-transform: uppercase;
     }
 
-    &:hover {
-      cursor: pointer;
+    .fa-check {
+      display: none;
+      padding: 5px;
+      border-radius: 50%;
+      border: 2px solid $brand-secondary;
+      color: transparent;
+      font-size: 10px;
+    }
+  }
+
+  .pokemon-info {
+    display: none;
+
+    img {
+      padding: 0 10px;
     }
 
-    &.captured {
-      background-color: $brand-primary-light;
-      border-color: darken($brand-primary-light, 5%);
+    h4 {
+      @include flex-grow(1);
+
+      margin: 0;
+      font-weight: 400;
+      font-size: 21px;
     }
 
-    &.disabled {
-      opacity: .1;
-
-      &:hover {
-        cursor: default;
-      }
+    p {
+      margin: 0;
+      font-family: $font-secondary;
+      font-size: 12px;
     }
   }
 }
@@ -249,12 +355,111 @@ box {
 
   info {
     width: 100%;
-    min-height: 300px;
+    min-height: 235px;
+
+    .info-header {
+      min-height: 50px;
+      padding: 10px 10px 10px 3px;
+
+      h1 {
+        font-size: 21px;
+        font-weight: 400;
+      }
+    }
+
+    .info-main {
+      @include flex-direction(row);
+    }
+
+    .info-body {
+      padding: 20px;
+
+      h3 {
+        font-size: 9px;
+      }
+
+      ul {
+        font-size: 14px;
+        margin: 8px 0 16px;
+      }
+    }
+
+    .info-footer {
+      padding: 88px 10px;
+
+      .fa-external-link {
+        display: block;
+      }
+
+      div {
+        display: none;
+      }
+    }
   }
 }
 
 @media (max-width: 700px) {
   dex {
-    padding: 10px;
+    padding: 20px;
+  }
+
+  header,
+  box {
+    width: 100%;
+  }
+
+  header {
+    h1 {
+      font-size: 30px;
+    }
+
+    .region-filter {
+      display: none;
+    }
+
+    .region-filter-mobile {
+      display: block;
+    }
+
+    .percentage  {
+      margin-top: 15px;
+    }
+
+    .progress-container h3 {
+      font-size: 11px;
+    }
+  }
+
+  box {
+    margin-top: 50px;
+
+    .box-container {
+      @include flex-direction(column);
+    }
+
+    pokemon {
+      width: 100%;
+      height: 80px;
+
+      .pokemon-info {
+        @include flexbox();
+        @include flex-grow(1);
+        @include align-items(center);
+      }
+
+      .pokemon-toggle {
+        max-width: 80px;
+
+        h4,
+        img,
+        p {
+          display: none;
+        }
+
+        .fa-check {
+          display: block;
+        }
+      }
+    }
   }
 }

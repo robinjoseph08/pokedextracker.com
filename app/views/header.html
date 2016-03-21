@@ -1,19 +1,36 @@
 <h1>Cabrioles's Living Dex</h1>
-<h2>FC: 0533-6415-2774</h2>
+<h2>FC: <span class="fc-missing">0533-6415-2774</span></h2>
 
 <div class="region-filter">
-  <a href="" class="active">National</a>
-  <a href="">Kanto</a>
-  <a href="">Johto</a>
-  <a href="">Hoenn</a>
-  <a href="">Sinnoh</a>
-  <a href="">Unova</a>
-  <a href="">Kalos</a>
+  <div class="active">National</div>
+  <div>Kanto</div>
+  <div>Johto</div>
+  <div>Hoenn</div>
+  <div>Sinnoh</div>
+  <div>Unova</div>
+  <div>Kalos</div>
 </div>
 
 <div class="percentage">
-  <div class="progress-outer">
-    <div class="progress-inner" style="width: 40%"></div>
+  <div class="progress-container">
+    <div class="progress-outer">
+      <div class="progress-inner" style="width: 40%"></div>
+    </div>
+    <h3>288 caught, 433 to go!</h3>
   </div>
-  <h3>288 caught, 433 to go!</h3>
+
+  <div class="region-filter-mobile">
+    <div class="active" (click)="toggleDropdown = !toggleDropdown">
+      <span>National</span>
+      <i class="fa fa-sort-desc"></i>
+    </div>
+    <div class="dropdown" *ngIf="toggleDropdown">
+      <div>Kanto</div>
+      <div>Johto</div>
+      <div>Hoenn</div>
+      <div>Sinnoh</div>
+      <div>Unova</div>
+      <div>Kalos</div>
+    </div>
+  </div>
 </div>
