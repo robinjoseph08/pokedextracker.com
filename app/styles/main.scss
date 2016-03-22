@@ -30,6 +30,16 @@ app {
   }
 }
 
+a.link {
+  color: $brand-secondary-light;
+  font-weight: 500;
+
+  &:hover,
+  &:focus {
+    color: $brand-secondary-dark;
+  }
+}
+
 nav {
   @include flexbox();
   @include justify-content(space-between);
@@ -57,18 +67,12 @@ nav {
   }
 }
 
-register,
-login {
-  @include flexbox();
-  @include align-items(center);
-  @include justify-content(center);
-}
-
 form {
-  width: 300px;
+  margin: 120px auto;
+  width: 280px;
 
   .form-alert {
-    height: 43px;
+    min-height: 43px;
     padding: 11px;
     margin-bottom: 35px;
     border: 2px solid $error;
@@ -102,7 +106,7 @@ form {
       font-size: 15px;
 
       &[type="password"] {
-        font-size: 25px;
+        font-family: $font-secondary;
       }
 
       &:focus {
@@ -151,5 +155,17 @@ form {
         margin-left: 7px;
       }
     }
+  }
+
+  p {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  form {
+    margin: 70px auto;
   }
 }
