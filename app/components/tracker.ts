@@ -19,11 +19,11 @@ export class TrackerComponent {
   public active: Pokemon;
   public pokemon: Pokemon[] = [];
 
-  constructor (_pokemonService: PokemonService, _title: Title) {
+  constructor (_pokemon: PokemonService, _title: Title) {
     _title.setTitle('My Pokédex Tracker');
 
-    _pokemonService.list()
-    .subscribe((pokemon: Pokemon[]) => {
+    _pokemon.list()
+    .then((pokemon: Pokemon[]) => {
       this.pokemon = pokemon;
       this.active = pokemon[0];
     });
