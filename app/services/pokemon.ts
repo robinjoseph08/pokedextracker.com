@@ -1,21 +1,21 @@
 import { Injectable } from 'angular2/core';
 import { Http }       from 'angular2/http';
-import { Observable } from 'rxjs/Rx';
 
-import { Pokemon } from '../classes/pokemon';
+import { ApiService } from './api';
+import { Pokemon }    from '../classes/pokemon';
 
 @Injectable()
 export class PokemonService {
 
-  private _http: Http;
+  private _api: ApiService;
 
-  constructor (_http: Http) {
-    this._http = _http;
+  constructor (_api: ApiService) {
+    this._api = _api;
   }
 
-  public list (): Observable<Pokemon[]> {
-    return this._http.get('https://api.pokedextracker.com/pokemon')
-    .map((res) => res.json().map((p) => new Pokemon(p)));
+  public list (): Promise<Pokemon[]> {
+    return this._api.get('/pokemon')
+    .then((pokemon: Array<Object>) => pokemon.map((p) => new Pokemon(p)));
   }
 
 }

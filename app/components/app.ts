@@ -5,12 +5,14 @@ import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
 import { NavComponent }      from './nav';
 import { RegisterComponent } from './register';
+import { SessionService }    from '../services/session';
 import { TrackerComponent }  from './tracker';
 
 const HTML = require('../views/app.html');
 
 @Component({
   directives: [NavComponent, RouterOutlet],
+  providers: [SessionService],
   selector: 'app',
   template: HTML
 })
@@ -20,4 +22,12 @@ const HTML = require('../views/app.html');
   { component: RegisterComponent, name: 'Register', path: '/register' },
   { component: TrackerComponent,  name: 'Tracker',  path: '/tracker' }
 ])
-export class AppComponent {}
+export class AppComponent {
+
+  public _session: SessionService;
+
+  constructor (_session: SessionService) {
+    this._session = _session;
+  }
+
+}
