@@ -57,9 +57,9 @@
       "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
     },
     "angular2": {
-      "version": "2.0.0-beta.9",
-      "from": "angular2@>=2.0.0-beta.7 <3.0.0",
-      "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.9.tgz"
+      "version": "2.0.0-beta.12",
+      "from": "angular2@latest",
+      "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.12.tgz"
     },
     "ansi": {
       "version": "0.3.1",
@@ -850,13 +850,13 @@
     },
     "es6-promise": {
       "version": "3.1.2",
-      "from": "es6-promise@>=3.0.2 <4.0.0",
+      "from": "es6-promise@latest",
       "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.1.2.tgz"
     },
     "es6-shim": {
-      "version": "0.33.13",
-      "from": "es6-shim@>=0.33.13 <0.34.0",
-      "resolved": "https://registry.npmjs.org/es6-shim/-/es6-shim-0.33.13.tgz"
+      "version": "0.35.0",
+      "from": "es6-shim@latest",
+      "resolved": "https://registry.npmjs.org/es6-shim/-/es6-shim-0.35.0.tgz"
     },
     "es6-symbol": {
       "version": "3.0.2",
@@ -4166,9 +4166,9 @@
       "resolved": "https://registry.npmjs.org/zip-object/-/zip-object-0.1.0.tgz"
     },
     "zone.js": {
-      "version": "0.5.15",
-      "from": "zone.js@>=0.5.15 <0.6.0",
-      "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.5.15.tgz"
+      "version": "0.6.6",
+      "from": "zone.js@latest",
+      "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.6.tgz"
     }
   }
 }
