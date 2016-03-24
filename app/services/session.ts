@@ -5,17 +5,14 @@ import { User } from '../classes/user';
 @Injectable()
 export class SessionService {
 
-  public get loggedIn (): boolean {
-    return Boolean(localStorage.getItem('token'));
-  }
-
   public get user (): User {
-    if (!this.loggedIn) {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
       return null;
     }
-    const payload = JSON.parse(atob(localStorage.getItem('token').split('.')[1]));
 
-    return new User(payload);
+    return new User(JSON.parse(atob(token.split('.')[1])));
   }
 
 }
