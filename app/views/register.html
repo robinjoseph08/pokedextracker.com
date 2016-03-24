@@ -1,3 +1,4 @@
+<nav [user]="_session.user"></nav>
 <form (ngSubmit)="createUser(user)">
   <div *ngIf="error" class="form-alert">
     {{error}}

@@ -1,5 +1,5 @@
-<h1>Cabrioles's Living Dex</h1>
-<h2>FC: <span class="fc-missing">0533-6415-2774</span></h2>
+<h1>{{user.username}}'s Living Dex</h1>
+<h2>FC: <span [class.fc-missing]="!user.friend_code">{{user.friend_code || 'XXXX-XXXX-XXXX'}}</span></h2>
 
 <div class="region-filter">
   <div class="active">National</div>

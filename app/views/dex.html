@@ -1,2 +1,2 @@
-<header></header>
+<header [user]="user"></header>
 <box *ngFor="#p of pokemon | GroupPipe : 30" (pokemonHover)="pokemonHover.emit($event)" [pokemon]="p"></box>

@@ -3,31 +3,18 @@ import { RouteConfig, RouterOutlet } from 'angular2/router';
 
 import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
-import { NavComponent }      from './nav';
 import { RegisterComponent } from './register';
-import { SessionService }    from '../services/session';
 import { TrackerComponent }  from './tracker';
 
-const HTML = require('../views/app.html');
-
 @Component({
-  directives: [NavComponent, RouterOutlet],
-  providers: [SessionService],
+  directives: [RouterOutlet],
   selector: 'app',
-  template: HTML
+  template: '<router-outlet></router-outlet>'
 })
 @RouteConfig([
   { component: HomeComponent,     name: 'Home',     path: '/' },
   { component: LoginComponent,    name: 'Login',    path: '/login' },
   { component: RegisterComponent, name: 'Register', path: '/register' },
-  { component: TrackerComponent,  name: 'Tracker',  path: '/tracker' }
+  { component: TrackerComponent,  name: 'Tracker',  path: '/u/:username' }
 ])
-export class AppComponent {
-
-  public _session: SessionService;
-
-  constructor (_session: SessionService) {
-    this._session = _session;
-  }
-
-}
+export class AppComponent {}

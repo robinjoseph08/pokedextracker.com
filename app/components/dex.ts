@@ -4,13 +4,14 @@ import { BoxComponent }    from './box';
 import { GroupPipe }       from '../pipes/group';
 import { HeaderComponent } from './header';
 import { Pokemon }         from '../classes/pokemon';
+import { User }            from '../classes/user';
 
 const HTML = require('../views/dex.html');
 
 @Component({
   directives: [HeaderComponent, BoxComponent],
   events: ['pokemonHover'],
-  inputs: ['pokemon'],
+  inputs: ['pokemon', 'user'],
   pipes: [GroupPipe],
   selector: 'dex',
   template: HTML
@@ -18,6 +19,7 @@ const HTML = require('../views/dex.html');
 export class DexComponent {
 
   public pokemon: Pokemon[];
+  public user: User;
 
   public pokemonHover = new EventEmitter<Pokemon>();
 
