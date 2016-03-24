@@ -1,16 +1,16 @@
 <nav [user]="_session.user"></nav>
-<form>
-  <div class="form-alert">
-    username not found
+<form (ngSubmit)="createSession(user)">
+  <div *ngIf="error" class="form-alert">
+    {{error}}
   </div>
   <div class="form-group">
     <label for="username">Username</label>
-    <input id="username" type="text" required placeholder="ashketchum10" maxlength="20">
+    <input [(ngModel)]="user.username" id="username" type="text" required placeholder="ashketchum10" maxlength="20">
     <i class="fa fa-asterisk"></i>
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input id="password" type="password" required placeholder="••••••••••••" maxlength="72">
+    <input [(ngModel)]="user.password" id="password" type="password" required placeholder="••••••••••••" maxlength="72">
     <i class="fa fa-asterisk"></i>
   </div>
   <button type="submit" class="btn">Let's go! <i class="fa fa-long-arrow-right"></i></button>

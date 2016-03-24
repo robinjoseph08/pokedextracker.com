@@ -1,5 +1,4 @@
 import { Injectable } from 'angular2/core';
-import { Http }       from 'angular2/http';
 
 import { ApiService } from './api';
 import { Pokemon }    from '../classes/pokemon';
