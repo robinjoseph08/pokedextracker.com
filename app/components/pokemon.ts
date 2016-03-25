@@ -1,21 +1,47 @@
 import { Component, EventEmitter } from 'angular2/core';
 
-import { NumberPipe } from '../pipes/number';
-import { Pokemon }    from '../classes/pokemon';
+import { Capture }        from '../classes/capture';
+import { CaptureService } from '../services/capture';
+import { NumberPipe }     from '../pipes/number';
+import { SessionService } from '../services/session';
 
 const HTML = require('../views/pokemon.html');
 
 @Component({
   events: ['pokemonHover'],
-  inputs: ['pokemon'],
+  inputs: ['capture'],
   pipes: [NumberPipe],
   selector: 'pokemon',
   template: HTML
 })
 export class PokemonComponent {
 
-  public pokemon: Pokemon;
+  public capture: Capture;
 
-  public pokemonHover = new EventEmitter<Pokemon>();
+  public pokemonHover = new EventEmitter<Capture>();
+
+  private _capture: CaptureService;
+  private _session: SessionService;
+
+  constructor (_capture: CaptureService, _session: SessionService) {
+    this._capture = _capture;
+    this._session = _session;
+  }
+
+  public toggle () {
+    if (!this._session.user || this._session.user.id !== this.capture.user_id) {
+      return;
+    }
+
+    const payload = { pokemon: this.capture.pokemon.national_id };
+
+    if (this.capture.captured) {
+      this._capture.delete(payload)
+      .then(() => this.capture.captured = false);
+    } else {
+      this._capture.create(payload)
+      .then(() => this.capture.captured = true);
+    }
+  }
 
 }

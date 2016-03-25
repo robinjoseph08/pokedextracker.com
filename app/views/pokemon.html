@@ -1,13 +1,13 @@
-<div *ngIf="pokemon" class="pokemon-info">
-  <img [src]="pokemon.icon_url">
-  <h4>{{pokemon.name}}</h4>
-  <p>#{{pokemon.national_id | NumberPipe : 3}}</p>
+<div *ngIf="capture" class="pokemon-info">
+  <img [src]="capture.pokemon.icon_url">
+  <h4>{{capture.pokemon.name}}</h4>
+  <p>#{{capture.pokemon.national_id | NumberPipe : 3}}</p>
 </div>
 
-<div *ngIf="pokemon" class="pokemon-toggle" (mouseover)="pokemonHover.emit(pokemon)">
-  <h4>{{pokemon.name}}</h4>
-  <img [src]="pokemon.icon_url">
-  <p>#{{pokemon.national_id | NumberPipe : 3}}</p>
+<div *ngIf="capture" class="pokemon-toggle" (click)="toggle()" (mouseover)="pokemonHover.emit(capture)">
+  <h4>{{capture.pokemon.name}}</h4>
+  <img [src]="capture.pokemon.icon_url">
+  <p>#{{capture.pokemon.national_id | NumberPipe : 3}}</p>
 
   <i class="fa fa-check"></i>
 </div>
