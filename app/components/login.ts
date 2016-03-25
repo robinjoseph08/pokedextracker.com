@@ -4,6 +4,7 @@ import { Title }              from 'angular2/platform/browser';
 
 import { NavComponent }   from './nav';
 import { SessionService } from '../services/session';
+import { User }           from '../classes/user';
 
 const HTML = require('../views/login.html');
 
@@ -15,7 +16,9 @@ const HTML = require('../views/login.html');
 })
 export class LoginComponent implements OnInit {
 
+  public error: string = null;
   public _session: SessionService;
+  public user: User = new User({});
 
   private _router: Router;
   private _title: Title;
@@ -32,6 +35,15 @@ export class LoginComponent implements OnInit {
     }
 
     this._title.setTitle('Login | Pokédex Tracker');
+  }
+
+  public createSession (payload: User) {
+    this.error = null;
+
+    this._session.create(payload)
+    .then((session) => localStorage.setItem('token', session.token))
+    .then(() => this._router.navigate(['Tracker', { username: this._session.user.username }]))
+    .catch((err) => this.error = err.message);
   }
 
 }
