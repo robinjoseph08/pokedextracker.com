@@ -25,6 +25,11 @@
   -moz-transition: $string;
 }
 
+@mixin animation($string) {
+  animation: $string;
+  -webkit-animation: $string;
+}
+
 @mixin flexbox() {
   display: -webkit-box;
   display: -moz-box;

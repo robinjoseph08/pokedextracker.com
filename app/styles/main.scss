@@ -31,6 +31,8 @@ app {
 }
 
 a.link {
+  @include transition(all .1s ease-out);
+
   color: $brand-secondary-light;
   font-weight: 500;
 
@@ -63,11 +65,49 @@ nav {
     &:hover,
     &:focus {
       background-color: lighten($brand-primary, 10%);
+      cursor: pointer;
+    }
+  }
+}
+
+button {
+  @include transition(all .1s ease-out);
+
+  display: block;
+  width: 100%;
+  height: 43px;
+  border: 0;
+  background-color: $brand-secondary-light;
+  font-family: $font-secondary;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+
+  .fa {
+    @include transition(all .1s ease-out);
+
+    font-size: 10px;
+    margin-left: 3px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $brand-secondary;
+    cursor: pointer;
+
+    .fa-long-arrow-right {
+      margin-left: 7px;
     }
   }
 }
 
 form {
+  @include animation(slide .5s ease-out forwards);
+
+  position: relative;
+  top: 60px;
   margin: 120px auto;
   width: 280px;
 
@@ -101,7 +141,7 @@ form {
       border: 2px solid $brand-secondary-light;
       border-radius: 0;
       height: 43px;
-      padding: 10px;
+      padding: 10px 32px 10px 10px;
       font-family: $font-primary;
       font-size: 15px;
 
@@ -123,44 +163,14 @@ form {
     }
   }
 
-  button {
-    @include transition(all .1s ease-out);
-
-    display: block;
-    width: 100%;
-    height: 43px;
-    margin-top: 40px;
-    border: 0;
-    background-color: $brand-secondary-light;
-    font-family: $font-secondary;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #fff;
-
-    .fa {
-      @include transition(all .1s ease-out);
-
-      font-size: 10px;
-      margin-left: 3px;
-    }
-
-    &:hover,
-    &:focus {
-      background-color: $brand-secondary;
-      cursor: pointer;
-
-      .fa-long-arrow-right {
-        margin-left: 7px;
-      }
-    }
-  }
-
   p {
     margin: 20px 0 0;
     text-align: center;
     font-size: 14px;
+  }
+
+  button {
+    margin-top: 40px;
   }
 }
 

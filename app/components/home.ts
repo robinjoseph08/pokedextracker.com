@@ -1,6 +1,6 @@
-import { Component, OnInit } from 'angular2/core';
-import { Router }            from 'angular2/router';
-import { Title }             from 'angular2/platform/browser';
+import { Component, OnInit }  from 'angular2/core';
+import { Router, RouterLink } from 'angular2/router';
+import { Title }              from 'angular2/platform/browser';
 
 import { SessionService } from '../services/session';
 
@@ -8,6 +8,7 @@ const HTML = require('../views/home.html');
 
 @Component({
   providers: [SessionService, Title],
+  directives: [RouterLink],
   selector: 'home',
   template: HTML
 })
