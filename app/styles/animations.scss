@@ -1,0 +1,21 @@
+@-webkit-keyframes slide {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
