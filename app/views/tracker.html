@@ -1,5 +1,5 @@
 <nav [user]="_session.user"></nav>
 <div class="tracker">
-  <dex *ngIf="user" (pokemonHover)="active = $event" [pokemon]="pokemon" [user]="user"></dex>
-  <info [pokemon]="active"></info>
+  <dex *ngIf="!loading" (pokemonHover)="active = $event" [captures]="captures" [user]="user"></dex>
+  <info [capture]="active"></info>
 </div>

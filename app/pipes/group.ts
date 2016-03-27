@@ -3,11 +3,11 @@ import { Pipe } from 'angular2/core';
 @Pipe({ name: 'GroupPipe' })
 export class GroupPipe {
 
-  public transform (pokemon, size) {
-    return pokemon.reduce((acc, p) => {
-      const box = Math.ceil(p.national_id / size) - 1;
-      acc[box] = acc[box] || [];
-      acc[box].push(p);
+  public transform (arr, [size]) {
+    return arr.reduce((acc, item, i) => {
+      const group = Math.ceil((i + 1) / size) - 1;
+      acc[group] = acc[group] || [];
+      acc[group].push(item);
       return acc;
     }, []);
   }

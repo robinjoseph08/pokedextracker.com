@@ -14,17 +14,17 @@
 <div class="percentage">
   <div class="progress-container">
     <div class="progress-outer">
-      <div class="progress-inner" style="width: 40%"></div>
+      <div class="progress-inner" [style.width.%]="caught * 100 / captures.length"></div>
     </div>
-    <h3>288 caught, 433 to go!</h3>
+    <h3>{{caught}} caught, {{captures.length - caught}} to go!</h3>
   </div>
 
   <div class="region-filter-mobile">
-    <div class="active" (click)="toggleDropdown = !toggleDropdown">
+    <div class="active" (click)="dropdown = !dropdown">
       <span>National</span>
       <i class="fa fa-sort-desc"></i>
     </div>
-    <div class="dropdown" *ngIf="toggleDropdown">
+    <div class="dropdown" *ngIf="dropdown">
       <div>Kanto</div>
       <div>Johto</div>
       <div>Hoenn</div>

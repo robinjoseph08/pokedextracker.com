@@ -1,18 +1,18 @@
 import { Component } from 'angular2/core';
 
+import { Capture }    from '../classes/capture';
 import { NumberPipe } from '../pipes/number';
-import { Pokemon }    from '../classes/pokemon';
 
 const HTML = require('../views/info.html');
 
 @Component({
-  inputs: ['pokemon'],
+  inputs: ['capture'],
   pipes: [NumberPipe],
   selector: 'info',
   template: HTML
 })
 export class InfoComponent {
 
-  public pokemon: Pokemon;
+  public capture: Capture;
 
 }
