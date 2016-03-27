@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "deploy": "ssh ubuntu@pokedextracker.com ./deployments/pokedextracker.com.sh",
     "postinstall": "typings install",
     "lint": "tslint app/*.ts app/**/*.ts",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",

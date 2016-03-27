@@ -1,6 +1,15 @@
 'use strict';
 
-var Webpack = require('webpack');
+const Webpack = require('webpack');
+
+const PRODUCTION = process.env.NODE_ENV === 'production';
+
+const PLUGINS = [new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development') })];
+
+if (PRODUCTION) {
+  PLUGINS.push(new Webpack.optimize.DedupePlugin());
+  PLUGINS.push(new Webpack.optimize.UglifyJsPlugin({ compress: { warnings: false }, mangle: false }));
+}
 
 module.exports = {
   context: __dirname + '/app',
@@ -12,7 +21,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
   },
-  devtool: 'inline-source-map',
+  devtool: PRODUCTION ? undefined : 'inline-source-map',
   devServer: {
     contentBase: 'public/',
     historyApiFallback: true
@@ -28,5 +37,6 @@ module.exports = {
       exclude: /(test|node_modules)\//,
       loader: 'istanbul-instrumenter'
     }]
-  }
+  },
+  plugins: PLUGINS
 };
