@@ -38,4 +38,11 @@ export class Pokemon {
     this.as_locations = params.as_locations;
   }
 
+  public is (region: string): boolean {
+    if (region === 'kalos') {
+      return Boolean(this.central_kalos_id || this.coastal_kalos_id || this.mountain_kalos_id);
+    }
+    return Boolean(this[`${region}_id`]);
+  }
+
 }

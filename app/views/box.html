@@ -1,5 +1,5 @@
 <h1>{{captures[0].pokemon.national_id | NumberPipe : 3}} - {{captures[captures.length - 1].pokemon.national_id | NumberPipe : 3}}</h1>
 <div class="box-container">
-  <pokemon *ngFor="#capture of captures" (activeChange)="activeChange.emit($event)" [class.captured]="capture.captured" [capture]="capture"></pokemon>
+  <pokemon *ngFor="#capture of captures" (activeChange)="capture.pokemon.is(region) && activeChange.emit($event)" [class.captured]="capture.captured" [class.disabled]="!capture.pokemon.is(region)" [capture]="capture" [region]="region"></pokemon>
   <pokemon *ngFor="#capture of empties" [capture]="capture" class="empty"></pokemon>
 </div>
