@@ -6,13 +6,13 @@ import { NumberPipe } from '../pipes/number';
 const HTML = require('../views/info.html');
 
 @Component({
-  inputs: ['capture'],
+  inputs: ['active'],
   pipes: [NumberPipe],
   selector: 'info',
   template: HTML
 })
 export class InfoComponent {
 
-  public capture: Capture;
+  public active: Capture;
 
 }

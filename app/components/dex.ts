@@ -10,7 +10,7 @@ const HTML = require('../views/dex.html');
 
 @Component({
   directives: [HeaderComponent, BoxComponent],
-  events: ['pokemonHover'],
+  events: ['activeChange'],
   inputs: ['captures', 'user'],
   pipes: [GroupPipe],
   selector: 'dex',
@@ -21,6 +21,6 @@ export class DexComponent {
   public captures: Capture[];
   public user: User;
 
-  public pokemonHover = new EventEmitter<Capture>();
+  public activeChange = new EventEmitter<Capture>();
 
 }

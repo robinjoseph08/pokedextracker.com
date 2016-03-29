@@ -1,2 +1,2 @@
 <header [captures]="captures" [user]="user"></header>
-<box *ngFor="#group of captures | GroupPipe : 30" (pokemonHover)="pokemonHover.emit($event)" [captures]="group"></box>
+<box *ngFor="#group of captures | GroupPipe : 30" (activeChange)="activeChange.emit($event)" [captures]="group"></box>

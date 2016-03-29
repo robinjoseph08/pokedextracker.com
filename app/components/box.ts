@@ -8,7 +8,7 @@ const HTML = require('../views/box.html');
 
 @Component({
   directives: [PokemonComponent],
-  events: ['pokemonHover'],
+  events: ['activeChange'],
   inputs: ['captures'],
   pipes: [NumberPipe],
   selector: 'box',
@@ -18,7 +18,7 @@ export class BoxComponent {
 
   public captures: Capture[];
 
-  public pokemonHover = new EventEmitter<Capture>();
+  public activeChange = new EventEmitter<Capture>();
 
   private boxSize = 30;
 
