@@ -8,6 +8,6 @@
   <h4 *ngIf="capture">{{capture.pokemon.name}}</h4>
   <p *ngIf="capture">#{{capture.pokemon.national_id | NumberPipe : 3}}</p>
 </div>
-<div *ngIf="capture" class="set-info" (click)="pokemonHover.emit(capture)">
+<div *ngIf="capture" class="set-info" (click)="activeChange.emit(capture)">
   <i class="fa fa-info"></i>
 </div>

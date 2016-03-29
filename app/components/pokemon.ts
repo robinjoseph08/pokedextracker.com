@@ -8,7 +8,7 @@ import { SessionService } from '../services/session';
 const HTML = require('../views/pokemon.html');
 
 @Component({
-  events: ['pokemonHover'],
+  events: ['activeChange'],
   inputs: ['capture'],
   pipes: [NumberPipe],
   selector: 'pokemon',
@@ -18,7 +18,7 @@ export class PokemonComponent {
 
   public capture: Capture;
 
-  public pokemonHover = new EventEmitter<Capture>();
+  public activeChange = new EventEmitter<Capture>();
 
   private _capture: CaptureService;
   private _session: SessionService;
