@@ -9,7 +9,7 @@ const HTML = require('../views/box.html');
 @Component({
   directives: [PokemonComponent],
   events: ['activeChange'],
-  inputs: ['captures'],
+  inputs: ['captures', 'region'],
   pipes: [NumberPipe],
   selector: 'box',
   template: HTML
@@ -17,6 +17,7 @@ const HTML = require('../views/box.html');
 export class BoxComponent {
 
   public captures: Capture[];
+  public region: string;
 
   public activeChange = new EventEmitter<Capture>();
 

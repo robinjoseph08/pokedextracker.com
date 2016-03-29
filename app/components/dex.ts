@@ -19,6 +19,7 @@ const HTML = require('../views/dex.html');
 export class DexComponent {
 
   public captures: Capture[];
+  public region: string = 'national';
   public user: User;
 
   public activeChange = new EventEmitter<Capture>();

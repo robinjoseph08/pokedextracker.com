@@ -298,7 +298,7 @@ box {
       }
     }
 
-    &:not(.empty):hover {
+    &:not(.empty):not(.disabled):hover {
       cursor: pointer;
 
       .set-captured {

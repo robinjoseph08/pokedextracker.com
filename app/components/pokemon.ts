@@ -9,7 +9,7 @@ const HTML = require('../views/pokemon.html');
 
 @Component({
   events: ['activeChange'],
-  inputs: ['capture'],
+  inputs: ['capture', 'region'],
   pipes: [NumberPipe],
   selector: 'pokemon',
   template: HTML
@@ -17,6 +17,7 @@ const HTML = require('../views/pokemon.html');
 export class PokemonComponent {
 
   public capture: Capture;
+  public region: string;
 
   public activeChange = new EventEmitter<Capture>();
 
@@ -29,7 +30,7 @@ export class PokemonComponent {
   }
 
   public toggle () {
-    if (!this._session.user || this._session.user.id !== this.capture.user_id) {
+    if (!this._session.user || !this.capture.pokemon.is(this.region) || this._session.user.id !== this.capture.user_id) {
       return;
     }
 
