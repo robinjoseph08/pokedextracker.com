@@ -5,7 +5,7 @@ import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
 import { RegisterComponent } from './register';
 import { TrackerComponent }  from './tracker';
-import { NotFoundComponent } from './notfound';
+import { NotFoundComponent } from './not-found';
 
 @Component({
   directives: [RouterOutlet],
@@ -17,6 +17,6 @@ import { NotFoundComponent } from './notfound';
   { component: LoginComponent,    name: 'Login',    path: '/login' },
   { component: RegisterComponent, name: 'Register', path: '/register' },
   { component: TrackerComponent,  name: 'Tracker',  path: '/u/:username' },
-  { component: NotFoundComponent,  name: 'NotFound',  path: '/notfound' }
+  { component: NotFoundComponent, name: 'NotFound', path: '/**' }
 ])
 export class AppComponent {}

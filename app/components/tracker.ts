@@ -2,19 +2,20 @@ import { Component, OnInit } from 'angular2/core';
 import { RouteParams }       from 'angular2/router';
 import { Title }             from 'angular2/platform/browser';
 
-import { Capture }        from '../classes/capture';
-import { CaptureService } from '../services/capture';
-import { DexComponent }   from './dex';
-import { InfoComponent }  from './info';
-import { NavComponent }   from './nav';
-import { SessionService } from '../services/session';
-import { User }           from '../classes/user';
-import { UserService }    from '../services/user';
+import { Capture }           from '../classes/capture';
+import { CaptureService }    from '../services/capture';
+import { DexComponent }      from './dex';
+import { InfoComponent }     from './info';
+import { NavComponent }      from './nav';
+import { NotFoundComponent } from './not-found';
+import { SessionService }    from '../services/session';
+import { User }              from '../classes/user';
+import { UserService }       from '../services/user';
 
 const HTML = require('../views/tracker.html');
 
 @Component({
-  directives: [DexComponent, InfoComponent, NavComponent],
+  directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent],
   providers: [CaptureService, SessionService, Title, UserService],
   selector: 'tracker',
   template: HTML
@@ -53,7 +54,8 @@ export class TrackerComponent implements OnInit {
       this.captures = captures;
       this.active = captures[0];
       this.loading = false;
-    });
+    })
+    .catch((err) => this.loading = false);
   }
 
 }
