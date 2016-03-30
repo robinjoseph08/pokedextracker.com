@@ -42,6 +42,19 @@ a.link {
   }
 }
 
+.loading-gif {
+  width: 25px;
+  height: 25px;
+  margin: 40vh auto 0;
+}
+
+.loading-gif-bg {
+  background: url('/loader.gif') no-repeat center;
+  background-size: 25px 25px;
+  height: 25px;
+  margin-top: 40vh;
+}
+
 nav {
   @include flexbox();
   @include justify-content(space-between);
