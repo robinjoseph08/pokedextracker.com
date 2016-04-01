@@ -1,10 +1,14 @@
-<div *ngIf="active" class="info-header">
-  <img [src]="active.pokemon.icon_url">
-  <h1 [innerHTML]="active.pokemon.name"></h1>
-  <h2>#{{active.pokemon.national_id | NumberPipe : 3}}</h2>
+<div *ngIf="active" class="info-collapse" (click)="collapsedChange.emit(!collapsed)">
+  <i class="fa" [class.fa-caret-right]="!collapsed" [class.fa-caret-left]="collapsed"></i>
 </div>
 
 <div *ngIf="active" class="info-main">
+  <div class="info-header">
+    <img [src]="active.pokemon.icon_url">
+    <h1 [innerHTML]="active.pokemon.name"></h1>
+    <h2>#{{active.pokemon.national_id | NumberPipe : 3}}</h2>
+  </div>
+
   <div class="info-body">
     <h3>Pokémon Omega Ruby</h3>
     <ul>

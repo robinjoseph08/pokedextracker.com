@@ -7,6 +7,8 @@ tracker {
   @include flexbox();
   @include flex-grow(1);
 
+  position: relative;
+  
   .fa-venus,
   .fa-mars {
     position: relative;
@@ -18,10 +20,39 @@ tracker {
 
 info {
   @include flexbox();
-  @include flex-direction(column);
 
+  position: relative;
   background-color: $brand-secondary;
-  width: 350px;
+
+  &.collapsed .info-main {
+    display: none;
+  }
+
+  .info-collapse {
+    @include flexbox();
+    @include align-items(center);
+
+    position: absolute;
+    height: 100%;
+    padding: 8px;
+    left: -20px;
+    background-color: darken($brand-secondary-dark, 3%);
+    color: white;
+    font-size: 12px;
+
+    &:hover {
+      cursor: pointer;
+      padding-right: 10px;
+      left: -22px;
+    }
+  }
+
+  .info-main {
+    @include flexbox();
+    @include flex-direction(column);
+
+    width: 350px;
+  }
 
   .info-header {
     @include flexbox();
@@ -50,12 +81,6 @@ info {
       font-size: 17px;
       font-weight: 400;
     }
-  }
-
-  .info-main {
-    @include flexbox();
-    @include flex-direction(column);
-    @include flex-grow(1);
   }
 
   .info-body {
@@ -401,60 +426,18 @@ box {
   }
 }
 
-@media (max-width: 1020px) {
-  .tracker {
-    @include flex-direction(column);
-  }
-
+@media (max-width: 1100px) {
   info {
-    width: 100%;
-    min-height: 235px;
-
-    .info-header {
-      max-height: 50px;
-      min-height: 50px;
-      padding: 10px 10px 10px 3px;
-
-      h1 {
-        font-size: 21px;
-        font-weight: 400;
-      }
-    }
-
-    .info-main {
-      @include flex-direction(row);
-    }
-
-    .info-body {
-      padding: 20px;
-
-      h3 {
-        font-size: 9px;
-      }
-
-      ul {
-        font-size: 14px;
-        margin: 8px 0 16px;
-      }
-    }
-
-    .info-footer {
-      padding: 88px 10px;
-
-      .fa-external-link {
-        display: block;
-      }
-
-      div {
-        display: none;
-      }
-    }
+    position: absolute;
+    left: auto;
+    right: 0;
+    height: 100%;
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
   dex {
-    padding: 20px;
+    padding: 20px 40px 20px 20px;
   }
 
   header,
@@ -526,6 +509,30 @@ box {
       &.empty {
         display: none;
       }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  info {
+    width: 100%;
+
+    .info-collapse {
+      position: relative;
+      left: 0;
+
+      &:hover {
+        left: 0;
+        padding-right: 8px;
+      }
+    }
+
+    .info-main {
+      width: 100%;
+    }
+
+    &.collapsed {
+      width: inherit;
     }
   }
 }

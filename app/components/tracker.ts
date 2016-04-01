@@ -25,6 +25,7 @@ export class TrackerComponent implements OnInit {
   public active: Capture;
   public captures: Capture[] = [];
   public loading: boolean = true;
+  public collapsed: boolean = false;
   public _session: SessionService;
   public user: User;
 
