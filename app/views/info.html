@@ -1,6 +1,6 @@
 <div *ngIf="active" class="info-header">
   <img [src]="active.pokemon.icon_url">
-  <h1>{{active.pokemon.name}}</h1>
+  <h1 [innerHTML]="active.pokemon.name"></h1>
   <h2>#{{active.pokemon.national_id | NumberPipe : 3}}</h2>
 </div>
 
