@@ -1,5 +1,5 @@
 <div class="set-captured" (click)="toggle()">
-  <h4 *ngIf="capture">{{capture.pokemon.name}}</h4>
+  <h4 *ngIf="capture" [innerHTML]="capture.pokemon.name"></h4>
   <img *ngIf="capture" [src]="capture.pokemon.icon_url">
   <p *ngIf="capture">#{{capture.pokemon.national_id | NumberPipe : 3}}</p>
 </div>
