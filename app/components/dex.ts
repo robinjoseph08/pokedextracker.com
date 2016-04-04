@@ -10,7 +10,7 @@ const HTML = require('../views/dex.html');
 
 @Component({
   directives: [HeaderComponent, BoxComponent],
-  events: ['activeChange'],
+  events: ['activeChange', 'collapsedChange'],
   inputs: ['captures', 'user'],
   pipes: [GroupPipe],
   selector: 'dex',
@@ -23,5 +23,6 @@ export class DexComponent {
   public user: User;
 
   public activeChange = new EventEmitter<Capture>();
+  public collapsedChange = new EventEmitter<boolean>();
 
 }

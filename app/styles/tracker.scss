@@ -8,7 +8,7 @@ tracker {
   @include flex-grow(1);
 
   position: relative;
-  
+
   .fa-venus,
   .fa-mars {
     position: relative;
@@ -340,6 +340,17 @@ box {
 
       .set-info {
         opacity: 1;
+
+        &:hover {
+          right: -1px;
+          bottom: -1px;
+
+          .fa-info {
+            padding: 5px 8px;
+            border-color: darken($brand-secondary-dark, 5%);
+            color: darken($brand-secondary-dark, 5%);
+          }
+        }
       }
     }
   }
@@ -411,17 +422,6 @@ box {
       border: 2px solid $brand-secondary-light;
       color: $brand-secondary-light;
       font-size: 10px;
-    }
-
-    &:hover {
-      right: -1px;
-      bottom: -1px;
-
-      .fa-info {
-        padding: 5px 8px;
-        border-color: darken($brand-secondary-dark, 5%);
-        color: darken($brand-secondary-dark, 5%);
-      }
     }
   }
 }
@@ -501,8 +501,8 @@ box {
         width: 60px;
 
         &:hover {
-          right: 0;
-          bottom: 0;
+          right: 0 !important;
+          bottom: 0 !important;
         }
       }
 

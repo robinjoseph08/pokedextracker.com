@@ -1,6 +1,6 @@
 <nav *ngIf="!loading && user" [user]="_session.user"></nav>
 <div *ngIf="!loading && user" class="tracker">
-  <dex *ngIf="!loading" (activeChange)="active = $event" [captures]="captures" [user]="user"></dex>
+  <dex *ngIf="!loading" (activeChange)="active = $event" (collapsedChange)="collapsed = $event" [captures]="captures" [user]="user"></dex>
   <info [(collapsed)]="collapsed" [class.collapsed]="collapsed" [active]="active"></info>
 </div>
 <not-found *ngIf="!loading && !user"></not-found>
