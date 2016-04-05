@@ -103,6 +103,20 @@ button {
   }
 }
 
+.alert {
+  min-height: 43px;
+  padding: 11px;
+  margin-bottom: 35px;
+  border: 2px solid $brand-secondary;
+  text-align: center;
+  font-size: 14px;
+
+  &.alert-error {
+    border: 2px solid $error;
+    color: $error;
+  }
+}
+
 form {
   @include animation(slide .5s ease-out forwards);
 
@@ -110,16 +124,6 @@ form {
   top: 60px;
   margin: 120px auto;
   width: 280px;
-
-  .form-alert {
-    min-height: 43px;
-    padding: 11px;
-    margin-bottom: 35px;
-    border: 2px solid $error;
-    text-align: center;
-    font-size: 14px;
-    color: $error;
-  }
 
   .form-group {
     position: relative;
