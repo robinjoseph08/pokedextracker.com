@@ -1,6 +1,6 @@
 <nav [user]="_session.user"></nav>
 <form (ngSubmit)="createSession(user)">
-  <div *ngIf="error" class="form-alert">
+  <div *ngIf="error" class="alert alert-error">
     {{error}}
   </div>
   <div class="form-group">
