@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, EventEmitter } from 'angular2/core';
 
 import { Capture }    from '../classes/capture';
 import { NumberPipe } from '../pipes/number';
@@ -6,7 +6,8 @@ import { NumberPipe } from '../pipes/number';
 const HTML = require('../views/info.html');
 
 @Component({
-  inputs: ['active'],
+  events: ['collapsedChange'],
+  inputs: ['active', 'collapsed'],
   pipes: [NumberPipe],
   selector: 'info',
   template: HTML
@@ -14,5 +15,7 @@ const HTML = require('../views/info.html');
 export class InfoComponent {
 
   public active: Capture;
+
+  public collapsedChange = new EventEmitter<boolean>();
 
 }

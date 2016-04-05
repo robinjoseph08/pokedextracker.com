@@ -8,7 +8,7 @@ import { SessionService } from '../services/session';
 const HTML = require('../views/pokemon.html');
 
 @Component({
-  events: ['activeChange'],
+  events: ['activeChange', 'collapsedChange'],
   inputs: ['capture', 'region'],
   pipes: [NumberPipe],
   selector: 'pokemon',
@@ -20,6 +20,7 @@ export class PokemonComponent {
   public region: string;
 
   public activeChange = new EventEmitter<Capture>();
+  public collapsedChange = new EventEmitter<boolean>();
 
   private _capture: CaptureService;
   private _session: SessionService;
