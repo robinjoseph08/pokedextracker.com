@@ -14,6 +14,8 @@ import { UserService }       from '../services/user';
 
 const HTML = require('../views/tracker.html');
 
+const MOBILE_WIDTH = 1100;
+
 @Component({
   directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent],
   providers: [CaptureService, SessionService, Title, UserService],
@@ -43,6 +45,10 @@ export class TrackerComponent implements OnInit {
   }
 
   public ngOnInit () {
+    if (window.innerWidth <= MOBILE_WIDTH) {
+      this.collapsed = true;
+    }
+
     this._user.retrieve(this._routeParams.get('username'))
     .then((user) => {
       this._title.setTitle(`${this._routeParams.get('username')}'s Pokédex Tracker`);
