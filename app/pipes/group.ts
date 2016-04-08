@@ -1,6 +1,6 @@
 import { Pipe } from 'angular2/core';
 
-@Pipe({ name: 'GroupPipe' })
+@Pipe({ name: 'group' })
 export class GroupPipe {
 
   public transform (arr, [size]) {

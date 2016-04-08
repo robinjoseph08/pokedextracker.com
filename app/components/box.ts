@@ -1,7 +1,7 @@
 import { Component, EventEmitter } from 'angular2/core';
+import { DecimalPipe }             from 'angular2/common';
 
 import { Capture }          from '../classes/capture';
-import { NumberPipe }       from '../pipes/number';
 import { PokemonComponent } from './pokemon';
 import { SessionService }   from '../services/session';
 import { User }             from '../classes/user';
@@ -12,7 +12,7 @@ const HTML = require('../views/box.html');
   directives: [PokemonComponent],
   events: ['activeChange', 'collapsedChange'],
   inputs: ['captures', 'region', 'user'],
-  pipes: [NumberPipe],
+  pipes: [DecimalPipe],
   providers: [SessionService],
   selector: 'box',
   template: HTML

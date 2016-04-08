@@ -1,4 +1,5 @@
 import { Component, EventEmitter } from 'angular2/core';
+import { PercentPipe }             from 'angular2/common';
 
 import { Capture }        from '../classes/capture';
 import { SessionService } from '../services/session';
@@ -9,6 +10,7 @@ const HTML = require('../views/header.html');
 @Component({
   events: ['regionChange'],
   inputs: ['captures', 'region', 'user'],
+  pipes: [PercentPipe],
   providers: [SessionService],
   selector: 'header',
   template: HTML

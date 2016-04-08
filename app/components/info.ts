@@ -1,14 +1,14 @@
 import { Component, EventEmitter } from 'angular2/core';
+import { DecimalPipe }             from 'angular2/common';
 
 import { Capture }    from '../classes/capture';
-import { NumberPipe } from '../pipes/number';
 
 const HTML = require('../views/info.html');
 
 @Component({
   events: ['collapsedChange'],
   inputs: ['active', 'collapsed'],
-  pipes: [NumberPipe],
+  pipes: [DecimalPipe],
   selector: 'info',
   template: HTML
 })

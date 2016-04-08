@@ -6,7 +6,7 @@
   <div class="info-header">
     <img [src]="active.pokemon.icon_url">
     <h1 [innerHTML]="active.pokemon.name"></h1>
-    <h2>#{{active.pokemon.national_id | NumberPipe : 3}}</h2>
+    <h2>#{{active.pokemon.national_id | number : '3.0'}}</h2>
   </div>
 
   <div class="info-body">

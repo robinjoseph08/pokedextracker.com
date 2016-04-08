@@ -1,8 +1,8 @@
 import { Component, EventEmitter } from 'angular2/core';
+import { DecimalPipe }             from 'angular2/common';
 
 import { Capture }        from '../classes/capture';
 import { CaptureService } from '../services/capture';
-import { NumberPipe }     from '../pipes/number';
 import { SessionService } from '../services/session';
 
 const HTML = require('../views/pokemon.html');
@@ -10,7 +10,7 @@ const HTML = require('../views/pokemon.html');
 @Component({
   events: ['activeChange', 'collapsedChange'],
   inputs: ['capture', 'region'],
-  pipes: [NumberPipe],
+  pipes: [DecimalPipe],
   providers: [SessionService],
   selector: 'pokemon',
   template: HTML

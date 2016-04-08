@@ -12,7 +12,7 @@
 <div class="percentage">
   <div class="progress-container">
     <div class="progress-outer">
-      <div class="progress-inner" [style.width.%]="caught * 100 / total"></div>
+      <div class="progress-inner" [style.width.%]="caught * 100 / total">{{caught / total | percent : '1.2-2'}}</div>
     </div>
     <h3>{{caught}} caught, {{total - caught}} to go!</h3>
   </div>
