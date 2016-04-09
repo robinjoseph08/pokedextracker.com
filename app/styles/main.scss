@@ -44,7 +44,6 @@ a.link {
 
 nav {
   @include flexbox();
-  @include justify-content(space-between);
 
   min-height: 49px;
   background-color: $brand-primary;
@@ -66,6 +65,10 @@ nav {
     &:focus {
       background-color: lighten($brand-primary, 10%);
       cursor: pointer;
+    }
+
+    &:first-child {
+      margin-right: auto;
     }
   }
 }

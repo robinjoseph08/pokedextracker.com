@@ -332,16 +332,11 @@ box {
     }
 
     &:not(.empty):not(.disabled):hover {
-      cursor: pointer;
-
-      .set-captured {
-        border-color: darken($brand-primary-light, 5%);
-      }
-
       .set-info {
         opacity: 1;
 
         &:hover {
+          cursor: pointer;
           right: -1px;
           bottom: -1px;
 
@@ -350,6 +345,15 @@ box {
             border-color: darken($brand-secondary-dark, 5%);
             color: darken($brand-secondary-dark, 5%);
           }
+        }
+      }
+
+      &:not(.viewing) {
+        cursor: pointer;
+
+        .set-captured,
+        .set-capture-mobile:hover {
+          border-color: darken($brand-primary-light, 5%);
         }
       }
     }
@@ -402,10 +406,6 @@ box {
       padding-right: 10px;
       font-family: $font-secondary;
       font-size: 12px;
-    }
-
-    &:hover {
-      border-color: darken($brand-primary-light, 5%);
     }
   }
 

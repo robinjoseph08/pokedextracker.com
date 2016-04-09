@@ -2,7 +2,7 @@
   This app is still in alpha, and we're still releasing changes consistently. Let us know<br>about any issues on our <a class="link" href="https://github.com/robinjoseph08/pokedextracker.com/issues/new" target="_blank">GitHub</a>. Happy tracking!
 </div>
 
-<h1>{{user.username}}'s Living Dex</h1>
+<h1><span *ngIf="_session.user?.id !== user.id">Viewing </span>{{user.username}}'s Living Dex</h1>
 <h2>FC: <span [class.fc-missing]="!user.friend_code">{{user.friend_code || 'XXXX-XXXX-XXXX'}}</span></h2>
 
 <div class="region-filter">

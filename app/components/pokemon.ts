@@ -11,6 +11,7 @@ const HTML = require('../views/pokemon.html');
   events: ['activeChange', 'collapsedChange'],
   inputs: ['capture', 'region'],
   pipes: [NumberPipe],
+  providers: [SessionService],
   selector: 'pokemon',
   template: HTML
 })
