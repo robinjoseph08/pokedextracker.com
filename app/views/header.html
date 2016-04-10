@@ -12,9 +12,10 @@
 <div class="percentage">
   <div class="progress-container">
     <div class="progress-outer">
+      <div class="progress-numbers"><b>{{caught / total | percent : '1.1-1'}}</b> done!<span class="mobile"> (<b>{{caught}}</b> caught, <b>{{total - caught}}</b> to go)</span></div>
       <div class="progress-inner" [style.width.%]="caught * 100 / total"></div>
     </div>
-    <h3>{{caught}} caught, {{total - caught}} to go!</h3>
+    <h3>(<b>{{caught}}</b> caught, <b>{{total - caught}}</b> to go)</h3>
   </div>
 
   <div class="region-filter-mobile">
