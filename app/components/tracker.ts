@@ -8,6 +8,7 @@ import { DexComponent }      from './dex';
 import { InfoComponent }     from './info';
 import { NavComponent }      from './nav';
 import { NotFoundComponent } from './not-found';
+import { PokemonService }    from '../services/pokemon';
 import { SessionService }    from '../services/session';
 import { User }              from '../classes/user';
 import { UserService }       from '../services/user';
@@ -18,7 +19,7 @@ const MOBILE_WIDTH = 1100;
 
 @Component({
   directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent],
-  providers: [CaptureService, SessionService, Title, UserService],
+  providers: [CaptureService, PokemonService, SessionService, Title, UserService],
   selector: 'tracker',
   template: HTML
 })
