@@ -14,8 +14,19 @@ const HTML = require('../views/info.html');
 })
 export class InfoComponent {
 
-  public active: Capture;
-
   public collapsedChange = new EventEmitter<boolean>();
+
+  public get active (): Capture {
+    return this._active;
+  }
+
+  public set active (active: Capture) {
+    this._active = active;
+    if (!active.pokemon.bulbapedia_url) {
+      active.loadPokemon();
+    }
+  }
+
+  private _active: Capture;
 
 }

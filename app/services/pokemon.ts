@@ -17,4 +17,9 @@ export class PokemonService {
     .then((pokemon: Array<Object>) => pokemon.map((p) => new Pokemon(p)));
   }
 
+  public retrieve (id: number): Promise<Pokemon> {
+    return this._api.get(`/pokemon/${id}`)
+    .then((pokemon) => new Pokemon(pokemon));
+  }
+
 }
