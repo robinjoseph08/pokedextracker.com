@@ -1,4 +1,4 @@
-<a [routerLink]="['Home']">Pokédex Tracker</a>
+<a [routerLink]="_session.user ? ['Tracker', { username: _session.user.username }] : ['Home']">Pokédex Tracker</a>
 <a *ngIf="!_session.user" [routerLink]="['Login']">Login</a>
 <a *ngIf="!_session.user" [routerLink]="['Register']">Register</a>
 <a *ngIf="_session.user" (click)="signOut()">Sign Out</a>
