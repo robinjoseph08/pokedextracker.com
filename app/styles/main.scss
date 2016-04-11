@@ -119,6 +119,19 @@ button {
   }
 }
 
+input {
+  width: 100%;
+  -webkit-appearance: none;
+  border: 2px solid $brand-secondary-light;
+  border-radius: 0;
+  padding: 6px;
+  font-family: $font-primary;
+
+  &:focus {
+    border-color: $brand-secondary-dark;
+  }
+}
+
 form {
   @include animation(slide .5s ease-out forwards);
 
@@ -142,21 +155,12 @@ form {
     }
 
     input {
-      width: 100%;
-      -webkit-appearance: none;
-      border: 2px solid $brand-secondary-light;
-      border-radius: 0;
       height: 43px;
       padding: 10px 32px 10px 10px;
-      font-family: $font-primary;
       font-size: 15px;
 
       &[type="password"] {
         font-family: $font-secondary;
-      }
-
-      &:focus {
-        border-color: $brand-secondary-dark;
       }
     }
 
