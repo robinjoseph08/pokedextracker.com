@@ -1,3 +1,5 @@
+import { EvolutionFamily } from './evolution-family';
+
 export class Pokemon {
 
   public national_id: number;
@@ -17,6 +19,7 @@ export class Pokemon {
   public y_locations: string[];
   public or_locations: string[];
   public as_locations: string[];
+  public evolution_family: EvolutionFamily;
 
   constructor (params) {
     this.national_id = params.national_id;
@@ -36,6 +39,7 @@ export class Pokemon {
     this.y_locations = params.y_locations;
     this.or_locations = params.or_locations;
     this.as_locations = params.as_locations;
+    this.evolution_family = params.evolution_family && new EvolutionFamily(params.evolution_family);
   }
 
   public is (region: string): boolean {

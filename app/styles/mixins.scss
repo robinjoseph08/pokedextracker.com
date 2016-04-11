@@ -66,9 +66,20 @@
   flex-wrap: $string;
 }
 
+@mixin flex($string) {
+  -webkit-flex: $string;
+  -ms-flex: $string;
+  flex: $string;
+}
+
 @mixin flex-grow($string) {
   -webkit-flex-grow: $string;
   flex-grow: $string;
+}
+
+@mixin flex-shrink($string) {
+  -webkit-flex-shrink: $string;
+  flex-shrink: $string;
 }
 
 @mixin align-self($string) {

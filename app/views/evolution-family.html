@@ -1,0 +1,16 @@
+<div class="evolution-pokemon-column">
+  <a><img [src]="family.pokemon[0][0].icon_url"></a>
+  <div *ngIf="family.evolutions.length === 0">Does not evolve</div>
+</div>
+<evolutions *ngIf="family.evolutions.length > 0" class="evolution-trigger-column" [evolutions]="family.evolutions[0]"></evolutions>
+<div *ngIf="family.pokemon.length > 1" class="evolution-pokemon-column">
+  <a *ngFor="#pokemon of family.pokemon[1]">
+    <img [src]="pokemon.icon_url">
+  </a>
+</div>
+<evolutions *ngIf="family.evolutions.length > 1" class="evolution-trigger-column" [evolutions]="family.evolutions[1]"></evolutions>
+<div *ngIf="family.pokemon.length > 2" class="evolution-pokemon-column">
+  <a *ngFor="#pokemon of family.pokemon[2]">
+    <img [src]="pokemon.icon_url">
+  </a>
+</div>

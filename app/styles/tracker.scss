@@ -52,16 +52,19 @@ info {
     @include flex-direction(column);
 
     width: 350px;
+    color: #fff;
+
+    > * {
+      @include flex-shrink(0);
+    }
   }
 
   .info-header {
     @include flexbox();
     @include align-items(center);
 
-    min-height: 76px;
     padding: 17px 17px 17px 8px;
     border-bottom: 2px solid $brand-secondary-dark;
-    color: #fff;
 
     img {
       margin-right: 3px;
@@ -83,12 +86,12 @@ info {
     }
   }
 
-  .info-body {
-    @include flex-grow(1);
+  .info-locations {
+    @include flex(1 1 auto);
     @include overflow-y-scroll;
 
     padding: 30px;
-    color: #fff;
+    border-bottom: 2px solid $brand-secondary-dark;
 
     h3 {
       margin: 0;
@@ -111,11 +114,96 @@ info {
     }
   }
 
+  .info-evolutions {
+    @include flexbox();
+    @include justify-content(center);
+
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+
+    .evolution-pokemon-column,
+    .evolution-trigger-column {
+      @include flexbox();
+      @include flex-direction(column);
+      @include justify-content(space-around);
+    }
+
+    .evolution-pokemon-column a {
+      padding: 0 5px;
+    }
+
+    .evolution-trigger-column {
+      @include flex-grow(1);
+
+      max-width: 90px;
+
+      .evolution-trigger {
+        @include flexbox();
+        @include flex-direction(column);
+        @include justify-content(center);
+
+        margin: 8px 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        > .fa {
+          margin-bottom: 3px;
+        }
+
+        .tooltip {
+          display: inline-block;
+          position: relative;
+          margin-left: 3px;
+
+          .fa-plus-circle {
+            font-size: 11px;
+          }
+
+          .tooltip-text {
+            visibility: hidden;
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -($tooltip-width / 2);
+            z-index: 1;
+            width: $tooltip-width;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #fff;
+            color: black;
+            text-align: center;
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              margin-left: -5px;
+              border-width: 5px;
+              border-style: solid;
+              border-color: #fff transparent transparent transparent;
+            }
+          }
+
+          &:hover .tooltip-text {
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+
   .info-footer {
     @include transition(all .1s ease-out);
 
     display: block;
-    min-height: 54px;
     padding: 20px;
     background-color: $brand-secondary-dark;
     color: #fff;

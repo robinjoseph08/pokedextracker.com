@@ -1,0 +1,21 @@
+<div *ngFor="#evolution of evolutions" class="evolution-trigger">
+  <i [class.fa-long-arrow-right]="evolution.trigger !== 'breed'" [class.fa-long-arrow-left]="evolution.trigger === 'breed'" class="fa"></i>
+  <div>
+    <span [ngSwitch]="evolution.trigger">
+      <span *ngSwitchWhen="'level'">
+        Level Up <span *ngIf="evolution.level">to {{evolution.level}}</span>
+      </span>
+      <span *ngSwitchWhen="'stone'">{{evolution.stone | capitalize}} Stone</span>
+      <span *ngSwitchWhen="'trade'">Trade</span>
+      <span *ngSwitchWhen="'breed'">Breed</span>
+    </span>
+    <span *ngIf="evolution.held_item">holding {{evolution.held_item | capitalize}}</span>
+    <span *ngIf="evolution.notes">
+      <span *ngIf="evolutions.length <= 3">{{evolution.notes}}</span>
+      <div *ngIf="evolutions.length > 3" class="tooltip">
+        <i class="fa fa-plus-circle"></i>
+        <span class="tooltip-text">{{evolution.notes}}</span>
+      </div>
+    </span>
+  </div>
+</div>
