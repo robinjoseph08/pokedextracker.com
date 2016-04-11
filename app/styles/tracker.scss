@@ -53,13 +53,16 @@ info {
 
     width: 350px;
     color: #fff;
+
+    > * {
+      @include flex-shrink(0);
+    }
   }
 
   .info-header {
     @include flexbox();
     @include align-items(center);
 
-    min-height: 76px;
     padding: 17px 17px 17px 8px;
     border-bottom: 2px solid $brand-secondary-dark;
 
@@ -84,7 +87,7 @@ info {
   }
 
   .info-locations {
-    @include flex-grow(1);
+    @include flex(1 1 auto);
     @include overflow-y-scroll;
 
     padding: 30px;
@@ -115,7 +118,7 @@ info {
     @include flexbox();
     @include justify-content(center);
 
-    padding: 30px 20px;
+    padding: 20px;
     text-align: center;
     font-size: 13px;
 
@@ -133,17 +136,25 @@ info {
     .evolution-trigger-column {
       @include flex-grow(1);
 
-      max-width: 80px;
+      max-width: 90px;
 
       .evolution-trigger {
         @include flexbox();
         @include flex-direction(column);
         @include justify-content(center);
 
-        margin: 10px 0;
+        margin: 8px 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
 
         > .fa {
-          margin-bottom: 4px;
+          margin-bottom: 3px;
         }
 
         .tooltip {
@@ -193,7 +204,6 @@ info {
     @include transition(all .1s ease-out);
 
     display: block;
-    min-height: 54px;
     padding: 20px;
     background-color: $brand-secondary-dark;
     color: #fff;
