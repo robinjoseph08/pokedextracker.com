@@ -249,9 +249,60 @@ header {
   width: 6 * $pokemon-box-size + 2;
 
   h1 {
+    display: inline-block;
     margin: 0;
     color: $brand-secondary;
     font-size: 40px;
+  }
+
+  .share-container {
+    position: relative;
+    display: inline-block;
+
+    a {
+      position: relative;
+      bottom: 4px;
+      font-size: 16px;
+      color: lighten(#000, 20%);
+
+      .fa {
+        padding: 5px;
+      }
+
+      &:hover {
+        color: black;
+        cursor: pointer;
+      }
+    }
+
+    .share {
+      position: absolute;
+      bottom: 156%;
+      left: 50%;
+      width: 250px;
+      padding: 10px;
+      margin-left: -(250px / 2);
+      z-index: 1;
+      border: 2px solid $gray-light;
+      background-color: lighten($gray-light, 10%);
+      font-size: 14px;
+
+      input {
+        margin-top: 5px;
+        font-size: 12px;
+      }
+
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -8px;
+        border-width: 8px;
+        border-style: solid;
+        border-color: $gray-light transparent transparent transparent;
+      }
+    }
   }
 
   h2 {
@@ -550,6 +601,10 @@ box {
   header {
     h1 {
       font-size: 30px;
+    }
+
+    .share-container {
+      display: none
     }
 
     .region-filter {
