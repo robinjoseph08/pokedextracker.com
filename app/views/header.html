@@ -2,8 +2,8 @@
 <div class="share-container">
   <a (click)="showLink = !showLink"><i class="fa fa-link"></i></a>
   <div class="share" *ngIf="showLink">
-    Share your progress:
-    <input value="https://pokedextracker.com/u/{{user.username}}" readonly>
+    Share this Living Dex:
+    <input #share value="https://pokedextracker.com/u/{{user.username}}" readonly (click)="share.select()">
   </div>
 </div>
 
