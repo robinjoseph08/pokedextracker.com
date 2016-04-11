@@ -119,7 +119,8 @@ info {
     text-align: center;
     font-size: 13px;
 
-    > div {
+    .evolution-pokemon-column,
+    .evolution-trigger-column {
       @include flexbox();
       @include flex-direction(column);
       @include justify-content(space-around);
@@ -127,10 +128,6 @@ info {
 
     .evolution-pokemon-column a {
       padding: 0 5px;
-
-      &:hover {
-        cursor: pointer;
-      }
     }
 
     .evolution-trigger-column {

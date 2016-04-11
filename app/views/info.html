@@ -28,40 +28,7 @@
     </ul>
   </div>
 
-  <div class="info-evolutions">
-    <div class="evolution-pokemon-column">
-      <a><img src="http://cdn.bulbagarden.net/upload/e/ec/001MS.png"></a>
-      <div *ngIf="">Does not evolve</div>
-    </div>
-    <div class="evolution-trigger-column">
-      <div class="evolution-trigger">
-        <i class="fa fa-long-arrow-right"></i>
-        <div>Level Up to 7 (random based on personality value)</div>
-      </div>
-    </div>
-    <div class="evolution-pokemon-column">
-      <a><img src="http://cdn.bulbagarden.net/upload/6/6b/002MS.png"></a>
-    </div>
-    <div class="evolution-trigger-column">
-      <div class="evolution-trigger">
-        <i class="fa fa-long-arrow-right"></i>
-        <div>
-          Level Up
-          <div class="tooltip">
-            <i class="fa fa-plus-circle"></i>
-            <span class="tooltip-text">with 2 affection hearts on pokémon-amie and knowing a fairy-type move</span>
-          </div>
-        </div>
-      </div>
-      <div class="evolution-trigger">
-        <i class="fa fa-long-arrow-right"></i>
-        <div>Level Up to 10</div>
-      </div>
-    </div>
-    <div class="evolution-pokemon-column">
-      <a><img src="http://cdn.bulbagarden.net/upload/d/df/003MS.png"></a><a><img src="http://cdn.bulbagarden.net/upload/6/6b/002MS.png"></a>
-    </div>
-  </div>
+  <evolution-family *ngIf="active.pokemon.evolution_family" class="info-evolutions" [family]="active.pokemon.evolution_family"></evolution-family>
 
   <a class="info-footer" [href]="active.pokemon.bulbapedia_url" target="_blank">
     <div>View on Bulbapedia <i class="fa fa-long-arrow-right"></i></div>
