@@ -9,7 +9,7 @@
     <h2>#{{active.pokemon.national_id | number : '3.0'}}</h2>
   </div>
 
-  <div class="info-locations">
+  <div *ngIf="!loading" class="info-locations">
     <h3>Pokémon Omega Ruby</h3>
     <ul>
       <li *ngFor="#loc of active.pokemon.or_locations">{{loc}}</li>
@@ -28,7 +28,7 @@
     </ul>
   </div>
 
-  <evolution-family *ngIf="active.pokemon.evolution_family" class="info-evolutions" [family]="active.pokemon.evolution_family"></evolution-family>
+  <evolution-family *ngIf="active.pokemon.evolution_family && !loading" class="info-evolutions" [family]="active.pokemon.evolution_family"></evolution-family>
 
   <a class="info-footer" [href]="active.pokemon.bulbapedia_url" target="_blank">
     <div>View on Bulbapedia <i class="fa fa-long-arrow-right"></i></div>

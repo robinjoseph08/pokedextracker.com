@@ -17,8 +17,8 @@ export class Capture {
     this._pokemon = _pokemon;
   }
 
-  public loadPokemon () {
-    this._pokemon.retrieve(this.pokemon.national_id)
+  public loadPokemon (): Promise<Pokemon> {
+    return this._pokemon.retrieve(this.pokemon.national_id)
     .then((pokemon) => this.pokemon = pokemon);
   }
 
