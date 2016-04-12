@@ -1,8 +1,8 @@
-<div *ngIf="active" class="info-collapse" (click)="collapsedChange.emit(!collapsed)">
+<div *ngIf="active && !loading" class="info-collapse" (click)="collapsedChange.emit(!collapsed)">
   <i class="fa" [class.fa-caret-right]="!collapsed" [class.fa-caret-left]="collapsed"></i>
 </div>
 
-<div *ngIf="active" class="info-main">
+<div *ngIf="active && !loading" class="info-main">
   <div class="info-header">
     <img [src]="active.pokemon.icon_url">
     <h1 [innerHTML]="active.pokemon.name"></h1>
@@ -28,7 +28,7 @@
     </ul>
   </div>
 
-  <evolution-family *ngIf="active.pokemon.evolution_family" class="info-evolutions" [family]="active.pokemon.evolution_family"></evolution-family>
+  <evolution-family *ngIf="active.pokemon.evolution_family && !loading" class="info-evolutions" [family]="active.pokemon.evolution_family"></evolution-family>
 
   <a class="info-footer" [href]="active.pokemon.bulbapedia_url" target="_blank">
     <div>View on Bulbapedia <i class="fa fa-long-arrow-right"></i></div>
