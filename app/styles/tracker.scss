@@ -446,12 +446,28 @@ box {
   margin: 60px auto 0;
   width: 6 * $pokemon-box-size + 2;
 
-  h1 {
-    margin: 0 0 10px;
-    font-family: $font-secondary;
-    font-size: 25px;
-    font-weight: 700;
-    text-transform: uppercase;
+  .box-header {
+    @include flexbox();
+
+    margin-bottom: 10px;
+
+    h1 {
+      @include flex(1 0 auto);
+
+      margin: 0;
+      font-family: $font-secondary;
+      font-size: 25px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    button {
+      display: inline-block;
+      height: auto;
+      width: auto;
+      padding: 8px 12px;
+      font-size: 10px;
+    }
   }
 
   .box-container {
