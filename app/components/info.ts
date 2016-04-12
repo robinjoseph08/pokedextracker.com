@@ -25,14 +25,12 @@ export class InfoComponent {
   }
 
   public set active (active: Capture) {
-    this.loading = true;
-    console.log('beginning: ' + this.loading);
     this._active = active;
     if (!active.pokemon.bulbapedia_url) {
-      active.loadPokemon();
+      this.loading = true;
+      active.loadPokemon()
+      .then(() => this.loading = false);
     }
-    this.loading = false;
-    console.log('end: ' + this.loading);
   }
 
   private _active: Capture;

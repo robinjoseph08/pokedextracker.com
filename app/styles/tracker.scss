@@ -204,6 +204,7 @@ info {
     @include transition(all .1s ease-out);
 
     display: block;
+    margin-top: auto;
     padding: 20px;
     background-color: $brand-secondary-dark;
     color: #fff;
