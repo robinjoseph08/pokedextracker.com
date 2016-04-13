@@ -20,9 +20,9 @@ export class CaptureService {
     .then((captures: Array<Object>) => captures.map((c) => new Capture(c, this._pokemon)));
   }
 
-  public create (payload): Promise<Capture> {
+  public create (payload): Promise<Capture[]> {
     return this._api.post('/captures', payload)
-    .then((capture) => new Capture(capture, this._pokemon));
+    .then((captures: Array<Object>) => captures.map((c) => new Capture(c, this._pokemon)));
   }
 
   public delete (payload): Promise<Object> {
