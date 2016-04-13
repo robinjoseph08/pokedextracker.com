@@ -1,5 +1,5 @@
 <h1><span *ngIf="_session.user?.id !== user.id">Viewing </span>{{user.username}}'s Living Dex</h1>
-<div class="share-container">
+<div class="share-container" [offClick]="closeShare">
   <a (click)="showLink = !showLink"><i class="fa fa-link"></i></a>
   <div class="share" *ngIf="showLink">
     Share this Living Dex:
@@ -23,7 +23,7 @@
   </div>
 
   <div class="region-filter-mobile">
-    <div class="active" (click)="dropdown = !dropdown">
+    <div class="active" (click)="dropdown = !dropdown" [offClick]="closeRegion">
       <span>{{region}}</span>
       <i class="fa fa-sort-desc"></i>
     </div>
