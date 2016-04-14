@@ -1,12 +1,18 @@
-<h1>Pokédex Tracker</h1>
+<div class="home">
+  <div class="hero">
+    <img src="/pokeball.svg" alt="Gotta catch 'em all!">
+    <h1>Pokédex Tracker</h1>
+  </div>
 
-<div class="hero">
-  <img class="mockup" src="/mockup.png">
-  <p>A tool for tracking your <a href="http://bulbapedia.bulbagarden.net/wiki/Living_Pok%C3%A9dex" target="_blank" class="link">Living Dex</a> progress. Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, and share a public link with others to see how you can help each other out.<br><br>This project is open source, and you can find the code on Github (<a href="https://github.com/robinjoseph08/api.pokedextracker.com" target="_blank" class="link">API</a> &amp; <a href="https://github.com/robinjoseph08/pokedextracker.com" target="_blank" class="link">website</a>). Feel free to report issues, suggest features, or even submit a pull request!</p>
+  <div class="sub">
+    <h2>A tool for tracking your <a href="http://bulbapedia.bulbagarden.net/wiki/Living_Pok%C3%A9dex" target="_blank" class="link">Living Dex</a> progress. Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, and share a public link with others to see how you can help each other out. Check out an example living dex <a class="link" [routerLink]="['Tracker', { username: 'ashketchum10' }]">here</a>!</h2>
 
-  <div>
-    <button [routerLink]="['Register']">Register <i class="fa fa-long-arrow-right"></i></button>
-    <button [routerLink]="['Login']">Login <i class="fa fa-long-arrow-right"></i></button>
+    <p>This project is open source, and you can find the code on Github (<a href="https://github.com/robinjoseph08/pokedextracker.com" target="_blank" class="link">website</a> &amp; <a href="https://github.com/robinjoseph08/api.pokedextracker.com" target="_blank" class="link">API</a>). Feel free to report issues, suggest features, or even submit a pull request!</p>
+
+    <div>
+      <button [routerLink]="['Register']">Register <i class="fa fa-long-arrow-right"></i></button>
+      <button [routerLink]="['Login']">Login <i class="fa fa-long-arrow-right"></i></button>
+    </div>
   </div>
 </div>
 

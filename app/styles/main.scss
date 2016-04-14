@@ -44,7 +44,7 @@ a.link {
 
 nav {
   @include flexbox();
-  @include flex-shrink(0);
+  @include flex(0 0 49px);
 
   background-color: $brand-primary;
   font-family: $font-secondary;
