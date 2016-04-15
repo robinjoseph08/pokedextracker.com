@@ -52,7 +52,7 @@ export class TrackerComponent implements OnInit {
 
     this._user.retrieve(this._routeParams.get('username'))
     .then((user) => {
-      this._title.setTitle(`${this._routeParams.get('username')}'s Pokédex Tracker`);
+      this._title.setTitle(`${this._routeParams.get('username')}'s Living Dex | Pokédex Tracker`);
 
       this.user = user;
 

@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       return this._router.navigate(['Tracker', { username: this._session.user.username }]);
     }
 
-    this._title.setTitle('Pokédex Tracker');
+    this._title.setTitle('Pokédex Tracker | Track the Progress of Your Living Dex Completion');
   }
 
 }
