@@ -1,7 +1,4 @@
 home {
-  @include flexbox();
-  @include flex-direction(column);
-
   background: $brand-primary url('/pattern.png') repeat center center;
   background-size: 500px 250px;
   text-align: center;

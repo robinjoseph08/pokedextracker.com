@@ -27,6 +27,8 @@ app {
   register,
   login {
     @include flex-grow(1);
+    @include flexbox();
+    @include flex-direction(column);
   }
 }
 
@@ -44,7 +46,7 @@ a.link {
 
 nav {
   @include flexbox();
-  @include flex(0 0 49px);
+  @include flex(0 0 42px);
 
   background-color: $brand-primary;
   font-family: $font-secondary;
@@ -52,8 +54,8 @@ nav {
   a {
     @include transition(all .1s ease-out);
 
-    padding: 17px;
-    font-size: 12px;
+    padding: 14px;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -108,7 +110,7 @@ button {
 
 .alert {
   padding: 11px;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   border: 2px solid $brand-secondary;
   text-align: center;
   font-size: 14px;
@@ -132,12 +134,22 @@ input {
   }
 }
 
+login {
+  padding-bottom: 150px;
+}
+
+.form {
+  @include flex-grow(1);
+  @include flexbox();
+  @include justify-content(center);
+  @include align-items(center);
+}
+
 form {
   @include animation(slide .5s ease-out forwards);
 
   position: relative;
   top: 60px;
-  margin: 120px auto;
   width: 280px;
 
   .form-group {
@@ -235,11 +247,6 @@ form {
 }
 
 @media (max-width: 700px) {
-  form {
-    margin: 0 auto;
-    padding: 70px 0;
-  }
-
   .not-found h1 {
     font-size: 35px;
   }
