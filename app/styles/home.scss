@@ -1,27 +1,43 @@
 home {
   @include flexbox();
   @include flex-direction(column);
-  @include align-items(center);
 
-  background-color: $brand-primary;
+  background: $brand-primary url('/pattern.png') repeat center center;
+  background-size: 500px 250px;
   text-align: center;
 
-  h1 {
+  .home {
+    @include flex-grow(1);
+    @include flexbox();
+    @include flex-direction(column);
+    @include justify-content(center);
+  }
+
+  .hero {
     @include animation(slide 1s cubic-bezier(0,0,.05,1) forwards);
 
     position: relative;
     top: -100px;
-    margin: 8vh 0 0;
-    font-family: $font-secondary;
-    font-size: 50px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
-    color: $brand-secondary;
+
+    img {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: $font-secondary;
+      font-size: 60px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: $brand-secondary;
+    }
   }
 
-  .hero {
+  .sub {
     @include animation(slide 1s cubic-bezier(0,0,.05,1) forwards);
     @include flexbox();
     @include flex-direction(column);
@@ -29,37 +45,35 @@ home {
 
     position: relative;
     top: 100px;
-  }
 
-  .mockup {
-    display: block;
-    margin-top: 25px;
-    width: auto;
-    height: auto;
-  }
-
-  p {
-    max-width: 600px;
-    margin: 25px 0;
-    padding: 0 10px;
-    font-size: 16px;
-    font-weight: 400;
-  }
-
-  button {
-    display: inline-block;
-    width: 180px;
-
-    &:first-child {
-      margin-right: 15px;
+    h2,
+    p {
+      max-width: 570px;
+      margin: 30px 0;
+      padding: 0 20px;
+      font-size: 15px;
+      font-weight: 400;
     }
 
-    &:last-child {
-      color: $brand-secondary;
-      background-color: #fff;
+    h2 {
+      margin-bottom: 0;
+    }
 
-      &:hover {
-        background-color: darken(#fff, 1%);
+    button {
+      display: inline-block;
+      width: 180px;
+
+      &:first-child {
+        margin-right: 15px;
+      }
+
+      &:last-child {
+        color: $brand-secondary;
+        background-color: #fff;
+
+        &:hover {
+          background-color: darken(#fff, 1%);
+        }
       }
     }
   }
@@ -83,33 +97,33 @@ home {
   }
 }
 
-@media (max-width: 750px) {
-  home {
-    .mockup {
-      max-height: 200px;
-    }
-  }
-}
-
 @media (max-width: 400px) {
   home {
-    h1 {
-      font-size: 40px;
-      margin-top: 25px;
+    .hero {
+      img {
+        width: 80px;
+        height: 80px;
+      }
+
+      h1 {
+        font-size: 45px;
+      }
     }
 
-    .mockup {
-      margin-top: 15px;
-      max-height: 140px;
-    }
+    .sub {
+      h2,
+      p {
+        margin-top: 15px;
+        font-size: 14px;
+      }
 
-    p {
-      margin: 20px 0;
-      font-size: 14px;
-    }
+      p {
+        margin-bottom: 15px;
+      }
 
-    button {
-      width: 140px;
+      button {
+        width: 130px;
+      }
     }
   }
 }
