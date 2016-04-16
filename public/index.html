@@ -41,7 +41,7 @@
       var _gaq = window._gaq || null;
     </script>
     <script>
-      if (!window.ontouchstart && !navigator.MaxTouchPoints && !navigator.msMaxTouchPoints) {
+      if (!('ontouchstart' in window)) {
         document.documentElement.className += ' no-touch';
       }
     </script>
