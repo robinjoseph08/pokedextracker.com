@@ -1,6 +1,8 @@
 import { Component, EventEmitter } from 'angular2/core';
 import { PercentPipe }             from 'angular2/common';
+import { Angulartics2On }          from 'angulartics2';
 
+import { CapitalizePipe }    from '../pipes/capitalize';
 import { Capture }           from '../classes/capture';
 import { OffClickDirective } from '../directives/off-click';
 import { SessionService }    from '../services/session';
@@ -9,10 +11,10 @@ import { User }              from '../classes/user';
 const HTML = require('../views/header.html');
 
 @Component({
-  directives: [OffClickDirective],
+  directives: [Angulartics2On, OffClickDirective],
   events: ['regionChange'],
   inputs: ['captures', 'region', 'user'],
-  pipes: [PercentPipe],
+  pipes: [CapitalizePipe, PercentPipe],
   providers: [SessionService],
   selector: 'header',
   template: HTML
