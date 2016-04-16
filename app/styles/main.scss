@@ -22,10 +22,11 @@ app {
 
   height: 100vh;
 
+  tracker,
   home,
   register,
   login {
-    @include flex-grow(1);
+    @include flex(1 1 auto);
     @include flexbox();
     @include flex-direction(column);
   }
@@ -45,10 +46,11 @@ a.link {
 
 nav {
   @include flexbox();
+  @include flex(0 0 42px);
 
+  position: relative;
   background-color: $brand-primary;
   font-family: $font-secondary;
-  min-height: 42px;
 
   a {
     @include transition(all .1s ease-out);
