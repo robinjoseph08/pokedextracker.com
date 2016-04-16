@@ -1,5 +1,6 @@
-import { Component, EventEmitter } from 'angular2/core';
-import { DecimalPipe }             from 'angular2/common';
+import { Component, EventEmitter }      from 'angular2/core';
+import { DecimalPipe }                  from 'angular2/common';
+import { Angulartics2, Angulartics2On } from 'angulartics2';
 
 import { Capture }        from '../classes/capture';
 import { CaptureService } from '../services/capture';
@@ -8,6 +9,7 @@ import { SessionService } from '../services/session';
 const HTML = require('../views/pokemon.html');
 
 @Component({
+  directives: [Angulartics2On],
   events: ['activeChange', 'collapsedChange'],
   inputs: ['capture', 'region'],
   pipes: [DecimalPipe],
@@ -23,10 +25,12 @@ export class PokemonComponent {
   public activeChange = new EventEmitter<Capture>();
   public collapsedChange = new EventEmitter<boolean>();
 
+  private _angulartics: Angulartics2;
   private _capture: CaptureService;
   private _session: SessionService;
 
-  constructor (_capture: CaptureService, _session: SessionService) {
+  constructor (_angulartics: Angulartics2, _capture: CaptureService, _session: SessionService) {
+    this._angulartics = _angulartics;
     this._capture = _capture;
     this._session = _session;
   }
@@ -38,13 +42,24 @@ export class PokemonComponent {
 
     const payload = { pokemon: this.capture.pokemon.national_id };
 
-    if (this.capture.captured) {
-      this._capture.delete(payload)
-      .then(() => this.capture.captured = false);
-    } else {
-      this._capture.create(payload)
-      .then(() => this.capture.captured = true);
-    }
+    Promise.resolve()
+    .then(() => {
+      if (this.capture.captured) {
+        this._capture.delete(payload);
+      } else {
+        this._capture.create(payload);
+      }
+    })
+    .then(() => {
+      this.capture.captured = !this.capture.captured;
+      this._angulartics.eventTrack.next({
+        action: this.capture.captured ? 'mark' : 'unmark',
+        properties: {
+          category: 'Pokemon',
+          label: this.capture.pokemon.name
+        }
+      });
+    });
   }
 
 }

@@ -61,6 +61,11 @@
       "from": "angular2@latest",
       "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.12.tgz"
     },
+    "angulartics2": {
+      "version": "1.0.8",
+      "from": "angulartics2@*",
+      "resolved": "https://registry.npmjs.org/angulartics2/-/angulartics2-1.0.8.tgz"
+    },
     "ansi": {
       "version": "0.3.1",
       "from": "ansi@>=0.3.1 <0.4.0",
@@ -850,7 +855,7 @@
     },
     "es6-promise": {
       "version": "3.1.2",
-      "from": "es6-promise@latest",
+      "from": "es6-promise@>=3.0.2 <4.0.0",
       "resolved": "https://registry.npmjs.org/es6-promise/-/es6-promise-3.1.2.tgz"
     },
     "es6-shim": {

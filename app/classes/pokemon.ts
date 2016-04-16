@@ -4,6 +4,7 @@ export class Pokemon {
 
   public national_id: number;
   public name: string;
+  public html_name: string;
   public kanto_id: number;
   public johto_id: number;
   public hoenn_id: number;
@@ -23,7 +24,8 @@ export class Pokemon {
 
   constructor (params) {
     this.national_id = params.national_id;
-    this.name = params.name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>');
+    this.name = params.name;
+    this.html_name = params.name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>');
     this.kanto_id = params.kanto_id;
     this.johto_id = params.johto_id;
     this.hoenn_id = params.hoenn_id;

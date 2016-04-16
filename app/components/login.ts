@@ -1,6 +1,7 @@
 import { Component, OnInit }  from 'angular2/core';
 import { Router, RouterLink } from 'angular2/router';
 import { Title }              from 'angular2/platform/browser';
+import { Angulartics2 }       from 'angulartics2';
 
 import { NavComponent }   from './nav';
 import { SessionService } from '../services/session';
@@ -20,10 +21,12 @@ export class LoginComponent implements OnInit {
   public _session: SessionService;
   public user: User = new User({});
 
+  private _angulartics: Angulartics2;
   private _router: Router;
   private _title: Title;
 
-  constructor (_router: Router, _session: SessionService, _title: Title) {
+  constructor (_angulartics: Angulartics2, _router: Router, _session: SessionService, _title: Title) {
+    this._angulartics = _angulartics;
     this._router = _router;
     this._session = _session;
     this._title = _title;
@@ -41,7 +44,14 @@ export class LoginComponent implements OnInit {
     this.error = null;
 
     this._session.create(payload)
-    .then((session) => localStorage.setItem('token', session.token))
+    .then((session) => {
+      localStorage.setItem('token', session.token);
+
+      this._angulartics.eventTrack.next({
+        action: 'login',
+        properties: { category: 'Session' }
+      });
+    })
     .then(() => this._router.navigate(['Tracker', { username: this._session.user.username }]))
     .catch((err) => this.error = err.message);
   }

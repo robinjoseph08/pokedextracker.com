@@ -1,5 +1,6 @@
 import { Component, EventEmitter } from 'angular2/core';
 import { DecimalPipe }             from 'angular2/common';
+import { Angulartics2On }          from 'angulartics2';
 
 import { Capture }                  from '../classes/capture';
 import { EvolutionFamilyComponent } from './evolution-family';
@@ -7,7 +8,7 @@ import { EvolutionFamilyComponent } from './evolution-family';
 const HTML = require('../views/info.html');
 
 @Component({
-  directives: [EvolutionFamilyComponent],
+  directives: [Angulartics2On, EvolutionFamilyComponent],
   events: ['collapsedChange'],
   inputs: ['active', 'collapsed'],
   pipes: [DecimalPipe],
