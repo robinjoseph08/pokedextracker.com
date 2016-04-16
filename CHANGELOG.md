@@ -1,3 +1,10 @@
+#### 1.0.1 (2016-4-16)
+
+##### Bug Fixes
+
+* **favicon:** fix link ([c6f23b12](https://github.com/robinjoseph08/rmj.io/commit/c6f23b1262079fe8ac66a3d55d264ffc66789755))
+* **tracker:** fix sizing ([75d44e31](https://github.com/robinjoseph08/rmj.io/commit/75d44e31a6153e2a59753c62a334b81a1ae0985b))
+
 ## 1.0.0 (2016-4-16)
 
 ##### Chores
