@@ -1,6 +1,6 @@
 .tracker {
   @include flexbox();
-  @include flex(1 0 auto);
+  @include flex(1 1 auto);
 
   position: relative;
 
