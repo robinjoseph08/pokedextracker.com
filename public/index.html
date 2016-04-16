@@ -40,6 +40,11 @@
       ga('create', 'UA-45307701-4', 'auto');
       var _gaq = window._gaq || null;
     </script>
+    <script>
+      if (!('ontouchstart' in window)) {
+        document.documentElement.className += ' no-touch';
+      }
+    </script>
   </head>
   <body>
     <app></app>
