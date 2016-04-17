@@ -1,3 +1,9 @@
+#### 1.0.2 (2016-4-16)
+
+##### New Features
+
+* **seo:** add site name ([b913fa77](https://github.com/robinjoseph08/rmj.io/commit/b913fa770d5d427d2d11954f2e4e1d2c2a03adfc))
+
 #### 1.0.1 (2016-4-16)
 
 ##### Bug Fixes
