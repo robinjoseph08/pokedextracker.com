@@ -1,3 +1,9 @@
+#### 1.0.3 (2016-4-17)
+
+##### Bug Fixes
+
+* **register:** fix friend_code ([9f83c26f](https://github.com/robinjoseph08/rmj.io/commit/9f83c26fe18fb1c5e6217c3ad5cd03794d10f1aa))
+
 #### 1.0.2 (2016-4-16)
 
 ##### New Features
