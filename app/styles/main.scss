@@ -29,6 +29,8 @@ app {
     @include flex(1 1 auto);
     @include flexbox();
     @include flex-direction(column);
+
+    min-height: 0;
   }
 }
 
@@ -136,6 +138,10 @@ input {
 
   &:focus {
     border-color: $brand-secondary-dark;
+  }
+
+  &:invalid {
+    box-shadow: none;
   }
 }
 

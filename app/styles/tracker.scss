@@ -3,6 +3,7 @@
   @include flex(1 1 auto);
 
   position: relative;
+  min-height: 0;
 
   .fa-venus,
   .fa-mars {
