@@ -1,3 +1,9 @@
+#### 1.0.4 (2016-4-21)
+
+##### Bug Fixes
+
+* **styles:** fix firefox bugs ([7a32937d](https://github.com/robinjoseph08/rmj.io/commit/7a32937de928feb7cea34f8b85b0444885ea36d8))
+
 #### 1.0.3 (2016-4-17)
 
 ##### Bug Fixes
