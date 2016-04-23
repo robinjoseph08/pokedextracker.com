@@ -19,13 +19,13 @@
     "typings": "typings"
   },
   "dependencies": {
-    "angular2": "^2.0.0-beta.12",
+    "angular2": "^2.0.0-beta.15",
     "angulartics2": "^1.0.8",
     "es6-promise": "^3.1.2",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "^5.0.0-beta.2",
-    "zone.js": "^0.6.6"
+    "zone.js": "^0.6.12"
   },
   "devDependencies": {
     "css-loader": "^0.23.1",
@@ -38,15 +38,15 @@
     "karma-sourcemap-loader": "^0.3.6",
     "karma-spec-reporter": "0.0.23",
     "karma-webpack": "^1.7.0",
-    "node-sass": "^3.4.2",
+    "node-sass": "^3.5.3",
     "raw-loader": "^0.5.1",
     "sass-loader": "^3.1.2",
-    "style-loader": "^0.13.0",
+    "style-loader": "^0.13.1",
     "ts-loader": "^0.7.2",
     "tslint": "^3.2.1",
-    "typescript": "^1.8.2",
+    "typescript": "^1.8.10",
     "typings": "^0.6.8",
-    "webpack": "^1.12.10",
+    "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.0"
   },
   "repository": {
