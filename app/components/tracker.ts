@@ -15,7 +15,8 @@ import { UserService }       from '../services/user';
 
 const HTML = require('../views/tracker.html');
 
-const MOBILE_WIDTH = 1100;
+const MOBILE_WIDTH          = 1100;
+const SHOW_SCROLL_THRESHOLD = 400;
 
 @Component({
   directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent],
@@ -30,6 +31,7 @@ export class TrackerComponent implements OnInit {
   public loading: boolean = true;
   public collapsed: boolean = false;
   public _session: SessionService;
+  public showScroll: boolean = false;
   public user: User;
 
   private _capture: CaptureService;
@@ -64,6 +66,21 @@ export class TrackerComponent implements OnInit {
       this.loading = false;
     })
     .catch((err) => this.loading = false);
+  }
+
+  public scroll (dex: DexComponent) {
+    const el: HTMLElement = dex._el.nativeElement;
+    if (!this.showScroll && el.scrollTop >= SHOW_SCROLL_THRESHOLD) {
+      this.showScroll = true;
+    } else if (this.showScroll && el.scrollTop < SHOW_SCROLL_THRESHOLD) {
+      this.showScroll = false;
+    }
+  }
+
+  public scrollUp (dex: DexComponent) {
+    const el: HTMLElement = dex._el.nativeElement;
+    el.scrollTop = 0;
+    this.showScroll = false;
   }
 
 }

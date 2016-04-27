@@ -240,14 +240,15 @@ dex {
   padding: 100px 0;
 
   .scroll-up {
-    @include transition(all .1s ease-out);
+    @include transition(all .5s ease-out);
     @include flexbox();
     @include align-items(center);
     @include justify-content(center);
 
+    opacity: 0;
     position: fixed;
     left: 10px;
-    bottom: 10px;
+    bottom: -100px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -261,6 +262,11 @@ dex {
     &:focus {
       cursor: pointer;
       background-color: $brand-secondary-dark;
+    }
+
+    &.visible {
+      bottom: 10px;
+      opacity: 1;
     }
   }
 }
