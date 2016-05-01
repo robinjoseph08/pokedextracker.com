@@ -11,8 +11,9 @@ import { Angulartics2 }     from 'angulartics2';
 
 import { ApiService }   from './services/api';
 import { AppComponent } from './components/app';
+import { Config }       from '../config';
 
-if (process.env.NODE_ENV === 'production') {
+if (Config.ENABLE_PRODUCTION) {
   enableProdMode();
 }
 
