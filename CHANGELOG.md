@@ -1,3 +1,9 @@
+### 1.1.0 (2016-5-1)
+
+##### New Features
+
+* **config:** add configs for each environment ([daa96e3a](https://github.com/robinjoseph08/rmj.io/commit/daa96e3a22eb87dee24142e748c7db1e49bd7fdd))
+
 #### 1.0.4 (2016-4-21)
 
 ##### Bug Fixes
