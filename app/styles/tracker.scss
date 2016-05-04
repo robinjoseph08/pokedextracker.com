@@ -18,7 +18,7 @@ info {
   @include flexbox();
 
   position: relative;
-  background-color: $brand-secondary;
+  z-index: 2;
 
   &.collapsed .info-main {
     display: none;
@@ -28,10 +28,7 @@ info {
     @include flexbox();
     @include align-items(center);
 
-    position: absolute;
-    height: 100%;
     padding: 8px;
-    left: -20px;
     background-color: darken($brand-secondary-dark, 3%);
     color: white;
     font-size: 12px;
@@ -39,7 +36,7 @@ info {
     &:hover {
       cursor: pointer;
       padding-right: 10px;
-      left: -22px;
+      margin-left: -2px;
     }
   }
 
@@ -48,6 +45,7 @@ info {
     @include flex-direction(column);
 
     width: 350px;
+    background-color: $brand-secondary;
     color: #fff;
 
     > * {
@@ -60,6 +58,7 @@ info {
     @include align-items(center);
 
     padding: 17px 17px 17px 8px;
+    background-color: $brand-secondary;
     border-bottom: 2px solid $brand-secondary-dark;
 
     img {
@@ -87,6 +86,7 @@ info {
     @include overflow-y-scroll;
 
     padding: 30px;
+    background-color: $brand-secondary;
     border-bottom: 2px solid $brand-secondary-dark;
 
     h3 {
@@ -115,6 +115,7 @@ info {
     @include justify-content(center);
 
     padding: 20px;
+    background-color: $brand-secondary;
     text-align: center;
     font-size: 13px;
 
@@ -237,6 +238,37 @@ dex {
   @include overflow-y-scroll;
 
   padding: 100px 0;
+
+  .scroll-up {
+    @include transition(all .5s ease-out);
+    @include flexbox();
+    @include align-items(center);
+    @include justify-content(center);
+
+    opacity: 0;
+    position: fixed;
+    left: 10px;
+    bottom: -100px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    background-color: $brand-secondary;
+    color: #fff;
+    font-size: 11px;
+    z-index: 1;
+
+    &:hover,
+    &:focus {
+      cursor: pointer;
+      background-color: $brand-secondary-dark;
+    }
+
+    &.visible {
+      bottom: 10px;
+      opacity: 1;
+    }
+  }
 }
 
 header {
@@ -613,16 +645,26 @@ box {
 
 @media (max-width: 1100px) {
   info {
-    position: absolute;
-    left: auto;
-    right: 0;
-    height: 100%;
+    .info-collapse {
+      position: relative;
+      right: 350px;
+    }
+
+    &.collapsed .info-collapse {
+      right: 0;
+    }
+
+    .info-main {
+      position: absolute;
+      right: 0;
+      height: 100%;
+    }
   }
 }
 
 @media (max-width: 750px) {
   dex {
-    padding: 15px 35px 15px 15px;
+    padding: 15px;
   }
 
   header,
@@ -715,20 +757,28 @@ box {
 }
 
 @media (max-width: 400px) {
+  dex {
+    padding: 15px 35px 15px 15px;
+  }
+
   info {
+    position: absolute;
+    left: auto;
+    right: 0;
+    height: 100%;
     width: 100%;
 
     .info-collapse {
-      position: relative;
-      left: 0;
+      right: 0;
 
       &:hover {
-        left: 0;
+        margin-left: 0;
         padding-right: 8px;
       }
     }
 
     .info-main {
+      position: relative;
       width: 100%;
     }
 
