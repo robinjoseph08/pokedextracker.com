@@ -1,3 +1,10 @@
+### 1.2.0 (2016-5-6)
+
+##### New Features
+
+* **scroll:** enable scroll to top ([cd2956ce](https://github.com/robinjoseph08/rmj.io/commit/cd2956ce24d52d30d5e4ed3910e07a525456557b))
+* **dex:** clickable scroll bar + back to top btn ([89b22933](https://github.com/robinjoseph08/rmj.io/commit/89b22933c4dd1a621fa21b2f0e090216b3f0a832))
+
 ### 1.1.0 (2016-5-1)
 
 ##### New Features
