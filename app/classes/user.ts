@@ -6,6 +6,7 @@ export class User {
   public username: string;
   public password: string;
   public password_confirm: string;
+  public referrer: string;
 
   private _friend_code: string;
 
@@ -28,6 +29,7 @@ export class User {
       friend_code: this.friend_code || undefined,
       id: this.id,
       password: this.password,
+      referrer: this.referrer,
       username: this.username
     };
   }
