@@ -50,6 +50,8 @@ export class RegisterComponent implements OnInit {
       return this.error = 'passwords need to match';
     }
 
+    payload.referrer = document.referrer;
+
     this._user.create(payload)
     .then((session) => {
       localStorage.setItem('token', session.token);
