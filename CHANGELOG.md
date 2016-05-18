@@ -1,3 +1,9 @@
+### 1.3.0 (2016-5-17)
+
+##### New Features
+
+* **register:** send referrer ([f7c69d01](https://github.com/robinjoseph08/rmj.io/commit/f7c69d01930984be814e606ed68aa2ceab03ce21))
+
 ### 1.2.0 (2016-5-6)
 
 ##### New Features
