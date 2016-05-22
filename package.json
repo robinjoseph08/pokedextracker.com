@@ -1,6 +1,6 @@
 {
   "name": "pokedextracker.com",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A website to track your completion of a Living Pokedex",
   "main": "./app/boot.ts",
   "directories": {
