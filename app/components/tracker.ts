@@ -8,6 +8,7 @@ import { DexComponent }      from './dex';
 import { InfoComponent }     from './info';
 import { NavComponent }      from './nav';
 import { NotFoundComponent } from './not-found';
+import { Pokemon }           from '../classes/pokemon';
 import { PokemonService }    from '../services/pokemon';
 import { SessionService }    from '../services/session';
 import { User }              from '../classes/user';
@@ -26,7 +27,7 @@ const SHOW_SCROLL_THRESHOLD = 400;
 })
 export class TrackerComponent implements OnInit {
 
-  public active: Capture;
+  public active: Pokemon;
   public captures: Capture[] = [];
   public loading: boolean = true;
   public collapsed: boolean = false;
@@ -62,7 +63,7 @@ export class TrackerComponent implements OnInit {
     })
     .then((captures) => {
       this.captures = captures;
-      this.active = captures[0];
+      this.active = captures[0].pokemon;
       this.loading = false;
     })
     .catch((err) => this.loading = false);

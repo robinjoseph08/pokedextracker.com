@@ -8,6 +8,6 @@
   <h4 *ngIf="capture" [innerHTML]="capture.pokemon.html_name"></h4>
   <p *ngIf="capture">#{{capture.pokemon.national_id | number : '3.0'}}</p>
 </div>
-<div *ngIf="capture" class="set-info" angulartics2On="click" angularticsEvent="show info" angularticsCategory="Pokemon" angularticsProperties="new Object({ label: '{{capture.pokemon.name}}' })" (click)="activeChange.emit(capture); collapsedChange.emit(false)">
+<div *ngIf="capture" class="set-info" angulartics2On="click" angularticsEvent="show info" angularticsCategory="Pokemon" angularticsProperties="new Object({ label: '{{capture.pokemon.name}}' })" (click)="activeChange.emit(capture.pokemon); collapsedChange.emit(false)">
   <i class="fa fa-info"></i>
 </div>

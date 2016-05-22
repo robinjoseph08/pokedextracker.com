@@ -2,8 +2,9 @@ import { Component, EventEmitter } from 'angular2/core';
 import { DecimalPipe }             from 'angular2/common';
 import { Angulartics2On }          from 'angulartics2';
 
-import { Capture }                  from '../classes/capture';
 import { EvolutionFamilyComponent } from './evolution-family';
+import { Pokemon }                  from '../classes/pokemon';
+import { PokemonService }           from '../services/pokemon';
 
 const HTML = require('../views/info.html');
 
@@ -21,19 +22,28 @@ export class InfoComponent {
 
   public collapsedChange = new EventEmitter<boolean>();
 
-  public get active (): Capture {
+  private _pokemon: PokemonService;
+
+  constructor (_pokemon: PokemonService) {
+    this._pokemon = _pokemon;
+  }
+
+  public get active (): Pokemon {
     return this._active;
   }
 
-  public set active (active: Capture) {
+  public set active (active: Pokemon) {
     this._active = active;
-    if (!active.pokemon.bulbapedia_url) {
+    if (!active.bulbapedia_url) {
       this.loading = true;
-      active.loadPokemon()
-      .then(() => this.loading = false);
+      this._pokemon.retrieve(active.national_id)
+      .then((pokemon) => {
+        this._active = pokemon;
+        this.loading = false;
+      });
     }
   }
 
-  private _active: Capture;
+  private _active: Pokemon;
 
 }

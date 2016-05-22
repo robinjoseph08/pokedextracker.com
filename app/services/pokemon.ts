@@ -7,6 +7,7 @@ import { Pokemon }    from '../classes/pokemon';
 export class PokemonService {
 
   private _api: ApiService;
+  private _cache: Pokemon[] = [];
 
   constructor (_api: ApiService) {
     this._api = _api;
@@ -18,8 +19,15 @@ export class PokemonService {
   }
 
   public retrieve (id: number): Promise<Pokemon> {
-    return this._api.get(`/pokemon/${id}`)
-    .then((pokemon) => new Pokemon(pokemon));
+    if (this._cache[id]) {
+      return Promise.resolve(this._cache[id]);
+    } else {
+      return this._api.get(`/pokemon/${id}`)
+      .then((pokemon) => {
+        this._cache[id] = new Pokemon(pokemon);
+        return this._cache[id];
+      });
+    }
   }
 
 }
