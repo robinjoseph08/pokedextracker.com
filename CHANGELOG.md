@@ -1,3 +1,9 @@
+### 1.4.0 (2016-5-21)
+
+##### New Features
+
+* **evolutions:** add links to the pokemon ([c19c5f98](https://github.com/robinjoseph08/rmj.io/commit/c19c5f983f5e2c35a77bc96769254e9ddc0b4534))
+
 ### 1.3.0 (2016-5-17)
 
 ##### New Features
