@@ -16,6 +16,7 @@ export class Pokemon {
   public regionless: boolean;
   public icon_url: string;
   public bulbapedia_url: string;
+  public serebii_url: string;
   public x_locations: string[];
   public y_locations: string[];
   public or_locations: string[];
@@ -37,6 +38,7 @@ export class Pokemon {
     this.regionless = params.regionless;
     this.icon_url = params.icon_url;
     this.bulbapedia_url = params.bulbapedia_url;
+    this.serebii_url = params.serebii_url;
     this.x_locations = params.x_locations;
     this.y_locations = params.y_locations;
     this.or_locations = params.or_locations;
