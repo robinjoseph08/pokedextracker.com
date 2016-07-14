@@ -12,7 +12,15 @@
       true,
       "spaces"
     ],
+    "interface-name": [
+      true,
+      "always-prefix"
+    ],
     "jsdoc-format": true,
+    "linebreak-style": [
+      true,
+      "LF"
+    ],
     "member-access": true,
     "member-ordering": [
       true,
@@ -24,31 +32,48 @@
     "no-arg": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": true,
-    "no-console": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "log",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
     "no-debugger": true,
+    "no-default-export": true,
     "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
+    "no-reference": true,
     "no-shadowed-variable": true,
     "no-trailing-whitespace": true,
     "no-unreachable": true,
+    "no-unused-expression": true,
     "no-unused-variable": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": true,
     "one-line": [
       true,
-      "check-open-brace",
       "check-catch",
+      "check-finally",
       "check-else",
+      "check-open-brace",
       "check-whitespace"
     ],
+    "one-variable-per-declaration": true,
     "quotemark": [
       true,
       "single"
     ],
-    "semicolon": true,
+    "radix": true,
+    "semicolon": [
+      true,
+      "always"
+    ],
     "switch-default": true,
     "trailing-comma": [
       true,
@@ -58,6 +83,7 @@
       }
     ],
     "triple-equals": true,
+    "use-isnan": true,
     "use-strict": [
       true,
       "check-module"

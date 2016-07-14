@@ -7,8 +7,8 @@ import { SessionService } from '../services/session';
 const HTML = require('../views/home.html');
 
 @Component({
-  providers: [SessionService, Title],
   directives: [RouterLink],
+  providers: [SessionService, Title],
   selector: 'home',
   template: HTML
 })

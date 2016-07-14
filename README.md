@@ -1,5 +1,7 @@
 # pokedextracker.com
 
+[![Build Status](https://travis-ci.org/robinjoseph08/pokedextracker.com.svg?branch=master)](https://travis-ci.org/robinjoseph08/pokedextracker.com)
+
 A website to track your completion of a Living Pokedex.
 
 ## Install
