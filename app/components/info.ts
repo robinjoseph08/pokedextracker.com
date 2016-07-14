@@ -22,6 +22,7 @@ export class InfoComponent {
 
   public collapsedChange = new EventEmitter<boolean>();
 
+  private _active: Pokemon;
   private _pokemon: PokemonService;
 
   constructor (_pokemon: PokemonService) {
@@ -43,7 +44,5 @@ export class InfoComponent {
       });
     }
   }
-
-  private _active: Pokemon;
 
 }
