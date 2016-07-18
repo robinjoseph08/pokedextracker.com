@@ -6,6 +6,6 @@
   </button>
 </div>
 <div class="box-container">
-  <pokemon *ngFor="#capture of captures" (activeChange)="capture.pokemon.is(region) && activeChange.emit($event)" (collapsedChange)="capture.pokemon.is(region) && collapsedChange.emit($event)" [class.captured]="capture.captured" [class.disabled]="!capture.pokemon.is(region)" [class.viewing]="_session.user?.id !== user.id" [capture]="capture" [region]="region"></pokemon>
-  <pokemon *ngFor="#capture of empties" [capture]="capture" class="empty"></pokemon>
+  <pokemon *ngFor="let capture of captures" (activeChange)="capture.pokemon.is(region) && activeChange.emit($event)" (collapsedChange)="capture.pokemon.is(region) && collapsedChange.emit($event)" [class.captured]="capture.captured" [class.disabled]="!capture.pokemon.is(region)" [class.viewing]="_session.user?.id !== user.id" [capture]="capture" [region]="region"></pokemon>
+  <pokemon *ngFor="let capture of empties" [capture]="capture" class="empty"></pokemon>
 </div>

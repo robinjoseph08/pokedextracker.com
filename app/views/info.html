@@ -12,19 +12,19 @@
   <div *ngIf="!loading" class="info-locations">
     <h3>Pokémon Omega Ruby</h3>
     <ul>
-      <li *ngFor="#loc of active.or_locations">{{loc}}</li>
+      <li *ngFor="let loc of active.or_locations">{{loc}}</li>
     </ul>
     <h3>Pokémon Alpha Sapphire</h3>
     <ul>
-      <li *ngFor="#loc of active.as_locations">{{loc}}</li>
+      <li *ngFor="let loc of active.as_locations">{{loc}}</li>
     </ul>
     <h3>Pokémon X</h3>
     <ul>
-      <li *ngFor="#loc of active.x_locations">{{loc}}</li>
+      <li *ngFor="let loc of active.x_locations">{{loc}}</li>
     </ul>
     <h3>Pokémon Y</h3>
     <ul>
-      <li *ngFor="#loc of active.y_locations">{{loc}}</li>
+      <li *ngFor="let loc of active.y_locations">{{loc}}</li>
     </ul>
   </div>
 

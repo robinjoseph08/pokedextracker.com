@@ -10,7 +10,7 @@
 <h2>FC: <span [class.fc-missing]="!user.friend_code">{{user.friend_code || 'XXXX-XXXX-XXXX'}}</span></h2>
 
 <div class="region-filter">
-  <div *ngFor="#r of regions" [class.active]="region === r" angulartics2On="click" angularticsEvent="toggle" angularticsCategory="Region" angularticsProperties="new Object({ label: '{{r | capitalize}}' })" (click)="regionChange.emit(r)">{{r | capitalize}}</div>
+  <div *ngFor="let r of regions" [class.active]="region === r" angulartics2On="click" angularticsEvent="toggle" angularticsCategory="Region" angularticsProperties="new Object({ label: '{{r | capitalize}}' })" (click)="regionChange.emit(r)">{{r | capitalize}}</div>
 </div>
 
 <div class="percentage">
@@ -28,7 +28,7 @@
       <i class="fa fa-sort-desc"></i>
     </div>
     <div class="dropdown" *ngIf="dropdown">
-      <div *ngFor="#r of regions" [style.display]="region === r ? 'none' : 'block'" angulartics2On="click" angularticsEvent="toggle" angularticsCategory="Region" angularticsProperties="new Object({ label: '{{r | capitalize}}' })" (click)="regionChange.emit(r); dropdown = false">{{r | capitalize}}</div>
+      <div *ngFor="let r of regions" [style.display]="region === r ? 'none' : 'block'" angulartics2On="click" angularticsEvent="toggle" angularticsCategory="Region" angularticsProperties="new Object({ label: '{{r | capitalize}}' })" (click)="regionChange.emit(r); dropdown = false">{{r | capitalize}}</div>
     </div>
   </div>
 </div>

@@ -57,14 +57,14 @@
       "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
     },
     "angular2": {
-      "version": "2.0.0-beta.12",
+      "version": "2.0.0-beta.17",
       "from": "angular2@latest",
-      "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.12.tgz"
+      "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.17.tgz"
     },
     "angulartics2": {
-      "version": "1.0.8",
-      "from": "angulartics2@*",
-      "resolved": "https://registry.npmjs.org/angulartics2/-/angulartics2-1.0.8.tgz"
+      "version": "1.0.10",
+      "from": "angulartics2@1.0.10",
+      "resolved": "https://registry.npmjs.org/angulartics2/-/angulartics2-1.0.10.tgz"
     },
     "ansi": {
       "version": "0.3.1",
@@ -3467,9 +3467,9 @@
       "resolved": "https://registry.npmjs.org/rx-lite/-/rx-lite-3.1.2.tgz"
     },
     "rxjs": {
-      "version": "5.0.0-beta.2",
-      "from": "rxjs@>=5.0.0-beta.2 <6.0.0",
-      "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.2.tgz"
+      "version": "5.0.0-beta.6",
+      "from": "rxjs@5.0.0-beta.6",
+      "resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.6.tgz"
     },
     "sass-graph": {
       "version": "2.1.1",
@@ -4299,9 +4299,9 @@
       "resolved": "https://registry.npmjs.org/zip-object/-/zip-object-0.1.0.tgz"
     },
     "zone.js": {
-      "version": "0.6.6",
+      "version": "0.6.12",
       "from": "zone.js@latest",
-      "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.6.tgz"
+      "resolved": "https://registry.npmjs.org/zone.js/-/zone.js-0.6.12.tgz"
     }
   }
 }

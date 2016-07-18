@@ -1,4 +1,4 @@
-<div *ngFor="#evolution of evolutions" class="evolution-trigger">
+<div *ngFor="let evolution of evolutions" class="evolution-trigger">
   <i [class.fa-long-arrow-right]="evolution.trigger !== 'breed'" [class.fa-long-arrow-left]="evolution.trigger === 'breed'" class="fa"></i>
   <div>
     <span [ngSwitch]="evolution.trigger">
