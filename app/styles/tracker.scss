@@ -59,7 +59,7 @@ info {
 
     padding: 17px 17px 17px 8px;
     background-color: $brand-secondary;
-    border-bottom: 2px solid $brand-secondary-dark;
+    border-bottom: 2px solid darken($brand-secondary-dark, 3%);
 
     img {
       margin-right: 3px;
@@ -87,7 +87,7 @@ info {
 
     padding: 30px;
     background-color: $brand-secondary;
-    border-bottom: 2px solid $brand-secondary-dark;
+    border-bottom: 2px solid darken($brand-secondary-dark, 3%);
 
     h3 {
       margin: 0;
@@ -199,31 +199,45 @@ info {
   }
 
   .info-footer {
-    @include transition(all .1s ease-out);
+    @include flexbox();
 
-    display: block;
     margin-top: auto;
-    padding: 20px;
-    background-color: $brand-secondary-dark;
-    color: #fff;
-    text-align: center;
-    font-family: $font-secondary;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: none;
+    border-top: 2px solid darken($brand-secondary-dark, 3%);
 
-    .fa {
+    a {
       @include transition(all .1s ease-out);
 
-      font-size: 10px;
-      margin-left: 3px;
+      width: 50%;
+      padding: 20px;
+      background-color: $brand-secondary-dark;
+      color: #fff;
+      font-family: $font-secondary;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      text-align: center;
+
+      &:first-child {
+        border-right: 1px solid darken($brand-secondary-dark, 3%);
+      }
+
+      &:last-child {
+        border-left: 1px solid darken($brand-secondary-dark, 3%);
+      }
+
+      .fa {
+        @include transition(all .1s ease-out);
+
+        font-size: 10px;
+        margin-left: 3px;
+      }
     }
   }
 }
 
-.no-touch .info-footer {
+.no-touch .info-footer a {
   &:hover,
   &:focus {
     background-color: darken($brand-secondary-dark, 3%);
