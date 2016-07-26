@@ -30,7 +30,8 @@
 
   <evolution-family *ngIf="active.evolution_family && !loading" class="info-evolutions" [family]="active.evolution_family" (activeChange)="active = $event"></evolution-family>
 
-  <a class="info-footer" angulartics2On="click" angularticsEvent="open Bulbapedia link" angularticsCategory="Info" angularticsProperties="new Object({ label: '{{active.name}}' })" [href]="active.bulbapedia_url" target="_blank">
-    <div>View on Bulbapedia <i class="fa fa-long-arrow-right"></i></div>
-  </a>
+  <div class="info-footer">
+    <a angulartics2On="click" angularticsEvent="open Bulbapedia link" angularticsCategory="Info" angularticsProperties="new Object({ label: '{{active.name}}' })" [href]="active.bulbapedia_url" target="_blank">Bulbapedia <i class="fa fa-long-arrow-right"></i></a>
+    <a angulartics2On="click" angularticsEvent="open Serebii link" angularticsCategory="Info" angularticsProperties="new Object({ label: '{{active.name}}' })" [href]="active.serebii_url" target="_blank">Serebii <i class="fa fa-long-arrow-right"></i></a>
+  </div>
 </div>
