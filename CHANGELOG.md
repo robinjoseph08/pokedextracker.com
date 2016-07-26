@@ -1,3 +1,18 @@
+### 1.5.0 (2016-7-25)
+
+##### Chores
+
+* **lint:** update tslint from 3.6.0 to 3.13.0 ([0c89994f](https://github.com/robinjoseph08/rmj.io/commit/0c89994ff43b9b4a0361c7bd510caecf6c83aaf1))
+
+##### New Features
+
+* **info:** add btn to serebii ([2a997ada](https://github.com/robinjoseph08/rmj.io/commit/2a997ada3ea157ebfdfc89181dcf5813cf1ac8a9))
+* **dex:** added serebii link ([09847798](https://github.com/robinjoseph08/rmj.io/commit/09847798d9669886a724393b7b7c5b640ff8a8d5))
+
+##### Tests
+
+* **travis:** enable travis ci for linting ([da372952](https://github.com/robinjoseph08/rmj.io/commit/da372952518cac1e2842fb63d13d1e374c13f225))
+
 ### 1.4.0 (2016-5-21)
 
 ##### New Features
