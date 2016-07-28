@@ -63,7 +63,7 @@ export class BoxComponent {
     })
     .then(() => {
       const pipe = new DecimalPipe();
-      const args = ['3.0'];
+      const args = '3.0';
 
       this.captures.map((capture) => capture.captured = markAll);
       this._angulartics.eventTrack.next({

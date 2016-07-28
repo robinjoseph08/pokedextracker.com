@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import 'rxjs';
 import './styles';
 
-import { bootstrap }        from 'angular2/bootstrap';
+import { bootstrap }        from 'angular2/platform/browser';
 import { enableProdMode }   from 'angular2/core';
 import { HTTP_PROVIDERS }   from 'angular2/http';
 import { ROUTER_PROVIDERS } from 'angular2/router';

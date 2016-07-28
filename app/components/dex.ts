@@ -13,7 +13,6 @@ const HTML = require('../views/dex.html');
   events: ['activeChange', 'collapsedChange', 'scrollUp'],
   inputs: ['captures', 'showScroll', 'user'],
   pipes: [GroupPipe],
-  providers: [ElementRef],
   selector: 'dex',
   template: HTML
 })
