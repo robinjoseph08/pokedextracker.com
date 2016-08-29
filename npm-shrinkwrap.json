@@ -934,7 +934,7 @@
     "esutils": {
       "version": "2.0.2",
       "from": "esutils@>=2.0.2 <3.0.0",
-      "resolved": "http://registry.nodejitsu.com/esutils/-/esutils-2.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/esutils/-/esutils-2.0.2.tgz"
     },
     "etag": {
       "version": "1.7.0",
@@ -2393,7 +2393,7 @@
         "source-map": {
           "version": "0.1.43",
           "from": "source-map@>=0.1.41 <0.2.0",
-          "resolved": "http://registry.nodejitsu.com/source-map/-/source-map-0.1.43.tgz"
+          "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.43.tgz"
         }
       }
     },
@@ -3997,7 +3997,7 @@
         "window-size": {
           "version": "0.1.0",
           "from": "window-size@0.1.0",
-          "resolved": "http://registry.nodejitsu.com/window-size/-/window-size-0.1.0.tgz"
+          "resolved": "https://registry.npmjs.org/window-size/-/window-size-0.1.0.tgz"
         },
         "wordwrap": {
           "version": "0.0.2",
@@ -4241,7 +4241,7 @@
     "window-size": {
       "version": "0.1.0",
       "from": "window-size@0.1.0",
-      "resolved": "http://registry.nodejitsu.com/window-size/-/window-size-0.1.0.tgz"
+      "resolved": "https://registry.npmjs.org/window-size/-/window-size-0.1.0.tgz"
     },
     "wordwrap": {
       "version": "0.0.3",
