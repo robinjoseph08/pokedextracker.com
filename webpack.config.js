@@ -31,12 +31,7 @@ module.exports = {
       { test: /\.ts$/, loader: 'ts' },
       { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
       { test: /\.html/, loader: 'raw' }
-    ],
-    postLoaders: [{
-      test: /\.(js|ts)$/,
-      exclude: /(test|node_modules)\//,
-      loader: 'istanbul-instrumenter'
-    }]
+    ]
   },
   plugins: PLUGINS
 };
