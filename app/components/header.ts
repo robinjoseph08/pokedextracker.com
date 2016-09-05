@@ -1,5 +1,6 @@
 import { Component, EventEmitter } from '@angular/core';
 import { PercentPipe }             from '@angular/common';
+import { RouterLink }              from '@angular/router-deprecated';
 import { Angulartics2On }          from 'angulartics2';
 
 import { CapitalizePipe }    from '../pipes/capitalize';
@@ -11,7 +12,7 @@ import { User }              from '../classes/user';
 const HTML = require('../views/header.html');
 
 @Component({
-  directives: [Angulartics2On, OffClickDirective],
+  directives: [Angulartics2On, OffClickDirective, RouterLink],
   events: ['regionChange'],
   inputs: ['captures', 'region', 'user'],
   pipes: [CapitalizePipe, PercentPipe],
