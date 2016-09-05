@@ -1,4 +1,4 @@
-import { Directive, OnDestroy, OnInit } from 'angular2/core';
+import { Directive, OnDestroy, OnInit } from '@angular/core';
 
 @Directive({
   host: { '(click)': 'onClick($event)' },

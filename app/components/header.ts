@@ -1,5 +1,5 @@
-import { Component, EventEmitter } from 'angular2/core';
-import { PercentPipe }             from 'angular2/common';
+import { Component, EventEmitter } from '@angular/core';
+import { PercentPipe }             from '@angular/common';
 import { Angulartics2On }          from 'angulartics2';
 
 import { CapitalizePipe }    from '../pipes/capitalize';

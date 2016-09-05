@@ -2,12 +2,12 @@
   <i [class.fa-long-arrow-right]="evolution.trigger !== 'breed'" [class.fa-long-arrow-left]="evolution.trigger === 'breed'" class="fa"></i>
   <div>
     <span [ngSwitch]="evolution.trigger">
-      <span *ngSwitchWhen="'level'">
+      <span *ngSwitchCase="'level'">
         Level Up <span *ngIf="evolution.level">to {{evolution.level}}</span>
       </span>
-      <span *ngSwitchWhen="'stone'">{{evolution.stone | capitalize}} Stone</span>
-      <span *ngSwitchWhen="'trade'">Trade</span>
-      <span *ngSwitchWhen="'breed'">Breed</span>
+      <span *ngSwitchCase="'stone'">{{evolution.stone | capitalize}} Stone</span>
+      <span *ngSwitchCase="'trade'">Trade</span>
+      <span *ngSwitchCase="'breed'">Breed</span>
     </span>
     <span *ngIf="evolution.held_item">holding {{evolution.held_item | capitalize}}</span>
     <span *ngIf="evolution.notes">

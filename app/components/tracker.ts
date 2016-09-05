@@ -1,6 +1,6 @@
-import { Component, OnInit } from 'angular2/core';
-import { RouteParams }       from 'angular2/router';
-import { Title }             from 'angular2/platform/browser';
+import { Component, OnInit } from '@angular/core';
+import { RouteParams }       from '@angular/router-deprecated';
+import { Title }             from '@angular/platform-browser';
 
 import { Capture }           from '../classes/capture';
 import { CaptureService }    from '../services/capture';

@@ -1,5 +1,5 @@
-import { Component, OnInit } from 'angular2/core';
-import { Title }             from 'angular2/platform/browser';
+import { Component, OnInit } from '@angular/core';
+import { Title }             from '@angular/platform-browser';
 
 import { NavComponent }   from './nav';
 import { SessionService } from '../services/session';
