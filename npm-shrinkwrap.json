@@ -2,6 +2,46 @@
   "name": "pokedextracker.com",
   "version": "1.5.0",
   "dependencies": {
+    "@angular/common": {
+      "version": "2.0.0-rc.4",
+      "from": "@angular/common@2.0.0-rc.4",
+      "resolved": "https://registry.npmjs.org/@angular/common/-/common-2.0.0-rc.4.tgz"
+    },
+    "@angular/compiler": {
+      "version": "2.0.0-rc.4",
+      "from": "@angular/compiler@2.0.0-rc.4",
+      "resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.0.0-rc.4.tgz"
+    },
+    "@angular/core": {
+      "version": "2.0.0-rc.4",
+      "from": "@angular/core@2.0.0-rc.4",
+      "resolved": "https://registry.npmjs.org/@angular/core/-/core-2.0.0-rc.4.tgz"
+    },
+    "@angular/forms": {
+      "version": "0.2.0",
+      "from": "@angular/forms@0.2.0",
+      "resolved": "https://registry.npmjs.org/@angular/forms/-/forms-0.2.0.tgz"
+    },
+    "@angular/http": {
+      "version": "2.0.0-rc.4",
+      "from": "@angular/http@2.0.0-rc.4",
+      "resolved": "https://registry.npmjs.org/@angular/http/-/http-2.0.0-rc.4.tgz"
+    },
+    "@angular/platform-browser": {
+      "version": "2.0.0-rc.4",
+      "from": "@angular/platform-browser@2.0.0-rc.4",
+      "resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-2.0.0-rc.4.tgz"
+    },
+    "@angular/platform-browser-dynamic": {
+      "version": "2.0.0-rc.4",
+      "from": "@angular/platform-browser-dynamic@2.0.0-rc.4",
+      "resolved": "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-2.0.0-rc.4.tgz"
+    },
+    "@angular/router-deprecated": {
+      "version": "2.0.0-rc.2",
+      "from": "@angular/router-deprecated@latest",
+      "resolved": "https://registry.npmjs.org/@angular/router-deprecated/-/router-deprecated-2.0.0-rc.2.tgz"
+    },
     "abbrev": {
       "version": "1.0.7",
       "from": "abbrev@>=1.0.0 <1.1.0",
@@ -56,15 +96,10 @@
       "from": "amdefine@>=0.0.4",
       "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
     },
-    "angular2": {
-      "version": "2.0.0-beta.17",
-      "from": "angular2@latest",
-      "resolved": "https://registry.npmjs.org/angular2/-/angular2-2.0.0-beta.17.tgz"
-    },
     "angulartics2": {
-      "version": "1.0.10",
-      "from": "angulartics2@1.0.10",
-      "resolved": "https://registry.npmjs.org/angulartics2/-/angulartics2-1.0.10.tgz"
+      "version": "1.1.5",
+      "from": "angulartics2@1.1.5",
+      "resolved": "https://registry.npmjs.org/angulartics2/-/angulartics2-1.1.5.tgz"
     },
     "ansi": {
       "version": "0.3.1",
@@ -2625,11 +2660,6 @@
       "version": "3.0.0",
       "from": "minimatch@>=3.0.0 <4.0.0",
       "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-3.0.0.tgz"
-    },
-    "minimist": {
-      "version": "0.0.8",
-      "from": "minimist@0.0.8",
-      "resolved": "https://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz"
     },
     "mkdirp": {
       "version": "0.5.1",

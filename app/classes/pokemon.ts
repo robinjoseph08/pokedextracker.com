@@ -1,10 +1,12 @@
+import { DomSanitizationService, SafeHtml } from '@angular/platform-browser';
+
 import { EvolutionFamily } from './evolution-family';
 
 export class Pokemon {
 
   public national_id: number;
   public name: string;
-  public html_name: string;
+  public html_name: SafeHtml;
   public kanto_id: number;
   public johto_id: number;
   public hoenn_id: number;
@@ -23,10 +25,10 @@ export class Pokemon {
   public as_locations: string[];
   public evolution_family: EvolutionFamily;
 
-  constructor (params) {
+  constructor (params, _sanitizer: DomSanitizationService) {
     this.national_id = params.national_id;
     this.name = params.name;
-    this.html_name = params.name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>');
+    this.html_name = _sanitizer.bypassSecurityTrustHtml(params.name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>'));
     this.kanto_id = params.kanto_id;
     this.johto_id = params.johto_id;
     this.hoenn_id = params.hoenn_id;
@@ -43,7 +45,7 @@ export class Pokemon {
     this.y_locations = params.y_locations;
     this.or_locations = params.or_locations;
     this.as_locations = params.as_locations;
-    this.evolution_family = params.evolution_family && new EvolutionFamily(params.evolution_family);
+    this.evolution_family = params.evolution_family && new EvolutionFamily(params.evolution_family, _sanitizer);
   }
 
   public is (region: string): boolean {

@@ -1,5 +1,5 @@
-import { Component, EventEmitter }      from 'angular2/core';
-import { DecimalPipe }                  from 'angular2/common';
+import { Component, EventEmitter }      from '@angular/core';
+import { DecimalPipe }                  from '@angular/common';
 import { Angulartics2, Angulartics2On } from 'angulartics2';
 
 import { Capture }        from '../classes/capture';
