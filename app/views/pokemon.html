@@ -1,10 +1,10 @@
 <div class="set-captured" (click)="toggle()">
   <h4 *ngIf="capture" [innerHTML]="capture.pokemon.html_name"></h4>
-  <img *ngIf="capture" [src]="capture.pokemon.icon_url">
+  <i *ngIf="capture" [ngClass]="capture.pokemon.icon_class"></i>
   <p *ngIf="capture">#{{capture.pokemon.national_id | number : '3.0'}}</p>
 </div>
 <div class="set-captured-mobile" (click)="toggle()">
-  <img *ngIf="capture" [src]="capture.pokemon.icon_url">
+  <i *ngIf="capture" [ngClass]="capture.pokemon.icon_class"></i>
   <h4 *ngIf="capture" [innerHTML]="capture.pokemon.html_name"></h4>
   <p *ngIf="capture">#{{capture.pokemon.national_id | number : '3.0'}}</p>
 </div>
