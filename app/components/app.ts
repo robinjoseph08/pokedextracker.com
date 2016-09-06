@@ -6,6 +6,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulart
 import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
 import { RegisterComponent } from './register';
+import { AccountComponent }  from './account';
 import { TrackerComponent }  from './tracker';
 import { NotFoundComponent } from './not-found';
 
@@ -19,6 +20,7 @@ import { NotFoundComponent } from './not-found';
   { component: HomeComponent,     name: 'Home',     path: '/' },
   { component: LoginComponent,    name: 'Login',    path: '/login' },
   { component: RegisterComponent, name: 'Register', path: '/register' },
+  { component: AccountComponent,  name: 'Account',  path: '/account' },
   { component: TrackerComponent,  name: 'Tracker',  path: '/u/:username' },
   { component: NotFoundComponent, name: 'NotFound', path: '/**' }
 ])

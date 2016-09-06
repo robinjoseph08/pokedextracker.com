@@ -25,7 +25,8 @@ app {
   tracker,
   home,
   register,
-  login {
+  login,
+  account {
     @include flex(1 1 auto);
     @include flexbox();
     @include flex-direction(column);
@@ -95,6 +96,11 @@ button {
   letter-spacing: 1px;
   color: #fff;
 
+  &.yellow {
+    background-color: $brand-primary;
+    color: $brand-secondary;
+  }
+
   .fa {
     @include transition(all .1s ease-out);
 
@@ -106,11 +112,18 @@ button {
 .no-touch button {
   &:hover,
   &:focus {
-    background-color: $brand-secondary;
     cursor: pointer;
 
     .fa-long-arrow-right {
       margin-left: 7px;
+    }
+
+    &:not(.yellow) {
+      background-color: $brand-secondary;
+    }
+
+    &.yellow {
+      background-color: $brand-primary-dark;
     }
   }
 }
@@ -126,13 +139,20 @@ button {
     border: 2px solid $error;
     color: $error;
   }
+
+  &.alert-success {
+    border: 2px solid $success;
+    color: $success;
+  }
 }
 
-input {
+input,
+select {
   width: 100%;
   -webkit-appearance: none;
   border: 2px solid $brand-secondary-light;
   border-radius: 0;
+  background-color: white;
   padding: 6px;
   font-family: $font-primary;
 
@@ -152,8 +172,13 @@ login {
 .form {
   @include flex-grow(1);
   @include flexbox();
+  @include flex-direction(column);
   @include justify-content(center);
   @include align-items(center);
+
+  h1 {
+    color: $brand-secondary;
+  }
 }
 
 form {
@@ -177,7 +202,8 @@ form {
       letter-spacing: 1px;
     }
 
-    input {
+    input,
+    select {
       height: 43px;
       padding: 10px 32px 10px 10px;
       font-size: 15px;
@@ -187,12 +213,18 @@ form {
       }
     }
 
-    .fa-asterisk {
+    .fa {
       position: absolute;
-      top: 38px;
+      bottom: 15px;
       right: 15px;
       font-size: 10px;
       color: $brand-primary;
+    }
+
+    .fa-chevron-down {
+      bottom: 17px;
+      font-size: 9px;
+      color: $brand-secondary;
     }
   }
 
@@ -202,7 +234,7 @@ form {
     font-size: 14px;
   }
 
-  button {
+  button:not(.inline) {
     margin-top: 40px;
   }
 }

@@ -297,25 +297,34 @@ header {
     font-size: 40px;
   }
 
+  a {
+    font-size: 16px;
+    color: lighten(#000, 25%);
+
+    .fa {
+      position: relative;
+    }
+
+    .fa-link {
+      padding: 5px;
+      bottom: 4px;
+    }
+
+    .fa-pencil {
+      font-size: 14px;
+      padding: 3px;
+      bottom: 1px;
+    }
+
+    &:hover {
+      color: black;
+      cursor: pointer;
+    }
+  }
+
   .share-container {
     position: relative;
     display: inline-block;
-
-    a {
-      position: relative;
-      bottom: 4px;
-      font-size: 16px;
-      color: lighten(#000, 25%);
-
-      .fa {
-        padding: 5px;
-      }
-
-      &:hover {
-        color: black;
-        cursor: pointer;
-      }
-    }
 
     .share {
       position: absolute;
