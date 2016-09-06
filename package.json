@@ -49,6 +49,9 @@
     "webpack": "^1.12.10",
     "webpack-dev-server": "^1.14.0"
   },
+  "optionalDependencies": {
+    "fsevents": "^1.0.8"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/robinjoseph08/rmj.io.git"
