@@ -1,6 +1,7 @@
 <h1><span *ngIf="_session.user?.id !== user.id">Viewing </span>{{user.username}}'s Living Dex</h1>
 <div class="share-container" [offClick]="closeShare">
   <a angulartics2On="click" angularticsEvent="{{showLink ? 'open' : 'close'}}" angularticsCategory="Share" (click)="showLink = !showLink"><i class="fa fa-link"></i></a>
+  <a angulartics2On="click" angularticsEvent="click tweet" angularticsCategory="Share" href="http://twitter.com/home/?status=Check out {{_session.user?.id === user.id ? 'my' : user.username + '\'s'}} living dex progress on @PokedexTracker! https://pokedextracker.com/u/{{user.username}}" target="_blank"><i class="fa fa-twitter"></i></a>
   <div class="share" *ngIf="showLink">
     Share this Living Dex:
     <input #share value="https://pokedextracker.com/u/{{user.username}}" readonly angulartics2On="click" angularticsEvent="select link" angularticsCategory="Share" (click)="share.select()">
