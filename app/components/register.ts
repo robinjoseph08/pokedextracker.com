@@ -44,9 +44,9 @@ export class RegisterComponent implements OnInit {
   }
 
   public createUser (payload: User) {
-    if (payload.password === payload.password_confirm) {
-      this.error = null;
-    } else {
+    this.error = null;
+
+    if (payload.password !== payload.password_confirm) {
       return this.error = 'passwords need to match';
     }
 

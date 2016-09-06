@@ -1,7 +1,7 @@
 <nav [user]="_session.user"></nav>
-<div class="form">
+<div *ngIf="_session.user" class="form">
   <h1>{{_session.user.username}}'s Account</h1>
-  <form>
+  <form (ngSubmit)="updateUser(user)">
     <div *ngIf="error" class="alert alert-error">
       {{error}}
     </div>
@@ -10,15 +10,15 @@
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <button class="inline yellow" (click)="changepw=!changepw">
-        {{!changepw ? 'Change' : 'Cancel'}}
+      <button class="inline yellow" type="button" (click)="togglePassword()">
+        {{password ? 'Cancel' : 'Change'}}
       </button>
     </div>
-    <div *ngIf="changepw" class="form-group">
+    <div *ngIf="password" class="form-group">
       <input [(ngModel)]="user.password" name="password" id="password" type="password" required placeholder="••••••••••••">
       <i class="fa fa-asterisk"></i>
     </div>
-    <div *ngIf="changepw" class="form-group">
+    <div *ngIf="password" class="form-group">
       <input [(ngModel)]="user.password_confirm" name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••">
       <i class="fa fa-asterisk"></i>
     </div>

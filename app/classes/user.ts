@@ -26,7 +26,7 @@ export class User {
 
   public toJSON (): Object {
     return {
-      friend_code: this.friend_code || undefined,
+      friend_code: this.friend_code,
       id: this.id,
       password: this.password,
       referrer: this.referrer,
