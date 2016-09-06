@@ -1,3 +1,30 @@
+### 1.6.0 (2016-9-5)
+
+##### Chores
+
+* **deps:**
+  * remove test dependencies ([f78bb39a](https://github.com/robinjoseph08/rmj.io/commit/f78bb39ab23ca854246eeb133d4917daed59d4e7))
+  * upgrade angular beta.17 -> rc.4 ([792e565e](https://github.com/robinjoseph08/rmj.io/commit/792e565e9c646abdbc283dd1f878b10cce56d367))
+  * upgrade angular beta.12 -> beta.17 ([eb85bbcf](https://github.com/robinjoseph08/rmj.io/commit/eb85bbcf10db779cc3ecaf8cff1e91e530a3b395))
+
+##### Documentation Changes
+
+* **contributing:** add CONTRIBUTING.md ([d29754da](https://github.com/robinjoseph08/rmj.io/commit/d29754da9fb298097f5b5456401d84ec1f1fef41))
+
+##### New Features
+
+* **share:** link to tweet ([a9f4efc0](https://github.com/robinjoseph08/rmj.io/commit/a9f4efc0200899acab3ff8f0b9e6245dcacf9666))
+* **account:**
+  * add functionality to the account page ([83f2808d](https://github.com/robinjoseph08/rmj.io/commit/83f2808deb8c92da261ced77af225222b6312683))
+  * styles for account page ([b90dcd3b](https://github.com/robinjoseph08/rmj.io/commit/b90dcd3b04a62c64b612719425628fe564cd3064))
+  * lay base for account page ([af6bf6ae](https://github.com/robinjoseph08/rmj.io/commit/af6bf6ae6754e6451efc7cfe1d2a29d6d9d35a07))
+* **twitter:** add twitter link ([a150dea1](https://github.com/robinjoseph08/rmj.io/commit/a150dea1195c2b8e6946efc7d9ae39c8e5d9f263))
+
+##### Bug Fixes
+
+* **webpack:** remove reference to istanbul-instrumenter ([bf0c9626](https://github.com/robinjoseph08/rmj.io/commit/bf0c9626a77de374a2a4469a7b776507eda5b042))
+* **shrinkwrap:** remove references to nodejitsu ([652d79b7](https://github.com/robinjoseph08/rmj.io/commit/652d79b7884040e81108a1fe93eb2437ece49aaa))
+
 ### 1.5.0 (2016-7-25)
 
 ##### Chores
