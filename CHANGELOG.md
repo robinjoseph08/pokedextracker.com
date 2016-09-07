@@ -1,3 +1,9 @@
+### 1.7.0 (2016-9-6)
+
+##### New Features
+
+* **sprites:** use modified pokesprite ([17dcabcb](https://github.com/robinjoseph08/rmj.io/commit/17dcabcb3a8ae4c6132ae7e56391df568a43c45f))
+
 ### 1.6.0 (2016-9-5)
 
 ##### Chores
