@@ -61,7 +61,7 @@ info {
     background-color: $brand-secondary;
     border-bottom: 2px solid darken($brand-secondary-dark, 3%);
 
-    img {
+    .pkicon {
       margin-right: 3px;
     }
 
@@ -600,8 +600,8 @@ box {
     display: none;
     border: 1px solid $gray-light;
 
-    img {
-      padding: 0 8px;
+    .pkicon {
+      margin: 0 8px;
     }
 
     h4 {

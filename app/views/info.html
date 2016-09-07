@@ -4,7 +4,7 @@
 
 <div *ngIf="active" class="info-main">
   <div class="info-header">
-    <img [src]="active.icon_url">
+    <i [ngClass]="active.icon_class"></i>
     <h1 [innerHTML]="active.html_name"></h1>
     <h2>#{{active.national_id | number : '3.0'}}</h2>
   </div>
