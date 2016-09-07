@@ -509,32 +509,11 @@ box {
     }
 
     button {
-      position: relative;
       display: inline-block;
       height: auto;
       width: auto;
       padding: 8px 12px;
       font-size: 10px;
-
-      .spinner {
-        @include flexbox();
-        @include align-items(center);
-        @include justify-content(center);
-
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        .fa {
-          margin: 0;
-        }
-      }
-
-      .hidden {
-        visibility: hidden;
-      }
     }
   }
 
