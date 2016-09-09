@@ -92,7 +92,10 @@ home {
     color: $brand-secondary;
     z-index: 1;
 
-    img {
+    i {
+      width: 30px;
+      height: 30px;
+      margin: 0;
       vertical-align: middle;
     }
   }
