@@ -1,5 +1,6 @@
 'use strict';
 
+const Path    = require('path');
 const Webpack = require('webpack');
 
 const PRODUCTION = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production';
@@ -12,7 +13,7 @@ if (PRODUCTION) {
 }
 
 module.exports = {
-  context: __dirname + '/app',
+  context: Path.join(__dirname, 'app'),
   entry: './boot.ts',
   output: {
     path: __dirname + '/public',
