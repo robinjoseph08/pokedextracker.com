@@ -24,4 +24,14 @@ To run the development server to test it locally, you only need to run:
 $ npm start
 ```
 
-Once the bundle becomes valid, you should be able to go to http://localhost:8080 to view it.
+Once the bundle becomes valid, you should be able to go to [http://localhost:8080](http://localhost:8080) to view it.
+
+## Linting
+
+To ensure your files are following the preferred style guide, you can run:
+
+```bash
+$ npm run lint
+```
+
+This is run on Travis whenever a commit is made so if you're going to [contribute](CONTRIBUTING.md), you should make sure your files pass the linter.
