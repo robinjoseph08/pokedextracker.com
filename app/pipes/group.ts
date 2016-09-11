@@ -1,4 +1,4 @@
-import { Pipe } from '@angular/core';
+import { Pipe } from 'angular2/core';
 
 @Pipe({ name: 'group' })
 export class GroupPipe {

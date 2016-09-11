@@ -1,6 +1,6 @@
-import { Component, OnInit }  from '@angular/core';
-import { Router, RouterLink } from '@angular/router-deprecated';
-import { Title }              from '@angular/platform-browser';
+import { Component, OnInit }  from 'angular2/core';
+import { Router, RouterLink } from 'angular2/router';
+import { Title }              from 'angular2/platform/browser';
 import { Angulartics2 }       from 'angulartics2';
 
 import { NavComponent }   from './nav';
