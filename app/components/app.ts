@@ -1,5 +1,5 @@
-import { Component }                   from '@angular/core';
-import { RouteConfig, RouterOutlet }   from '@angular/router-deprecated';
+import { Component }                   from 'angular2/core';
+import { RouteConfig, RouterOutlet }   from 'angular2/router';
 import { Angulartics2 }                from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 

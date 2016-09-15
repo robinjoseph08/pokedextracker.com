@@ -1,5 +1,3 @@
-import { DomSanitizationService } from '@angular/platform-browser';
-
 import { Pokemon }        from './pokemon';
 import { PokemonService } from '../services/pokemon';
 
@@ -11,9 +9,9 @@ export class Capture {
 
   private _pokemon: PokemonService;
 
-  constructor (params, _pokemon: PokemonService, _sanitizer: DomSanitizationService) {
+  constructor (params, _pokemon: PokemonService) {
     this.user_id = params.user_id;
-    this.pokemon = new Pokemon(params.pokemon, _sanitizer);
+    this.pokemon = new Pokemon(params.pokemon);
     this.captured = params.captured;
 
     this._pokemon = _pokemon;

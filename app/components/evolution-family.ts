@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter } from 'angular2/core';
 
 import { EvolutionsComponent } from './evolutions';
 import { EvolutionFamily }     from '../classes/evolution-family';

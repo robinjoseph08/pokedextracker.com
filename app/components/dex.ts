@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter } from '@angular/core';
+import { Component, ElementRef, EventEmitter } from 'angular2/core';
 
 import { BoxComponent }    from './box';
 import { Capture }         from '../classes/capture';

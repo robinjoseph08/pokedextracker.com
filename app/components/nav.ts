@@ -1,6 +1,5 @@
-import { Component }          from '@angular/core';
-import { Location }           from '@angular/common';
-import { Router, RouterLink } from '@angular/router-deprecated';
+import { Component }          from 'angular2/core';
+import { Router, RouterLink } from 'angular2/router';
 import { Angulartics2 }       from 'angulartics2';
 
 import { SessionService } from '../services/session';
@@ -21,12 +20,10 @@ export class NavComponent {
   public user: User;
 
   private _angulartics: Angulartics2;
-  private _location: Location;
   private _router: Router;
 
-  constructor (_angulartics: Angulartics2, _location: Location, _router: Router, _session: SessionService) {
+  constructor (_angulartics: Angulartics2, _router: Router, _session: SessionService) {
     this._angulartics = _angulartics;
-    this._location = _location;
     this._router = _router;
     this._session = _session;
   }
@@ -39,7 +36,7 @@ export class NavComponent {
       properties: { category: 'Session' }
     });
 
-    if (this._location.path().startsWith('/account')) {
+    if (this._router.root.isRouteActive(this._router.generate(['Account']))) {
       this._router.navigate(['Login']);
     }
   }
