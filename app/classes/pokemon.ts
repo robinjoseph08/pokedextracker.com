@@ -1,10 +1,6 @@
-import { DecimalPipe }                      from '@angular/common';
 import { DomSanitizationService, SafeHtml } from '@angular/platform-browser';
 
 import { EvolutionFamily } from './evolution-family';
-
-const pipe = new DecimalPipe();
-const args = '3.0';
 
 export class Pokemon {
 
@@ -50,14 +46,6 @@ export class Pokemon {
     this.or_locations = params.or_locations;
     this.as_locations = params.as_locations;
     this.evolution_family = params.evolution_family && new EvolutionFamily(params.evolution_family, _sanitizer);
-  }
-
-  public get icon_class () {
-    const map = { pkicon: true };
-
-    map[`pkicon-${pipe.transform(this.national_id, args)}`] = true;
-
-    return map;
   }
 
   public is (region: string): boolean {
