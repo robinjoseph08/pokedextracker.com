@@ -260,6 +260,10 @@ form {
   }
 }
 
+img.pixel {
+  @include crisp-rendering();
+}
+
 .loading {
   margin-top: 47vh;
   text-align: center;
