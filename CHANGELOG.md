@@ -1,3 +1,23 @@
+### 1.8.0 (2016-9-17)
+
+##### Chores
+
+* **deps:**
+  * update node-sass from 3.4.2 to 3.9.3 ([df898980](https://github.com/robinjoseph08/rmj.io/commit/df89898023080db9117eb85929cc6b9ca96951dd))
+  * make fsevents optional ([581e1af4](https://github.com/robinjoseph08/rmj.io/commit/581e1af43d2c9e14e92987e449d2396a1ae460db))
+
+##### Documentation Changes
+
+* **windows:** make a note about using nvm on windows ([a6d119c8](https://github.com/robinjoseph08/rmj.io/commit/a6d119c87439e36f0e6df3b6536a71ed5dddd219))
+* **shrinkwrap:** add docs for fsevents/shrinkwrap issues ([92e2bdbe](https://github.com/robinjoseph08/rmj.io/commit/92e2bdbe596aa76980214f99f6b7cd1ad48ba854))
+
+##### Bug Fixes
+
+* **pkicon:** better class property ([560d60ec](https://github.com/robinjoseph08/rmj.io/commit/560d60ecb8cb445c9f791c65d87e546cfd224f52))
+* **webpack:** use path.join in config ([dd34937f](https://github.com/robinjoseph08/rmj.io/commit/dd34937f2e56db41d7ca05ca66bccc9b5a5262ed))
+* **home:** replace loveball w pokesprite ([37ce1387](https://github.com/robinjoseph08/rmj.io/commit/37ce1387ad218c7773a6a961da509a1cd0a3c95d))
+* **spinner:** hide content when spinning ([c8419d51](https://github.com/robinjoseph08/rmj.io/commit/c8419d51935c72930b11fd9fce4e7c717be46ed2))
+
 ### 1.7.0 (2016-9-6)
 
 ##### New Features
