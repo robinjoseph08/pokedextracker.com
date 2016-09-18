@@ -28,6 +28,7 @@ export class Pokemon {
   public or_locations: string[];
   public as_locations: string[];
   public evolution_family: EvolutionFamily;
+  public icon_class: Object;
 
   constructor (params, _sanitizer: DomSanitizationService) {
     this.national_id = params.national_id;
@@ -50,14 +51,12 @@ export class Pokemon {
     this.or_locations = params.or_locations;
     this.as_locations = params.as_locations;
     this.evolution_family = params.evolution_family && new EvolutionFamily(params.evolution_family, _sanitizer);
-  }
 
-  public get icon_class () {
-    const map = { pkicon: true };
-
-    map[`pkicon-${pipe.transform(this.national_id, args)}`] = true;
-
-    return map;
+    const pkiconClass = `pkicon-${pipe.transform(this.national_id, args)}`;
+    this.icon_class = {
+      pkicon: true,
+      [pkiconClass]: true
+    };
   }
 
   public is (region: string): boolean {
