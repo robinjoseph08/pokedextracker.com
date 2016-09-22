@@ -63,15 +63,6 @@ home {
       &:first-child {
         margin-right: 15px;
       }
-
-      &:last-child {
-        color: $brand-secondary;
-        background-color: #fff;
-
-        &:hover {
-          background-color: darken(#fff, 1%);
-        }
-      }
     }
 
     .social {
