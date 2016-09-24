@@ -1,8 +1,3 @@
-<div *ngIf="loading" class="loading">Loading...</div>
-<nav *ngIf="!loading && user" [user]="user"></nav>
-<reload *ngIf="!loading && user && _version.reloadPage"></reload>
 <div *ngIf="!loading && user" class="tracker">
   <dex #dex (scroll)="scroll(dex)" *ngIf="!loading" (activeChange)="active = $event" (collapsedChange)="collapsed = $event" (scrollUp)="scrollUp(dex)" [captures]="captures" [showScroll]="showScroll" [user]="user"></dex>
-  <info [(collapsed)]="collapsed" [class.collapsed]="collapsed" [active]="active"></info>
 </div>
-<not-found *ngIf="!loading && !user"></not-found>

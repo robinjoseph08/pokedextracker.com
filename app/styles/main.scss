@@ -16,17 +16,17 @@ body {
   font-family: $font-primary;
 }
 
-app {
+#root {
   @include flexbox();
   @include flex-direction(column);
 
   height: 100vh;
 
-  tracker,
-  home,
-  register,
-  login,
-  account {
+  .tracker-container,
+  .home-container,
+  .register-container,
+  .login-container,
+  .account-container {
     @include flex(1 1 auto);
     @include flexbox();
     @include flex-direction(column);
@@ -199,7 +199,7 @@ select {
   }
 }
 
-login {
+.login-container {
   padding-bottom: 150px;
 }
 
