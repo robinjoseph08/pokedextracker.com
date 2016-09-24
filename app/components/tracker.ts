@@ -10,6 +10,7 @@ import { NavComponent }      from './nav';
 import { NotFoundComponent } from './not-found';
 import { Pokemon }           from '../classes/pokemon';
 import { PokemonService }    from '../services/pokemon';
+import { ReloadComponent }   from './reload';
 import { SessionService }    from '../services/session';
 import { User }              from '../classes/user';
 import { UserService }       from '../services/user';
@@ -20,7 +21,7 @@ const MOBILE_WIDTH          = 1100;
 const SHOW_SCROLL_THRESHOLD = 400;
 
 @Component({
-  directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent],
+  directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent, ReloadComponent],
   providers: [CaptureService, PokemonService, SessionService, Title, UserService],
   selector: 'tracker',
   template: HTML

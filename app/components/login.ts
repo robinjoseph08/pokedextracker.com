@@ -3,14 +3,15 @@ import { Router, RouterLink } from '@angular/router-deprecated';
 import { Title }              from '@angular/platform-browser';
 import { Angulartics2 }       from 'angulartics2';
 
-import { NavComponent }   from './nav';
-import { SessionService } from '../services/session';
-import { User }           from '../classes/user';
+import { NavComponent }    from './nav';
+import { ReloadComponent } from './reload';
+import { SessionService }  from '../services/session';
+import { User }            from '../classes/user';
 
 const HTML = require('../views/login.html');
 
 @Component({
-  directives: [NavComponent, RouterLink],
+  directives: [NavComponent, ReloadComponent, RouterLink],
   providers: [SessionService, Title],
   selector: 'login',
   template: HTML

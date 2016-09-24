@@ -1,4 +1,5 @@
 <nav [user]="_session.user"></nav>
+<reload></reload>
 <div *ngIf="_session.user" class="form">
   <h1>{{_session.user.username}}'s Account</h1>
   <form (ngSubmit)="updateUser(user)">
