@@ -10,9 +10,10 @@ import { HTTP_PROVIDERS }                       from '@angular/http';
 import { ROUTER_PROVIDERS }                     from '@angular/router-deprecated';
 import { Angulartics2 }                         from 'angulartics2';
 
-import { ApiService }   from './services/api';
-import { AppComponent } from './components/app';
-import { Config }       from '../config';
+import { ApiService }     from './services/api';
+import { AppComponent }   from './components/app';
+import { Config }         from '../config';
+import { VersionService } from './services/version';
 
 if (Config.ENABLE_PRODUCTION) {
   enableProdMode();
@@ -24,5 +25,6 @@ bootstrap(AppComponent, [
   Angulartics2,
   ApiService,
   HTTP_PROVIDERS,
-  ROUTER_PROVIDERS
+  ROUTER_PROVIDERS,
+  VersionService
 ]);

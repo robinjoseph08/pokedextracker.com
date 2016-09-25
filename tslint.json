@@ -28,7 +28,6 @@
       "static-before-instance",
       "variables-before-functions"
     ],
-    "no-any": true,
     "no-arg": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": true,

@@ -8,4 +8,8 @@ const HTML = require('../views/reload.html');
 })
 export class ReloadComponent {
 
+  public reloadPage () {
+    window.location.href = window.location.href;
+  }
+
 }

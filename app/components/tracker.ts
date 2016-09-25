@@ -14,6 +14,7 @@ import { ReloadComponent }   from './reload';
 import { SessionService }    from '../services/session';
 import { User }              from '../classes/user';
 import { UserService }       from '../services/user';
+import { VersionService }    from '../services/version';
 
 const HTML = require('../views/tracker.html');
 
@@ -22,7 +23,7 @@ const SHOW_SCROLL_THRESHOLD = 400;
 
 @Component({
   directives: [DexComponent, InfoComponent, NavComponent, NotFoundComponent, ReloadComponent],
-  providers: [CaptureService, PokemonService, SessionService, Title, UserService],
+  providers: [CaptureService, PokemonService, SessionService, Title, UserService, VersionService],
   selector: 'tracker',
   template: HTML
 })
@@ -35,18 +36,20 @@ export class TrackerComponent implements OnInit {
   public _session: SessionService;
   public showScroll: boolean = false;
   public user: User;
+  public _version: VersionService;
 
   private _capture: CaptureService;
   private _routeParams: RouteParams;
   private _title: Title;
   private _user: UserService;
 
-  constructor (_capture: CaptureService, _routeParams: RouteParams, _session: SessionService, _title: Title, _user: UserService) {
+  constructor (_capture: CaptureService, _routeParams: RouteParams, _session: SessionService, _title: Title, _user: UserService, _version: VersionService) {
     this._capture = _capture;
     this._routeParams = _routeParams;
     this._session = _session;
     this._title = _title;
     this._user = _user;
+    this._version = _version;
   }
 
   public ngOnInit () {

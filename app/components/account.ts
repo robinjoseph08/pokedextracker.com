@@ -8,12 +8,13 @@ import { ReloadComponent } from './reload';
 import { SessionService }  from '../services/session';
 import { User }            from '../classes/user';
 import { UserService }     from '../services/user';
+import { VersionService }  from '../services/version';
 
 const HTML = require('../views/account.html');
 
 @Component({
   directives: [NavComponent, ReloadComponent],
-  providers: [SessionService, Title, UserService],
+  providers: [SessionService, Title, UserService, VersionService],
   selector: 'account',
   template: HTML
 })
@@ -25,18 +26,20 @@ export class AccountComponent implements OnInit {
   public success: boolean = false;
   public _session: SessionService;
   public user: User;
+  public _version: VersionService;
 
   private _angulartics: Angulartics2;
   private _router: Router;
   private _title: Title;
   private _user: UserService;
 
-  constructor (_angulartics: Angulartics2, _router: Router, _session: SessionService, _title: Title, _user: UserService) {
+  constructor (_angulartics: Angulartics2, _router: Router, _session: SessionService, _title: Title, _user: UserService, _version: VersionService) {
     this._angulartics = _angulartics;
     this._router = _router;
     this._session = _session;
     this._title = _title;
     this._user = _user;
+    this._version = _version;
   }
 
   public ngOnInit () {
@@ -45,6 +48,7 @@ export class AccountComponent implements OnInit {
     }
 
     this.reset();
+    this._version.check();
 
     this._title.setTitle('Account | Pokédex Tracker');
   }
