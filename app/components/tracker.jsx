@@ -5,8 +5,9 @@ import { DexComponent }                 from './dex';
 import { InfoComponent }                from './info';
 import { NavComponent }                 from './nav';
 import { NotFoundComponent }            from './not-found';
-import { setCurrentPokemon }            from '../actions/pokemon';
 import { retrieveUser, setCurrentUser } from '../actions/user';
+import { setCurrentPokemon }            from '../actions/pokemon';
+import { setShowScroll }                from '../actions/tracker';
 
 export class Tracker extends Component {
 
@@ -23,6 +24,7 @@ export class Tracker extends Component {
   reset () {
     const { params: { username }, retrieveUser, setCurrentPokemon, setCurrentUser } = this.props;
 
+    setShowScroll(false);
     setCurrentPokemon(1);
     setCurrentUser(username);
     retrieveUser(username);
@@ -60,7 +62,8 @@ function mapDispatchToProps (dispatch) {
   return {
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
-    setCurrentUser: (username) => dispatch(setCurrentUser(username))
+    setCurrentUser: (username) => dispatch(setCurrentUser(username)),
+    setShowScroll: (show) => dispatch(setShowScroll(show))
   };
 }
 
