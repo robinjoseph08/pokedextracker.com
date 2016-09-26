@@ -34,7 +34,7 @@ import { setError, setLoading } from './utils';
 
 export const SET_TOKEN = 'SET_TOKEN';
 
-export function login (username, password) {
+export function login ({ username, password }) {
   return (dispatch) => {
     dispatch(setError(null));
     dispatch(setLoading('login', true));
