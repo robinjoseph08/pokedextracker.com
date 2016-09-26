@@ -1,12 +1,14 @@
 import { Injectable }                                     from '@angular/core';
 import { Headers, Http, RequestOptions, URLSearchParams } from '@angular/http';
 
-import { Config } from '../../config';
+import { Config }         from '../../config';
+import { VersionService } from './version';
 
 @Injectable()
 export class ApiService {
 
   private _http: Http;
+  private _version: VersionService;
 
   public get options (): RequestOptions {
     const headers = new Headers({ 'Content-Type': 'application/json' });
@@ -19,8 +21,9 @@ export class ApiService {
     return new RequestOptions({ headers });
   }
 
-  constructor (_http: Http) {
+  constructor (_http: Http, _version: VersionService) {
     this._http = _http;
+    this._version = _version;
   }
 
   public get (endpoint: string, params: Object = {}): Promise<Object> {
@@ -30,16 +33,20 @@ export class ApiService {
       options.search.set(key, params[key]);
     }
 
-    return this._http.get(Config.API_HOST + endpoint, options)
-    .toPromise()
-    .then((res) => res.json())
+    return Promise.all([
+      <Promise<any>> this._http.get(Config.API_HOST + endpoint, options).toPromise(),
+      this._version.check()
+    ])
+    .then(([res]) => res.json())
     .catch((err) => Promise.reject(err.json().error));
   }
 
   public post (endpoint: string, payload: Object = {}): Promise<Object> {
-    return this._http.post(Config.API_HOST + endpoint, JSON.stringify(payload), this.options)
-    .toPromise()
-    .then((res) => res.json())
+    return Promise.all([
+      <Promise<any>> this._http.post(Config.API_HOST + endpoint, JSON.stringify(payload), this.options).toPromise(),
+      this._version.check()
+    ])
+    .then(([res]) => res.json())
     .catch((err) => Promise.reject(err.json().error));
   }
 
@@ -47,9 +54,11 @@ export class ApiService {
     const options = this.options;
     options.body = JSON.stringify(payload);
 
-    return this._http.delete(Config.API_HOST + endpoint, options)
-    .toPromise()
-    .then((res) => res.json())
+    return Promise.all([
+      <Promise<any>> this._http.delete(Config.API_HOST + endpoint, options).toPromise(),
+      this._version.check()
+    ])
+    .then(([res]) => res.json())
     .catch((err) => Promise.reject(err.json().error));
   }
 

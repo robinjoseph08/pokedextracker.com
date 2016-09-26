@@ -323,6 +323,18 @@ form {
   }
 }
 
+reload div {
+  text-align: center;
+  padding: 10px 30px;
+  background-color: lighten($brand-primary-light, 15%);
+  font-size: 14px;
+
+  .fa {
+    font-size: 11px;
+    padding-right: 2px;
+  }
+}
+
 @media (max-width: 700px) {
   .not-found h1 {
     font-size: 35px;
