@@ -16,6 +16,7 @@
   region: 'national',
   showInfo: true,
   showShare: false,
+  showScroll: true,
   token: 'token',
   loading: {
     info: false,
