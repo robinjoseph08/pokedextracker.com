@@ -5,7 +5,7 @@ import { EvolutionFamilyComponent } from './evolution-family';
 import { htmlName, iconClass }      from '../utils/pokemon';
 import { padding }                  from '../utils/formatting';
 import { retrievePokemon }          from '../actions/pokemon';
-import { setInfoOpen }              from '../actions/tracker';
+import { setShowInfo }              from '../actions/tracker';
 
 export class Info extends Component {
 
@@ -26,13 +26,13 @@ export class Info extends Component {
   }
 
   render () {
-    const { infoOpen, pokemon, setInfoOpen } = this.props;
+    const { pokemon, setShowInfo, showInfo } = this.props;
 
     if (!pokemon) {
       return (
-        <div className={`info ${infoOpen ? '' : 'collapsed'}`}>
-          <div className="info-collapse" onClick={() => setInfoOpen(!infoOpen)}>
-            <i className={`fa ${infoOpen ? 'fa-caret-right' : 'fa-caret-left'}`}></i>
+        <div className={`info ${showInfo ? '' : 'collapsed'}`}>
+          <div className="info-collapse" onClick={() => setShowInfo(!showInfo)}>
+            <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`}></i>
           </div>
 
           <div className="info-main"></div>
@@ -41,9 +41,9 @@ export class Info extends Component {
     }
 
     return (
-      <div className={`info ${infoOpen ? '' : 'collapsed'}`}>
-        <div className="info-collapse" onClick={() => setInfoOpen(!infoOpen)}>
-          <i className={`fa ${infoOpen ? 'fa-caret-right' : 'fa-caret-left'}`}></i>
+      <div className={`info ${showInfo ? '' : 'collapsed'}`}>
+        <div className="info-collapse" onClick={() => setShowInfo(!showInfo)}>
+          <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`}></i>
         </div>
 
         <div className="info-main">
@@ -85,14 +85,14 @@ export class Info extends Component {
 
 }
 
-function mapStateToProps ({ currentPokemon, infoOpen, pokemon }) {
-  return { currentPokemon, infoOpen, pokemon: pokemon[currentPokemon] };
+function mapStateToProps ({ currentPokemon, pokemon, showInfo }) {
+  return { currentPokemon, pokemon: pokemon[currentPokemon], showInfo };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     retrievePokemon: (id) => dispatch(retrievePokemon(id)),
-    setInfoOpen: (open) => dispatch(setInfoOpen(open))
+    setShowInfo: (show) => dispatch(setShowInfo(show))
   };
 }
 
