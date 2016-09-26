@@ -1,10 +1,36 @@
-import { Config }       from '../../config';
-import { get }          from '../utils/api';
-import { listCaptures } from './capture';
-import { setLoading }   from './utils';
+import { push } from 'react-router-redux';
+
+import { Config }               from '../../config';
+import { get, post }            from '../utils/api';
+import { listCaptures }         from './capture';
+import { setError, setLoading } from './utils';
+import { setToken }             from './session';
 
 export const SET_USER         = 'SET_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+export function createUser ({ username, password, password_confirm, friend_code }) {
+  return (dispatch) => {
+    dispatch(setError(null));
+
+    if (password !== password_confirm) {
+      return dispatch(setError('passwords need to match'));
+    }
+
+    dispatch(setLoading('register', true));
+
+    return post(`${Config.API_HOST}/users`, { username, password, friend_code, referrer: document.referrer })
+    .then(({ token }) => {
+      dispatch(setToken(token));
+      dispatch(setLoading('register', false));
+      dispatch(push(`/u/${username}`));
+    })
+    .catch((err) => {
+      dispatch(setError(err.message));
+      dispatch(setLoading('register', false));
+    });
+  };
+}
 
 export function retrieveUser (username) {
   return (dispatch) => {

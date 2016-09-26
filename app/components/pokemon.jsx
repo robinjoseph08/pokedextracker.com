@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import classNames    from 'classnames';
 import { connect }   from 'react-redux';
 
 import { htmlName, iconClass, regionCheck } from '../utils/pokemon';
@@ -9,10 +10,12 @@ import { setInfoOpen }                      from '../actions/tracker';
 export class Pokemon extends Component {
 
   setCurrentPokemon = (id) => {
-    const { setCurrentPokemon, setInfoOpen } = this.props;
+    const { capture, region, setCurrentPokemon, setInfoOpen } = this.props;
 
-    setCurrentPokemon(id);
-    setInfoOpen(true);
+    if (regionCheck(capture.pokemon, region)) {
+      setCurrentPokemon(id);
+      setInfoOpen(true);
+    }
   }
 
   render () {
@@ -27,23 +30,15 @@ export class Pokemon extends Component {
       );
     }
 
-    const ownPage = session && session.id === user.id;
-    const classes = ['pokemon'];
-
-    if (!ownPage) {
-      classes.push('viewing');
-    }
-
-    if (!regionCheck(capture.pokemon, region)) {
-      classes.push('disabled');
-    }
-
-    if (capture.captured) {
-      classes.push('captured');
-    }
+    const classes = {
+      pokemon: true,
+      viewing: !session || session.id !== user.id,
+      disabled: !regionCheck(capture.pokemon, region),
+      captured: capture.captured
+    };
 
     return (
-      <div className={classes.join(' ')}>
+      <div className={classNames(classes)}>
         <div className="set-captured" onClick={this.toggleCaptured}>
           <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)}></h4>
           <i className={iconClass(capture.pokemon.national_id)}></i>

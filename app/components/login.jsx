@@ -59,7 +59,7 @@ function mapStateToProps ({ error }) {
 function mapDispatchToProps (dispatch) {
   return {
     clearError: () => dispatch(setError(null)),
-    onSubmit: ({ username, password }) => dispatch(login(username, password))
+    onSubmit: (payload) => dispatch(login(payload))
   };
 }
 

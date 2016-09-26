@@ -4,6 +4,7 @@ import { syncHistoryWithStore }          from 'react-router-redux';
 import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
 import { NotFoundComponent } from './not-found';
+import { RegisterComponent } from './register';
 import { Store }             from '../stores';
 import { TrackerComponent }  from './tracker';
 
@@ -14,6 +15,7 @@ export function AppComponent () {
     <Router history={history}>
       <Route path='/' component={HomeComponent}></Route>
       <Route path='/login' component={LoginComponent}></Route>
+      <Route path='/register' component={RegisterComponent}></Route>
       <Route path='/u/:username' component={TrackerComponent}></Route>
       <Route path='*' component={NotFoundComponent}></Route>
     </Router>
