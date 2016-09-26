@@ -7,19 +7,19 @@ export function tokenToUser (token) {
 }
 
 export function loadState () {
-  const infoOpen = localStorage.getItem('infoOpen');
   const token = localStorage.getItem('token');
   const session = tokenToUser(token);
+  const showInfo = localStorage.getItem('showInfo');
 
-  return { infoOpen: infoOpen ? infoOpen === 'true' : undefined, token, session };
+  return { token, session, showInfo: showInfo ? showInfo === 'true' : undefined };
 }
 
-export function saveState ({ infoOpen, token }) {
-  localStorage.setItem('infoOpen', infoOpen);
-
+export function saveState ({ showInfo, token }) {
   if (token) {
     localStorage.setItem('token', token);
   } else {
     localStorage.removeItem('token');
   }
+
+  localStorage.setItem('showInfo', showInfo);
 }

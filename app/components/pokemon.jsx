@@ -5,16 +5,16 @@ import { connect }   from 'react-redux';
 import { htmlName, iconClass, regionCheck } from '../utils/pokemon';
 import { padding }                          from '../utils/formatting';
 import { setCurrentPokemon }                from '../actions/pokemon';
-import { setInfoOpen }                      from '../actions/tracker';
+import { setShowInfo }                      from '../actions/tracker';
 
 export class Pokemon extends Component {
 
   setCurrentPokemon = (id) => {
-    const { capture, region, setCurrentPokemon, setInfoOpen } = this.props;
+    const { capture, region, setCurrentPokemon, setShowInfo } = this.props;
 
     if (regionCheck(capture.pokemon, region)) {
       setCurrentPokemon(id);
-      setInfoOpen(true);
+      setShowInfo(true);
     }
   }
 
@@ -65,7 +65,7 @@ function mapStateToProps ({ currentUser, region, session, users }) {
 function mapDispatchToProps (dispatch) {
   return {
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
-    setInfoOpen: (open) => dispatch(setInfoOpen(open))
+    setShowInfo: (show) => dispatch(setShowInfo(show))
   };
 }
 

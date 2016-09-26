@@ -5,38 +5,38 @@ import { connect }   from 'react-redux';
 import { ProgressComponent } from './progress';
 import { RegionComponent }   from './region';
 import { ShareComponent }    from './share';
-import { setShareOpen }      from '../actions/tracker';
+import { setShowShare }      from '../actions/tracker';
 
 export class Header extends Component {
 
   componentDidMount () {
-    window.addEventListener('click', this.closeShareOpen);
+    window.addEventListener('click', this.closeShare);
   }
 
   componentWillUnmount () {
-    window.removeEventListener('click', this.closeShareOpen);
+    window.removeEventListener('click', this.closeShare);
   }
 
-  closeShareOpen = () => {
-    this.props.setShareOpen(false);
+  closeShare = () => {
+    this.props.setShowShare(false);
   }
 
-  toggleShareOpen = (e) => {
+  toggleShare = (e) => {
     e.stopPropagation();
-    this.props.setShareOpen(!this.props.shareOpen);
+    this.props.setShowShare(!this.props.showShare);
   }
 
   render () {
-    const { session, shareOpen, user } = this.props;
+    const { session, showShare, user } = this.props;
     const ownPage = session && session.id === user.id;
 
     return (
       <header>
         <h1>{ownPage ? null : 'Viewing '}{user.username}'s Living Dex</h1>
         <div className="share-container">
-          <a onClick={this.toggleShareOpen}><i className="fa fa-link"></i></a>
+          <a onClick={this.toggleShare}><i className="fa fa-link"></i></a>
           <a href="http://twitter.com/home/?status=Check out {ownPage ? 'my' : user.username + '\'s'} living dex progress on @PokedexTracker! https://pokedextracker.com/u/{user.username}" target="_blank"><i className="fa fa-twitter"></i></a>
-          <ShareComponent show={shareOpen} username={user.username}></ShareComponent>
+          <ShareComponent show={showShare} username={user.username}></ShareComponent>
         </div>
 
         <h2>
@@ -55,13 +55,13 @@ export class Header extends Component {
 
 }
 
-function mapStateToProps ({ currentUser, session, shareOpen, users }) {
-  return { session, shareOpen, user: users[currentUser] };
+function mapStateToProps ({ currentUser, session, showShare, users }) {
+  return { session, showShare, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    setShareOpen: (open) => dispatch(setShareOpen(open))
+    setShowShare: (show) => dispatch(setShowShare(show))
   };
 }
 

@@ -14,8 +14,8 @@
     }
   },
   region: 'national',
-  infoOpen: true,
-  shareOpen: false,
+  showInfo: true,
+  showShare: false,
   token: 'token',
   loading: {
     info: false,
