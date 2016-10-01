@@ -16,8 +16,8 @@ export class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const username = this.refs.username.value;
-    const password = this.refs.password.value;
+    const username = this._username.value;
+    const password = this._password.value;
 
     this.props.onSubmit({ username, password });
   }
@@ -34,12 +34,12 @@ export class Login extends Component {
             <ErrorComponent error={error}></ErrorComponent>
             <div className="form-group">
               <label htmlFor="username">Username</label>
-              <input ref="username" name="username" id="username" type="text" required placeholder="ashketchum10" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+              <input ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
               <i className="fa fa-asterisk"></i>
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input ref="password" name="password" id="password" type="password" required placeholder="••••••••••••" maxLength="72" />
+              <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" maxLength="72" />
               <i className="fa fa-asterisk"></i>
             </div>
             <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right"></i></button>

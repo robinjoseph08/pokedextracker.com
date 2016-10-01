@@ -12,7 +12,7 @@ export class ShareComponent extends Component {
     return (
       <div className="share" onClick={(e) => e.stopPropagation()}>
         Share this Living Dex:
-        <input ref="share" value={`https://pokedextracker.com/u/${username}`} readOnly onClick={() => this.refs.share.select()} />
+        <input ref={(c) => this._share = c} value={`https://pokedextracker.com/u/${username}`} readOnly onClick={() => this._share.select()} />
       </div>
     );
   }
