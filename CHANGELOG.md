@@ -1,3 +1,17 @@
+### 1.9.0 (2016-10-10)
+
+##### New Features
+
+* **reload:**
+  * add functionality to reload component ([ec9c61e9](https://github.com/robinjoseph08/rmj.io/commit/ec9c61e97c130055458f95ef7e76e9898f53be42))
+  * add reload component and styles ([843e5156](https://github.com/robinjoseph08/rmj.io/commit/843e5156e2fcf3da0e0d37342924d8d2a34a8268))
+
+##### Refactors
+
+* **buttons:**
+  * better btn styles ([c55bac1f](https://github.com/robinjoseph08/rmj.io/commit/c55bac1f4d1ccb76f5df0ef474f55c96828c7ba9))
+  * add .btn styles ([0ccb4f20](https://github.com/robinjoseph08/rmj.io/commit/0ccb4f207ccbc1400896d26af3aefa3ad6d176cd))
+
 ### 1.8.0 (2016-9-17)
 
 ##### Chores
