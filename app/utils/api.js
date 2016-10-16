@@ -1,6 +1,8 @@
 import fetch         from 'isomorphic-fetch';
 import { stringify } from 'qs';
 
+import { Store } from '../stores';
+
 function handleResponse (response) {
   return response.json()
   .then((json) => {
@@ -14,15 +16,32 @@ function handleResponse (response) {
   });
 }
 
-export function get (url, params) {
-  return fetch(`${url}?${stringify(params)}`)
-  .then((response) => handleResponse(response));
+function getHeaders () {
+  return {
+    Authorization: `Bearer ${Store.getState().token}`,
+    'Content-Type': 'application/json'
+  };
 }
 
-export function post (url, payload) {
-  return fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(payload)
-  })
-  .then((response) => handleResponse(response));
-}
+export const API = {
+  delete (url, payload) {
+    return fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify(payload),
+      headers: getHeaders()
+    })
+    .then((response) => handleResponse(response));
+  },
+  get (url, params) {
+    return fetch(`${url}?${stringify(params)}`)
+    .then((response) => handleResponse(response));
+  },
+  post (url, payload) {
+    return fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: getHeaders()
+    })
+    .then((response) => handleResponse(response));
+  }
+};
