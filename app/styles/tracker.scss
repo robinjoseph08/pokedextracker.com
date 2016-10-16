@@ -547,6 +547,33 @@ box {
         cursor: default;
       }
     }
+
+    &:not(.empty):not(.disabled):hover {
+      .set-info {
+        opacity: 1;
+
+        &:hover {
+          cursor: pointer;
+          right: -1px;
+          bottom: -1px;
+
+          .fa-info {
+            padding: 5px 8px;
+            border-color: darken($brand-secondary-dark, 5%);
+            color: darken($brand-secondary-dark, 5%);
+          }
+        }
+      }
+
+      &:not(.viewing) {
+        cursor: pointer;
+
+        .set-captured,
+        .set-capture-mobile:hover {
+          border-color: darken($brand-primary-light, 5%);
+        }
+      }
+    }
   }
 
   .set-captured {
@@ -612,33 +639,6 @@ box {
       border: 2px solid $brand-secondary-light;
       color: $brand-secondary-light;
       font-size: 10px;
-    }
-  }
-}
-
-.no-touch box pokemon:not(.empty):not(.disabled):hover {
-  .set-info {
-    opacity: 1;
-
-    &:hover {
-      cursor: pointer;
-      right: -1px;
-      bottom: -1px;
-
-      .fa-info {
-        padding: 5px 8px;
-        border-color: darken($brand-secondary-dark, 5%);
-        color: darken($brand-secondary-dark, 5%);
-      }
-    }
-  }
-
-  &:not(.viewing) {
-    cursor: pointer;
-
-    .set-captured,
-    .set-capture-mobile:hover {
-      border-color: darken($brand-primary-light, 5%);
     }
   }
 }
