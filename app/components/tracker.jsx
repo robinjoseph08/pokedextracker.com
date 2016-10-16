@@ -5,6 +5,7 @@ import { DexComponent }                 from './dex';
 import { InfoComponent }                from './info';
 import { NavComponent }                 from './nav';
 import { NotFoundComponent }            from './not-found';
+import { ReloadComponent }              from './reload';
 import { retrieveUser, setCurrentUser } from '../actions/user';
 import { setCurrentPokemon }            from '../actions/pokemon';
 import { setShowScroll }                from '../actions/tracker';
@@ -44,6 +45,7 @@ export class Tracker extends Component {
     return (
       <div className="tracker-container">
         <NavComponent></NavComponent>
+        <ReloadComponent></ReloadComponent>
         <div className="tracker">
           <DexComponent></DexComponent>
           <InfoComponent></InfoComponent>

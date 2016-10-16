@@ -2,11 +2,12 @@ import { Component } from 'react';
 import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
-import { ErrorComponent } from './error';
-import { NavComponent }   from './nav';
-import { createUser }     from '../actions/user';
-import { friendCode }     from '../utils/formatting';
-import { setError }       from '../actions/utils';
+import { ErrorComponent }  from './error';
+import { NavComponent }    from './nav';
+import { ReloadComponent } from './reload';
+import { createUser }      from '../actions/user';
+import { friendCode }      from '../utils/formatting';
+import { setError }        from '../actions/utils';
 
 export class Register extends Component {
 
@@ -31,6 +32,7 @@ export class Register extends Component {
     return (
       <div className="register-container">
         <NavComponent></NavComponent>
+        <ReloadComponent></ReloadComponent>
         <div className="form">
           <h1>Register</h1>
           <form onSubmit={this.onSubmit}>
