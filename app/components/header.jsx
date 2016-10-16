@@ -35,7 +35,7 @@ export class Header extends Component {
         <h1>{ownPage ? null : 'Viewing '}{user.username}'s Living Dex</h1>
         <div className="share-container">
           <a onClick={this.toggleShare}><i className="fa fa-link"></i></a>
-          <a href="http://twitter.com/home/?status=Check out {ownPage ? 'my' : user.username + '\'s'} living dex progress on @PokedexTracker! https://pokedextracker.com/u/{user.username}" target="_blank"><i className="fa fa-twitter"></i></a>
+          <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} living dex progress on @PokedexTracker! https://pokedextracker.com/u/${user.username}`} target="_blank"><i className="fa fa-twitter"></i></a>
           <ShareComponent show={showShare} username={user.username}></ShareComponent>
         </div>
 
