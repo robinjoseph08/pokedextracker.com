@@ -1,10 +1,10 @@
 import { push } from 'react-router-redux';
 
-import { Config }               from '../../config';
-import { API }                  from '../utils/api';
-import { listCaptures }         from './capture';
-import { setError, setLoading } from './utils';
-import { setToken }             from './session';
+import { Config }                             from '../../config';
+import { API }                                from '../utils/api';
+import { checkVersion, setError, setLoading } from './utils';
+import { listCaptures }                       from './capture';
+import { setToken }                           from './session';
 
 export const SET_USER         = 'SET_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -34,6 +34,7 @@ export function createUser ({ username, password, password_confirm, friend_code 
 
 export function retrieveUser (username) {
   return (dispatch) => {
+    dispatch(checkVersion());
     dispatch(setLoading('tracker', true));
 
     return API.get(`${Config.API_HOST}/users/${username}`)

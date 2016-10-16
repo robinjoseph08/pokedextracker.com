@@ -6,6 +6,7 @@ import { InfoComponent }                from './info';
 import { NavComponent }                 from './nav';
 import { NotFoundComponent }            from './not-found';
 import { ReloadComponent }              from './reload';
+import { checkVersion }                 from '../actions/utils';
 import { retrieveUser, setCurrentUser } from '../actions/user';
 import { setCurrentPokemon }            from '../actions/pokemon';
 import { setShowScroll }                from '../actions/tracker';
@@ -23,8 +24,9 @@ export class Tracker extends Component {
   }
 
   reset () {
-    const { params: { username }, retrieveUser, setCurrentPokemon, setCurrentUser } = this.props;
+    const { checkVersion, params: { username }, retrieveUser, setCurrentPokemon, setCurrentUser } = this.props;
 
+    checkVersion();
     setShowScroll(false);
     setCurrentPokemon(1);
     setCurrentUser(username);
@@ -62,6 +64,7 @@ function mapStateToProps ({ loading, users }, { params: { username } }) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    checkVersion: () => dispatch(checkVersion()),
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
     setCurrentUser: (username) => dispatch(setCurrentUser(username)),
