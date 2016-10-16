@@ -1,19 +1,17 @@
-import { connect } from 'react-redux';
-
-import { PokemonComponent } from './pokemon';
-import { padding }          from '../utils/formatting';
-// import { regionCheck }      from '../utils/pokemon';
+import { MarkAllButtonComponent } from './mark-all-button';
+import { PokemonComponent }       from './pokemon';
+import { padding }                from '../utils/formatting';
 
 export const BOX_SIZE = 30;
 
-export function Box ({ captures }) {
-  // const uncaught = captures.reduce((total, capture) => total + (capture.captured ? 0 : 1), 0);
+export function BoxComponent ({ captures }) {
   const empties = Array.from({ length: BOX_SIZE - captures.length });
 
   return (
     <div className="box">
       <div className="box-header">
         <h1>{padding(captures[0].pokemon.national_id, 3)} - {padding(captures[captures.length - 1].pokemon.national_id, 3)}</h1>
+        <MarkAllButtonComponent captures={captures}></MarkAllButtonComponent>
       </div>
       <div className="box-container">
         {captures.map((capture, i) => <PokemonComponent key={i} capture={capture}></PokemonComponent>)}
@@ -22,9 +20,3 @@ export function Box ({ captures }) {
     </div>
   );
 }
-
-function mapStateToProps ({ region }) {
-  return { region };
-}
-
-export const BoxComponent = connect(mapStateToProps)(Box);
