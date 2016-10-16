@@ -2719,6 +2719,11 @@
       "from": "react@*",
       "resolved": "https://registry.npmjs.org/react/-/react-15.3.1.tgz"
     },
+    "react-document-title": {
+      "version": "2.0.2",
+      "from": "react-document-title@*",
+      "resolved": "https://registry.npmjs.org/react-document-title/-/react-document-title-2.0.2.tgz"
+    },
     "react-dom": {
       "version": "15.3.1",
       "from": "react-dom@*",
@@ -2738,6 +2743,28 @@
       "version": "4.0.6",
       "from": "react-router-redux@*",
       "resolved": "https://registry.npmjs.org/react-router-redux/-/react-router-redux-4.0.6.tgz"
+    },
+    "react-side-effect": {
+      "version": "1.0.2",
+      "from": "react-side-effect@>=1.0.2 <2.0.0",
+      "resolved": "https://registry.npmjs.org/react-side-effect/-/react-side-effect-1.0.2.tgz",
+      "dependencies": {
+        "core-js": {
+          "version": "1.2.7",
+          "from": "core-js@>=1.0.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/core-js/-/core-js-1.2.7.tgz"
+        },
+        "fbjs": {
+          "version": "0.1.0-alpha.10",
+          "from": "fbjs@0.1.0-alpha.10",
+          "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.1.0-alpha.10.tgz"
+        },
+        "whatwg-fetch": {
+          "version": "0.9.0",
+          "from": "whatwg-fetch@>=0.9.0 <0.10.0",
+          "resolved": "https://registry.npmjs.org/whatwg-fetch/-/whatwg-fetch-0.9.0.tgz"
+        }
+      }
     },
     "read-pkg": {
       "version": "1.1.0",

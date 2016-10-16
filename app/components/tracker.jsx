@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
 import { DexComponent }                 from './dex';
@@ -34,10 +35,14 @@ export class Tracker extends Component {
   }
 
   render () {
-    const { loading, user } = this.props;
+    const { loading, params: { username }, user } = this.props;
 
     if (loading) {
-      return <div className="loading">Loading...</div>;
+      return (
+        <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
+          <div className="loading">Loading...</div>
+        </DocumentTitle>
+      );
     }
 
     if (!user) {
@@ -45,14 +50,16 @@ export class Tracker extends Component {
     }
 
     return (
-      <div className="tracker-container">
-        <NavComponent></NavComponent>
-        <ReloadComponent></ReloadComponent>
-        <div className="tracker">
-          <DexComponent></DexComponent>
-          <InfoComponent></InfoComponent>
+      <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
+        <div className="tracker-container">
+          <NavComponent></NavComponent>
+          <ReloadComponent></ReloadComponent>
+          <div className="tracker">
+            <DexComponent></DexComponent>
+            <InfoComponent></InfoComponent>
+          </div>
         </div>
-      </div>
+      </DocumentTitle>
     );
   }
 
