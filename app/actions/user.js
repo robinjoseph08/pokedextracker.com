@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
 import { Config }               from '../../config';
-import { get, post }            from '../utils/api';
+import { API }                  from '../utils/api';
 import { listCaptures }         from './capture';
 import { setError, setLoading } from './utils';
 import { setToken }             from './session';
@@ -19,7 +19,7 @@ export function createUser ({ username, password, password_confirm, friend_code 
 
     dispatch(setLoading('register', true));
 
-    return post(`${Config.API_HOST}/users`, { username, password, friend_code, referrer: document.referrer })
+    return API.post(`${Config.API_HOST}/users`, { username, password, friend_code, referrer: document.referrer })
     .then(({ token }) => {
       dispatch(setToken(token));
       dispatch(setLoading('register', false));
@@ -36,7 +36,7 @@ export function retrieveUser (username) {
   return (dispatch) => {
     dispatch(setLoading('tracker', true));
 
-    return get(`${Config.API_HOST}/users/${username}`)
+    return API.get(`${Config.API_HOST}/users/${username}`)
     .then((user) => {
       dispatch(setUser(user));
       dispatch(listCaptures(user));

@@ -30,7 +30,7 @@
 import { push } from 'react-router-redux';
 
 import { Config }               from '../../config';
-import { post }                 from '../utils/api';
+import { API }                  from '../utils/api';
 import { setError, setLoading } from './utils';
 
 export const SET_TOKEN = 'SET_TOKEN';
@@ -40,7 +40,7 @@ export function login ({ username, password }) {
     dispatch(setError(null));
     dispatch(setLoading('login', true));
 
-    return post(`${Config.API_HOST}/sessions`, { username, password })
+    return API.post(`${Config.API_HOST}/sessions`, { username, password })
     .then(({ token }) => {
       dispatch(setToken(token));
       dispatch(setLoading('login', false));
