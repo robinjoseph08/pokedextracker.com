@@ -2,15 +2,16 @@ import { Component } from 'react';
 import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
-import { ErrorComponent }  from './error';
-import { NavComponent }    from './nav';
-import { ReloadComponent } from './reload';
-import { login }           from '../actions/session';
-import { setError }        from '../actions/utils';
+import { ErrorComponent }         from './error';
+import { NavComponent }           from './nav';
+import { ReloadComponent }        from './reload';
+import { checkVersion, setError } from '../actions/utils';
+import { login }                  from '../actions/session';
 
 export class Login extends Component {
 
   componentDidMount () {
+    this.props.checkVersion();
     this.props.clearError();
   }
 
@@ -60,6 +61,7 @@ function mapStateToProps ({ error }) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    checkVersion: () => dispatch(checkVersion()),
     clearError: () => dispatch(setError(null)),
     onSubmit: (payload) => dispatch(login(payload))
   };

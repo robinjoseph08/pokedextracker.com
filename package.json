@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "npm run build:bundle && npm run build:version",
+    "build:bundle": "webpack",
+    "build:version": "date > public/version",
     "deploy:production": "ssh ubuntu@pokedextracker.com ./deployments/pokedextracker.com.sh",
     "deploy:staging": "ssh ubuntu@staging.pokedextracker.com ./deployments/staging.pokedextracker.com.sh",
     "fsevents": "if grep -q fsevents npm-shrinkwrap.json; then echo 'The fsevents module is in the shrinkwrap file. See https://github.com/robinjoseph08/pokedextracker.com/blob/master/CONTRIBUTING.md#shrinkwrap for help.' && exit 1; fi",

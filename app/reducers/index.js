@@ -7,6 +7,7 @@ import { error }          from './error';
 import { loading }        from './loading';
 import { pokemon }        from './pokemon';
 import { region }         from './region';
+import { reload }         from './reload';
 import { session }        from './session';
 import { showInfo }       from './show-info';
 import { showScroll }     from './show-scroll';
@@ -21,6 +22,7 @@ export const reducer = combineReducers({
   loading,
   pokemon,
   region,
+  reload,
   routing: routerReducer,
   session,
   showInfo,

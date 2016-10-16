@@ -19,6 +19,7 @@ typings
 
 coverage
 bundle.js
+version
 
 .idea/
 .DS_Store

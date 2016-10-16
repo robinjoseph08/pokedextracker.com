@@ -1,11 +1,14 @@
-import { Config } from '../../config';
-import { API }    from '../utils/api';
+import { Config }       from '../../config';
+import { API }          from '../utils/api';
+import { checkVersion } from './utils';
 
 export const SET_POKEMON         = 'SET_POKEMON';
 export const SET_CURRENT_POKEMON = 'SET_CURRENT_POKEMON';
 
 export function retrievePokemon (id) {
   return (dispatch) => {
+    dispatch(checkVersion());
+
     return API.get(`${Config.API_HOST}/pokemon/${id}`)
     .then((pokemon) => dispatch(setPokemon(pokemon)));
   };

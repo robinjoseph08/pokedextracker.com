@@ -23,7 +23,8 @@
     login: false
   },
   error: null,
-  currentPokemon: 1
+  currentPokemon: 1,
+  reload: false
 }
 */
 
