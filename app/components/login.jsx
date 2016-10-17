@@ -2,6 +2,7 @@ import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
+import { push }      from 'react-router-redux';
 
 import { AlertComponent }         from './alert';
 import { NavComponent }           from './nav';
@@ -11,8 +12,17 @@ import { login }                  from '../actions/session';
 
 export class Login extends Component {
 
+  componentWillMount () {
+    const { checkVersion, redirectToTracker, session } = this.props;
+
+    if (session) {
+      redirectToTracker(session.username);
+    }
+
+    checkVersion();
+  }
+
   componentDidMount () {
-    this.props.checkVersion();
     this.props.clearError();
   }
 
@@ -58,15 +68,16 @@ export class Login extends Component {
 
 }
 
-function mapStateToProps ({ error }) {
-  return { error };
+function mapStateToProps ({ error, session }) {
+  return { error, session };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
     clearError: () => dispatch(setError(null)),
-    onSubmit: (payload) => dispatch(login(payload))
+    onSubmit: (payload) => dispatch(login(payload)),
+    redirectToTracker: (username) => dispatch(push(`/u/${username}`))
   };
 }
 
