@@ -48,6 +48,7 @@ export class Header extends Component {
 
         <div className="percentage">
           <ProgressComponent></ProgressComponent>
+          <RegionComponent mobile={true}></RegionComponent>
         </div>
       </header>
     );

@@ -8,7 +8,7 @@ export class MarkAllButton extends Component {
 
   constructor (props) {
     super(props);
-    this.state = {};
+    this.state = { loading: false };
   }
 
   toggleCaptured = () => {
