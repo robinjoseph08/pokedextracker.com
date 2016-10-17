@@ -1,11 +1,7 @@
 <div class="box-header">
-  <h1>{{captures[0].pokemon.national_id | number : '3.0'}} - {{captures[captures.length - 1].pokemon.national_id | number : '3.0'}}</h1>
+  <!-- <h1>{{captures[0].pokemon.national_id | number : '3.0'}} - {{captures[captures.length - 1].pokemon.national_id | number : '3.0'}}</h1> -->
   <button class="btn btn-blue" *ngIf="_session.user?.id === user.id" (click)="toggle()" [disabled]="loading">
     <span [class.hidden]="loading">{{uncaught === 0 ? 'Unmark' : 'Mark'}} All</span>
     <span *ngIf="loading" class="spinner"><i class="fa fa-spinner fa-spin"></i></span>
   </button>
-</div>
-<div class="box-container">
-  <pokemon *ngFor="let capture of captures" (activeChange)="capture.pokemon.is(region) && activeChange.emit($event)" (collapsedChange)="capture.pokemon.is(region) && collapsedChange.emit($event)" [class.captured]="capture.captured" [class.disabled]="!capture.pokemon.is(region)" [class.viewing]="_session.user?.id !== user.id" [capture]="capture" [region]="region"></pokemon>
-  <pokemon *ngFor="let capture of empties" [capture]="capture" class="empty"></pokemon>
 </div>
