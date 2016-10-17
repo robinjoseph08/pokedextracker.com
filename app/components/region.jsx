@@ -32,7 +32,7 @@ export class Region extends Component {
   }
 
   render () {
-    const { mobile, region } = this.props;
+    const { mobile, region, setRegion } = this.props;
 
     if (mobile) {
       let dropdown = null;
