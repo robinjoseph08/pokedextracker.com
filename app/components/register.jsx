@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
-import { ErrorComponent }         from './error';
+import { AlertComponent }         from './alert';
 import { NavComponent }           from './nav';
 import { ReloadComponent }        from './reload';
 import { checkVersion, setError } from '../actions/utils';
@@ -39,7 +39,7 @@ export class Register extends Component {
           <div className="form">
             <h1>Register</h1>
             <form onSubmit={this.onSubmit}>
-              <ErrorComponent error={error}></ErrorComponent>
+              <AlertComponent message={error} type="error"></AlertComponent>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />

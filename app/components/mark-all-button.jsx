@@ -42,12 +42,11 @@ export class MarkAllButton extends Component {
     }
 
     const uncaught = captures.reduce((total, capture) => total + (!regionCheck(capture.pokemon, region) || capture.captured ? 0 : 1), 0);
-    const spinner = loading ? <span className="spinner"><i className="fa fa-spinner fa-spin"></i></span> : null;
 
     return (
       <button className="btn btn-blue" onClick={this.toggleCaptured} disabled={loading}>
         <span className={loading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
-        {spinner}
+        {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin"></i></span> : null}
       </button>
     );
   }

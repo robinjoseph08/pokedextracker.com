@@ -46,6 +46,26 @@ export function retrieveUser (username) {
   };
 }
 
+export function updateUser ({ username, payload }) {
+  return (dispatch) => {
+    return Promise.resolve()
+    .then(() => {
+      const { password, password_confirm } = payload;
+
+      if (password !== password_confirm) {
+        throw new Error('passwords need to match');
+      }
+
+      Reflect.deleteProperty(payload, 'password_confirm');
+
+      return API.post(`${Config.API_HOST}/users/${username}`, payload);
+    })
+    .then(({ token }) => {
+      dispatch(setToken(token));
+    });
+  };
+}
+
 export function setCurrentUser (user) {
   return { type: SET_CURRENT_USER, user };
 }
