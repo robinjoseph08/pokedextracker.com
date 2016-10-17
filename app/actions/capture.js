@@ -10,7 +10,7 @@ export function createCaptures ({ payload, username }) {
     dispatch(checkVersion());
 
     return API.post(`${Config.API_HOST}/captures`, payload)
-    .then(() => payload.pokemon.map((pokemon) => dispatch(markCaptured(true, pokemon, username))));
+    .then(() => dispatch(markCaptured(true, payload.pokemon, username)));
   };
 }
 
@@ -19,7 +19,7 @@ export function deleteCaptures ({ payload, username }) {
     dispatch(checkVersion());
 
     return API.delete(`${Config.API_HOST}/captures`, payload)
-    .then(() => payload.pokemon.map((pokemon) => dispatch(markCaptured(false, pokemon, username))));
+    .then(() => dispatch(markCaptured(false, payload.pokemon, username)));
   };
 }
 

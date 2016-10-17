@@ -11,20 +11,15 @@ export function captures (state = {}, action) {
         }
       };
     case MARK_CAPTURED:
-      return {
+      const newState = {
         ...state,
         [action.username]: {
           ...state[action.username],
-          captures: [
-            ...state[action.username].captures.slice(0, action.pokemon - 1),
-            {
-              ...state[action.username].captures[action.pokemon - 1],
-              captured: action.captured
-            },
-            ...state[action.username].captures.slice(action.pokemon)
-          ]
+          captures: state[action.username].captures.slice()
         }
       };
+      action.pokemon.forEach((pokemon) => newState[action.username].captures[pokemon - 1].captured = action.captured);
+      return newState;
     default:
       return state;
   }
