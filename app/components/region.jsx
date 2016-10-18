@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect }   from 'react-redux';
 
+import { ReactGA }   from '../utils/analytics';
 import { setRegion } from '../actions/tracker';
 
 const REGIONS = ['national', 'kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos'];
@@ -24,15 +25,23 @@ export class Region extends Component {
     this.setState({ dropdown: false });
   }
 
+  setDropdown = (dropdown) => {
+    ReactGA.event({ action: dropdown ? 'open' : 'close', category: 'Region' });
+
+    this.setState({ dropdown });
+  }
+
   setRegion = (region) => {
     const { setRegion } = this.props;
+
+    ReactGA.event({ action: 'toggle', category: 'Region', label: region });
 
     setRegion(region);
     this.setState({ dropdown: false });
   }
 
   render () {
-    const { mobile, region, setRegion } = this.props;
+    const { mobile, region } = this.props;
 
     if (mobile) {
       let dropdown = null;
@@ -47,7 +56,7 @@ export class Region extends Component {
 
       return (
         <div className="region-filter-mobile" onClick={(e) => e.stopPropagation()}>
-          <div className="active" onClick={() => this.setState({ dropdown: !this.state.dropdown })}>
+          <div className="active" onClick={() => this.setDropdown(!this.state.dropdown)}>
             <span>{region}</span>
             <i className="fa fa-sort-desc"></i>
           </div>
@@ -58,7 +67,7 @@ export class Region extends Component {
 
     return (
       <div className="region-filter">
-        {REGIONS.map((r) => <div key={r} className={region === r ? 'active' : ''} onClick={() => setRegion(r)}>{r}</div>)}
+        {REGIONS.map((r) => <div key={r} className={region === r ? 'active' : ''} onClick={() => this.setRegion(r)}>{r}</div>)}
       </div>
     );
   }

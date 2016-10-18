@@ -2,6 +2,7 @@ import { Component } from 'react';
 import classNames    from 'classnames';
 import { connect }   from 'react-redux';
 
+import { ReactGA }                          from '../utils/analytics';
 import { createCaptures, deleteCaptures }   from '../actions/capture';
 import { htmlName, iconClass, regionCheck } from '../utils/pokemon';
 import { padding }                          from '../utils/formatting';
@@ -14,6 +15,8 @@ export class Pokemon extends Component {
     const { capture, region, setCurrentPokemon, setShowInfo } = this.props;
 
     if (regionCheck(capture.pokemon, region)) {
+      ReactGA.event({ action: 'show info', category: 'Pokemon', label: capture.pokemon.name });
+
       setCurrentPokemon(capture.pokemon.national_id);
       setShowInfo(true);
     }
@@ -28,11 +31,23 @@ export class Pokemon extends Component {
 
     const payload = { pokemon: [capture.pokemon.national_id] };
 
-    if (capture.captured) {
-      deleteCaptures({ payload, username: user.username });
-    } else {
-      createCaptures({ payload, username: user.username });
-    }
+    Promise.resolve()
+    .then(() => {
+      if (capture.captured) {
+        deleteCaptures({ payload, username: user.username });
+      } else {
+        createCaptures({ payload, username: user.username });
+      }
+    })
+    .then(() => {
+      const event = { category: 'Pokemon', label: capture.pokemon.name };
+
+      if (capture.captured) {
+        ReactGA.event({ ...event, action: 'unmark' });
+      } else {
+        ReactGA.event({ ...event, action: 'mark' });
+      }
+    });
   }
 
   render () {

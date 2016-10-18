@@ -6,6 +6,7 @@ import { push }      from 'react-router-redux';
 
 import { AlertComponent }         from './alert';
 import { NavComponent }           from './nav';
+import { ReactGA }                from '../utils/analytics';
 import { ReloadComponent }        from './reload';
 import { checkVersion, setError } from '../actions/utils';
 import { createUser }             from '../actions/user';
@@ -35,7 +36,8 @@ export class Register extends Component {
     const password_confirm = this._password_confirm.value;
     const friend_code = this._friend_code.value;
 
-    this.props.onSubmit({ username, password, password_confirm, friend_code });
+    this.props.onSubmit({ username, password, password_confirm, friend_code })
+    .then(() => ReactGA.event({ action: 'register', category: 'Session' }));
   }
 
   render () {

@@ -1,4 +1,4 @@
 export const Production = {
   API_HOST: 'https://api.pokedextracker.com',
-  ENABLE_PRODUCTION: true
+  GA_ID: 'UA-45307701-4'
 };

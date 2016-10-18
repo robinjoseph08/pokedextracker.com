@@ -3,6 +3,7 @@ import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
 import { ProgressComponent } from './progress';
+import { ReactGA }           from '../utils/analytics';
 import { RegionComponent }   from './region';
 import { ShareComponent }    from './share';
 import { setShowShare }      from '../actions/tracker';
@@ -21,9 +22,14 @@ export class Header extends Component {
     this.props.setShowShare(false);
   }
 
-  toggleShare = (e) => {
+  toggleShare = (e, showShare) => {
     e.stopPropagation();
-    this.props.setShowShare(!this.props.showShare);
+
+    const { setShowShare } = this.props;
+
+    ReactGA.event({ action: showShare ? 'open' : 'close', category: 'Share' });
+
+    setShowShare(showShare);
   }
 
   render () {
@@ -34,14 +40,14 @@ export class Header extends Component {
       <header>
         <h1>{ownPage ? null : 'Viewing '}{user.username}'s Living Dex</h1>
         <div className="share-container">
-          <a onClick={this.toggleShare}><i className="fa fa-link"></i></a>
-          <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} living dex progress on @PokedexTracker! https://pokedextracker.com/u/${user.username}`} target="_blank"><i className="fa fa-twitter"></i></a>
+          <a onClick={(e) => this.toggleShare(e, !showShare)}><i className="fa fa-link"></i></a>
+          <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} living dex progress on @PokedexTracker! https://pokedextracker.com/u/${user.username}`} target="_blank" onClick={() => ReactGA.event({ action: 'click tweet', category: 'Share' })}><i className="fa fa-twitter"></i></a>
           <ShareComponent show={showShare} username={user.username}></ShareComponent>
         </div>
 
         <h2>
           FC: <span className={user.friend_code ? '' : 'fc-missing'}>{user.friend_code || 'XXXX-XXXX-XXXX'}</span>
-          {ownPage ? <Link to="/account"><i className="fa fa-pencil"></i></Link> : null}
+          {ownPage ? <Link to="/account" onClick={() => ReactGA.event({ action: 'click edit friend code', category: 'User' })}><i className="fa fa-pencil"></i></Link> : null}
         </h2>
 
         <RegionComponent></RegionComponent>

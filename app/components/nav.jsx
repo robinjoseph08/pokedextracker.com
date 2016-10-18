@@ -2,12 +2,15 @@ import { Component } from 'react';
 import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
+import { ReactGA }  from '../utils/analytics';
 import { setToken } from '../actions/session';
 
 export class Nav extends Component {
 
   signOut = () => {
     const { clearToken } = this.props;
+
+    ReactGA.event({ action: 'sign out', category: 'Session' });
 
     clearToken();
   }
