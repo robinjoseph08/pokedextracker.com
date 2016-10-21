@@ -8,12 +8,13 @@ import { NotFoundComponent } from './not-found';
 import { RegisterComponent } from './register';
 import { Store }             from '../stores';
 import { TrackerComponent }  from './tracker';
+import { logPageView }       from '../utils/analytics';
 
 const history = syncHistoryWithStore(browserHistory, Store);
 
 export function AppComponent () {
   return (
-    <Router history={history}>
+    <Router history={history} onUpdate={logPageView}>
       <Route path='/' component={HomeComponent}></Route>
       <Route path='/login' component={LoginComponent}></Route>
       <Route path='/register' component={RegisterComponent}></Route>

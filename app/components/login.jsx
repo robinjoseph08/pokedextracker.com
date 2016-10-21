@@ -6,6 +6,7 @@ import { push }      from 'react-router-redux';
 
 import { AlertComponent }         from './alert';
 import { NavComponent }           from './nav';
+import { ReactGA }                from '../utils/analytics';
 import { ReloadComponent }        from './reload';
 import { checkVersion, setError } from '../actions/utils';
 import { login }                  from '../actions/session';
@@ -32,7 +33,8 @@ export class Login extends Component {
     const username = this._username.value;
     const password = this._password.value;
 
-    this.props.onSubmit({ username, password });
+    this.props.onSubmit({ username, password })
+    .then(() => ReactGA.event({ action: 'login', category: 'Session' }));
   }
 
   render () {

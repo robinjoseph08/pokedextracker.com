@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import { connect }   from 'react-redux';
 
+import { ReactGA }                        from '../utils/analytics';
 import { createCaptures, deleteCaptures } from '../actions/capture';
+import { padding }                        from '../utils/formatting';
 import { regionCheck }                    from '../utils/pokemon';
 
 export class MarkAllButton extends Component {
@@ -28,6 +30,14 @@ export class MarkAllButton extends Component {
       return createCaptures({ payload, username: user.username });
     })
     .then(() => {
+      const event = { category: 'Box', label: `${padding(captures[0].pokemon.national_id, 3)} - ${padding(captures[captures.length - 1].pokemon.national_id, 3)}` };
+
+      if (deleting) {
+        ReactGA.event({ ...event, action: 'unmark all' });
+      } else {
+        ReactGA.event({ ...event, action: 'mark all' });
+      }
+
       this.setState({ loading: false });
     });
   }

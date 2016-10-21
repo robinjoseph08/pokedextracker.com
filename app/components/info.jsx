@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect }   from 'react-redux';
 
 import { EvolutionFamilyComponent } from './evolution-family';
+import { ReactGA }                  from '../utils/analytics';
 import { htmlName, iconClass }      from '../utils/pokemon';
 import { padding }                  from '../utils/formatting';
 import { retrievePokemon }          from '../actions/pokemon';
@@ -25,13 +26,21 @@ export class Info extends Component {
     }
   }
 
+  setShowInfo = (showInfo) => {
+    const { setShowInfo } = this.props;
+
+    ReactGA.event({ action: showInfo ? 'uncollapse' : 'collapse', category: 'Info' });
+
+    setShowInfo(showInfo);
+  }
+
   render () {
-    const { pokemon, setShowInfo, showInfo } = this.props;
+    const { pokemon, showInfo } = this.props;
 
     if (!pokemon) {
       return (
         <div className={`info ${showInfo ? '' : 'collapsed'}`}>
-          <div className="info-collapse" onClick={() => setShowInfo(!showInfo)}>
+          <div className="info-collapse" onClick={() => this.setShowInfo(!showInfo)}>
             <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`}></i>
           </div>
 
@@ -42,7 +51,7 @@ export class Info extends Component {
 
     return (
       <div className={`info ${showInfo ? '' : 'collapsed'}`}>
-        <div className="info-collapse" onClick={() => setShowInfo(!showInfo)}>
+        <div className="info-collapse" onClick={() => this.setShowInfo(!showInfo)}>
           <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`}></i>
         </div>
 
@@ -75,8 +84,8 @@ export class Info extends Component {
           <EvolutionFamilyComponent family={pokemon.evolution_family}></EvolutionFamilyComponent>
 
           <div className="info-footer">
-            <a href={pokemon.bulbapedia_url} target="_blank">Bulbapedia <i className="fa fa-long-arrow-right"></i></a>
-            <a href={pokemon.serebii_url} target="_blank">Serebii <i className="fa fa-long-arrow-right"></i></a>
+            <a href={pokemon.bulbapedia_url} target="_blank" onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}>Bulbapedia <i className="fa fa-long-arrow-right"></i></a>
+            <a href={pokemon.serebii_url} target="_blank" onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}>Serebii <i className="fa fa-long-arrow-right"></i></a>
           </div>
         </div>
       </div>

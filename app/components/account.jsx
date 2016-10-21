@@ -5,6 +5,7 @@ import { push }      from 'react-router-redux';
 
 import { AlertComponent }  from './alert';
 import { NavComponent }    from './nav';
+import { ReactGA }         from '../utils/analytics';
 import { ReloadComponent } from './reload';
 import { checkVersion }    from '../actions/utils';
 import { friendCode }      from '../utils/formatting';
@@ -51,7 +52,11 @@ export class Account extends Component {
     this.setState({ ...this.state, error: null, loading: true, success: null });
 
     updateUser(payload)
-    .then(() => this.setState({ ...this.state, loading: false, success: 'Account settings saved!' }))
+    .then(() => {
+      ReactGA.event({ action: 'update', category: 'User' });
+
+      this.setState({ ...this.state, loading: false, success: 'Account settings saved!' });
+    })
     .catch((err) => this.setState({ ...this.state, error: err.message, loading: false }));
   }
 
