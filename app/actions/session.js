@@ -18,11 +18,6 @@
   showShare: false,
   showScroll: true,
   token: 'token',
-  loading: {
-    info: false,
-    login: false
-  },
-  error: null,
   currentPokemon: 1,
   reload: false
 }
@@ -30,26 +25,17 @@
 
 import { push } from 'react-router-redux';
 
-import { Config }               from '../../config';
-import { API }                  from '../utils/api';
-import { setError, setLoading } from './utils';
+import { Config } from '../../config';
+import { API }    from '../utils/api';
 
 export const SET_TOKEN = 'SET_TOKEN';
 
 export function login ({ username, password }) {
   return (dispatch) => {
-    dispatch(setError(null));
-    dispatch(setLoading('login', true));
-
     return API.post(`${Config.API_HOST}/sessions`, { username, password })
     .then(({ token }) => {
       dispatch(setToken(token));
-      dispatch(setLoading('login', false));
       dispatch(push(`/u/${username}`));
-    })
-    .catch((err) => {
-      dispatch(setError(err.message));
-      dispatch(setLoading('login', false));
     });
   };
 }

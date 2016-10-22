@@ -4,15 +4,20 @@ import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }         from './alert';
-import { NavComponent }           from './nav';
-import { ReactGA }                from '../utils/analytics';
-import { ReloadComponent }        from './reload';
-import { checkVersion, setError } from '../actions/utils';
-import { createUser }             from '../actions/user';
-import { friendCode }             from '../utils/formatting';
+import { AlertComponent }  from './alert';
+import { NavComponent }    from './nav';
+import { ReactGA }         from '../utils/analytics';
+import { ReloadComponent } from './reload';
+import { checkVersion }    from '../actions/utils';
+import { createUser }      from '../actions/user';
+import { friendCode }      from '../utils/formatting';
 
 export class Register extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { error: null };
+  }
 
   componentWillMount () {
     const { checkVersion, redirectToTracker, session } = this.props;
@@ -24,24 +29,24 @@ export class Register extends Component {
     checkVersion();
   }
 
-  componentDidMount () {
-    this.props.clearError();
-  }
-
-  onSubmit = (e) => {
+  register = (e) => {
     e.preventDefault();
 
+    const { register } = this.props;
     const username = this._username.value;
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
     const friend_code = this._friend_code.value;
 
-    this.props.onSubmit({ username, password, password_confirm, friend_code })
-    .then(() => ReactGA.event({ action: 'register', category: 'Session' }));
+    this.setState({ ...this.state, error: null });
+
+    register({ username, password, password_confirm, friend_code })
+    .then(() => ReactGA.event({ action: 'register', category: 'Session' }))
+    .catch((err) => this.setState({ ...this.state, error: err.message }));
   }
 
   render () {
-    const { error } = this.props;
+    const { error } = this.state;
 
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
@@ -50,7 +55,7 @@ export class Register extends Component {
           <ReloadComponent></ReloadComponent>
           <div className="form">
             <h1>Register</h1>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.register}>
               <AlertComponent message={error} type="error"></AlertComponent>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
@@ -82,15 +87,14 @@ export class Register extends Component {
 
 }
 
-function mapStateToProps ({ error, session }) {
-  return { error, session };
+function mapStateToProps ({ session }) {
+  return { session };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
-    clearError: () => dispatch(setError(null)),
-    onSubmit: (payload) => dispatch(createUser(payload)),
+    register: (payload) => dispatch(createUser(payload)),
     redirectToTracker: (username) => dispatch(push(`/u/${username}`))
   };
 }

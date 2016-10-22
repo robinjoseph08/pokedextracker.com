@@ -1,8 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-export const SET_ERROR   = 'SET_ERROR';
-export const SET_LOADING = 'SET_LOADING';
-export const SET_RELOAD  = 'SET_RELOAD';
+export const SET_RELOAD = 'SET_RELOAD';
 
 let VERSION;
 
@@ -19,14 +17,6 @@ export function checkVersion () {
     })
     .catch(() => {});
   };
-}
-
-export function setError (error) {
-  return { type: SET_ERROR, error };
-}
-
-export function setLoading (property, loading) {
-  return { type: SET_LOADING, loading, property };
 }
 
 export function setReload (reload) {

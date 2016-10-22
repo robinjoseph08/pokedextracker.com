@@ -4,14 +4,19 @@ import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }         from './alert';
-import { NavComponent }           from './nav';
-import { ReactGA }                from '../utils/analytics';
-import { ReloadComponent }        from './reload';
-import { checkVersion, setError } from '../actions/utils';
-import { login }                  from '../actions/session';
+import { AlertComponent }  from './alert';
+import { NavComponent }    from './nav';
+import { ReactGA }         from '../utils/analytics';
+import { ReloadComponent } from './reload';
+import { checkVersion }    from '../actions/utils';
+import { login }           from '../actions/session';
 
 export class Login extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = { error: null };
+  }
 
   componentWillMount () {
     const { checkVersion, redirectToTracker, session } = this.props;
@@ -23,22 +28,22 @@ export class Login extends Component {
     checkVersion();
   }
 
-  componentDidMount () {
-    this.props.clearError();
-  }
-
-  onSubmit = (e) => {
+  login = (e) => {
     e.preventDefault();
 
+    const { login } = this.props;
     const username = this._username.value;
     const password = this._password.value;
 
-    this.props.onSubmit({ username, password })
-    .then(() => ReactGA.event({ action: 'login', category: 'Session' }));
+    this.setState({ ...this.state, error: null });
+
+    login({ username, password })
+    .then(() => ReactGA.event({ action: 'login', category: 'Session' }))
+    .catch((err) => this.setState({ ...this.state, error: err.message }));
   }
 
   render () {
-    const { error } = this.props;
+    const { error } = this.state;
 
     return (
       <DocumentTitle title="Login | Pokédex Tracker">
@@ -47,7 +52,7 @@ export class Login extends Component {
           <ReloadComponent></ReloadComponent>
           <div className="form">
             <h1>Login</h1>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.login}>
               <AlertComponent message={error} type="error"></AlertComponent>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
@@ -70,15 +75,14 @@ export class Login extends Component {
 
 }
 
-function mapStateToProps ({ error, session }) {
-  return { error, session };
+function mapStateToProps ({ session }) {
+  return { session };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
-    clearError: () => dispatch(setError(null)),
-    onSubmit: (payload) => dispatch(login(payload)),
+    login: (payload) => dispatch(login(payload)),
     redirectToTracker: (username) => dispatch(push(`/u/${username}`))
   };
 }
