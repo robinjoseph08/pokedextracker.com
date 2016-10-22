@@ -56,17 +56,17 @@ export class Tracker extends Component {
     }
 
     if (!user) {
-      return <NotFoundComponent></NotFoundComponent>;
+      return <NotFoundComponent />;
     }
 
     return (
       <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
         <div className="tracker-container">
-          <NavComponent></NavComponent>
-          <ReloadComponent></ReloadComponent>
+          <NavComponent />
+          <ReloadComponent />
           <div className="tracker">
-            <DexComponent></DexComponent>
-            <InfoComponent></InfoComponent>
+            <DexComponent />
+            <InfoComponent />
           </div>
         </div>
       </DocumentTitle>

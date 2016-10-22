@@ -12,7 +12,7 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
     column1 = (
       <div className="evolution-pokemon-column">
         {family.pokemon[1].map((pokemon, i) => <a key={i} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id)}></i>
+          <i className={iconClass(pokemon.national_id)} />
         </a>)}
       </div>
     );
@@ -22,7 +22,7 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
     column2 = (
       <div className="evolution-pokemon-column">
         {family.pokemon[2].map((pokemon, i) => <a key={i} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id)}></i>
+          <i className={iconClass(pokemon.national_id)} />
         </a>)}
       </div>
     );
@@ -32,13 +32,13 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
     <div className="info-evolutions">
       <div className="evolution-pokemon-column">
         <a onClick={() => setCurrentPokemon(family.pokemon[0][0].national_id)}>
-          <i className={iconClass(family.pokemon[0][0].national_id)}></i>
+          <i className={iconClass(family.pokemon[0][0].national_id)} />
         </a>
         {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
       </div>
-      {family.evolutions.length > 0 ? <EvolutionsComponent evolutions={family.evolutions[0]}></EvolutionsComponent> : null}
+      {family.evolutions.length > 0 ? <EvolutionsComponent evolutions={family.evolutions[0]} /> : null}
       {column1}
-      {family.evolutions.length > 1 ? <EvolutionsComponent evolutions={family.evolutions[1]}></EvolutionsComponent> : null}
+      {family.evolutions.length > 1 ? <EvolutionsComponent evolutions={family.evolutions[1]} /> : null}
       {column2}
     </div>
   );

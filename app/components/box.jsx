@@ -11,11 +11,11 @@ export function BoxComponent ({ captures }) {
     <div className="box">
       <div className="box-header">
         <h1>{padding(captures[0].pokemon.national_id, 3)} - {padding(captures[captures.length - 1].pokemon.national_id, 3)}</h1>
-        <MarkAllButtonComponent captures={captures}></MarkAllButtonComponent>
+        <MarkAllButtonComponent captures={captures} />
       </div>
       <div className="box-container">
-        {captures.map((capture, i) => <PokemonComponent key={i} capture={capture}></PokemonComponent>)}
-        {empties.map((capture, i) => <PokemonComponent key={i} capture={capture}></PokemonComponent>)}
+        {captures.map((capture, i) => <PokemonComponent key={i} capture={capture} />)}
+        {empties.map((capture, i) => <PokemonComponent key={i} capture={capture} />)}
       </div>
     </div>
   );

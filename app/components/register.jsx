@@ -51,32 +51,32 @@ export class Register extends Component {
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
         <div className="register-container">
-          <NavComponent></NavComponent>
-          <ReloadComponent></ReloadComponent>
+          <NavComponent />
+          <ReloadComponent />
           <div className="form">
             <h1>Register</h1>
             <form onSubmit={this.register}>
-              <AlertComponent message={error} type="error"></AlertComponent>
+              <AlertComponent message={error} type="error" />
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <i className="fa fa-asterisk"></i>
+                <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
-                <i className="fa fa-asterisk"></i>
+                <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="password_confirm">Confirm Password</label>
                 <input ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
-                <i className="fa fa-asterisk"></i>
+                <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="friend_code">Friend Code</label>
                 <input ref={(c) => this._friend_code = c} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
               </div>
-              <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right"></i></button>
+              <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
               <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
             </form>
           </div>

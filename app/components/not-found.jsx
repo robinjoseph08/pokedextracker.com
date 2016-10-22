@@ -6,7 +6,7 @@ export function NotFoundComponent () {
   return (
     <DocumentTitle title="404 Not Found | Pokédex Tracker">
       <div>
-        <NavComponent></NavComponent>
+        <NavComponent />
         <div className="not-found">
           <img src="/missingno.svg" />
           <div className="not-found-caption">

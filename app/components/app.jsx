@@ -15,12 +15,12 @@ const history = syncHistoryWithStore(browserHistory, Store);
 export function AppComponent () {
   return (
     <Router history={history} onUpdate={logPageView}>
-      <Route path='/' component={HomeComponent}></Route>
-      <Route path='/login' component={LoginComponent}></Route>
-      <Route path='/register' component={RegisterComponent}></Route>
-      <Route path='/account' component={AccountComponent}></Route>
-      <Route path='/u/:username' component={TrackerComponent}></Route>
-      <Route path='*' component={NotFoundComponent}></Route>
+      <Route path='/' component={HomeComponent} />
+      <Route path='/login' component={LoginComponent} />
+      <Route path='/register' component={RegisterComponent} />
+      <Route path='/account' component={AccountComponent} />
+      <Route path='/u/:username' component={TrackerComponent} />
+      <Route path='*' component={NotFoundComponent} />
     </Router>
   );
 }

@@ -7,7 +7,7 @@ export function Reload ({ reload }) {
 
   return (
     <div className="reload">
-      <i className="fa fa-exclamation-circle"></i>
+      <i className="fa fa-exclamation-circle" />
       There's a new version of the app available &ndash; <a className="link" onClick={() => window.location.reload()}>Refresh your browser</a> now!
     </div>
   );
