@@ -1,9 +1,16 @@
+import { Raven } from '../utils/analytics';
+
 export function tokenToUser (token) {
   if (!token) {
+    Raven.setUserContext();
     return null;
   }
 
-  return JSON.parse(atob(token.split('.')[1]));
+  const user = JSON.parse(atob(token.split('.')[1]));
+
+  Raven.setUserContext({ id: user.id, username: user.username });
+
+  return user;
 }
 
 export function loadState () {
