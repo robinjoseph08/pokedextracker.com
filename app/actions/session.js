@@ -1,28 +1,3 @@
-/*
-{
-  users: {
-    robinjoseph08: {
-      id: 1,
-      username: 'robinjoseph08',
-      captures: [{}]
-    }
-  },
-  pokemon: {
-    1: {
-      national_id: 1,
-      name: 'Bulbasaur'
-    }
-  },
-  region: 'national',
-  showInfo: true,
-  showShare: false,
-  showScroll: true,
-  token: 'token',
-  currentPokemon: 1,
-  reload: false
-}
-*/
-
 import { push } from 'react-router-redux';
 
 import { Config } from '../../config';
