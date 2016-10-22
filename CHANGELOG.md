@@ -1,3 +1,30 @@
+### 1.10.0 (2016-10-22)
+
+##### Bug Fixes
+
+* **captures:** bulk edit the state for (un)markall button ([57004690](https://github.com/robinjoseph08/rmj.io/commit/57004690c7efd3634c76c9fd3797ffcb69720e10))
+* **redirect:** redirect from home, login, register if logged in ([9ce016e7](https://github.com/robinjoseph08/rmj.io/commit/9ce016e760adcb9b2fe5e9fecb3594b9c3b0f587))
+* **region:** fix non-mobile region select ([6111c485](https://github.com/robinjoseph08/rmj.io/commit/6111c485f40a09819c0b6b6564bdf39bd417673c))
+* **twitter:** fix refactored twitter link ([74987406](https://github.com/robinjoseph08/rmj.io/commit/74987406a868d86d8af28df1ca98e9653e3f30ea))
+* **info:** remove no-touch styles for info btn ([b9cc0a7c](https://github.com/robinjoseph08/rmj.io/commit/b9cc0a7c933dca6a80428246072ef69105646150))
+
+##### Refactors
+
+* **react:**
+  * add analytics ([1836652c](https://github.com/robinjoseph08/rmj.io/commit/1836652ced1337046bef179627815d5207a4ea8b))
+  * add account page ([2e386c6a](https://github.com/robinjoseph08/rmj.io/commit/2e386c6aba042139d51088660a22e729fd09523e))
+  * add mobile region picker ([082adf3d](https://github.com/robinjoseph08/rmj.io/commit/082adf3d822f1e5fcf76a7dc2b381e5a9f6ec0f1))
+  * modify document title for each route ([7a9a05d8](https://github.com/robinjoseph08/rmj.io/commit/7a9a05d81eb937e5cd1f189b5aec869ff8d92e51))
+  * add mark all button ([d3275140](https://github.com/robinjoseph08/rmj.io/commit/d327514053e832584f9dd542a89ff2b5a66a59af))
+  * add functionality to reload component ([5581641b](https://github.com/robinjoseph08/rmj.io/commit/5581641b5df63dbe73bc93a366aaeca4a04cf53c))
+  * move over reload styles ([37f118e8](https://github.com/robinjoseph08/rmj.io/commit/37f118e87b25a7b43a6f896030148e5757d4244f))
+  * add individual captured toggling capabilities ([005aea0d](https://github.com/robinjoseph08/rmj.io/commit/005aea0d3fe956ac823fa39ddda2a93da4164302))
+  * use ref callback instead of ref string ([d7374d68](https://github.com/robinjoseph08/rmj.io/commit/d7374d68b9e1ec0712c06e296b106dcbc95de971))
+  * add scroll to top button ([12b93052](https://github.com/robinjoseph08/rmj.io/commit/12b930522bb0d44e2f6b031d144b921cf870d567))
+  * rename infoOpen and shareOpen to showInfo and showShare ([166fdec8](https://github.com/robinjoseph08/rmj.io/commit/166fdec81b828f05de9ee476ba451d9653fc258c))
+  * convert register page ([fe793a65](https://github.com/robinjoseph08/rmj.io/commit/fe793a65fe8d3eefe815930eca730c524a4fac3e))
+  * switch to react ([347c2425](https://github.com/robinjoseph08/rmj.io/commit/347c24250400e6b0c07a931d6f2da14d2387d10a))
+
 ### 1.9.0 (2016-10-10)
 
 ##### New Features
