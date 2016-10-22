@@ -1,3 +1,0 @@
-<div *ngIf="!loading && user" class="tracker">
-  <dex #dex (scroll)="scroll(dex)" *ngIf="!loading" (activeChange)="active = $event" (collapsedChange)="collapsed = $event" (scrollUp)="scrollUp(dex)" [captures]="captures" [showScroll]="showScroll" [user]="user"></dex>
-</div>
