@@ -1,3 +1,20 @@
+### 1.11.0 (2016-10-23)
+
+##### Chores
+
+* **package:** fix typos in the package.json ([fbb86bb0](https://github.com/robinjoseph08/pokedextracker.com/commit/fbb86bb0090340f07136da66f4ab430490ba26ce))
+* **cleanup:** remove unnecessary comments ([386a0e9b](https://github.com/robinjoseph08/pokedextracker.com/commit/386a0e9b3dcee98d4ec891d1744bc3d0c1609cdd))
+* **files:** remove unused views and services directories ([b57fb72e](https://github.com/robinjoseph08/pokedextracker.com/commit/b57fb72e340362d38f833cc33d1a62c98d63eae1))
+
+##### New Features
+
+* **errors:** add sentry for error logging ([9fa732fc](https://github.com/robinjoseph08/pokedextracker.com/commit/9fa732fcc5f3921d2c504518b67788cda8f03394))
+
+##### Refactors
+
+* **jsx:** use self-closing tags ([8d0ba2e9](https://github.com/robinjoseph08/pokedextracker.com/commit/8d0ba2e91313f433969827dd51ac04e73b47fab7))
+* **state:** move error and loading to local state ([a546a25e](https://github.com/robinjoseph08/pokedextracker.com/commit/a546a25e1eccccf162b3daab281c3549a4cd7585))
+
 ### 1.10.0 (2016-10-22)
 
 ##### Bug Fixes
