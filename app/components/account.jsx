@@ -75,11 +75,11 @@ export class Account extends Component {
         <div>
           <div className="form-group">
             <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
-            <i className="fa fa-asterisk"></i>
+            <i className="fa fa-asterisk" />
           </div>
           <div className="form-group">
             <input ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
-            <i className="fa fa-asterisk"></i>
+            <i className="fa fa-asterisk" />
           </div>
         </div>
       );
@@ -88,13 +88,13 @@ export class Account extends Component {
     return (
       <DocumentTitle title="Account | Pokédex Tracker">
         <div className="account-container">
-          <NavComponent></NavComponent>
-          <ReloadComponent></ReloadComponent>
+          <NavComponent />
+          <ReloadComponent />
           <div className="form">
             <h1>{session.username}'s Account</h1>
             <form onSubmit={this.onSubmit}>
-              <AlertComponent message={error} type="error"></AlertComponent>
-              <AlertComponent message={success} type="success"></AlertComponent>
+              <AlertComponent message={error} type="error" />
+              <AlertComponent message={success} type="success" />
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <button className="btn btn-inline btn-yellow" type="button" onClick={() => this.setState({ ...this.state, password: !password })}>
@@ -111,11 +111,11 @@ export class Account extends Component {
                 <select>
                   <option>English</option>
                 </select>
-                <i className="fa fa-chevron-down"></i>
+                <i className="fa fa-chevron-down" />
               </div>
               <button className="btn btn-blue" type="submit">
-                <span className={loading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right"></i></span>
-                {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin"></i></span> : null}
+                <span className={loading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right" /></span>
+                {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
               </button>
             </form>
           </div>

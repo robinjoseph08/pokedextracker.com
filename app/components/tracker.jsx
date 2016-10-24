@@ -14,6 +14,11 @@ import { setShowScroll }                from '../actions/tracker';
 
 export class Tracker extends Component {
 
+  constructor (props) {
+    super(props);
+    this.state = { loading: false };
+  }
+
   componentDidMount () {
     this.reset();
   }
@@ -25,17 +30,22 @@ export class Tracker extends Component {
   }
 
   reset () {
-    const { checkVersion, params: { username }, retrieveUser, setCurrentPokemon, setCurrentUser } = this.props;
+    const { checkVersion, params: { username }, retrieveUser, setCurrentPokemon, setCurrentUser, setShowScroll } = this.props;
+
+    this.setState({ ...this.state, loading: true });
 
     checkVersion();
     setShowScroll(false);
     setCurrentPokemon(1);
     setCurrentUser(username);
-    retrieveUser(username);
+    retrieveUser(username)
+    .then(() => this.setState({ ...this.state, loading: false }))
+    .catch(() => this.setState({ ...this.state, loading: false }));
   }
 
   render () {
-    const { loading, params: { username }, user } = this.props;
+    const { params: { username }, user } = this.props;
+    const { loading } = this.state;
 
     if (loading) {
       return (
@@ -46,17 +56,17 @@ export class Tracker extends Component {
     }
 
     if (!user) {
-      return <NotFoundComponent></NotFoundComponent>;
+      return <NotFoundComponent />;
     }
 
     return (
       <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
         <div className="tracker-container">
-          <NavComponent></NavComponent>
-          <ReloadComponent></ReloadComponent>
+          <NavComponent />
+          <ReloadComponent />
           <div className="tracker">
-            <DexComponent></DexComponent>
-            <InfoComponent></InfoComponent>
+            <DexComponent />
+            <InfoComponent />
           </div>
         </div>
       </DocumentTitle>
@@ -65,8 +75,8 @@ export class Tracker extends Component {
 
 }
 
-function mapStateToProps ({ loading, users }, { params: { username } }) {
-  return { loading: loading.tracker, user: users[username] };
+function mapStateToProps ({ users }, { params: { username } }) {
+  return { user: users[username] };
 }
 
 function mapDispatchToProps (dispatch) {

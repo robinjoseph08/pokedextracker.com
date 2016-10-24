@@ -22,7 +22,7 @@ export function EvolutionsComponent ({ evolutions }) {
       } else {
         notes = (
           <div className="tooltip">
-            <i className="fa fa-plus-circle"></i>
+            <i className="fa fa-plus-circle" />
             <span className="tooltip-text">{evolution.notes}</span>
           </div>
         );
@@ -31,7 +31,7 @@ export function EvolutionsComponent ({ evolutions }) {
 
     return (
       <div key={i} className="evolution-trigger">
-        <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`}></i>
+        <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`} />
         <div>
           {trigger}
           {evolution.held_item ? <span>holding {capitalize(evolution.held_item)}</span> : null}

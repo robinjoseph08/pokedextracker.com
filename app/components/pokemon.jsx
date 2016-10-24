@@ -56,8 +56,8 @@ export class Pokemon extends Component {
     if (!capture) {
       return (
         <div className="pokemon empty">
-          <div className="set-captured"></div>
-          <div className="set-captured-mobile"></div>
+          <div className="set-captured" />
+          <div className="set-captured-mobile" />
         </div>
       );
     }
@@ -72,17 +72,17 @@ export class Pokemon extends Component {
     return (
       <div className={classNames(classes)}>
         <div className="set-captured" onClick={this.toggleCaptured}>
-          <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)}></h4>
-          <i className={iconClass(capture.pokemon.national_id)}></i>
+          <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
+          <i className={iconClass(capture.pokemon.national_id)} />
           <p>#{padding(capture.pokemon.national_id, 3)}</p>
         </div>
         <div className="set-captured-mobile" onClick={this.toggleCaptured}>
-          <i className={iconClass(capture.pokemon.national_id)}></i>
-          <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)}></h4>
+          <i className={iconClass(capture.pokemon.national_id)} />
+          <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
           <p>#{padding(capture.pokemon.national_id, 3)}</p>
         </div>
         <div className="set-info" onClick={this.setCurrentPokemon}>
-          <i className="fa fa-info"></i>
+          <i className="fa fa-info" />
         </div>
       </div>
     );

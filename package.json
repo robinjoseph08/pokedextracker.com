@@ -57,12 +57,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robinjoseph08/rmj.io.git"
+    "url": "git+https://github.com/robinjoseph08/pokedextracker.com.git"
   },
   "author": "Robin Joseph <robin.joseph@me.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/robinjoseph08/rmj.io/issues"
+    "url": "https://github.com/robinjoseph08/pokedextracker.com/issues"
   },
-  "homepage": "https://github.com/robinjoseph08/rmj.io#readme"
+  "homepage": "https://github.com/robinjoseph08/pokedextracker.com#readme"
 }

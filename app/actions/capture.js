@@ -1,6 +1,6 @@
-import { Config }                   from '../../config';
-import { API }                      from '../utils/api';
-import { checkVersion, setLoading } from './utils';
+import { Config }       from '../../config';
+import { API }          from '../utils/api';
+import { checkVersion } from './utils';
 
 export const MARK_CAPTURED = 'MARK_CAPTURED';
 export const SET_CAPTURES  = 'SET_CAPTURES';
@@ -26,14 +26,9 @@ export function deleteCaptures ({ payload, username }) {
 export function listCaptures ({ id, username }) {
   return (dispatch) => {
     dispatch(checkVersion());
-    dispatch(setLoading('tracker', true));
 
     return API.get(`${Config.API_HOST}/captures`, { user: id })
-    .then((captures) => {
-      dispatch(setCaptures(captures, username));
-      dispatch(setLoading('tracker', false));
-    })
-    .catch(() => dispatch(setLoading('tracker', false)));
+    .then((captures) => dispatch(setCaptures(captures, username)));
   };
 }
 

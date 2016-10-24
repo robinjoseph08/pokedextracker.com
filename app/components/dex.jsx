@@ -31,9 +31,9 @@ export class Dex extends Component {
 
     return (
       <div className="dex" ref={(c) => this._dex = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
-        <ScrollComponent onClick={() => this._dex.scrollTop = 0}></ScrollComponent>
-        <HeaderComponent></HeaderComponent>
-        {groups.map((group) => <BoxComponent key={group[0].pokemon.national_id} captures={group}></BoxComponent>)}
+        <ScrollComponent onClick={() => this._dex.scrollTop = 0} />
+        <HeaderComponent />
+        {groups.map((group) => <BoxComponent key={group[0].pokemon.national_id} captures={group} />)}
       </div>
     );
   }

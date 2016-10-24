@@ -56,7 +56,7 @@ export class MarkAllButton extends Component {
     return (
       <button className="btn btn-blue" onClick={this.toggleCaptured} disabled={loading}>
         <span className={loading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
-        {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin"></i></span> : null}
+        {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
       </button>
     );
   }

@@ -5,7 +5,7 @@ export const SHOW_SCROLL_THRESHOLD = 400;
 
 export function Scroll ({ onClick, showScroll }) {
   return (
-    <div className={`scroll-up ${showScroll ? 'visible' : ''}`} onClick={onClick}><i className="fa fa-long-arrow-up"></i></div>
+    <div className={`scroll-up ${showScroll ? 'visible' : ''}`} onClick={onClick}><i className="fa fa-long-arrow-up" /></div>
   );
 }
 

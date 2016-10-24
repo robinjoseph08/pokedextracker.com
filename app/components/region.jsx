@@ -58,7 +58,7 @@ export class Region extends Component {
         <div className="region-filter-mobile" onClick={(e) => e.stopPropagation()}>
           <div className="active" onClick={() => this.setDropdown(!this.state.dropdown)}>
             <span>{region}</span>
-            <i className="fa fa-sort-desc"></i>
+            <i className="fa fa-sort-desc" />
           </div>
           {dropdown}
         </div>
