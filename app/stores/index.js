@@ -4,7 +4,7 @@ import { routerMiddleware }             from 'react-router-redux';
 import thunkMiddleware                  from 'redux-thunk';
 
 import { loadState, saveState } from '../utils/local-storage';
-import { reducer }            from '../reducers';
+import { reducer }              from '../reducers';
 
 const initialState = loadState();
 const router = routerMiddleware(browserHistory);

@@ -25,7 +25,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.jsx', '.js']
   },
-  devtool: PRODUCTION ? undefined : 'inline-source-map',
+  devtool: PRODUCTION ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: 'public/',
     historyApiFallback: true
@@ -34,6 +34,7 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, loader: 'babel' },
       { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
+      { test: /\.json/, loader: 'json' },
       { test: /\.html/, loader: 'raw' }
     ]
   },

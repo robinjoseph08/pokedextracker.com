@@ -19,6 +19,7 @@ typings
 
 coverage
 bundle.js
+*.map
 version
 
 .idea/

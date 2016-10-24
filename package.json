@@ -22,8 +22,10 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "isomorphic-fetch": "^2.2.1",
+    "json-loader": "^0.5.4",
     "lodash": "^4.16.2",
     "qs": "^6.2.1",
+    "raven-js": "^3.7.0",
     "react": "^15.3.1",
     "react-document-title": "^2.0.2",
     "react-dom": "^15.3.1",
