@@ -12,9 +12,9 @@ export class Dex extends Component {
   onScroll = () => {
     const { setShowScroll, showScroll } = this.props;
 
-    if (!showScroll && this._dex.scrollTop >= SHOW_SCROLL_THRESHOLD) {
+    if (!showScroll && this._dex && this._dex.scrollTop >= SHOW_SCROLL_THRESHOLD) {
       setShowScroll(true);
-    } else if (showScroll && this._dex.scrollTop < SHOW_SCROLL_THRESHOLD) {
+    } else if (showScroll && this._dex && this._dex.scrollTop < SHOW_SCROLL_THRESHOLD) {
       setShowScroll(false);
     }
   }
@@ -31,7 +31,7 @@ export class Dex extends Component {
 
     return (
       <div className="dex" ref={(c) => this._dex = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
-        <ScrollComponent onClick={() => this._dex.scrollTop = 0} />
+        <ScrollComponent onClick={() => this._dex ? this._dex.scrollTop = 0 : null} />
         <HeaderComponent />
         {groups.map((group) => <BoxComponent key={group[0].pokemon.national_id} captures={group} />)}
       </div>
