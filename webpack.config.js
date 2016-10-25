@@ -17,7 +17,7 @@ if (PRODUCTION) {
 
 module.exports = {
   context: Path.join(__dirname, 'app'),
-  entry: './index.jsx',
+  entry: ['babel-polyfill', './index.jsx'],
   output: {
     path: `${__dirname}/public`,
     filename: 'bundle.js'
