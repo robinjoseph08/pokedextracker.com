@@ -1,3 +1,16 @@
+#### 1.11.1 (2016-10-25)
+
+##### Documentation Changes
+
+* **license:** add license file ([59b12a43](https://github.com/robinjoseph08/pokedextracker.com/commit/59b12a43097d514c1f5a64c517a44d27848ac360))
+* **changelog:** update links ([3dbc52d9](https://github.com/robinjoseph08/pokedextracker.com/commit/3dbc52d98882b206e2d747e2306b3e9e4aa70483))
+
+##### Bug Fixes
+
+* **load:** wait for DOMContentLoaded if necessary ([b5f49c65](https://github.com/robinjoseph08/pokedextracker.com/commit/b5f49c651464f85713bd2877d80e3f736c641ff0))
+* **scroll:** check if _dex exists ([595f4ae2](https://github.com/robinjoseph08/pokedextracker.com/commit/595f4ae28a5310ac6d07956bd90d03254560dccb))
+* **polyfill:** add babel-polyfill ([58ca2ea3](https://github.com/robinjoseph08/pokedextracker.com/commit/58ca2ea300ce9d1f145e18bc280b7168d43e2148))
+
 ### 1.11.0 (2016-10-23)
 
 ##### Chores
