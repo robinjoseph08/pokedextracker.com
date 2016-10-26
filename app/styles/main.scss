@@ -26,7 +26,8 @@ body {
   .home-container,
   .register-container,
   .login-container,
-  .account-container {
+  .account-container,
+  .profile-container {
     @include flex(1 1 auto);
     @include flexbox();
     @include flex-direction(column);

@@ -1,0 +1,57 @@
+.profile {
+  @include flexbox();
+  @include flex(1 1 auto);
+  @include overflow-y-scroll;
+
+  padding: 100px 0;
+}
+
+.dex-preview {
+  margin-top: 40px;
+}
+
+.dex-preview-header {
+  @include flexbox();
+  @include align-items(center);
+
+  h3 {
+    @include flex(1 0 auto);
+
+    margin: 0 0 8px;
+
+    a {
+      font-size: 20px;
+    }
+  }
+}
+
+.dex-create {
+  margin: 40px 0;
+  text-align: center;
+
+  .btn {
+    display: inline-block;
+    padding: 12px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 750px) {
+  .profile {
+    padding: 40px 15px;
+  }
+
+  .dex-preview {
+    margin-bottom: 60px;
+
+    .percentage {
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .dex-create .btn {
+    width: 100%;
+  }
+}
