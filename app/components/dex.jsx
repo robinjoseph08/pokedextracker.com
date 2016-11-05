@@ -39,8 +39,8 @@ export class Dex extends Component {
   }
 }
 
-function mapStateToProps ({ currentUser, showScroll, users }) {
-  return { captures: users[currentUser].captures, showScroll };
+function mapStateToProps ({ currentDex, currentUser, showScroll, users }) {
+  return { captures: users[currentUser].dexesBySlug[currentDex].captures, showScroll };
 }
 
 function mapDispatchToProps (dispatch) {

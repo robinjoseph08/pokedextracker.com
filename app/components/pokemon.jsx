@@ -23,20 +23,20 @@ export class Pokemon extends Component {
   }
 
   toggleCaptured = () => {
-    const { capture, createCaptures, deleteCaptures, region, session, user } = this.props;
+    const { capture, createCaptures, currentDex, deleteCaptures, dex, region, session, user } = this.props;
 
     if (!session || session.id !== user.id || !regionCheck(capture.pokemon, region)) {
       return;
     }
 
-    const payload = { pokemon: [capture.pokemon.national_id] };
+    const payload = { dex: dex.id, pokemon: [capture.pokemon.national_id] };
 
     Promise.resolve()
     .then(() => {
       if (capture.captured) {
-        deleteCaptures({ payload, username: user.username });
+        deleteCaptures({ payload, slug: currentDex, username: user.username });
       } else {
-        createCaptures({ payload, username: user.username });
+        createCaptures({ payload, slug: currentDex, username: user.username });
       }
     })
     .then(() => {
@@ -90,8 +90,8 @@ export class Pokemon extends Component {
 
 }
 
-function mapStateToProps ({ currentUser, region, session, users }) {
-  return { region, session, user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, region, session, users }) {
+  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], region, session, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {

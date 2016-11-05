@@ -3,7 +3,6 @@ import { push } from 'react-router-redux';
 import { Config }       from '../../config';
 import { API }          from '../utils/api';
 import { checkVersion } from './utils';
-import { listCaptures } from './capture';
 import { setToken }     from './session';
 
 export const SET_USER         = 'SET_USER';
@@ -33,7 +32,7 @@ export function retrieveUser (username) {
     return API.get(`${Config.API_HOST}/users/${username}`)
     .then((user) => {
       dispatch(setUser(user));
-      return dispatch(listCaptures(user));
+      return user;
     });
   };
 }
@@ -58,8 +57,8 @@ export function updateUser ({ username, payload }) {
   };
 }
 
-export function setCurrentUser (user) {
-  return { type: SET_CURRENT_USER, user };
+export function setCurrentUser (username) {
+  return { type: SET_CURRENT_USER, username };
 }
 
 export function setUser (user) {

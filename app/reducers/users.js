@@ -1,6 +1,7 @@
 import { MARK_CAPTURED, SET_CAPTURES } from '../actions/capture';
+import { SET_DEX }                     from '../actions/dex';
 import { SET_USER }                    from '../actions/user';
-import { captures }                    from '../reducers/captures';
+import { dexes }                       from '../reducers/dexes';
 
 export function users (state = {}, action) {
   switch (action.type) {
@@ -9,12 +10,13 @@ export function users (state = {}, action) {
         ...state,
         [action.user.username]: {
           ...action.user,
-          captures: []
+          dexesBySlug: {}
         }
       };
     case MARK_CAPTURED:
     case SET_CAPTURES:
-      return captures(state, action);
+    case SET_DEX:
+      return dexes(state, action);
     default:
       return state;
   }
