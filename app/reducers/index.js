@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer }   from 'react-router-redux';
 
+import { currentDex }     from './current-dex';
 import { currentPokemon } from './current-pokemon';
 import { currentUser }    from './current-user';
 import { pokemon }        from './pokemon';
@@ -14,6 +15,7 @@ import { token }          from './token';
 import { users }          from './users';
 
 export const reducer = combineReducers({
+  currentDex,
   currentPokemon,
   currentUser,
   pokemon,

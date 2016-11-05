@@ -19,8 +19,8 @@ export function Progress ({ captures, region }) {
   );
 }
 
-function mapStateToProps ({ currentUser, region, users }) {
-  return { captures: users[currentUser].captures, region };
+function mapStateToProps ({ currentDex, currentUser, region, users }) {
+  return { captures: users[currentUser].dexesBySlug[currentDex].captures, region };
 }
 
 export const ProgressComponent = connect(mapStateToProps)(Progress);

@@ -7,7 +7,12 @@ export function captures (state = {}, action) {
         ...state,
         [action.username]: {
           ...state[action.username],
-          captures: action.captures
+          dexesBySlug: {
+            [action.slug]: {
+              ...state[action.username].dexesBySlug[action.slug],
+              captures: action.captures
+            }
+          }
         }
       };
     case MARK_CAPTURED:
@@ -15,10 +20,15 @@ export function captures (state = {}, action) {
         ...state,
         [action.username]: {
           ...state[action.username],
-          captures: state[action.username].captures.slice()
+          dexesBySlug: {
+            [action.slug]: {
+              ...state[action.username].dexesBySlug[action.slug],
+              captures: state[action.username].dexesBySlug[action.slug].captures.slice()
+            }
+          }
         }
       };
-      action.pokemon.forEach((pokemon) => newState[action.username].captures[pokemon - 1].captured = action.captured);
+      action.pokemon.forEach((pokemon) => newState[action.username].dexesBySlug[action.slug].captures[pokemon - 1].captured = action.captured);
       return newState;
     default:
       return state;
