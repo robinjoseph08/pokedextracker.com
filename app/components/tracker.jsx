@@ -2,15 +2,17 @@ import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
-import { DexComponent }                 from './dex';
-import { InfoComponent }                from './info';
-import { NavComponent }                 from './nav';
-import { NotFoundComponent }            from './not-found';
-import { ReloadComponent }              from './reload';
-import { checkVersion }                 from '../actions/utils';
-import { retrieveUser, setCurrentUser } from '../actions/user';
-import { setCurrentPokemon }            from '../actions/pokemon';
-import { setShowScroll }                from '../actions/tracker';
+import { DexComponent }               from './dex';
+import { InfoComponent }              from './info';
+import { NavComponent }               from './nav';
+import { NotFoundComponent }          from './not-found';
+import { ReloadComponent }            from './reload';
+import { checkVersion }               from '../actions/utils';
+import { listCaptures }               from '../actions/capture';
+import { retrieveDex, setCurrentDex } from '../actions/dex';
+import { retrieveUser }               from '../actions/user';
+import { setCurrentPokemon }          from '../actions/pokemon';
+import { setShowScroll }              from '../actions/tracker';
 
 export class Tracker extends Component {
 
@@ -30,15 +32,19 @@ export class Tracker extends Component {
   }
 
   reset () {
-    const { checkVersion, params: { username }, retrieveUser, setCurrentPokemon, setCurrentUser, setShowScroll } = this.props;
+    const { checkVersion, listCaptures, params: { username }, retrieveDex, retrieveUser, setCurrentDex, setCurrentPokemon, setShowScroll } = this.props;
+    const slug = 'living-dex';
 
     this.setState({ ...this.state, loading: true });
 
     checkVersion();
     setShowScroll(false);
     setCurrentPokemon(1);
-    setCurrentUser(username);
+    setCurrentDex(slug, username);
+
     retrieveUser(username)
+    .then(() => retrieveDex(slug, username))
+    .then((dex) => listCaptures(dex, username))
     .then(() => this.setState({ ...this.state, loading: false }))
     .catch(() => this.setState({ ...this.state, loading: false }));
   }
@@ -82,9 +88,11 @@ function mapStateToProps ({ users }, { params: { username } }) {
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
+    listCaptures: (dex, username) => dispatch(listCaptures(dex, username)),
+    retrieveDex: (slug, username) => dispatch(retrieveDex(slug, username)),
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
-    setCurrentUser: (username) => dispatch(setCurrentUser(username)),
+    setCurrentDex: (slug, username) => dispatch(setCurrentDex(slug, username)),
     setShowScroll: (show) => dispatch(setShowScroll(show))
   };
 }
