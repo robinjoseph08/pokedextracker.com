@@ -349,6 +349,17 @@ reload div {
   }
 }
 
+.wrapper {
+  width: 6 * $pokemon-box-size + 2;
+  margin: 0 auto;
+}
+
+@media (max-width: 750px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
 @media (max-width: 700px) {
   .not-found h1 {
     font-size: 35px;

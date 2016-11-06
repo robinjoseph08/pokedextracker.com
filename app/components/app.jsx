@@ -20,8 +20,8 @@ export function AppComponent () {
       <Route path='/login' component={LoginComponent} />
       <Route path='/register' component={RegisterComponent} />
       <Route path='/account' component={AccountComponent} />
-      <Route path='/profile' component={ProfileComponent} />
-      <Route path='/u/:username' component={TrackerComponent} />
+      <Route path='/u/:username' component={ProfileComponent} />
+      <Route path='/u/:username/:slug' component={TrackerComponent} />
       <Route path='*' component={NotFoundComponent} />
     </Router>
   );

@@ -1,12 +1,9 @@
 import { Component } from 'react';
-import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
-import { ProgressComponent } from './progress';
-import { ReactGA }           from '../utils/analytics';
-import { RegionComponent }   from './region';
-import { ShareComponent }    from './share';
-import { setShowShare }      from '../actions/tracker';
+import { ReactGA }        from '../utils/analytics';
+import { ShareComponent } from './share';
+import { setShowShare }   from '../actions/tracker';
 
 export class Header extends Component {
 
@@ -33,37 +30,27 @@ export class Header extends Component {
   }
 
   render () {
-    const { session, showShare, user } = this.props;
+    const { dex, profile, session, showShare, user } = this.props;
     const ownPage = session && session.id === user.id;
 
     return (
-      <header>
-        <h1>{ownPage ? null : 'Viewing '}{user.username}'s Living Dex</h1>
+      <h1>
+        {profile ? `${user.username}'s Profile` : dex.title}
         <div className="share-container">
-          <a onClick={(e) => this.toggleShare(e, !showShare)}><i className="fa fa-link" /></a>
-          <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} living dex progress on @PokedexTracker! https://pokedextracker.com/u/${user.username}`} target="_blank" onClick={() => ReactGA.event({ action: 'click tweet', category: 'Share' })}><i className="fa fa-twitter" /></a>
-          <ShareComponent show={showShare} username={user.username} />
+          <a onClick={(e) => this.toggleShare(e, !showShare)}>
+            <i className="fa fa-link" />
+            <ShareComponent profile={profile} />
+          </a>
+          <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`} target="_blank" onClick={() => ReactGA.event({ action: 'click tweet', category: 'Share' })}><i className="fa fa-twitter" /></a>
         </div>
-
-        <h2>
-          FC: <span className={user.friend_code ? '' : 'fc-missing'}>{user.friend_code || 'XXXX-XXXX-XXXX'}</span>
-          {ownPage ? <Link to="/account" onClick={() => ReactGA.event({ action: 'click edit friend code', category: 'User' })}><i className="fa fa-pencil" /></Link> : null}
-        </h2>
-
-        <RegionComponent />
-
-        <div className="percentage">
-          <ProgressComponent />
-          <RegionComponent mobile={true} />
-        </div>
-      </header>
+      </h1>
     );
   }
 
 }
 
-function mapStateToProps ({ currentUser, session, showShare, users }) {
-  return { session, showShare, user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, session, showShare, users }) {
+  return { dex: users[currentUser].dexesBySlug[currentDex], session, showShare, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {

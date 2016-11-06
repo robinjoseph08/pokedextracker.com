@@ -1,10 +1,16 @@
 import { Component } from 'react';
+import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 import throttle      from 'lodash/throttle';
 
 import { BOX_SIZE, BoxComponent }                                  from './box';
-import { HeaderComponent }                                         from './header';
 import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD, ScrollComponent } from './scroll';
+import { FriendCodeComponent }                                     from './friend-code';
+import { HeaderComponent }                                         from './header';
+import { ProgressComponent }                                       from './progress';
+import { ReactGA }                                                 from '../utils/analytics';
+import { RegionComponent }                                         from './region';
+import { regionCheck }                                             from '../utils/pokemon';
 import { setShowScroll }                                           from '../actions/tracker';
 
 export class Dex extends Component {
@@ -20,8 +26,10 @@ export class Dex extends Component {
   }
 
   render () {
-    const { captures } = this.props;
+    const { captures, region, username } = this.props;
 
+    const caught = captures.filter(({ captured, pokemon }) => regionCheck(pokemon, region) && captured).length;
+    const total = captures.filter(({ pokemon }) => regionCheck(pokemon, region)).length;
     const groups = captures.reduce((all, capture, i) => {
       const group = Math.ceil((i + 1) / BOX_SIZE) - 1;
       all[group] = all[group] || [];
@@ -31,16 +39,27 @@ export class Dex extends Component {
 
     return (
       <div className="dex" ref={(c) => this._dex = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
-        <ScrollComponent onClick={() => this._dex ? this._dex.scrollTop = 0 : null} />
-        <HeaderComponent />
-        {groups.map((group) => <BoxComponent key={group[0].pokemon.national_id} captures={group} />)}
+        <div className="wrapper">
+          <ScrollComponent onClick={() => this._dex ? this._dex.scrollTop = 0 : null} />
+          <header>
+            <HeaderComponent />
+            <h3><Link to={`/u/${username}`} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}>/u/{username}</Link></h3>
+            <FriendCodeComponent />
+          </header>
+          <RegionComponent />
+          <div className="percentage">
+            <ProgressComponent caught={caught} total={total} />
+            <RegionComponent mobile={true} />
+          </div>
+          {groups.map((group) => <BoxComponent key={group[0].pokemon.national_id} captures={group} />)}
+        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps ({ currentDex, currentUser, showScroll, users }) {
-  return { captures: users[currentUser].dexesBySlug[currentDex].captures, showScroll };
+function mapStateToProps ({ currentDex, currentUser, region, showScroll, users }) {
+  return { captures: users[currentUser].dexesBySlug[currentDex].captures, region, showScroll, username: currentUser };
 }
 
 function mapDispatchToProps (dispatch) {
