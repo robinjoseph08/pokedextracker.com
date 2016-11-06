@@ -1,11 +1,6 @@
-import { connect } from 'react-redux';
+import { decimal } from '../utils/formatting';
 
-import { decimal }     from '../utils/formatting';
-import { regionCheck } from '../utils/pokemon';
-
-export function Progress ({ captures, region }) {
-  const caught = captures.filter(({ captured, pokemon }) => regionCheck(pokemon, region) && captured).length;
-  const total = captures.filter(({ pokemon }) => regionCheck(pokemon, region)).length;
+export function ProgressComponent ({ caught, total }) {
   const percent = 100 * caught / total;
 
   return (
@@ -18,9 +13,3 @@ export function Progress ({ captures, region }) {
     </div>
   );
 }
-
-function mapStateToProps ({ currentDex, currentUser, region, users }) {
-  return { captures: users[currentUser].dexesBySlug[currentDex].captures, region };
-}
-
-export const ProgressComponent = connect(mapStateToProps)(Progress);
