@@ -287,14 +287,23 @@
 }
 
 header {
-  margin: 0 auto;
-  width: 6 * $pokemon-box-size + 2;
-
   h1 {
     display: inline-block;
     margin: 0;
     color: $brand-secondary;
     font-size: 40px;
+  }
+
+  h3 {
+    margin: 0 0 8px;
+
+    a {
+      color: lighten(#000, 35%);
+
+      &:hover {
+        color: lighten(#000, 25%);
+      }
+    }
   }
 
   a {
@@ -303,9 +312,6 @@ header {
 
     .fa {
       position: relative;
-    }
-
-    .fa-link {
       padding: 5px 0 5px 5px;
       bottom: 4px;
     }
@@ -313,6 +319,7 @@ header {
     .fa-pencil {
       font-size: 14px;
       padding: 3px;
+      margin-left: 2px;
       bottom: 1px;
     }
 
@@ -326,13 +333,19 @@ header {
     position: relative;
     display: inline-block;
 
+    a {
+      position: relative;
+    }
+
     .share {
+      $share-width: 300px;
+
       position: absolute;
-      bottom: 156%;
+      bottom: 180%;
       left: 50%;
-      width: 250px;
+      width: $share-width;
       padding: 10px;
-      margin-left: -(250px / 2);
+      margin-left: -($share-width / 2);
       z-index: 1;
       border: 2px solid $gray-light;
       background-color: lighten($gray-light, 10%);
@@ -366,135 +379,89 @@ header {
       color: $gray-light;
     }
   }
+}
 
-  .region-filter {
-    @include flexbox();
+.region-filter {
+  @include flexbox();
 
-    margin: 30px 0 20px;
+  margin: 30px 0 20px;
 
-    div {
-      @include transition(all .1s ease-out);
-      @include flex-grow(1);
+  div {
+    @include transition(all .1s ease-out);
+    @include flex-grow(1);
 
-      padding: 10px;
-      text-align: center;
-      background-color: $gray-light;
-      font-family: $font-secondary;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    padding: 10px;
+    text-align: center;
+    background-color: $gray-light;
+    font-family: $font-secondary;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 
-      &.active {
-        background-color: $brand-secondary-light;
-        color: #fff;
-      }
-
-      &:hover {
-        cursor: pointer;
-
-        &:not(.active) {
-          background-color: darken($gray-light, 5%);
-        }
-      }
-    }
-  }
-
-  .region-filter-mobile {
-    display: none;
-    position: relative;
-    min-width: 100px;
-    margin-left: 10px;
-
-    .dropdown > div,
-    .active {
-      padding: 7px;
-      text-align: left;
-      font-family: $font-secondary;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .active {
-      @include flexbox();
-      @include justify-content(space-between);
-
+    &.active {
       background-color: $brand-secondary-light;
       color: #fff;
     }
 
-    .dropdown {
-      position: absolute;
-      width: 100px;
-      z-index: 1;
-
-      div {
-        border-bottom: 1px solid darken($gray-light, 5%);
-        background-color: $gray-light;
-
-        &:last-child {
-          border-bottom: none;
-        }
-      }
-    }
-
     &:hover {
       cursor: pointer;
+
+      &:not(.active) {
+        background-color: darken($gray-light, 5%);
+      }
     }
   }
 }
 
-.percentage {
-  @include flexbox();
-  @include justify-content(space-between);
-}
-
-.progress-container {
-  width: 100%;
-  height: 28px;
-
-  h3 {
-    display: none;
-    margin: 10px 0;
-    font-family: $font-secondary;
-    font-size: 11px;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-}
-
-.progress-outer {
+.region-filter-mobile {
+  display: none;
   position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  border: 2px solid $brand-primary;
+  min-width: 100px;
+  margin-left: 10px;
 
-  .progress-numbers {
-    position: absolute;
-    width: 100%;
-    padding: 5px;
-    text-align: center;
+  .dropdown > div,
+  .active {
+    padding: 7px;
+    text-align: left;
     font-family: $font-secondary;
     font-size: 11px;
-    font-weight: 400;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
 
-  .progress-inner {
-    height: 100%;
-    background-color: $brand-primary;
+  .active {
+    @include flexbox();
+    @include justify-content(space-between);
+
+    background-color: $brand-secondary-light;
+    color: #fff;
+  }
+
+  .dropdown {
+    position: absolute;
+    width: 100px;
+    z-index: 1;
+
+    div {
+      border-bottom: 1px solid darken($gray-light, 5%);
+      background-color: $gray-light;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 }
 
 .box {
   display: block;
-  margin: 60px auto 0;
-  width: 6 * $pokemon-box-size + 2;
+  margin-top: 60px;
 
   .box-header {
     @include flexbox();
@@ -668,6 +635,18 @@ header {
 @media (max-width: 750px) {
   .dex {
     padding: 15px;
+
+    .percentage {
+      margin-top: 15px;
+    }
+
+    .region-filter {
+      display: none;
+    }
+
+    .region-filter-mobile {
+      display: block;
+    }
   }
 
   header,
@@ -682,22 +661,6 @@ header {
 
     .share-container {
       display: none
-    }
-
-    .region-filter {
-      display: none;
-    }
-
-    .region-filter-mobile {
-      display: block;
-    }
-
-    .percentage  {
-      margin-top: 15px;
-    }
-
-    .progress-container h3 {
-      font-size: 11px;
     }
   }
 
@@ -743,18 +706,6 @@ header {
       &.empty {
         display: none;
       }
-    }
-  }
-}
-
-@media (max-width: 500px) {
-  header .percentage .progress-container {
-    h3 {
-      display: block;
-    }
-
-    .progress-numbers .mobile {
-      display: none;
     }
   }
 }
