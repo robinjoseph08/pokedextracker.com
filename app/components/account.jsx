@@ -74,11 +74,11 @@ export class Account extends Component {
       passwordInputs = (
         <div>
           <div className="form-group">
-            <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
+            <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
             <i className="fa fa-asterisk" />
           </div>
           <div className="form-group">
-            <input ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
+            <input className="form-control" ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
             <i className="fa fa-asterisk" />
           </div>
         </div>
@@ -104,11 +104,11 @@ export class Account extends Component {
               {passwordInputs}
               <div className="form-group">
                 <label htmlFor="friend_code">Friend Code</label>
-                <input ref={(c) => this._friend_code = c} defaultValue={session.friend_code} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
+                <input className="form-control" ref={(c) => this._friend_code = c} defaultValue={session.friend_code} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="language">Pokémon Name Language</label>
-                <select>
+                <select className="form-control">
                   <option>English</option>
                 </select>
                 <i className="fa fa-chevron-down" />

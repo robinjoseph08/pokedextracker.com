@@ -37,10 +37,13 @@ export class Register extends Component {
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
     const friend_code = this._friend_code.value;
+    const title = this._title.value;
+    const shiny = this._shiny.checked;
+    const generation = this._generation.value;
 
     this.setState({ ...this.state, error: null });
 
-    register({ username, password, password_confirm, friend_code })
+    register({ username, password, password_confirm, friend_code, title, shiny, generation })
     .then(() => ReactGA.event({ action: 'register', category: 'Session' }))
     .catch((err) => this.setState({ ...this.state, error: err.message }));
   }
@@ -53,29 +56,66 @@ export class Register extends Component {
         <div className="register-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form">
+          <div className="form register">
             <h1>Register</h1>
             <form onSubmit={this.register}>
               <AlertComponent message={error} type="error" />
+
+              <h2>Account Info</h2>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+                <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
                 <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
+                <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
                 <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="password_confirm">Confirm Password</label>
-                <input ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
+                <input className="form-control" ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
                 <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="friend_code">Friend Code</label>
-                <input ref={(c) => this._friend_code = c} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
+                <input className="form-control" ref={(c) => this._friend_code = c} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
               </div>
+
+              <h2>
+                First Dex Info
+                <div className="tooltip">
+                  <i className="fa fa-plus-circle" />
+                  <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
+                </div>
+              </h2>
+              <div className="form-group">
+                <label htmlFor="dex_name">Name</label>
+                <input className="form-control" ref={(c) => this._title = c} name="dex_name" id="dex_name" type="text" placeholder="Living Dex" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="type">Type</label>
+                <div className="radio">
+                  <label>
+                    <input type="radio" name="type" defaultChecked />
+                    <span className="radio-custom"><span></span></span>Normal
+                  </label>
+                </div>
+                <div className="radio">
+                  <label>
+                    <input ref={(c) => this._shiny = c} type="radio" name="type" />
+                    <span className="radio-custom"><span></span></span>Shiny
+                  </label>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="generation">Generation</label>
+                <select className="form-control" ref={(c) => this._generation = c} defaultValue="6">
+                  <option value="6">Six</option>
+                </select>
+                <i className="fa fa-chevron-down" />
+              </div>
+
               <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
               <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
             </form>
