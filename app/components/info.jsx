@@ -35,7 +35,7 @@ export class Info extends Component {
   }
 
   render () {
-    const { pokemon, showInfo } = this.props;
+    const { dex, pokemon, showInfo } = this.props;
 
     if (!pokemon) {
       return (
@@ -57,7 +57,7 @@ export class Info extends Component {
 
         <div className="info-main">
           <div className="info-header">
-            <i className={iconClass(pokemon.national_id)} />
+            <i className={iconClass(pokemon.national_id, dex.shiny)} />
             <h1 dangerouslySetInnerHTML={htmlName(pokemon.name)}></h1>
             <h2>#{padding(pokemon.national_id, 3)}</h2>
           </div>
@@ -94,8 +94,8 @@ export class Info extends Component {
 
 }
 
-function mapStateToProps ({ currentPokemon, pokemon, showInfo }) {
-  return { currentPokemon, pokemon: pokemon[currentPokemon], showInfo };
+function mapStateToProps ({ currentDex, currentUser, currentPokemon, pokemon, showInfo, users }) {
+  return { currentPokemon, dex: users[currentUser].dexesBySlug[currentDex], pokemon: pokemon[currentPokemon], showInfo };
 }
 
 function mapDispatchToProps (dispatch) {
