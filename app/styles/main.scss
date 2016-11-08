@@ -76,6 +76,60 @@ nav {
     &:first-child {
       margin-right: auto;
     }
+
+    .fa {
+      margin-left: 3px;
+    }
+  }
+
+  .dropdown {
+    @include flexbox();
+
+    &:hover {
+      > a {
+        background-color: lighten($brand-primary, 10%);
+      }
+
+      ul {
+        opacity: 1;
+        visibility: visible;
+        top: 100%;
+      }
+    }
+
+    ul {
+      @include transition(all .1s ease-out);
+
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      right: 0;
+      top: 70%;
+    	margin: 0;
+    	padding: 0;
+      list-style: none;
+      text-align: right;
+      z-index: 10;
+      width: 200px;
+
+      li  a {
+        display: block;
+        border-top: 2px solid $brand-primary;
+        background-color: lighten($brand-primary, 10%);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover {
+          background-color: lighten($brand-primary, 15%);
+        }
+
+        .fa {
+          margin-left: 0;
+          padding-right: 4px;
+        }
+      }
+    }
   }
 }
 
