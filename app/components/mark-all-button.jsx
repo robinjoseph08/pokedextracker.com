@@ -14,20 +14,20 @@ export class MarkAllButton extends Component {
   }
 
   toggleCaptured = () => {
-    const { captures, createCaptures, deleteCaptures, region, user } = this.props;
+    const { captures, createCaptures, currentDex, deleteCaptures, dex, region, user } = this.props;
     const deleting = captures.reduce((total, capture) => total + (!regionCheck(capture.pokemon, region) || capture.captured ? 0 : 1), 0) === 0;
     const pokemon = captures.filter((capture) => regionCheck(capture.pokemon, region) && capture.captured === deleting).map((capture) => capture.pokemon.national_id);
-    const payload = { pokemon };
+    const payload = { dex: dex.id, pokemon };
 
     Promise.resolve()
     .then(() => {
       this.setState({ loading: true });
 
       if (deleting) {
-        return deleteCaptures({ payload, username: user.username });
+        return deleteCaptures({ payload, slug: currentDex, username: user.username });
       }
 
-      return createCaptures({ payload, username: user.username });
+      return createCaptures({ payload, slug: currentDex, username: user.username });
     })
     .then(() => {
       const event = { category: 'Box', label: `${padding(captures[0].pokemon.national_id, 3)} - ${padding(captures[captures.length - 1].pokemon.national_id, 3)}` };
@@ -63,8 +63,8 @@ export class MarkAllButton extends Component {
 
 }
 
-function mapStateToProps ({ currentUser, region, session, users }) {
-  return { region, session, user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, region, session, users }) {
+  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], region, session, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {
