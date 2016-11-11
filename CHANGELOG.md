@@ -1,3 +1,13 @@
+#### 1.11.2 (2016-11-10)
+
+##### Bug Fixes
+
+* **progress:** add percentage ([dd36b26d](https://github.com/robinjoseph08/pokedextracker.com/commit/dd36b26d54cbfa10243247d041e75688ff686003))
+
+##### Refactors
+
+* **dexes:** use the dexes API for the tracker page ([af3e7cd0](https://github.com/robinjoseph08/pokedextracker.com/commit/af3e7cd0c740410d6e12f6067570feafb51b24f0))
+
 #### 1.11.1 (2016-10-25)
 
 ##### Documentation Changes
