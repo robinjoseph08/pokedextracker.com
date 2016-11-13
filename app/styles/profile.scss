@@ -17,8 +17,6 @@
   @include align-items(baseline);
 
   h3 {
-    @include flex(1);
-
     margin: 0 0 8px;
     min-width: 0;
 
@@ -30,6 +28,10 @@
       padding-right: 15px;
       font-size: 20px;
     }
+  }
+
+  > a {
+    margin-left: auto;
   }
 }
 

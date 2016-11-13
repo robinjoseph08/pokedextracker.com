@@ -182,27 +182,35 @@ nav {
   }
 }
 
-.login-container {
-  padding-bottom: 150px;
-}
-
 .form {
   @include flex-grow(1);
   @include flexbox();
   @include flex-direction(column);
-  @include justify-content(center);
+  @include overflow-y-scroll;
   @include align-items(center);
+
+  padding: 50px 0 100px;
 
   h1 {
     color: $brand-secondary;
     margin-bottom: 17px;
   }
 
-  &.register {
-    @include overflow-y-scroll;
-    @include justify-content(flex-start);
+  .form-column {
+    width: 280px;
+    margin: 0 auto;
+  }
 
-    padding: 50px 0 100px;
+  .form-row {
+    @include flexbox();
+
+    .form-column {
+      margin: 0 15px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -211,7 +219,6 @@ form {
 
   position: relative;
   top: 60px;
-  width: 280px;
 
   h2 {
     text-align: center;
@@ -273,8 +280,8 @@ select {
 
   .form-control,
   select {
-    height: 42px;
-    padding: 12px 32px 10px 10px;
+    height: 43px;
+    padding: 0 32px 0 10px;
     font-size: 15px;
 
     &[type="password"] {
@@ -351,7 +358,7 @@ select {
   position: relative;
   margin-left: 3px;
 
-  .fa-plus-circle {
+  .fa {
     font-size: 11px;
     color: $brand-secondary;
   }
@@ -477,5 +484,15 @@ reload div {
 @media (max-width: 700px) {
   .not-found h1 {
     font-size: 35px;
+  }
+}
+
+@media (max-width: 600px) {
+  .form .form-row {
+    display: block;
+
+    .form-group:last-child {
+      margin-bottom: 25px;
+    }
   }
 }

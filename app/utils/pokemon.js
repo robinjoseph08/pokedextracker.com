@@ -5,12 +5,12 @@ export function htmlName (name) {
 }
 
 export function iconClass (id, shiny) {
-  const idPadded = padding(id, 3);
+  const paddedId = padding(id, 3);
 
   if (shiny) {
-    return `pkicon pkicon-${idPadded} color-shiny`;
+    return `pkicon pkicon-${paddedId} color-shiny`;
   }
-  return `pkicon pkicon-${idPadded} test`;
+  return `pkicon pkicon-${paddedId}`;
 }
 
 export function regionCheck (pokemon, region) {
