@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+import slug     from 'slug';
 
 import { Config }       from '../../config';
 import { API }          from '../utils/api';
@@ -20,7 +21,7 @@ export function createUser ({ username, password, password_confirm, friend_code,
     })
     .then(({ token }) => {
       dispatch(setToken(token));
-      dispatch(push(`/u/${username}`));
+      dispatch(push(`/u/${username}/${slug(title, { lower: true })}`));
     });
   };
 }
