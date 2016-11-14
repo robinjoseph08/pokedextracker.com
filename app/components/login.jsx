@@ -57,7 +57,7 @@ export class Login extends Component {
                 <AlertComponent message={error} type="error" />
                 <div className="form-group">
                   <label htmlFor="username">Username</label>
-                  <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="cabrioles" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+                  <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
                   <i className="fa fa-asterisk" />
                 </div>
                 <div className="form-group">
