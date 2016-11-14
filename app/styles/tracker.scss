@@ -156,42 +156,17 @@
         }
 
         .tooltip {
-          display: inline-block;
-          position: relative;
-          margin-left: 3px;
-
           .fa-plus-circle {
-            font-size: 11px;
+            color: white;
           }
 
           .tooltip-text {
-            visibility: hidden;
-            position: absolute;
-            bottom: 150%;
-            left: 50%;
-            margin-left: -($tooltip-width / 2);
-            z-index: 1;
-            width: $tooltip-width;
-            padding: 5px;
-            border-radius: 5px;
-            background-color: #fff;
             color: black;
-            text-align: center;
+            background-color: white;
 
             &::after {
-              content: "";
-              position: absolute;
-              top: 100%;
-              left: 50%;
-              margin-left: -5px;
-              border-width: 5px;
-              border-style: solid;
               border-color: #fff transparent transparent transparent;
             }
-          }
-
-          &:hover .tooltip-text {
-            visibility: visible;
           }
         }
       }

@@ -9,10 +9,10 @@ import { checkVersion } from '../actions/utils';
 export class Home extends Component {
 
   componentWillMount () {
-    const { checkVersion, redirectToTracker, session } = this.props;
+    const { checkVersion, redirectToProfile, session } = this.props;
 
     if (session) {
-      redirectToTracker(session.username);
+      redirectToProfile(session.username);
     }
 
     checkVersion();
@@ -58,7 +58,7 @@ function mapStateToProps ({ session }) {
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
-    redirectToTracker: (username) => dispatch(push(`/u/${username}`))
+    redirectToProfile: (username) => dispatch(push(`/u/${username}`))
   };
 }
 

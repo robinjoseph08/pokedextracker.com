@@ -36,6 +36,12 @@ export class Account extends Component {
     checkVersion();
   }
 
+  scrollToTop () {
+    if (this._form) {
+      this._form.scrollTop = 0;
+    }
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -57,7 +63,10 @@ export class Account extends Component {
 
       this.setState({ ...this.state, loading: false, success: 'Account settings saved!' });
     })
-    .catch((err) => this.setState({ ...this.state, error: err.message, loading: false }));
+    .catch((err) => {
+      this.setState({ ...this.state, error: err.message, loading: false });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -74,11 +83,11 @@ export class Account extends Component {
       passwordInputs = (
         <div>
           <div className="form-group">
-            <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
+            <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
             <i className="fa fa-asterisk" />
           </div>
           <div className="form-group">
-            <input ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
+            <input className="form-control" ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
             <i className="fa fa-asterisk" />
           </div>
         </div>
@@ -90,33 +99,35 @@ export class Account extends Component {
         <div className="account-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form">
+          <div className="form" ref={(c) => this._form = c}>
             <h1>{session.username}'s Account</h1>
             <form onSubmit={this.onSubmit}>
-              <AlertComponent message={error} type="error" />
-              <AlertComponent message={success} type="success" />
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <button className="btn btn-inline btn-yellow" type="button" onClick={() => this.setState({ ...this.state, password: !password })}>
-                  {password ? 'Cancel' : 'Change'}
+              <div className="form-column">
+                <AlertComponent message={error} type="error" />
+                <AlertComponent message={success} type="success" />
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <button className="btn btn-inline btn-yellow" type="button" onClick={() => this.setState({ ...this.state, password: !password })}>
+                    {password ? 'Cancel' : 'Change'}
+                  </button>
+                </div>
+                {passwordInputs}
+                <div className="form-group">
+                  <label htmlFor="friend_code">Friend Code</label>
+                  <input className="form-control" ref={(c) => this._friend_code = c} defaultValue={session.friend_code} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="language">Pokémon Name Language</label>
+                  <select className="form-control">
+                    <option>English</option>
+                  </select>
+                  <i className="fa fa-chevron-down" />
+                </div>
+                <button className="btn btn-blue" type="submit">
+                  <span className={loading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right" /></span>
+                  {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
                 </button>
               </div>
-              {passwordInputs}
-              <div className="form-group">
-                <label htmlFor="friend_code">Friend Code</label>
-                <input ref={(c) => this._friend_code = c} defaultValue={session.friend_code} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="language">Pokémon Name Language</label>
-                <select>
-                  <option>English</option>
-                </select>
-                <i className="fa fa-chevron-down" />
-              </div>
-              <button className="btn btn-blue" type="submit">
-                <span className={loading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right" /></span>
-                {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
-              </button>
             </form>
           </div>
         </div>

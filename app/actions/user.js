@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+import slug     from 'slug';
 
 import { Config }       from '../../config';
 import { API }          from '../utils/api';
@@ -8,7 +9,7 @@ import { setToken }     from './session';
 export const SET_USER         = 'SET_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-export function createUser ({ username, password, password_confirm, friend_code }) {
+export function createUser ({ username, password, password_confirm, friend_code, title, shiny, generation }) {
   return (dispatch) => {
     return Promise.resolve()
     .then(() => {
@@ -16,11 +17,11 @@ export function createUser ({ username, password, password_confirm, friend_code 
         throw new Error('passwords need to match');
       }
 
-      return API.post(`${Config.API_HOST}/users`, { username, password, friend_code, referrer: document.referrer });
+      return API.post(`${Config.API_HOST}/users`, { username, password, friend_code, referrer: document.referrer, title, shiny, generation });
     })
     .then(({ token }) => {
       dispatch(setToken(token));
-      dispatch(push(`/u/${username}`));
+      dispatch(push(`/u/${username}/${slug(title, { lower: true })}`));
     });
   };
 }
