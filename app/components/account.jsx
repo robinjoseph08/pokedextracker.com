@@ -36,6 +36,12 @@ export class Account extends Component {
     checkVersion();
   }
 
+  scrollToTop () {
+    if (this._form) {
+      this._form.scrollTop = 0;
+    }
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -57,7 +63,10 @@ export class Account extends Component {
 
       this.setState({ ...this.state, loading: false, success: 'Account settings saved!' });
     })
-    .catch((err) => this.setState({ ...this.state, error: err.message, loading: false }));
+    .catch((err) => {
+      this.setState({ ...this.state, error: err.message, loading: false });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -90,7 +99,7 @@ export class Account extends Component {
         <div className="account-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form">
+          <div className="form" ref={(c) => this._form = c}>
             <h1>{session.username}'s Account</h1>
             <form onSubmit={this.onSubmit}>
               <div className="form-column">

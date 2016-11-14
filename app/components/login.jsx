@@ -28,6 +28,12 @@ export class Login extends Component {
     checkVersion();
   }
 
+  scrollToTop () {
+    if (this._form) {
+      this._form.scrollTop = 0;
+    }
+  }
+
   login = (e) => {
     e.preventDefault();
 
@@ -39,7 +45,10 @@ export class Login extends Component {
 
     login({ username, password })
     .then(() => ReactGA.event({ action: 'login', category: 'Session' }))
-    .catch((err) => this.setState({ ...this.state, error: err.message }));
+    .catch((err) => {
+      this.setState({ ...this.state, error: err.message });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -50,7 +59,7 @@ export class Login extends Component {
         <div className="login-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form">
+          <div className="form" ref={(c) => this._form = c}>
             <h1>Login</h1>
             <form onSubmit={this.login}>
               <div className="form-column">
