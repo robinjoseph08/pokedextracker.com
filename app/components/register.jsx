@@ -29,6 +29,12 @@ export class Register extends Component {
     checkVersion();
   }
 
+  scrollToTop () {
+    if (this._form) {
+      this._form.scrollTop = 0;
+    }
+  }
+
   register = (e) => {
     e.preventDefault();
 
@@ -45,7 +51,10 @@ export class Register extends Component {
 
     register({ username, password, password_confirm, friend_code, title, shiny, generation })
     .then(() => ReactGA.event({ action: 'register', category: 'Session' }))
-    .catch((err) => this.setState({ ...this.state, error: err.message }));
+    .catch((err) => {
+      this.setState({ ...this.state, error: err.message });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -56,7 +65,7 @@ export class Register extends Component {
         <div className="register-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form register">
+          <div className="form register" ref={(c) => this._form = c}>
             <h1>Register</h1>
             <form onSubmit={this.register}>
               <div className="form-column">
