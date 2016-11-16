@@ -5,6 +5,14 @@ import { checkVersion } from './utils';
 export const SET_DEX         = 'SET_DEX';
 export const SET_CURRENT_DEX = 'SET_CURRENT_DEX';
 
+export function createDex ({ payload, username }) {
+  return (dispatch) => {
+    dispatch(checkVersion());
+
+    return API.post(`${Config.API_HOST}/users/${username}/dexes`, payload);
+  };
+}
+
 export function retrieveDex (slug, username) {
   return (dispatch) => {
     dispatch(checkVersion());
