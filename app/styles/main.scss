@@ -485,17 +485,19 @@ reload div {
 }
 
 .modal {
-  position: absolute;
-  top: 100px;
-  right: 100px;
-  bottom: 100px;
-  left: 100px;
+  @include overflow-y-scroll();
+
+  margin: 100px auto;
+  width: 500px;
   border: 2px solid $brand-secondary-light;
   background: #fff;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
   outline: none;
-  padding: 20px;
+
+  p {
+    margin-top: 0;
+    text-align: center;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 750px) {
@@ -517,5 +519,12 @@ reload div {
     .form-group:last-child {
       margin-bottom: 25px;
     }
+  }
+}
+
+@media (max-width: 550px) {
+  .modal {
+    margin-top: 70px;
+    width: 100%;
   }
 }
