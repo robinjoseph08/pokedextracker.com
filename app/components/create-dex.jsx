@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link }      from 'react-router';
 import Modal         from 'react-modal';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
@@ -54,7 +55,7 @@ export class CreateDex extends Component {
       <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={onRequestClose}>
         <div className="form" ref={(c) => this._form = c}>
           <h1>Create New Dex</h1>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit} className="form-column">
             <AlertComponent message={error} type="error" />
             <div className="form-group">
               <label htmlFor="dex_title">Title</label>
@@ -86,6 +87,7 @@ export class CreateDex extends Component {
             <button className="btn btn-blue" type="submit">Create <i className="fa fa-long-arrow-right" /></button>
           </form>
         </div>
+        <p><Link className="link">Go Back</Link></p>
       </Modal>
     );
   }
