@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Link }      from 'react-router';
 import Modal         from 'react-modal';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
@@ -8,7 +7,7 @@ import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
 import { createDex }      from '../actions/dex';
 
-export class CreateDex extends Component {
+export class DexCreate extends Component {
 
   constructor (props) {
     super(props);
@@ -87,7 +86,7 @@ export class CreateDex extends Component {
             <button className="btn btn-blue" type="submit">Create <i className="fa fa-long-arrow-right" /></button>
           </form>
         </div>
-        <p><Link className="link">Go Back</Link></p>
+        <p><a className="link" onClick={onRequestClose}>Go Back</a></p>
       </Modal>
     );
   }
@@ -105,4 +104,4 @@ function mapDispatchToProps (dispatch) {
   };
 }
 
-export const CreateDexComponent = connect(mapStateToProps, mapDispatchToProps)(CreateDex);
+export const DexCreateComponent = connect(mapStateToProps, mapDispatchToProps)(DexCreate);
