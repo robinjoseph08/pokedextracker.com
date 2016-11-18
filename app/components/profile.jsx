@@ -2,16 +2,16 @@ import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
-import { DexCreateComponent }           from './dex-create';
-import { DexPreviewComponent }          from './dex-preview';
-import { FriendCodeComponent }          from './friend-code';
-import { HeaderComponent }              from './header';
-import { NavComponent }                 from './nav';
-import { NotFoundComponent }            from './not-found';
-import { ReloadComponent }              from './reload';
-import { checkVersion }                 from '../actions/utils';
-import { retrieveUser, setCurrentUser } from '../actions/user';
-import { setShowShare }                 from '../actions/tracker';
+import { DexCreateComponent }                    from './dex-create';
+import { DexPreviewComponent }                   from './dex-preview';
+import { FriendCodeComponent }                   from './friend-code';
+import { HeaderComponent }                       from './header';
+import { NavComponent }                          from './nav';
+import { NotFoundComponent }                     from './not-found';
+import { ReloadComponent }                       from './reload';
+import { checkVersion }                          from '../actions/utils';
+import { retrieveUser, setCurrentUser, setUser } from '../actions/user';
+import { setShowShare }                          from '../actions/tracker';
 
 export class Profile extends Component {
 
@@ -31,7 +31,7 @@ export class Profile extends Component {
   }
 
   reset (props) {
-    const { checkVersion, params: { username }, retrieveUser, setCurrentUser, setShowShare } = props || this.props;
+    const { checkVersion, params: { username }, retrieveUser, setCurrentUser, setShowShare, setUser } = props || this.props;
 
     this.setState({ ...this.state, loading: true });
 
@@ -40,7 +40,10 @@ export class Profile extends Component {
     setShowShare(false);
 
     retrieveUser(username)
-    .then(() => this.setState({ ...this.state, loading: false }))
+    .then((user) => {
+      setUser(user);
+      this.setState({ ...this.state, loading: false });
+    })
     .catch(() => this.setState({ ...this.state, loading: false }));
   }
 
@@ -105,7 +108,8 @@ function mapDispatchToProps (dispatch) {
     checkVersion: () => dispatch(checkVersion()),
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentUser: (username) => dispatch(setCurrentUser(username)),
-    setShowShare: (show) => dispatch(setShowShare(show))
+    setShowShare: (show) => dispatch(setShowShare(show)),
+    setUser: (user) => dispatch(setUser(user))
   };
 }
 

@@ -7,6 +7,7 @@ import { currentUser }    from './current-user';
 import { pokemon }        from './pokemon';
 import { region }         from './region';
 import { reload }         from './reload';
+import { sessionUser }    from './session-user';
 import { session }        from './session';
 import { showInfo }       from './show-info';
 import { showScroll }     from './show-scroll';
@@ -22,6 +23,7 @@ export const reducer = combineReducers({
   region,
   reload,
   routing: routerReducer,
+  sessionUser,
   session,
   showInfo,
   showScroll,
