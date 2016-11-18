@@ -110,7 +110,7 @@ nav {
       list-style: none;
       text-align: right;
       z-index: 10;
-      width: 200px;
+      width: 230px;
 
       li  a {
         display: block;
@@ -125,8 +125,10 @@ nav {
         }
 
         .fa {
+          float: left;
+          margin-top: 2px;
           margin-left: 0;
-          padding-right: 4px;
+          padding-right: 15px;
         }
       }
     }
