@@ -2,7 +2,7 @@ import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
-import { CreateDexComponent }           from './create-dex';
+import { DexCreateComponent }           from './dex-create';
 import { DexPreviewComponent }          from './dex-preview';
 import { FriendCodeComponent }          from './friend-code';
 import { HeaderComponent }              from './header';
@@ -67,7 +67,7 @@ export class Profile extends Component {
       createDexButton = (
         <div className="dex-create">
           <div className="btn btn-blue" onClick={() => this.setState({ ...this.state, showCreateDex: true })}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
-          <CreateDexComponent isOpen={showCreateDex} onRequestClose={() => this.setState({ ...this.state, showCreateDex: false })} />
+          <DexCreateComponent isOpen={showCreateDex} onRequestClose={() => this.setState({ ...this.state, showCreateDex: false })} />
         </div>
       );
     }
