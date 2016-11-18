@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Modal         from 'react-modal';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
+import slug          from 'slug';
 
 import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
@@ -18,6 +19,11 @@ export class DexCreate extends Component {
     if (this._form) {
       this._form.scrollTop = 0;
     }
+  }
+
+  onRequestClose = () => {
+    this.setState({ error: null, url: null });
+    this.props.onRequestClose();
   }
 
   onSubmit = (e) => {
@@ -47,18 +53,19 @@ export class DexCreate extends Component {
   }
 
   render () {
-    const { isOpen, onRequestClose } = this.props;
-    const { error } = this.state;
+    const { isOpen, session } = this.props;
+    const { error, url } = this.state;
 
     return (
-      <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={onRequestClose}>
+      <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose}>
         <div className="form" ref={(c) => this._form = c}>
           <h1>Create New Dex</h1>
           <form onSubmit={this.onSubmit} className="form-column">
             <AlertComponent message={error} type="error" />
             <div className="form-group">
+              <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex', { lower: true })}</div>
               <label htmlFor="dex_title">Title</label>
-              <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" required placeholder="Living Dex" />
+              <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" onChange={() => this.setState({ ...this.state, url: this._title.value })} />
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">
@@ -86,7 +93,7 @@ export class DexCreate extends Component {
             <button className="btn btn-blue" type="submit">Create <i className="fa fa-long-arrow-right" /></button>
           </form>
         </div>
-        <p><a className="link" onClick={onRequestClose}>Go Back</a></p>
+        <p><a className="link" onClick={this.onRequestClose}>Go Back</a></p>
       </Modal>
     );
   }
