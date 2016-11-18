@@ -351,6 +351,19 @@ select {
     font-size: 9px;
     color: $brand-secondary;
   }
+
+  .form-note {
+    float: right;
+    position: relative;
+    bottom: 2px;
+    text-align: right;
+    font-size: 13px;
+    color: $gray-dark;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .tooltip {
@@ -524,7 +537,7 @@ reload div {
 
 @media (max-width: 550px) {
   .modal {
-    margin-top: 70px;
+    margin-top: 0;
     width: 100%;
   }
 }
