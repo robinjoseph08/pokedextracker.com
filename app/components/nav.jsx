@@ -2,9 +2,9 @@ import { Component } from 'react';
 import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 
-import { ReactGA }      from '../utils/analytics';
-import { retrieveUser } from '../actions/user';
-import { setToken }     from '../actions/session';
+import { ReactGA }                  from '../utils/analytics';
+import { retrieveUser }             from '../actions/user';
+import { setSessionUser, setToken } from '../actions/session';
 
 export class Nav extends Component {
 
@@ -26,13 +26,16 @@ export class Nav extends Component {
   }
 
   reset (props) {
-    const { retrieveUser, session } = props || this.props;
+    const { retrieveUser, session, setSessionUser } = props || this.props;
 
     if (session) {
       this.setState({ ...this.state, loading: true });
 
       retrieveUser(session.username)
-      .then(() => this.setState({ ...this.state, loading: false }))
+      .then((user) => {
+        setSessionUser(user);
+        this.setState({ ...this.state, loading: false });
+      })
       .catch(() => this.setState({ ...this.state, loading: false }));
     }
   }
@@ -49,7 +52,7 @@ export class Nav extends Component {
       );
     }
 
-    if (session) {
+    if (session && user) {
       return (
         <nav>
           <Link to="/">Pokédex Tracker</Link>
@@ -77,14 +80,15 @@ export class Nav extends Component {
   }
 }
 
-function mapStateToProps ({ session, users }) {
-  return { session, user: session && users[session.username] };
+function mapStateToProps ({ session, sessionUser }) {
+  return { session, user: sessionUser };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     clearToken: () => dispatch(setToken(null)),
-    retrieveUser: (username) => dispatch(retrieveUser(username))
+    retrieveUser: (username) => dispatch(retrieveUser(username)),
+    setSessionUser: (user) => dispatch(setSessionUser(user))
   };
 }
 

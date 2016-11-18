@@ -30,11 +30,7 @@ export function retrieveUser (username) {
   return (dispatch) => {
     dispatch(checkVersion());
 
-    return API.get(`${Config.API_HOST}/users/${username}`)
-    .then((user) => {
-      dispatch(setUser(user));
-      return user;
-    });
+    return API.get(`${Config.API_HOST}/users/${username}`);
   };
 }
 

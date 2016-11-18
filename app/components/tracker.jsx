@@ -10,7 +10,7 @@ import { ReloadComponent }             from './reload';
 import { checkVersion }                from '../actions/utils';
 import { listCaptures }                from '../actions/capture';
 import { retrieveDex, setCurrentDex }  from '../actions/dex';
-import { retrieveUser }                from '../actions/user';
+import { retrieveUser, setUser }       from '../actions/user';
 import { setCurrentPokemon }           from '../actions/pokemon';
 import { setShowScroll, setShowShare } from '../actions/tracker';
 
@@ -26,13 +26,16 @@ export class Tracker extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.params.username !== this.props.params.username) {
+    const { slug, username } = this.props.params;
+    const samePage = nextProps.params.username === username && nextProps.params.slug === slug;
+
+    if (!samePage) {
       this.reset(nextProps);
     }
   }
 
   reset (props) {
-    const { checkVersion, listCaptures, params: { slug, username }, retrieveDex, retrieveUser, setCurrentDex, setCurrentPokemon, setShowScroll, setShowShare } = props || this.props;
+    const { checkVersion, listCaptures, params: { slug, username }, retrieveDex, retrieveUser, setCurrentDex, setCurrentPokemon, setShowScroll, setShowShare, setUser } = props || this.props;
 
     this.setState({ ...this.state, loading: true });
 
@@ -43,7 +46,10 @@ export class Tracker extends Component {
     setCurrentDex(slug, username);
 
     retrieveUser(username)
-    .then(() => retrieveDex(slug, username))
+    .then((user) => {
+      setUser(user);
+      return retrieveDex(slug, username);
+    })
     .then((dex) => listCaptures(dex, username))
     .then(() => this.setState({ ...this.state, loading: false }))
     .catch(() => this.setState({ ...this.state, loading: false }));
@@ -94,7 +100,8 @@ function mapDispatchToProps (dispatch) {
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
     setCurrentDex: (slug, username) => dispatch(setCurrentDex(slug, username)),
     setShowScroll: (show) => dispatch(setShowScroll(show)),
-    setShowShare: (show) => dispatch(setShowShare(show))
+    setShowShare: (show) => dispatch(setShowShare(show)),
+    setUser: (user) => dispatch(setUser(user))
   };
 }
 
