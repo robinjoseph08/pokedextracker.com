@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { Link }      from 'react-router';
 import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
+import { DexCreateComponent }           from './dex-create';
 import { DexPreviewComponent }          from './dex-preview';
 import { FriendCodeComponent }          from './friend-code';
 import { HeaderComponent }              from './header';
@@ -45,8 +45,8 @@ export class Profile extends Component {
   }
 
   render () {
-    const { params: { username }, user } = this.props;
-    const { loading } = this.state;
+    const { params: { username }, session, user } = this.props;
+    const { loading, showCreateDex } = this.state;
 
     if (loading) {
       return (
@@ -58,6 +58,18 @@ export class Profile extends Component {
 
     if (!user) {
       return <NotFoundComponent />;
+    }
+
+    const ownPage = session && session.id === user.id;
+    let createDexButton = null;
+
+    if (ownPage) {
+      createDexButton = (
+        <div className="dex-create">
+          <div className="btn btn-blue" onClick={() => this.setState({ ...this.state, showCreateDex: true })}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
+          <DexCreateComponent isOpen={showCreateDex} onRequestClose={() => this.setState({ ...this.state, showCreateDex: false })} />
+        </div>
+      );
     }
 
     return (
@@ -74,9 +86,7 @@ export class Profile extends Component {
 
               {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} />)}
 
-              <div className="dex-create">
-                <Link className="btn btn-blue" to="">Create a New Dex <i className="fa fa-long-arrow-right" /></Link>
-              </div>
+              {createDexButton}
             </div>
           </div>
         </div>
@@ -86,8 +96,8 @@ export class Profile extends Component {
 
 }
 
-function mapStateToProps ({ currentUser, users }) {
-  return { user: users[currentUser] };
+function mapStateToProps ({ currentUser, session, users }) {
+  return { session, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {

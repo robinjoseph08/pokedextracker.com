@@ -106,7 +106,7 @@ export class Register extends Component {
                   </h2>
                   <div className="form-group">
                     <label htmlFor="dex_title">Title</label>
-                    <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" required placeholder="Living Dex" />
+                    <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" />
                     <i className="fa fa-asterisk" />
                   </div>
                   <div className="form-group">

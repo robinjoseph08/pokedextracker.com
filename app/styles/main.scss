@@ -351,6 +351,19 @@ select {
     font-size: 9px;
     color: $brand-secondary;
   }
+
+  .form-note {
+    float: right;
+    position: relative;
+    bottom: 2px;
+    text-align: right;
+    font-size: 13px;
+    color: $gray-dark;
+    width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .tooltip {
@@ -475,6 +488,31 @@ reload div {
   margin: 0 auto;
 }
 
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.modal {
+  @include overflow-y-scroll();
+
+  margin: 100px auto;
+  width: 500px;
+  border: 2px solid $brand-secondary-light;
+  background: #fff;
+  outline: none;
+
+  p {
+    margin-top: 0;
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 750px) {
   .wrapper {
     width: 100%;
@@ -494,5 +532,12 @@ reload div {
     .form-group:last-child {
       margin-bottom: 25px;
     }
+  }
+}
+
+@media (max-width: 550px) {
+  .modal {
+    margin-top: 0;
+    width: 100%;
   }
 }
