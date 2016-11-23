@@ -7,13 +7,13 @@ export function EvolutionsComponent ({ evolutions }) {
 
     switch (evolution.trigger) {
       case 'level':
-        trigger = <span>Level Up {evolution.level ? `to ${evolution.level}` : ''}</span>;
+        trigger = <span>Level Up {evolution.level ? `to ${evolution.level} ` : ''}</span>;
         break;
       case 'stone':
-        trigger = <span>{capitalize(evolution.stone)} Stone</span>;
+        trigger = <span>{capitalize(evolution.stone)} Stone </span>;
         break;
       default:
-        trigger = <span>{capitalize(evolution.trigger)}</span>;
+        trigger = <span>{capitalize(evolution.trigger)} </span>;
     }
 
     if (evolution.notes) {
@@ -34,7 +34,7 @@ export function EvolutionsComponent ({ evolutions }) {
         <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`} />
         <div>
           {trigger}
-          {evolution.held_item ? <span>holding {capitalize(evolution.held_item)}</span> : null}
+          {evolution.held_item ? <span>holding {capitalize(evolution.held_item)} </span> : null}
           {notes}
         </div>
       </div>
