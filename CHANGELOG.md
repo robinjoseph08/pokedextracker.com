@@ -1,3 +1,13 @@
+#### 1.11.3 (2016-11-26)
+
+##### Bug Fixes
+
+* **evolutions:** add some extra spaces ([f9ac1d79](https://github.com/robinjoseph08/pokedextracker.com/commit/f9ac1d792709a749598397ce27dbc33ee66af729))
+
+##### Refactors
+
+* **info:** generate urls on the front-end ([26b69510](https://github.com/robinjoseph08/pokedextracker.com/commit/26b695105bb67085256eab1dfff82f3b66a2a060))
+
 #### 1.11.2 (2016-11-10)
 
 ##### Bug Fixes
