@@ -263,10 +263,19 @@
 
 header {
   h1 {
+    position: relative;
     display: inline-block;
     margin: 0;
     color: $brand-secondary;
     font-size: 40px;
+
+    .dex-indicator {
+      left: -20px;
+
+      .fa-star {
+        font-size: 12px;
+      }
+    }
   }
 
   h3 {

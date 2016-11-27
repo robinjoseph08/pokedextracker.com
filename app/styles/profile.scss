@@ -16,8 +16,11 @@
   @include flexbox();
   @include align-items(baseline);
 
+  position: relative;
+  margin-bottom: 8px;
+
   h3 {
-    margin: 0 0 8px;
+    margin: 0;
     min-width: 0;
 
     a {
@@ -32,6 +35,20 @@
 
   > a {
     margin-left: auto;
+  }
+}
+
+.dex-indicator {
+  @include flexbox();
+  @include align-items(center);
+
+  height: 100%;
+  position: absolute;
+  left: -15px;
+
+  .fa-star {
+    color: #d81118;
+    font-size: 9px;
   }
 }
 
@@ -102,6 +119,10 @@
     .percentage {
       margin-top: 0;
     }
+  }
+
+  .dex-indicator {
+    display: none;
   }
 
   .progress-container h3 {
