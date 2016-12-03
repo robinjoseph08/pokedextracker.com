@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import { connect }   from 'react-redux';
 
-import { ReactGA }        from '../utils/analytics';
-import { ShareComponent } from './share';
-import { setShowShare }   from '../actions/tracker';
+import { DexIndicatorComponent } from './dex-indicator';
+import { ReactGA }               from '../utils/analytics';
+import { ShareComponent }        from './share';
+import { setShowShare }          from '../actions/tracker';
 
 export class Header extends Component {
 
@@ -35,6 +36,7 @@ export class Header extends Component {
 
     return (
       <h1>
+        <DexIndicatorComponent dex={dex} />
         {profile ? `${user.username}'s Profile` : dex.title}
         <div className="share-container">
           <a onClick={(e) => this.toggleShare(e, !showShare)}>
