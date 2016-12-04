@@ -32,7 +32,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: 'babel' },
+      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ },
       { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
       { test: /\.json/, loader: 'json' },
       { test: /\.html/, loader: 'raw' }
