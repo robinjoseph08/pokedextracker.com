@@ -36,6 +36,14 @@
       font-size: 20px;
     }
   }
+
+  .dex-edit a.link {
+    color: lighten(#000, 25%);
+
+    &:hover {
+      color: black;
+    }
+  }
 }
 
 .dex-indicator {
@@ -68,6 +76,22 @@
     display: inline-block;
     padding: 12px;
     width: 200px;
+  }
+}
+
+.dex-delete-container {
+  text-align: right;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+
+  a:first-child {
+    color: $error;
+    margin: 0 3px;
+
+    &:hover {
+      color: darken($error, 5%);
+    }
   }
 }
 
@@ -127,10 +151,6 @@
     margin-bottom: 60px;
   }
 
-  .dex-indicator {
-    display: none;
-  }
-
   .progress-container h3 {
     font-size: 11px;
   }
@@ -145,6 +165,10 @@
     .progress-numbers .mobile {
       display: none;
     }
+  }
+
+  .dex-indicator {
+    display: none;
   }
 
   .dex-create .btn {
