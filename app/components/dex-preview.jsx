@@ -8,9 +8,9 @@ export function DexPreview ({ dex, username }) {
   return (
     <div className="dex-preview">
       <div className="dex-preview-header">
-        <DexIndicatorComponent dex={dex} />
         <h3><Link to={`/u/${username}/${dex.slug}`} className="link">{dex.title}</Link></h3>
         <Link to=""><i className="fa fa-pencil" /></Link>
+        <DexIndicatorComponent dex={dex} />
       </div>
       <div className="percentage">
         <ProgressComponent caught={dex.caught} total={dex.total} />

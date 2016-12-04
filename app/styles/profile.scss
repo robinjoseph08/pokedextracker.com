@@ -10,6 +10,10 @@
 
 .dex-preview {
   margin-top: 40px;
+
+  .percentage {
+    margin-top: 0;
+  }
 }
 
 .dex-preview-header {
@@ -28,27 +32,31 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding-right: 15px;
+      padding-right: 10px;
       font-size: 20px;
     }
-  }
-
-  > a {
-    margin-left: auto;
   }
 }
 
 .dex-indicator {
-  @include flexbox();
-  @include align-items(center);
+  @include flex-shrink(0);
 
-  height: 100%;
-  position: absolute;
-  left: -15px;
+  margin-left: auto;
+  padding-left: 30px;
 
   .fa-star {
     color: #d81118;
     font-size: 9px;
+  }
+
+  .label {
+    margin-left: 7px;
+    border-radius: 3px;
+    font-size: 10px;
+    padding: 4px 6px;
+    background-color: $gray-light;
+    text-transform: uppercase;
+    font-family: $font-secondary;
   }
 }
 
@@ -66,6 +74,8 @@
 .percentage {
   @include flexbox();
   @include justify-content(space-between);
+
+  margin-top: 20px;
 }
 
 .progress-container {
@@ -115,10 +125,6 @@
 
   .dex-preview {
     margin-bottom: 60px;
-
-    .percentage {
-      margin-top: 0;
-    }
   }
 
   .dex-indicator {
