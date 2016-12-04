@@ -28,7 +28,10 @@ export function listCaptures ({ id, slug }, username) {
     dispatch(checkVersion());
 
     return API.get(`${Config.API_HOST}/captures`, { dex: id })
-    .then((captures) => dispatch(setCaptures(captures, slug, username)));
+    .then((captures) => {
+      dispatch(setCaptures(captures, slug, username));
+      return captures;
+    });
   };
 }
 
