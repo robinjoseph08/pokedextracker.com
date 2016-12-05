@@ -71,9 +71,9 @@ export class DexCreate extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="generation">Generation</label>
-              <select className="form-control" ref={(c) => this._generation = c} defaultValue="6">
-                <option value="6">Six</option>
+              <select className="form-control" ref={(c) => this._generation = c} defaultValue="7">
                 <option value="7">Seven</option>
+                <option value="6">Six</option>
               </select>
               <i className="fa fa-chevron-down" />
             </div>

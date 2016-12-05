@@ -9,7 +9,10 @@ import { setToken }     from './session';
 export const SET_USER         = 'SET_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-export function createUser ({ username, password, password_confirm, friend_code, title, shiny, generation }) {
+export function createUser (payload) {
+  const { password, password_confirm, title, username } = payload;
+  payload = Object.assign({ referrer: document.referrer }, payload);
+
   return (dispatch) => {
     return Promise.resolve()
     .then(() => {
@@ -17,7 +20,9 @@ export function createUser ({ username, password, password_confirm, friend_code,
         throw new Error('passwords need to match');
       }
 
-      return API.post(`${Config.API_HOST}/users`, { username, password, friend_code, referrer: document.referrer, title, shiny, generation });
+      Reflect.deleteProperty(payload, 'password_confirm');
+
+      return API.post(`${Config.API_HOST}/users`, payload);
     })
     .then(({ token }) => {
       dispatch(setToken(token));
