@@ -262,6 +262,11 @@
 }
 
 header {
+  .header-row {
+    @include flexbox();
+    @include align-items(center);
+  }
+
   h1 {
     position: relative;
     display: inline-block;

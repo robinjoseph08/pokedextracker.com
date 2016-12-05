@@ -12,7 +12,7 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
     column1 = (
       <div className="evolution-pokemon-column">
         {family.pokemon[1].map((pokemon, i) => <a key={i} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id, dex.shiny)} />
+          <i className={iconClass(pokemon.national_id, dex)} />
         </a>)}
       </div>
     );
@@ -22,7 +22,7 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
     column2 = (
       <div className="evolution-pokemon-column">
         {family.pokemon[2].map((pokemon, i) => <a key={i} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id, dex.shiny)} />
+          <i className={iconClass(pokemon.national_id, dex)} />
         </a>)}
       </div>
     );
@@ -32,7 +32,7 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
     <div className="info-evolutions">
       <div className="evolution-pokemon-column">
         <a onClick={() => setCurrentPokemon(family.pokemon[0][0].national_id)}>
-          <i className={iconClass(family.pokemon[0][0].national_id, dex.shiny)} />
+          <i className={iconClass(family.pokemon[0][0].national_id, dex)} />
         </a>
         {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
       </div>

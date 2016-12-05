@@ -33,9 +33,10 @@ export class DexCreate extends Component {
     const title = this._title.value;
     const shiny = this._shiny.checked;
     const generation = this._generation.value;
+    const region = parseInt(generation) === 7 ? 'alola' : 'national';
     const payload = {
       username: session.username,
-      payload: { title, shiny, generation }
+      payload: { title, shiny, generation, region }
     };
 
     this.setState({ ...this.state, error: null });
@@ -70,7 +71,8 @@ export class DexCreate extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="generation">Generation</label>
-              <select className="form-control" ref={(c) => this._generation = c} defaultValue="6">
+              <select className="form-control" ref={(c) => this._generation = c} defaultValue="7">
+                <option value="7">Seven</option>
                 <option value="6">Six</option>
               </select>
               <i className="fa fa-chevron-down" />
