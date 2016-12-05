@@ -59,7 +59,7 @@ export class Tracker extends Component {
   }
 
   render () {
-    const { params: { username }, user } = this.props;
+    const { dex, params: { username } } = this.props;
     const { loading } = this.state;
 
     if (loading) {
@@ -70,7 +70,7 @@ export class Tracker extends Component {
       );
     }
 
-    if (!user) {
+    if (!dex) {
       return <NotFoundComponent />;
     }
 
@@ -90,8 +90,8 @@ export class Tracker extends Component {
 
 }
 
-function mapStateToProps ({ currentUser, users }) {
-  return { user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, users }) {
+  return { dex: users[currentUser] && users[currentUser].dexesBySlug[currentDex] };
 }
 
 function mapDispatchToProps (dispatch) {
