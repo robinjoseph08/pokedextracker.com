@@ -10,7 +10,16 @@ export class DexPreview extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { loading: false };
+    this.state = {};
+  }
+
+  onRequestClose = (shouldReload) => {
+    const { reload } = this.props;
+    this.setState({ ...this.state, showEditDex: false });
+
+    if (shouldReload) {
+      reload();
+    }
   }
 
   render () {
@@ -23,8 +32,8 @@ export class DexPreview extends Component {
     if (ownPage) {
       editDexButton = (
         <div className="dex-edit">
-          <a className ="link" onClick={() => this.setState({ ...this.state, showEditDex: true })}><i className="fa fa-pencil" /></a>
-          <DexEditComponent dex={dex} isOpen={showEditDex} onRequestClose={() => this.setState({ ...this.state, showEditDex: false })} />
+          <a className="link" onClick={() => this.setState({ ...this.state, showEditDex: true })}><i className="fa fa-pencil" /></a>
+          <DexEditComponent dex={dex} isOpen={showEditDex} onRequestClose={this.onRequestClose} />
         </div>
       );
     }

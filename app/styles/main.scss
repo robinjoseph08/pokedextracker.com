@@ -236,6 +236,10 @@ nav {
     border: 2px solid $success;
     color: $success;
   }
+
+  &.form-confirm {
+    margin-top: 40px;
+  }
 }
 
 .form {
@@ -298,6 +302,10 @@ form {
 
   .btn:not(.btn-inline) {
     margin-top: 40px;
+
+    &.form-confirm {
+      margin-top: 0;
+    }
   }
 }
 
@@ -448,16 +456,6 @@ select {
         border-color: darken($error, 5%) transparent transparent transparent;
       }
     }
-  }
-}
-
-.form-confirm {
-  .alert {
-    margin-top: 40px;
-  }
-
-  button.btn {
-    margin-top: 0;
   }
 }
 

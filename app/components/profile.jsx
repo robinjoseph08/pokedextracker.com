@@ -87,7 +87,7 @@ export class Profile extends Component {
                 <FriendCodeComponent />
               </header>
 
-              {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} />)}
+              {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} reload={() => this.reset()} />)}
 
               {createDexButton}
             </div>
