@@ -4,6 +4,7 @@ import { routerReducer }   from 'react-router-redux';
 import { currentDex }     from './current-dex';
 import { currentPokemon } from './current-pokemon';
 import { currentUser }    from './current-user';
+import { notification }   from './notification';
 import { pokemon }        from './pokemon';
 import { region }         from './region';
 import { reload }         from './reload';
@@ -19,6 +20,7 @@ export const reducer = combineReducers({
   currentDex,
   currentPokemon,
   currentUser,
+  notification,
   pokemon,
   region,
   reload,

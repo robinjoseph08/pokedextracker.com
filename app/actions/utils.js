@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
-export const SET_RELOAD = 'SET_RELOAD';
+export const SET_NOTIFICATION = 'SET_NOTIFICATION';
+export const SET_RELOAD       = 'SET_RELOAD';
 
 let VERSION;
 
@@ -17,6 +18,10 @@ export function checkVersion () {
     })
     .catch(() => {});
   };
+}
+
+export function setNotification (notification) {
+  return { type: SET_NOTIFICATION, notification };
 }
 
 export function setReload (reload) {
