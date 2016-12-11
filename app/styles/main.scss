@@ -221,11 +221,16 @@ nav {
 }
 
 .alert {
+  position: relative;
   padding: 11px;
   margin-bottom: 20px;
   border: 2px solid $brand-secondary;
   text-align: center;
   font-size: 14px;
+
+  a {
+    font-size: 14px;
+  }
 
   &.alert-error {
     border: 2px solid $error;
@@ -239,6 +244,26 @@ nav {
 
   &.form-confirm {
     margin-top: 40px;
+  }
+
+  &.alert-muted {
+    margin-bottom: 50px;
+    border: 2px solid $gray-medium;
+    color: darken($gray-dark, 20%);
+  }
+
+  .fa-times {
+    @include transition(all .1s ease-out);
+
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: $gray-medium;
+
+    &:hover {
+      cursor: pointer;
+      color: $gray-dark;
+    }
   }
 }
 

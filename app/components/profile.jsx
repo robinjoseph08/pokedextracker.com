@@ -84,6 +84,7 @@ export class Profile extends Component {
           <div className="profile">
             <div className="wrapper">
               <header>
+                <NotificationComponent />
                 <HeaderComponent profile={true} />
                 <FriendCodeComponent />
               </header>
@@ -93,7 +94,6 @@ export class Profile extends Component {
               {createDexButton}
             </div>
           </div>
-          <NotificationComponent message="This is a notification, yo!" />
         </div>
       </DocumentTitle>
     );
