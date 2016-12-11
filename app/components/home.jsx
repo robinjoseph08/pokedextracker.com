@@ -41,18 +41,18 @@ export class Home extends Component {
             </div>
 
             <div className="sub">
-              <h2>A tool for tracking your <a href="http://bulbapedia.bulbagarden.net/wiki/Living_Pok%C3%A9dex" target="_blank" className="link">Living Dex</a> progress. Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, and share a public link with others to see how you can help each other out. Check out an example living dex <Link className="link" to="/u/ashketchum10/living-dex">here</Link>!</h2>
+              <h2>A tool for tracking your Living Dex progress for <Link className="link" alt="Sample Sun &amp; Moon Living Dex" to="/u/ashketchum10/alola-living-dex">Gen 7 (Pokémon Sun &amp; Moon)</Link> or <Link className="link" alt="Sample Gen 6 Living Dex" to="/u/ashketchum10/gen-6-living-dex">Gen 6</Link>. Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, and share a public link with others to see how you can help each other out. Manage all your dexes on one <Link className="link" alt="Sample Profile" to="/u/ashketchum10">profile</Link>, and even track a <Link className="link" alt="Sample Shiny Living Dex" to="/u/ashketchum10/shinies">shiny living dex</Link>!</h2>
 
-              <p>This project is open source, and you can find the code on Github (<a href="https://github.com/robinjoseph08/pokedextracker.com" target="_blank" className="link">website</a> &amp; <a href="https://github.com/robinjoseph08/api.pokedextracker.com" target="_blank" className="link">API</a>). Feel free to report issues, suggest features, or even submit a pull request!</p>
+              <p>This project is open source, and you can find the code on <a href="https://github.com/pokedextracker" target="_blank" className="link">GitHub</a>. Feel free to report issues, suggest features, or even submit a pull request!</p>
 
               {ctas}
 
               <div className="social">
                 <a href="https://twitter.com/PokedexTracker" target="_blank" className="link"><i className="fa fa-twitter" /></a>
+                <a href="/blog/" target="_blank" className="link"><i className="fa fa-rss" /></a>
               </div>
             </div>
           </div>
-
           <div className="footer">Made with <i className="pkicon pkicon-ball-love" /> in San Francisco</div>
         </div>
       </DocumentTitle>
