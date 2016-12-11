@@ -5,6 +5,7 @@ import { AccountComponent }  from './account';
 import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
 import { NotFoundComponent } from './not-found';
+import { ProfileComponent }  from './profile';
 import { RegisterComponent } from './register';
 import { Store }             from '../stores';
 import { TrackerComponent }  from './tracker';
@@ -19,7 +20,8 @@ export function AppComponent () {
       <Route path='/login' component={LoginComponent} />
       <Route path='/register' component={RegisterComponent} />
       <Route path='/account' component={AccountComponent} />
-      <Route path='/u/:username' component={TrackerComponent} />
+      <Route path='/u/:username' component={ProfileComponent} />
+      <Route path='/u/:username/:slug' component={TrackerComponent} />
       <Route path='*' component={NotFoundComponent} />
     </Router>
   );

@@ -51,7 +51,7 @@ export class Pokemon extends Component {
   }
 
   render () {
-    const { capture, region, session, user } = this.props;
+    const { capture, dex, region, session, user } = this.props;
 
     if (!capture) {
       return (
@@ -73,11 +73,11 @@ export class Pokemon extends Component {
       <div className={classNames(classes)}>
         <div className="set-captured" onClick={this.toggleCaptured}>
           <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
-          <i className={iconClass(capture.pokemon.national_id)} />
+          <i className={iconClass(capture.pokemon.national_id, dex)} />
           <p>#{padding(capture.pokemon.national_id, 3)}</p>
         </div>
         <div className="set-captured-mobile" onClick={this.toggleCaptured}>
-          <i className={iconClass(capture.pokemon.national_id)} />
+          <i className={iconClass(capture.pokemon.national_id, dex)} />
           <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
           <p>#{padding(capture.pokemon.national_id, 3)}</p>
         </div>

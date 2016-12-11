@@ -19,13 +19,19 @@ export class Login extends Component {
   }
 
   componentWillMount () {
-    const { checkVersion, redirectToTracker, session } = this.props;
+    const { checkVersion, redirectToProfile, session } = this.props;
 
     if (session) {
-      redirectToTracker(session.username);
+      redirectToProfile(session.username);
     }
 
     checkVersion();
+  }
+
+  scrollToTop () {
+    if (this._form) {
+      this._form.scrollTop = 0;
+    }
   }
 
   login = (e) => {
@@ -39,7 +45,10 @@ export class Login extends Component {
 
     login({ username, password })
     .then(() => ReactGA.event({ action: 'login', category: 'Session' }))
-    .catch((err) => this.setState({ ...this.state, error: err.message }));
+    .catch((err) => {
+      this.setState({ ...this.state, error: err.message });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -50,18 +59,18 @@ export class Login extends Component {
         <div className="login-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form">
+          <div className="form" ref={(c) => this._form = c}>
             <h1>Login</h1>
-            <form onSubmit={this.login}>
+            <form onSubmit={this.login} className="form-column">
               <AlertComponent message={error} type="error" />
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+                <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
                 <i className="fa fa-asterisk" />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" maxLength="72" />
+                <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" maxLength="72" />
                 <i className="fa fa-asterisk" />
               </div>
               <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
@@ -83,7 +92,7 @@ function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
     login: (payload) => dispatch(login(payload)),
-    redirectToTracker: (username) => dispatch(push(`/u/${username}`))
+    redirectToProfile: (username) => dispatch(push(`/u/${username}`))
   };
 }
 

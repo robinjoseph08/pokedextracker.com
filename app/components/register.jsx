@@ -4,13 +4,13 @@ import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }  from './alert';
-import { NavComponent }    from './nav';
-import { ReactGA }         from '../utils/analytics';
-import { ReloadComponent } from './reload';
-import { checkVersion }    from '../actions/utils';
-import { createUser }      from '../actions/user';
-import { friendCode }      from '../utils/formatting';
+import { AlertComponent }                from './alert';
+import { NavComponent }                  from './nav';
+import { ReactGA }                       from '../utils/analytics';
+import { ReloadComponent }               from './reload';
+import { checkVersion, setNotification } from '../actions/utils';
+import { createUser }                    from '../actions/user';
+import { friendCode }                    from '../utils/formatting';
 
 export class Register extends Component {
 
@@ -20,29 +20,45 @@ export class Register extends Component {
   }
 
   componentWillMount () {
-    const { checkVersion, redirectToTracker, session } = this.props;
+    const { checkVersion, redirectToProfile, session } = this.props;
 
     if (session) {
-      redirectToTracker(session.username);
+      redirectToProfile(session.username);
     }
 
     checkVersion();
   }
 
+  scrollToTop () {
+    if (this._form) {
+      this._form.scrollTop = 0;
+    }
+  }
+
   register = (e) => {
     e.preventDefault();
 
-    const { register } = this.props;
+    const { register, setNotification } = this.props;
     const username = this._username.value;
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
     const friend_code = this._friend_code.value;
+    const title = this._title.value;
+    const shiny = this._shiny.checked;
+    const generation = this._generation.value;
+    const region = parseInt(generation) === 7 ? 'alola' : 'national';
 
     this.setState({ ...this.state, error: null });
 
-    register({ username, password, password_confirm, friend_code })
-    .then(() => ReactGA.event({ action: 'register', category: 'Session' }))
-    .catch((err) => this.setState({ ...this.state, error: err.message }));
+    register({ username, password, password_confirm, friend_code, title, shiny, generation, region })
+    .then(() => {
+      ReactGA.event({ action: 'register', category: 'Session' });
+      setNotification(true);
+    })
+    .catch((err) => {
+      this.setState({ ...this.state, error: err.message });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -53,31 +69,80 @@ export class Register extends Component {
         <div className="register-container">
           <NavComponent />
           <ReloadComponent />
-          <div className="form">
+          <div className="form register" ref={(c) => this._form = c}>
             <h1>Register</h1>
             <form onSubmit={this.register}>
-              <AlertComponent message={error} type="error" />
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <i className="fa fa-asterisk" />
+              <div className="form-column">
+                <AlertComponent message={error} type="error" />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
-                <i className="fa fa-asterisk" />
+
+              <div className="form-row">
+                <div className="form-column">
+                  <h2>Account Info</h2>
+                  <div className="form-group">
+                    <label htmlFor="username">Username</label>
+                    <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+                    <i className="fa fa-asterisk" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
+                    <i className="fa fa-asterisk" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password_confirm">Confirm Password</label>
+                    <input className="form-control" ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
+                    <i className="fa fa-asterisk" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="friend_code">Friend Code</label>
+                    <input className="form-control" ref={(c) => this._friend_code = c} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
+                  </div>
+                </div>
+
+                <div className="form-column">
+                  <h2>
+                    First Dex Info
+                    <div className="tooltip">
+                      <i className="fa fa-question-circle" />
+                      <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
+                    </div>
+                  </h2>
+                  <div className="form-group">
+                    <label htmlFor="dex_title">Title</label>
+                    <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" />
+                    <i className="fa fa-asterisk" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="generation">Generation</label>
+                    <select className="form-control" ref={(c) => this._generation = c} defaultValue="7">
+                      <option value="7">Seven</option>
+                      <option value="6">Six</option>
+                    </select>
+                    <i className="fa fa-chevron-down" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="type">Type</label>
+                    <div className="radio">
+                      <label>
+                        <input type="radio" name="type" defaultChecked />
+                        <span className="radio-custom"><span></span></span>Normal
+                      </label>
+                    </div>
+                    <div className="radio">
+                      <label>
+                        <input ref={(c) => this._shiny = c} type="radio" name="type" />
+                        <span className="radio-custom"><span></span></span>Shiny
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="form-group">
-                <label htmlFor="password_confirm">Confirm Password</label>
-                <input ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
-                <i className="fa fa-asterisk" />
+
+              <div className="form-column">
+                <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
+                <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
               </div>
-              <div className="form-group">
-                <label htmlFor="friend_code">Friend Code</label>
-                <input ref={(c) => this._friend_code = c} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
-              </div>
-              <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
-              <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
             </form>
           </div>
         </div>
@@ -95,7 +160,8 @@ function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
     register: (payload) => dispatch(createUser(payload)),
-    redirectToTracker: (username) => dispatch(push(`/u/${username}`))
+    redirectToProfile: (username) => dispatch(push(`/u/${username}/`)),
+    setNotification: (value) => dispatch(setNotification(value))
   };
 }
 

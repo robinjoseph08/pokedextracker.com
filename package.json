@@ -30,11 +30,13 @@
     "react-document-title": "^2.0.2",
     "react-dom": "^15.3.1",
     "react-ga": "^2.1.2",
+    "react-modal": "^1.5.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "slug": "^0.9.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

@@ -4,7 +4,10 @@ import { connect }   from 'react-redux';
 import { ReactGA }   from '../utils/analytics';
 import { setRegion } from '../actions/tracker';
 
-const REGIONS = ['national', 'kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos'];
+const REGIONS = {
+  6: ['national', 'kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos'],
+  7: ['national', 'kanto', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola']
+};
 
 export class Region extends Component {
 
@@ -41,7 +44,11 @@ export class Region extends Component {
   }
 
   render () {
-    const { mobile, region } = this.props;
+    const { dex, mobile, region } = this.props;
+
+    if (dex.region !== 'national') {
+      return null;
+    }
 
     if (mobile) {
       let dropdown = null;
@@ -49,7 +56,7 @@ export class Region extends Component {
       if (this.state.dropdown) {
         dropdown = (
           <div className="dropdown">
-            {REGIONS.map((r) => <div key={r} style={{ display: region === r ? 'none' : 'block' }} onClick={() => this.setRegion(r)}>{r}</div>)}
+            {REGIONS[dex.generation].map((r) => <div key={r} style={{ display: region === r ? 'none' : 'block' }} onClick={() => this.setRegion(r)}>{r}</div>)}
           </div>
         );
       }
@@ -67,15 +74,15 @@ export class Region extends Component {
 
     return (
       <div className="region-filter">
-        {REGIONS.map((r) => <div key={r} className={region === r ? 'active' : ''} onClick={() => this.setRegion(r)}>{r}</div>)}
+        {REGIONS[dex.generation].map((r) => <div key={r} className={region === r ? 'active' : ''} onClick={() => this.setRegion(r)}>{r}</div>)}
       </div>
     );
   }
 
 }
 
-function mapStateToProps ({ region }) {
-  return { region };
+function mapStateToProps ({ currentDex, currentUser, region, users }) {
+  return { dex: users[currentUser].dexesBySlug[currentDex], region };
 }
 
 function mapDispatchToProps (dispatch) {

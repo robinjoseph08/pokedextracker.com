@@ -4,7 +4,7 @@ import { EvolutionsComponent } from './evolutions';
 import { iconClass }           from '../utils/pokemon';
 import { setCurrentPokemon }   from '../actions/pokemon';
 
-export function EvolutionFamily ({ family, setCurrentPokemon }) {
+export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
   let column1 = null;
   let column2 = null;
 
@@ -12,7 +12,7 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
     column1 = (
       <div className="evolution-pokemon-column">
         {family.pokemon[1].map((pokemon, i) => <a key={i} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id)} />
+          <i className={iconClass(pokemon.national_id, dex)} />
         </a>)}
       </div>
     );
@@ -22,7 +22,7 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
     column2 = (
       <div className="evolution-pokemon-column">
         {family.pokemon[2].map((pokemon, i) => <a key={i} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id)} />
+          <i className={iconClass(pokemon.national_id, dex)} />
         </a>)}
       </div>
     );
@@ -32,7 +32,7 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
     <div className="info-evolutions">
       <div className="evolution-pokemon-column">
         <a onClick={() => setCurrentPokemon(family.pokemon[0][0].national_id)}>
-          <i className={iconClass(family.pokemon[0][0].national_id)} />
+          <i className={iconClass(family.pokemon[0][0].national_id, dex)} />
         </a>
         {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
       </div>
@@ -44,10 +44,14 @@ export function EvolutionFamily ({ family, setCurrentPokemon }) {
   );
 }
 
+function mapStateToProps ({ currentDex, currentUser, users }) {
+  return { dex: users[currentUser].dexesBySlug[currentDex] };
+}
+
 function mapDispatchToProps (dispatch) {
   return {
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id))
   };
 }
 
-export const EvolutionFamilyComponent = connect(null, mapDispatchToProps)(EvolutionFamily);
+export const EvolutionFamilyComponent = connect(mapStateToProps, mapDispatchToProps)(EvolutionFamily);

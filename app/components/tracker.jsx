@@ -2,17 +2,17 @@ import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
-import { DexComponent }               from './dex';
-import { InfoComponent }              from './info';
-import { NavComponent }               from './nav';
-import { NotFoundComponent }          from './not-found';
-import { ReloadComponent }            from './reload';
-import { checkVersion }               from '../actions/utils';
-import { listCaptures }               from '../actions/capture';
-import { retrieveDex, setCurrentDex } from '../actions/dex';
-import { retrieveUser }               from '../actions/user';
-import { setCurrentPokemon }          from '../actions/pokemon';
-import { setShowScroll }              from '../actions/tracker';
+import { DexComponent }                           from './dex';
+import { InfoComponent }                          from './info';
+import { NavComponent }                           from './nav';
+import { NotFoundComponent }                      from './not-found';
+import { ReloadComponent }                        from './reload';
+import { checkVersion }                           from '../actions/utils';
+import { listCaptures }                           from '../actions/capture';
+import { retrieveDex, setCurrentDex }             from '../actions/dex';
+import { retrieveUser, setUser }                  from '../actions/user';
+import { setCurrentPokemon }                      from '../actions/pokemon';
+import { setRegion, setShowScroll, setShowShare } from '../actions/tracker';
 
 export class Tracker extends Component {
 
@@ -21,36 +21,45 @@ export class Tracker extends Component {
     this.state = { loading: false };
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.reset();
   }
 
-  componentDidUpdate ({ params: { username } }) {
-    if (username !== this.props.params.username) {
-      this.reset();
+  componentWillReceiveProps (nextProps) {
+    const { slug, username } = this.props.params;
+    const samePage = nextProps.params.username === username && nextProps.params.slug === slug;
+
+    if (!samePage) {
+      this.reset(nextProps);
     }
   }
 
-  reset () {
-    const { checkVersion, listCaptures, params: { username }, retrieveDex, retrieveUser, setCurrentDex, setCurrentPokemon, setShowScroll } = this.props;
-    const slug = 'living-dex';
+  reset (props) {
+    const { checkVersion, listCaptures, params: { slug, username }, retrieveDex, retrieveUser, setCurrentDex, setCurrentPokemon, setRegion, setShowScroll, setShowShare, setUser } = props || this.props;
 
     this.setState({ ...this.state, loading: true });
 
     checkVersion();
+    setRegion('national');
     setShowScroll(false);
-    setCurrentPokemon(1);
+    setShowShare(false);
     setCurrentDex(slug, username);
 
     retrieveUser(username)
-    .then(() => retrieveDex(slug, username))
+    .then((user) => {
+      setUser(user);
+      return retrieveDex(slug, username);
+    })
     .then((dex) => listCaptures(dex, username))
-    .then(() => this.setState({ ...this.state, loading: false }))
+    .then((captures) => {
+      setCurrentPokemon(captures[0].pokemon.national_id);
+      this.setState({ ...this.state, loading: false });
+    })
     .catch(() => this.setState({ ...this.state, loading: false }));
   }
 
   render () {
-    const { params: { username }, user } = this.props;
+    const { dex, params: { username } } = this.props;
     const { loading } = this.state;
 
     if (loading) {
@@ -61,7 +70,7 @@ export class Tracker extends Component {
       );
     }
 
-    if (!user) {
+    if (!dex) {
       return <NotFoundComponent />;
     }
 
@@ -81,8 +90,8 @@ export class Tracker extends Component {
 
 }
 
-function mapStateToProps ({ users }, { params: { username } }) {
-  return { user: users[username] };
+function mapStateToProps ({ currentDex, currentUser, users }) {
+  return { dex: users[currentUser] && users[currentUser].dexesBySlug[currentDex] };
 }
 
 function mapDispatchToProps (dispatch) {
@@ -93,7 +102,10 @@ function mapDispatchToProps (dispatch) {
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
     setCurrentDex: (slug, username) => dispatch(setCurrentDex(slug, username)),
-    setShowScroll: (show) => dispatch(setShowScroll(show))
+    setRegion: (region) => dispatch(setRegion(region)),
+    setShowScroll: (show) => dispatch(setShowScroll(show)),
+    setShowShare: (show) => dispatch(setShowShare(show)),
+    setUser: (user) => dispatch(setUser(user))
   };
 }
 

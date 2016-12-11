@@ -1,11 +1,18 @@
+import classNames from 'classnames';
+
 import { padding } from './formatting';
 
 export function htmlName (name) {
   return { __html: name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>') };
 }
 
-export function iconClass (id) {
-  return `pkicon pkicon-${padding(id, 3)}`;
+export function iconClass (id, dex) {
+  const classes = {
+    'color-shiny': dex.shiny,
+    'form-alola': dex.generation === 7
+  };
+
+  return classNames('pkicon', `pkicon-${padding(id, 3)}`, classes);
 }
 
 export function regionCheck (pokemon, region) {

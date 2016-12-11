@@ -14,19 +14,21 @@ export function tokenToUser (token) {
 }
 
 export function loadState () {
+  const notif20161210 = localStorage.getItem('notif-2016.12.10') === 'true' || undefined;
   const token = localStorage.getItem('token');
   const session = tokenToUser(token);
-  const showInfo = localStorage.getItem('showInfo');
+  const showInfo = localStorage.getItem('showInfo') === 'true' || undefined;
 
-  return { token, session, showInfo: showInfo ? showInfo === 'true' : undefined };
+  return { notification: notif20161210, token, session, showInfo };
 }
 
-export function saveState ({ showInfo, token }) {
+export function saveState ({ notification, showInfo, token }) {
   if (token) {
     localStorage.setItem('token', token);
   } else {
     localStorage.removeItem('token');
   }
 
+  localStorage.setItem('notif-2016.12.10', notification);
   localStorage.setItem('showInfo', showInfo);
 }
