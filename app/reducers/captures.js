@@ -29,8 +29,11 @@ export function captures (state = {}, action) {
         }
       };
       const index = newState[action.username].dexesBySlug[action.slug].captures.findIndex((c) => c.pokemon.national_id === action.pokemon[0]);
-      for (let i = index; i < index + action.pokemon.length; i++) {
-        newState[action.username].dexesBySlug[action.slug].captures[i].captured = action.captured;
+      for (let i = index, count = 0; count < action.pokemon.length; i++) {
+        if (action.pokemon.indexOf(newState[action.username].dexesBySlug[action.slug].captures[i].pokemon.national_id) !== -1) {
+          newState[action.username].dexesBySlug[action.slug].captures[i].captured = action.captured;
+          count++;
+        }
       }
       return newState;
     default:
