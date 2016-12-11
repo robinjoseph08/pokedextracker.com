@@ -236,6 +236,10 @@ nav {
     border: 2px solid $success;
     color: $success;
   }
+
+  &.form-confirm {
+    margin-top: 40px;
+  }
 }
 
 .form {
@@ -298,6 +302,10 @@ form {
 
   .btn:not(.btn-inline) {
     margin-top: 40px;
+
+    &.form-confirm {
+      margin-top: 0;
+    }
   }
 }
 
@@ -395,17 +403,19 @@ select {
   }
 
   .fa {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    font-size: 10px;
-    color: $brand-primary;
-  }
+    &:last-child {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      font-size: 10px;
+      color: $brand-primary;
+    }
 
-  .fa-chevron-down {
-    bottom: 17px;
-    font-size: 9px;
-    color: $brand-secondary;
+    &.fa-chevron-down {
+      bottom: 17px;
+      font-size: 9px;
+      color: $brand-secondary;
+    }
   }
 
   .form-note {
@@ -419,6 +429,33 @@ select {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+}
+
+.form-warning {
+  @include flexbox();
+  @include align-items(center);
+
+  position: absolute;
+  height: 100%;
+  bottom: 0;
+  left: -23px;
+  padding-top: 21px;
+
+  .tooltip {
+    margin-left: 0;
+
+    .fa {
+      color: $error;
+    }
+
+    .tooltip-text {
+      background-color: darken($error, 5%);
+
+      &::after {
+        border-color: darken($error, 5%) transparent transparent transparent;
+      }
+    }
   }
 }
 
@@ -556,6 +593,7 @@ reload div {
 .modal {
   @include overflow-y-scroll();
 
+  position: relative;
   margin: 100px auto;
   width: 500px;
   border: 2px solid $brand-secondary-light;
@@ -595,5 +633,13 @@ reload div {
   .modal {
     margin-top: 0;
     width: 100%;
+  }
+
+  .form-warning .tooltip .tooltip-text {
+    margin-left: -20px;
+
+    &::after {
+      left: 20px;
+    }
   }
 }

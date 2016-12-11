@@ -13,11 +13,31 @@ export function createDex ({ payload, username }) {
   };
 }
 
+export function deleteDex (slug, username) {
+  return (dispatch) => {
+    dispatch(checkVersion());
+
+    return API.delete(`${Config.API_HOST}/users/${username}/dexes/${slug}`);
+  };
+}
+
 export function retrieveDex (slug, username) {
   return (dispatch) => {
     dispatch(checkVersion());
 
     return API.get(`${Config.API_HOST}/users/${username}/dexes/${slug}`)
+    .then((dex) => {
+      dispatch(setDex(dex, username));
+      return dex;
+    });
+  };
+}
+
+export function updateDex ({ payload, slug, username }) {
+  return (dispatch) => {
+    dispatch(checkVersion());
+
+    return API.post(`${Config.API_HOST}/users/${username}/dexes/${slug}`, payload)
     .then((dex) => {
       dispatch(setDex(dex, username));
       return dex;
