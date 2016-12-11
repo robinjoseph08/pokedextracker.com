@@ -1,3 +1,52 @@
+## 2.0.0 (2016-12-10)
+
+##### Chores
+
+* **webpack:** exclude node_modules from babel to speed things up ([2025792d](https://github.com/robinjoseph08/pokedextracker.com/commit/2025792dc70ccf92b8c39a5d25b1ab5a96784807))
+* **config:** add local config ([e45c107e](https://github.com/robinjoseph08/pokedextracker.com/commit/e45c107e7fe788047d8563b723d558e9f5301ac1))
+
+##### New Features
+
+* **home:** update home content ([bbefb4dd](https://github.com/robinjoseph08/pokedextracker.com/commit/bbefb4dde9dd71284e9cee311c4265898a152efd))
+* **notification:** add base of notification ([09a4f38c](https://github.com/robinjoseph08/pokedextracker.com/commit/09a4f38ce1706815c151b1bf805c653d0eaad43a))
+* **dexes:**
+  * add edit dex modal ([88ba0812](https://github.com/robinjoseph08/pokedextracker.com/commit/88ba0812f6e8d19e5e09c2e61770fdadd89b872b))
+  * add shiny dex indicator ([c374f09a](https://github.com/robinjoseph08/pokedextracker.com/commit/c374f09a5c93976de27d85a7340d8ac5ffebabc0))
+  * use shiny sprites for shiny dexes ([e5329cb9](https://github.com/robinjoseph08/pokedextracker.com/commit/e5329cb94d559a2b5cbdcc13aba994ab3c0a7fbe))
+  * add dexes to signup ([b8174c38](https://github.com/robinjoseph08/pokedextracker.com/commit/b8174c380c5f096182e369dac85b5a5a40096e83))
+* **tracker:**
+  * add indicator for gens ([0f672666](https://github.com/robinjoseph08/pokedextracker.com/commit/0f6726661042e7db9c49bd8eb6a0552b7f2a728c))
+  * support gen 7 and regional dexes ([66b02709](https://github.com/robinjoseph08/pokedextracker.com/commit/66b027096bd9f3103b448114db1de93ed7c3bed9))
+* **pokesprite:** update for gen 7 ([2037a5a3](https://github.com/robinjoseph08/pokedextracker.com/commit/2037a5a3d582a83b7ae61b6ddd80b7345508dafb))
+* **nav:** update nav for multiple dexes ([a427272a](https://github.com/robinjoseph08/pokedextracker.com/commit/a427272a0e5e3dd9882c9c326f9bcbe987d10f7a))
+* **dex:** add create dex modal ([4128d4ad](https://github.com/robinjoseph08/pokedextracker.com/commit/4128d4ad54092e9209a42b35b9a976de22d390ba))
+* **profile:**
+  * connect profile page ([b1bdcffc](https://github.com/robinjoseph08/pokedextracker.com/commit/b1bdcffc5662171db57999588e0ef64deb81bab5))
+  * add profile page ([ee4940a1](https://github.com/robinjoseph08/pokedextracker.com/commit/ee4940a11ef6381c4c0c2586d502053e76b0a425))
+
+##### Bug Fixes
+
+* **404:** gracefully 404 on the tracker page ([4e84fccc](https://github.com/robinjoseph08/pokedextracker.com/commit/4e84fccc26cfedcf4e65a4f3b77a2bfc14c24b87))
+* **mark-all:** fix mark all button for partially marked box ([fe093982](https://github.com/robinjoseph08/pokedextracker.com/commit/fe0939828c53ec59e7d161e7948d81a3df83a1a7))
+* **notification:**
+  * mark notification as read if registering ([dacd1c20](https://github.com/robinjoseph08/pokedextracker.com/commit/dacd1c204f3ca796ec8c408a202dbf3d303e236d))
+  * add styles ([ce30a66c](https://github.com/robinjoseph08/pokedextracker.com/commit/ce30a66c2207dddd182f124165f31f85892a859c))
+* **sprites:** use real gen 7 shiny sprites ([bff0eec1](https://github.com/robinjoseph08/pokedextracker.com/commit/bff0eec1c5617ef105ccf1e6a2f9f1c49c267f18))
+* **dexes:**
+  * add functionality to edit/delete dex modal ([8f54697e](https://github.com/robinjoseph08/pokedextracker.com/commit/8f54697e66dcd751f93c40a2a7a2f353b335d23f))
+  * form style updates ([24ef3cc0](https://github.com/robinjoseph08/pokedextracker.com/commit/24ef3cc0726a5667014dbc770f443dceb0af6f62))
+* **generation:** default to gen 7 ([29045018](https://github.com/robinjoseph08/pokedextracker.com/commit/290450186621e26d84ac593d1b5a348ce4e77cc9))
+* **share:** fix share styles ([2a438168](https://github.com/robinjoseph08/pokedextracker.com/commit/2a438168ade22d2f87945d083fc749b875ed8a40))
+* **nav:**
+  * style updates ([ca29f57b](https://github.com/robinjoseph08/pokedextracker.com/commit/ca29f57b5b27506985e3f2f22a24501f8e2526ae))
+  * load user for nav into sessionUser ([38f5a9bb](https://github.com/robinjoseph08/pokedextracker.com/commit/38f5a9bbc528258a8817baa45eb859ab8518b12c))
+* **dex:**
+  * add url preview to dex create ([1d867242](https://github.com/robinjoseph08/pokedextracker.com/commit/1d8672425733be59089a994dc8e41df000c55cfa))
+  * create dex modal fixes ([43dec59a](https://github.com/robinjoseph08/pokedextracker.com/commit/43dec59aeebb0901cce437280d6cb1c813142c06))
+  * modal styles ([d62bb962](https://github.com/robinjoseph08/pokedextracker.com/commit/d62bb9623ba3740a2591ad93c269429559a36e71))
+* **forms:** scroll to top on form error ([b2a5cd32](https://github.com/robinjoseph08/pokedextracker.com/commit/b2a5cd327092b02ad2466ac66cd3d48b74c62394))
+* **register:** redirect to first dex page instead of profile ([46a328a2](https://github.com/robinjoseph08/pokedextracker.com/commit/46a328a26160ba35825830441aa486b03c4eea5f))
+
 #### 1.11.3 (2016-11-26)
 
 ##### Bug Fixes
