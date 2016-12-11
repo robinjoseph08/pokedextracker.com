@@ -4,13 +4,13 @@ import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }  from './alert';
-import { NavComponent }    from './nav';
-import { ReactGA }         from '../utils/analytics';
-import { ReloadComponent } from './reload';
-import { checkVersion }    from '../actions/utils';
-import { createUser }      from '../actions/user';
-import { friendCode }      from '../utils/formatting';
+import { AlertComponent }                from './alert';
+import { NavComponent }                  from './nav';
+import { ReactGA }                       from '../utils/analytics';
+import { ReloadComponent }               from './reload';
+import { checkVersion, setNotification } from '../actions/utils';
+import { createUser }                    from '../actions/user';
+import { friendCode }                    from '../utils/formatting';
 
 export class Register extends Component {
 
@@ -38,7 +38,7 @@ export class Register extends Component {
   register = (e) => {
     e.preventDefault();
 
-    const { register } = this.props;
+    const { register, setNotification } = this.props;
     const username = this._username.value;
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
@@ -51,7 +51,10 @@ export class Register extends Component {
     this.setState({ ...this.state, error: null });
 
     register({ username, password, password_confirm, friend_code, title, shiny, generation, region })
-    .then(() => ReactGA.event({ action: 'register', category: 'Session' }))
+    .then(() => {
+      ReactGA.event({ action: 'register', category: 'Session' });
+      setNotification(true);
+    })
     .catch((err) => {
       this.setState({ ...this.state, error: err.message });
       this.scrollToTop();
@@ -157,7 +160,8 @@ function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
     register: (payload) => dispatch(createUser(payload)),
-    redirectToProfile: (username) => dispatch(push(`/u/${username}/`))
+    redirectToProfile: (username) => dispatch(push(`/u/${username}/`)),
+    setNotification: (value) => dispatch(setNotification(value))
   };
 }
 
