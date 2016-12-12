@@ -57,7 +57,7 @@ export class Nav extends Component {
         <nav>
           <Link to="/">Pokédex Tracker</Link>
           <div className="dropdown">
-            <a>{session.username} <i className="fa fa-caret-down" /></a>
+            <a href="#">{session.username} <i className="fa fa-caret-down" /></a>
             <ul>
               {user.dexes.map((dex) => <li key={dex.id}><Link to={`/u/${session.username}/${dex.slug}`}><i className="fa fa-th" /> {dex.title}</Link></li>)}
 
