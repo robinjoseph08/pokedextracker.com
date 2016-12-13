@@ -1,3 +1,9 @@
+#### 2.0.1 (2016-12-12)
+
+##### Bug Fixes
+
+* **nav:** fix dropdown for mobile ([3948623a](https://github.com/robinjoseph08/pokedextracker.com/commit/3948623a136b58d9b05e75a194dfe9aef136a364))
+
 ## 2.0.0 (2016-12-10)
 
 ##### Chores
