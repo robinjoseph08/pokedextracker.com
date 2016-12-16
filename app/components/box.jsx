@@ -7,7 +7,7 @@ import { padding }                from '../utils/formatting';
 export const BOX_SIZE = 30;
 
 export function Box ({ captures, dex }) {
-  const empties = Array.from({ length: BOX_SIZE - captures.length });
+  const empties = Array.from({ length: BOX_SIZE - captures.length }).map((_, i) => i);
 
   return (
     <div className="box">
@@ -16,8 +16,8 @@ export function Box ({ captures, dex }) {
         <MarkAllButtonComponent captures={captures} />
       </div>
       <div className="box-container">
-        {captures.map((capture, i) => <PokemonComponent key={i} capture={capture} />)}
-        {empties.map((capture, i) => <PokemonComponent key={i} capture={capture} />)}
+        {captures.map((capture) => <PokemonComponent key={capture.pokemon.national_id} capture={capture} />)}
+        {empties.map((index) => <PokemonComponent key={index} capture={null} />)}
       </div>
     </div>
   );
