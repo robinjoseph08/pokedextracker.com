@@ -85,7 +85,7 @@ export class Profile extends Component {
             <div className="wrapper">
               <header>
                 <NotificationComponent />
-                <HeaderComponent profile={true} />
+                <HeaderComponent profile />
                 <FriendCodeComponent />
               </header>
 
