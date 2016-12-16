@@ -36,7 +36,7 @@
     "react/prefer-stateless-function": [2, { "ignorePureComponents": true }],
     "react/require-render-return": 2,
     "react/self-closing-comp": 2,
-    "react/sort-comp": 0,
+    "react/sort-comp": 2,
     "array-bracket-spacing": [2, "never"],
     "arrow-parens": 2,
     "arrow-spacing": 2,

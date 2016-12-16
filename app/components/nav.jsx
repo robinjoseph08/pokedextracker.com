@@ -8,14 +8,6 @@ import { setSessionUser, setToken } from '../actions/session';
 
 export class Nav extends Component {
 
-  signOut = () => {
-    const { clearToken } = this.props;
-
-    ReactGA.event({ action: 'sign out', category: 'Session' });
-
-    clearToken();
-  }
-
   constructor (props) {
     super(props);
     this.state = { loading: false };
@@ -38,6 +30,14 @@ export class Nav extends Component {
       })
       .catch(() => this.setState({ ...this.state, loading: false }));
     }
+  }
+
+  signOut = () => {
+    const { clearToken } = this.props;
+
+    ReactGA.event({ action: 'sign out', category: 'Session' });
+
+    clearToken();
   }
 
   render () {
