@@ -126,13 +126,13 @@ export class Register extends Component {
                     <div className="radio">
                       <label>
                         <input type="radio" name="type" defaultChecked />
-                        <span className="radio-custom"><span></span></span>Normal
+                        <span className="radio-custom"><span /></span>Normal
                       </label>
                     </div>
                     <div className="radio">
                       <label>
                         <input ref={(c) => this._shiny = c} type="radio" name="type" />
-                        <span className="radio-custom"><span></span></span>Shiny
+                        <span className="radio-custom"><span /></span>Shiny
                       </label>
                     </div>
                   </div>

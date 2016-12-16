@@ -46,7 +46,7 @@ export class Info extends Component {
             <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`} />
           </div>
 
-          <div className="info-main"></div>
+          <div className="info-main" />
         </div>
       );
     }
@@ -60,7 +60,7 @@ export class Info extends Component {
         <div className="info-main">
           <div className="info-header">
             <i className={iconClass(pokemon.national_id, dex)} />
-            <h1 dangerouslySetInnerHTML={htmlName(pokemon.name)}></h1>
+            <h1 dangerouslySetInnerHTML={htmlName(pokemon.name)} />
             <h2>#{padding(pokemon.national_id, 3)}</h2>
           </div>
 
