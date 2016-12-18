@@ -10,7 +10,7 @@ export function Notification ({ notification, setNotification }) {
   return (
     <div className="alert alert-muted">
       <i className="fa fa-times" onClick={() => setNotification(true)} />
-      <p>We've updated with Sun & Moon support, and much more! Read more about the update <a href="https://pokedextracker.com/blog/sun-moon-support-and-more/" target="_blank">on our blog</a>.</p>
+      <p>We've updated with Sun & Moon support, and much more! Read more about the update <a href="https://pokedextracker.com/blog/sun-moon-support-and-more/" target="_blank" rel="noopener noreferrer">on our blog</a>.</p>
     </div>
   );
 }

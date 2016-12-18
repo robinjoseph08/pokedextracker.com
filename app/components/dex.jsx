@@ -49,7 +49,7 @@ export class Dex extends Component {
           <RegionComponent />
           <div className="percentage">
             <ProgressComponent caught={caught} total={total} />
-            <RegionComponent mobile={true} />
+            <RegionComponent mobile />
           </div>
           {groups.map((group) => <BoxComponent key={group[0].pokemon.national_id} captures={group} />)}
         </div>

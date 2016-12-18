@@ -1,7 +1,8 @@
 import { capitalize } from '../utils/formatting';
 
 export function EvolutionsComponent ({ evolutions }) {
-  const elements = evolutions.map((evolution, i) => {
+  const elements = evolutions.map((evolution) => {
+    const key = `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
     let trigger = null;
     let notes = null;
 
@@ -30,7 +31,7 @@ export function EvolutionsComponent ({ evolutions }) {
     }
 
     return (
-      <div key={i} className="evolution-trigger">
+      <div key={key} className="evolution-trigger">
         <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`} />
         <div>
           {trigger}
