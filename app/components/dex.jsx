@@ -9,6 +9,7 @@ import { FriendCodeComponent }                                     from './frien
 import { HeaderComponent }                                         from './header';
 import { NotificationComponent }                                   from './notification';
 import { ProgressComponent }                                       from './progress';
+import { FiltersComponent }                                        from './filters';
 import { ReactGA }                                                 from '../utils/analytics';
 import { RegionComponent }                                         from './region';
 import { groupBoxes, regionCheck }                                 from '../utils/pokemon';
@@ -48,6 +49,7 @@ export class Dex extends Component {
             <ProgressComponent caught={caught} total={total} />
             <RegionComponent mobile />
           </div>
+          <FiltersComponent />
           {boxes.map((box) => <BoxComponent key={box[0].pokemon.id} captures={box} />)}
         </div>
       </div>
@@ -65,10 +67,6 @@ function mapStateToProps ({ currentDex, currentUser, region, showScroll, users }
   };
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    setShowScroll: (show) => dispatch(setShowScroll(show))
-  };
-}
+const mapDispatchToProps = { setShowScroll };
 
 export const DexComponent = connect(mapStateToProps, mapDispatchToProps)(Dex);

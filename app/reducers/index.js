@@ -15,6 +15,7 @@ import { showScroll }     from './show-scroll';
 import { showShare }      from './show-share';
 import { token }          from './token';
 import { users }          from './users';
+import { filters }        from './filters';
 
 export const reducer = combineReducers({
   currentDex,
@@ -31,5 +32,6 @@ export const reducer = combineReducers({
   showScroll,
   showShare,
   token,
-  users
+  users,
+  filters
 });
