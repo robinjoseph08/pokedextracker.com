@@ -38,6 +38,7 @@
     "slug": "^0.9.1"
   },
   "devDependencies": {
+    "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
     "babel-polyfill": "^6.5.0",
