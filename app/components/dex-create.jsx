@@ -12,7 +12,17 @@ export class DexCreate extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null };
+    this.state = { error: null, generation: 7, region: 'national' };
+  }
+
+  onChange = (e) => {
+    const generation = parseInt(e.target.value);
+
+    if (generation === 6) {
+      this.setState({ region: 'national' });
+    }
+
+    this.setState({ generation });
   }
 
   scrollToTop () {
@@ -22,7 +32,7 @@ export class DexCreate extends Component {
   }
 
   onRequestClose = () => {
-    this.setState({ error: null, url: null });
+    this.setState({ error: null, url: null, generation: 7, region: 'national' });
     this.props.onRequestClose();
   }
 
@@ -30,10 +40,9 @@ export class DexCreate extends Component {
     e.preventDefault();
 
     const { createDex, redirect, session } = this.props;
+    const { generation, region } = this.state;
     const title = this._title.value;
     const shiny = this._shiny.checked;
-    const generation = this._generation.value;
-    const region = parseInt(generation) === 7 ? 'alola' : 'national';
     const payload = {
       username: session.username,
       payload: { title, shiny, generation, region }
@@ -55,7 +64,7 @@ export class DexCreate extends Component {
 
   render () {
     const { isOpen, session } = this.props;
-    const { error, url } = this.state;
+    const { error, generation, region, url } = this.state;
 
     return (
       <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose}>
@@ -66,16 +75,31 @@ export class DexCreate extends Component {
             <div className="form-group">
               <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex', { lower: true })}</div>
               <label htmlFor="dex_title">Title</label>
-              <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" onChange={() => this.setState({ ...this.state, url: this._title.value })} />
+              <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" onChange={() => this.setState({ url: this._title.value })} />
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">
               <label htmlFor="generation">Generation</label>
-              <select className="form-control" ref={(c) => this._generation = c} defaultValue="7">
+              <select className="form-control" onChange={this.onChange} value={generation}>
                 <option value="7">Seven</option>
                 <option value="6">Six</option>
               </select>
               <i className="fa fa-chevron-down" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="region">Regionality</label>
+              <div className="radio">
+                <label>
+                  <input type="radio" name="region" checked={region === 'national'} value="national" onChange={() => this.setState({ region: 'national' })} />
+                  <span className="radio-custom"><span /></span>National
+                </label>
+              </div>
+              <div className={`radio ${generation === 6 ? 'disabled' : ''}`}>
+                <label title={generation === 6 ? 'Regional dexes only supported for Gen 7.' : ''}>
+                  <input type="radio" name="region" checked={region === 'alola'} disabled={generation === 6} value="alola" onChange={() => this.setState({ region: 'alola' })} />
+                  <span className="radio-custom"><span /></span>Regional
+                </label>
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="type">Type</label>
