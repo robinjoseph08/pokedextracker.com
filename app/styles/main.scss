@@ -425,6 +425,18 @@ select {
         margin: -5px 0 0 -5px;
       }
     }
+
+    &.disabled {
+      color: $gray-medium;
+
+      .radio-custom {
+        border: 1px solid $gray-light;
+      }
+
+      label {
+        cursor: not-allowed;
+      }
+    }
   }
 
   .fa {
