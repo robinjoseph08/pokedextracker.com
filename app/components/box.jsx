@@ -8,11 +8,18 @@ export const BOX_SIZE = 30;
 
 export function Box ({ captures, dex }) {
   const empties = Array.from({ length: BOX_SIZE - captures.length }).map((_, i) => i);
+  const firstPokemon = captures[0].pokemon;
+  const lastPokemon = captures[captures.length - 1].pokemon;
+  let title = <h1>{padding(firstPokemon[`${dex.region}_id`], 3)} - {padding(lastPokemon[`${dex.region}_id`], 3)}</h1>;
+
+  if (firstPokemon.box) {
+    title = <h1>{firstPokemon.box}</h1>;
+  }
 
   return (
     <div className="box">
       <div className="box-header">
-        <h1>{padding(captures[0].pokemon[`${dex.region}_id`], 3)} - {padding(captures[captures.length - 1].pokemon[`${dex.region}_id`], 3)}</h1>
+        {title}
         <MarkAllButtonComponent captures={captures} />
       </div>
       <div className="box-container">
