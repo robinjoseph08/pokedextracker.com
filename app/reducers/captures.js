@@ -28,9 +28,9 @@ export function captures (state = {}, action) {
           }
         }
       };
-      const index = newState[action.username].dexesBySlug[action.slug].captures.findIndex((c) => c.pokemon.national_id === action.pokemon[0]);
+      const index = newState[action.username].dexesBySlug[action.slug].captures.findIndex((c) => c.pokemon.id === action.pokemon[0]);
       for (let i = index, count = 0; count < action.pokemon.length; i++) {
-        if (action.pokemon.indexOf(newState[action.username].dexesBySlug[action.slug].captures[i].pokemon.national_id) !== -1) {
+        if (action.pokemon.indexOf(newState[action.username].dexesBySlug[action.slug].captures[i].pokemon.id) !== -1) {
           newState[action.username].dexesBySlug[action.slug].captures[i].captured = action.captured;
           count++;
         }

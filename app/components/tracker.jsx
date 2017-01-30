@@ -11,7 +11,7 @@ import { checkVersion }                           from '../actions/utils';
 import { listCaptures }                           from '../actions/capture';
 import { retrieveDex, setCurrentDex }             from '../actions/dex';
 import { retrieveUser, setUser }                  from '../actions/user';
-import { setCurrentPokemon }                      from '../actions/pokemon';
+import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
 import { setRegion, setShowScroll, setShowShare } from '../actions/tracker';
 
 export class Tracker extends Component {
@@ -35,11 +35,25 @@ export class Tracker extends Component {
   }
 
   reset (props) {
-    const { checkVersion, listCaptures, params: { slug, username }, retrieveDex, retrieveUser, setCurrentDex, setCurrentPokemon, setRegion, setShowScroll, setShowShare, setUser } = props || this.props;
+    const {
+      checkVersion,
+      clearPokemon,
+      listCaptures,
+      params: { slug, username },
+      retrieveDex,
+      retrieveUser,
+      setCurrentDex,
+      setCurrentPokemon,
+      setRegion,
+      setShowScroll,
+      setShowShare,
+      setUser
+    } = props || this.props;
 
     this.setState({ ...this.state, loading: true });
 
     checkVersion();
+    clearPokemon();
     setRegion('national');
     setShowScroll(false);
     setShowShare(false);
@@ -52,7 +66,7 @@ export class Tracker extends Component {
     })
     .then((dex) => listCaptures(dex, username))
     .then((captures) => {
-      setCurrentPokemon(captures[0].pokemon.national_id);
+      setCurrentPokemon(captures[0].pokemon.id);
       this.setState({ ...this.state, loading: false });
     })
     .catch(() => this.setState({ ...this.state, loading: false }));
@@ -97,6 +111,7 @@ function mapStateToProps ({ currentDex, currentUser, users }) {
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
+    clearPokemon: () => dispatch(clearPokemon()),
     listCaptures: (dex, username) => dispatch(listCaptures(dex, username)),
     retrieveDex: (slug, username) => dispatch(retrieveDex(slug, username)),
     retrieveUser: (username) => dispatch(retrieveUser(username)),

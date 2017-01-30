@@ -20,10 +20,10 @@ export class Info extends Component {
   }
 
   reset () {
-    const { currentPokemon, pokemon, retrievePokemon } = this.props;
+    const { currentPokemon, dex, pokemon, retrievePokemon } = this.props;
 
     if (!pokemon) {
-      retrievePokemon(currentPokemon);
+      retrievePokemon(currentPokemon, { generation: dex.generation, region: dex.region });
     }
   }
 
@@ -59,7 +59,7 @@ export class Info extends Component {
 
         <div className="info-main">
           <div className="info-header">
-            <i className={iconClass(pokemon.national_id, dex)} />
+            <i className={iconClass(pokemon, dex)} />
             <h1 dangerouslySetInnerHTML={htmlName(pokemon.name)} />
             <h2>#{padding(pokemon.national_id, 3)}</h2>
           </div>
@@ -85,7 +85,7 @@ function mapStateToProps ({ currentDex, currentUser, currentPokemon, pokemon, sh
 
 function mapDispatchToProps (dispatch) {
   return {
-    retrievePokemon: (id) => dispatch(retrievePokemon(id)),
+    retrievePokemon: (id, query) => dispatch(retrievePokemon(id, query)),
     setShowInfo: (show) => dispatch(setShowInfo(show))
   };
 }
