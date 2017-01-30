@@ -1,3 +1,27 @@
+### 2.1.0 (2017-1-29)
+
+##### Documentation Changes
+
+* **readme:** update travis badge ([35e3de70](https://github.com/robinjoseph08/pokedextracker.com/commit/35e3de703ffd50744b37f6c5fe9ed4db6a814f8b))
+
+##### New Features
+
+* **notif:** remove 2016-12-10 notif ([8bbd8d08](https://github.com/robinjoseph08/pokedextracker.com/commit/8bbd8d08a6827e9ff66df984dbd9d317ca355bc1))
+
+##### Refactors
+
+* **pokemon:** use pokemon.id instead of pokemon.national_id ([b0583224](https://github.com/robinjoseph08/pokedextracker.com/commit/b058322451de3e0b0ce7b663dcc3d53e8c374f72))
+
+##### Code Style Changes
+
+* **lint:**
+  * enforce react/sort-comp lint rule ([2f9d3b4f](https://github.com/robinjoseph08/pokedextracker.com/commit/2f9d3b4f9f5410110f0b2dd0e9606f7401b657c7))
+  * enforce react/self-closing-comp lint rule ([c3f23992](https://github.com/robinjoseph08/pokedextracker.com/commit/c3f23992e9fec40de011c6e17f444802db7ee02e))
+  * enforce react/no-array-index-key lint rule ([15166acb](https://github.com/robinjoseph08/pokedextracker.com/commit/15166acb074dd189e0d72d150a13da220339de03))
+  * enforce react/jsx-no-target-blank lint rule ([c3a15921](https://github.com/robinjoseph08/pokedextracker.com/commit/c3a15921239637b268076837c2e734169895e5aa))
+  * enforce react/jsx-boolean-value lint rule ([bef5a621](https://github.com/robinjoseph08/pokedextracker.com/commit/bef5a6217e5f34bc1f8085847ecf73f461c238ae))
+  * update eslint-plugin-react and enable common rules ([546012cf](https://github.com/robinjoseph08/pokedextracker.com/commit/546012cfba30b0c763eaee7707726cc499150cef))
+
 #### 2.0.1 (2016-12-12)
 
 ##### Bug Fixes
