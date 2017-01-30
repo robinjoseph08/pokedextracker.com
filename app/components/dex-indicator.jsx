@@ -14,6 +14,7 @@ export function DexIndicatorComponent ({ dex }) {
   return (
     <div className="dex-indicator">
       {shiny}
+      <span className="label">{dex.region === 'national' ? 'National' : 'Regional'}</span>
       <span className="label">Gen {dex.generation}</span>
     </div>
   );
