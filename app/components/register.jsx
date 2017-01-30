@@ -16,7 +16,7 @@ export class Register extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null };
+    this.state = { error: null, generation: 7, region: 'national' };
   }
 
   componentWillMount () {
@@ -29,6 +29,16 @@ export class Register extends Component {
     checkVersion();
   }
 
+  onChange = (e) => {
+    const generation = parseInt(e.target.value);
+
+    if (generation === 6) {
+      this.setState({ region: 'national' });
+    }
+
+    this.setState({ generation });
+  }
+
   scrollToTop () {
     if (this._form) {
       this._form.scrollTop = 0;
@@ -39,16 +49,15 @@ export class Register extends Component {
     e.preventDefault();
 
     const { register, setNotification } = this.props;
+    const { generation, region } = this.state;
     const username = this._username.value;
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
     const friend_code = this._friend_code.value;
     const title = this._title.value;
     const shiny = this._shiny.checked;
-    const generation = this._generation.value;
-    const region = parseInt(generation) === 7 ? 'alola' : 'national';
 
-    this.setState({ ...this.state, error: null });
+    this.setState({ error: null });
 
     register({ username, password, password_confirm, friend_code, title, shiny, generation, region })
     .then(() => {
@@ -56,13 +65,13 @@ export class Register extends Component {
       setNotification(true);
     })
     .catch((err) => {
-      this.setState({ ...this.state, error: err.message });
+      this.setState({ error: err.message });
       this.scrollToTop();
     });
   }
 
   render () {
-    const { error } = this.state;
+    const { error, generation, region } = this.state;
 
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
@@ -115,11 +124,26 @@ export class Register extends Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="generation">Generation</label>
-                    <select className="form-control" ref={(c) => this._generation = c} defaultValue="7">
+                    <select className="form-control" onChange={this.onChange} value={generation}>
                       <option value="7">Seven</option>
                       <option value="6">Six</option>
                     </select>
                     <i className="fa fa-chevron-down" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="region">Regionality</label>
+                    <div className="radio">
+                      <label>
+                        <input type="radio" name="region" checked={region === 'national'} value="national" onChange={() => this.setState({ region: 'national' })} />
+                        <span className="radio-custom"><span /></span>National
+                      </label>
+                    </div>
+                    <div className={`radio ${generation === 6 ? 'disabled' : ''}`}>
+                      <label title={generation === 6 ? 'Regional dexes only supported for Gen 7.' : ''}>
+                        <input type="radio" name="region" checked={region === 'alola'} disabled={generation === 6} value="alola" onChange={() => this.setState({ region: 'alola' })} />
+                        <span className="radio-custom"><span /></span>Regional
+                      </label>
+                    </div>
                   </div>
                   <div className="form-group">
                     <label htmlFor="type">Type</label>
