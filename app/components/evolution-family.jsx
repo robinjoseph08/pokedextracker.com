@@ -11,8 +11,8 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
   if (family.pokemon.length > 1) {
     column1 = (
       <div className="evolution-pokemon-column">
-        {family.pokemon[1].map((pokemon) => <a key={pokemon.national_id} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id, dex)} />
+        {family.pokemon[1].map((pokemon) => <a key={pokemon.id} onClick={() => setCurrentPokemon(pokemon.id)}>
+          <i className={iconClass(pokemon, dex)} />
         </a>)}
       </div>
     );
@@ -21,8 +21,8 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
   if (family.pokemon.length > 2) {
     column2 = (
       <div className="evolution-pokemon-column">
-        {family.pokemon[2].map((pokemon) => <a key={pokemon.national_id} onClick={() => setCurrentPokemon(pokemon.national_id)}>
-          <i className={iconClass(pokemon.national_id, dex)} />
+        {family.pokemon[2].map((pokemon) => <a key={pokemon.id} onClick={() => setCurrentPokemon(pokemon.id)}>
+          <i className={iconClass(pokemon, dex)} />
         </a>)}
       </div>
     );
@@ -31,8 +31,8 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
   return (
     <div className="info-evolutions">
       <div className="evolution-pokemon-column">
-        <a onClick={() => setCurrentPokemon(family.pokemon[0][0].national_id)}>
-          <i className={iconClass(family.pokemon[0][0].national_id, dex)} />
+        <a onClick={() => setCurrentPokemon(family.pokemon[0][0].id)}>
+          <i className={iconClass(family.pokemon[0][0], dex)} />
         </a>
         {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
       </div>

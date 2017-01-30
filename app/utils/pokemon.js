@@ -6,13 +6,13 @@ export function htmlName (name) {
   return { __html: name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>') };
 }
 
-export function iconClass (id, dex) {
+export function iconClass ({ national_id: nationalId }, dex) {
   const classes = {
     'color-shiny': dex.shiny,
     'form-alola': dex.generation === 7
   };
 
-  return classNames('pkicon', `pkicon-${padding(id, 3)}`, classes);
+  return classNames('pkicon', `pkicon-${padding(nationalId, 3)}`, classes);
 }
 
 export function regionCheck (pokemon, region) {

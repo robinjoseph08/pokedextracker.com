@@ -16,7 +16,7 @@ export function Box ({ captures, dex }) {
         <MarkAllButtonComponent captures={captures} />
       </div>
       <div className="box-container">
-        {captures.map((capture) => <PokemonComponent key={capture.pokemon.national_id} capture={capture} />)}
+        {captures.map((capture) => <PokemonComponent key={capture.pokemon.id} capture={capture} />)}
         {empties.map((index) => <PokemonComponent key={index} capture={null} />)}
       </div>
     </div>

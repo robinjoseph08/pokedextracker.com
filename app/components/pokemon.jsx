@@ -17,7 +17,7 @@ export class Pokemon extends Component {
     if (regionCheck(capture.pokemon, region)) {
       ReactGA.event({ action: 'show info', category: 'Pokemon', label: capture.pokemon.name });
 
-      setCurrentPokemon(capture.pokemon.national_id);
+      setCurrentPokemon(capture.pokemon.id);
       setShowInfo(true);
     }
   }
@@ -29,7 +29,7 @@ export class Pokemon extends Component {
       return;
     }
 
-    const payload = { dex: dex.id, pokemon: [capture.pokemon.national_id] };
+    const payload = { dex: dex.id, pokemon: [capture.pokemon.id] };
 
     Promise.resolve()
     .then(() => {
@@ -73,11 +73,11 @@ export class Pokemon extends Component {
       <div className={classNames(classes)}>
         <div className="set-captured" onClick={this.toggleCaptured}>
           <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
-          <i className={iconClass(capture.pokemon.national_id, dex)} />
+          <i className={iconClass(capture.pokemon, dex)} />
           <p>#{padding(capture.pokemon.national_id, 3)}</p>
         </div>
         <div className="set-captured-mobile" onClick={this.toggleCaptured}>
-          <i className={iconClass(capture.pokemon.national_id, dex)} />
+          <i className={iconClass(capture.pokemon, dex)} />
           <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
           <p>#{padding(capture.pokemon.national_id, 3)}</p>
         </div>

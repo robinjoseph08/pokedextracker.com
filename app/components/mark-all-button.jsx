@@ -16,7 +16,7 @@ export class MarkAllButton extends Component {
   toggleCaptured = () => {
     const { captures, createCaptures, currentDex, deleteCaptures, dex, region, user } = this.props;
     const deleting = captures.reduce((total, capture) => total + (!regionCheck(capture.pokemon, region) || capture.captured ? 0 : 1), 0) === 0;
-    const pokemon = captures.filter((capture) => regionCheck(capture.pokemon, region) && capture.captured === deleting).map((capture) => capture.pokemon.national_id);
+    const pokemon = captures.filter((capture) => regionCheck(capture.pokemon, region) && capture.captured === deleting).map((capture) => capture.pokemon.id);
     const payload = { dex: dex.id, pokemon };
 
     Promise.resolve()
