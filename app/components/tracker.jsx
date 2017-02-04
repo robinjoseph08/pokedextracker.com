@@ -6,7 +6,6 @@ import { DexComponent }                           from './dex';
 import { InfoComponent }                          from './info';
 import { NavComponent }                           from './nav';
 import { NotFoundComponent }                      from './not-found';
-import { NotificationComponent }                  from './notification';
 import { ReloadComponent }                        from './reload';
 import { checkVersion }                           from '../actions/utils';
 import { listCaptures }                           from '../actions/capture';
@@ -95,7 +94,6 @@ export class Tracker extends Component {
           <NavComponent />
           <ReloadComponent />
           <div className="tracker">
-            <NotificationComponent />
             <DexComponent />
             <InfoComponent />
           </div>
