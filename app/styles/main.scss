@@ -250,6 +250,14 @@ nav {
     margin-bottom: 50px;
     border: 2px solid $gray-medium;
     color: darken($gray-dark, 20%);
+
+    a {
+      color: darken($gray-dark, 40%);
+
+      &:hover {
+        color: black;
+      }
+    }
   }
 
   .fa-times {
