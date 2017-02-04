@@ -13,4 +13,3 @@ addons:
       - g++-4.8
 script:
   - npm run lint
-  - npm run fsevents
