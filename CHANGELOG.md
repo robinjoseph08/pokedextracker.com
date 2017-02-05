@@ -1,3 +1,18 @@
+### 2.2.0 (2017-2-4)
+
+##### New Features
+
+* **notif:** add national gen 7 notification ([b822e34c](https://github.com/robinjoseph08/pokedextracker.com/commit/b822e34c0f2ea58ae5d6339a5ee6c6f9d7e3751e))
+* **boxes:** take pokemon.box into account when grouping ([5dc15493](https://github.com/robinjoseph08/pokedextracker.com/commit/5dc15493cd9c288d08bae506a20b4da938e9cce2))
+* **edit:** add region to edit dex ([4bd3f95d](https://github.com/robinjoseph08/pokedextracker.com/commit/4bd3f95df59ed43b4b5f5066c9484ec3f0ec4f0e))
+* **register:** add region to registration ([905bfb96](https://github.com/robinjoseph08/pokedextracker.com/commit/905bfb9693b06a5872ffd44ccd97e6515d4e7031))
+* **create:** add region to create dex ([1da14043](https://github.com/robinjoseph08/pokedextracker.com/commit/1da14043270c8fb8d0c096268df9a071bb1d5ffe))
+
+##### Bug Fixes
+
+* **notif:** update styles ([53971216](https://github.com/robinjoseph08/pokedextracker.com/commit/5397121606b29c7dbebeaa76da16ea248b8db208))
+* **box:** normal case for box headers ([0391198d](https://github.com/robinjoseph08/pokedextracker.com/commit/0391198d6423fc68141d961d0ddd41e0de498c86))
+
 ### 2.1.0 (2017-1-29)
 
 ##### Documentation Changes
