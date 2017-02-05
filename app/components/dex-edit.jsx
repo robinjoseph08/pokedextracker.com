@@ -9,8 +9,8 @@ import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
 
 const URL_WARNING = 'The old URL to your dex will not function anymore.';
-const REGION_WARNING = 'Any capture information not in the Alolan Dex will be lost.';
-const GENERATION_WARNING = 'Any Gen 7 capture information will be lost.';
+const REGION_WARNING = 'Any non-Alola Dex capture info will be lost.';
+const GENERATION_WARNING = 'Any Gen 7 capture info will be lost.';
 
 export class DexEdit extends Component {
 
@@ -20,10 +20,21 @@ export class DexEdit extends Component {
       error: null,
       gen: props.dex.generation,
       loading: false,
+      region: props.dex.region,
       url: props.dex.title,
       confirmingDelete: false,
       confirmingEdit: false
     };
+  }
+
+  onChange = (e) => {
+    const gen = parseInt(e.target.value);
+
+    if (gen === 6) {
+      this.setState({ region: 'national' });
+    }
+
+    this.setState({ gen });
   }
 
   scrollToTop () {
@@ -39,6 +50,7 @@ export class DexEdit extends Component {
       error: null,
       gen: dex.generation,
       loading: false,
+      region: dex.region,
       url: dex.title,
       confirmingDelete: false,
       confirmingEdit: false
@@ -55,7 +67,7 @@ export class DexEdit extends Component {
       this.onRequestClose(true);
     })
     .catch((err) => {
-      this.setState({ ...this.state, error: err.message });
+      this.setState({ error: err.message });
       this.scrollToTop();
     });
   }
@@ -63,16 +75,15 @@ export class DexEdit extends Component {
   updateDex = (e) => {
     e.preventDefault();
     const { dex, session, updateDex } = this.props;
-    const { confirmingEdit, gen, url } = this.state;
+    const { confirmingEdit, gen, region, url } = this.state;
 
-    if (!confirmingEdit && (slug(url || 'Living Dex', { lower: true }) !== dex.slug || gen !== dex.generation)) {
-      return this.setState({ ...this.state, confirmingEdit: true });
+    if (!confirmingEdit && (slug(url || 'Living Dex', { lower: true }) !== dex.slug || gen !== dex.generation || (region === 'alola' && dex.region === 'national'))) {
+      return this.setState({ confirmingEdit: true });
     }
 
     const title = this._title.value;
     const shiny = this._shiny.checked;
-    const generation = this._generation.value;
-    const region = parseInt(generation) === 7 ? 'alola' : 'national';
+    const generation = gen;
     const payload = {
       slug: dex.slug,
       username: session.username,
@@ -85,21 +96,21 @@ export class DexEdit extends Component {
       this.onRequestClose(true);
     })
     .catch((err) => {
-      this.setState({ ...this.state, error: err.message });
+      this.setState({ error: err.message });
       this.scrollToTop();
     });
   }
 
   render () {
     const { dex, isOpen, session } = this.props;
-    const { confirmingDelete, confirmingEdit, error, gen, url } = this.state;
+    const { confirmingDelete, confirmingEdit, error, gen, region, url } = this.state;
 
     let dexDelete = null;
 
     if (!confirmingDelete) {
-      dexDelete = <a className="link" onClick={() => this.setState({ ...this.state, confirmingDelete: true })}><i className="fa fa-trash" /></a>;
+      dexDelete = <a className="link" onClick={() => this.setState({ confirmingDelete: true })}><i className="fa fa-trash" /></a>;
     } else {
-      dexDelete = <div>Are you sure? <a className="link" onClick={this.deleteDex}>Yes</a> <a className="link" onClick={() => this.setState({ ...this.state, confirmingDelete: false })}>No</a></div>;
+      dexDelete = <div>Are you sure? <a className="link" onClick={this.deleteDex}>Yes</a> <a className="link" onClick={() => this.setState({ confirmingDelete: false })}>No</a></div>;
     }
 
     return (
@@ -115,17 +126,33 @@ export class DexEdit extends Component {
               <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex', { lower: true })}</div>
               <label htmlFor="dex_title">Title</label>
               <FormWarningComponent message={slug(url || 'Living Dex', { lower: true }) !== dex.slug ? URL_WARNING : null} />
-              <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" defaultValue={dex.title} onChange={() => this.setState({ ...this.state, url: this._title.value })} />
+              <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" defaultValue={dex.title} onChange={() => this.setState({ url: this._title.value })} />
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">
-              <FormWarningComponent message={gen < dex.generation ? GENERATION_WARNING : (gen > dex.generation ? REGION_WARNING : null)} />
+              <FormWarningComponent message={gen < dex.generation ? GENERATION_WARNING : null} />
               <label htmlFor="generation">Generation</label>
-              <select className="form-control" ref={(c) => this._generation = c} defaultValue={dex.generation} onChange={() => this.setState({ ...this.state, gen: parseInt(this._generation.value) })}>
+              <select className="form-control" onChange={this.onChange} value={gen}>
                 <option value="7">Seven</option>
                 <option value="6">Six</option>
               </select>
               <i className="fa fa-chevron-down" />
+            </div>
+            <div className="form-group">
+              <FormWarningComponent message={region === 'alola' && dex.region === 'national' ? REGION_WARNING : null} />
+              <label htmlFor="region">Regionality</label>
+              <div className="radio">
+                <label>
+                  <input type="radio" name="region" checked={region === 'national'} value="national" onChange={() => this.setState({ region: 'national' })} />
+                  <span className="radio-custom"><span /></span>National
+                </label>
+              </div>
+              <div className={`radio ${gen === 6 ? 'disabled' : ''}`}>
+                <label title={gen === 6 ? 'Regional dexes only supported for Gen 7.' : ''}>
+                  <input type="radio" name="region" checked={region === 'alola'} disabled={gen === 6} value="alola" onChange={() => this.setState({ region: 'alola' })} />
+                  <span className="radio-custom"><span /></span>Regional
+                </label>
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="type">Type</label>

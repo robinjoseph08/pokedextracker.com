@@ -250,6 +250,14 @@ nav {
     margin-bottom: 50px;
     border: 2px solid $gray-medium;
     color: darken($gray-dark, 20%);
+
+    a {
+      color: darken($gray-dark, 40%);
+
+      &:hover {
+        color: black;
+      }
+    }
   }
 
   .fa-times {
@@ -423,6 +431,18 @@ select {
         top: 50%;
         left: 50%;
         margin: -5px 0 0 -5px;
+      }
+    }
+
+    &.disabled {
+      color: $gray-medium;
+
+      .radio-custom {
+        border: 1px solid $gray-light;
+      }
+
+      label {
+        cursor: not-allowed;
       }
     }
   }
