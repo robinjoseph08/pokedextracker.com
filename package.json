@@ -12,7 +12,6 @@
     "build:version": "date > public/version",
     "deploy:production": "ssh ubuntu@pokedextracker.com ./deployments/pokedextracker.com.sh",
     "deploy:staging": "ssh ubuntu@staging.pokedextracker.com ./deployments/staging.pokedextracker.com.sh",
-    "fsevents": "if grep -q fsevents npm-shrinkwrap.json; then echo 'The fsevents module is in the shrinkwrap file. See https://github.com/robinjoseph08/pokedextracker.com/blob/master/CONTRIBUTING.md#shrinkwrap for help.' && exit 1; fi",
     "lint": "eslint -c .eslintrc --ext .js,.jsx app config",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
@@ -39,25 +38,23 @@
     "slug": "^0.9.1"
   },
   "devDependencies": {
+    "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.5",
     "babel-polyfill": "^6.5.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
-    "css-loader": "^0.25.0",
+    "css-loader": "^0.26.1",
     "eslint": "^3.6.0",
     "eslint-plugin-react": "^6.8.0",
     "generate-changelog": "^1.0.0",
     "node-sass": "^3.10.0",
     "raw-loader": "^0.5.1",
-    "sass-loader": "^4.0.2",
+    "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
-  },
-  "optionalDependencies": {
-    "fsevents": "^1.0.8"
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
   },
   "repository": {
     "type": "git",
