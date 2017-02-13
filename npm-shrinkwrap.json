@@ -2030,9 +2030,9 @@
       "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.16.tgz"
     },
     "lodash": {
-      "version": "4.16.2",
+      "version": "4.17.4",
       "from": "lodash@*",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.2.tgz"
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz"
     },
     "lodash-es": {
       "version": "4.15.0",
