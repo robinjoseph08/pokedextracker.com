@@ -49,9 +49,9 @@
     "eslint": "^3.6.0",
     "eslint-plugin-react": "^6.8.0",
     "generate-changelog": "^1.1.0",
-    "node-sass": "^3.10.0",
+    "node-sass": "^4.5.0",
     "raw-loader": "^0.5.1",
-    "sass-loader": "^4.0.2",
+    "sass-loader": "^5.0.1",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.3.0"
