@@ -2756,7 +2756,8 @@
         },
         "regexpu-core": {
           "version": "1.0.0",
-          "from": "regexpu-core@>=1.0.0 <2.0.0"
+          "from": "regexpu-core@1.0.0",
+          "resolved": "https://registry.npmjs.org/regexpu-core/-/regexpu-core-1.0.0.tgz"
         }
       }
     },
@@ -2772,7 +2773,8 @@
         },
         "regexpu-core": {
           "version": "1.0.0",
-          "from": "regexpu-core@>=1.0.0 <2.0.0"
+          "from": "regexpu-core@1.0.0",
+          "resolved": "https://registry.npmjs.org/regexpu-core/-/regexpu-core-1.0.0.tgz"
         }
       }
     },
@@ -2947,9 +2949,9 @@
       "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.2.0.tgz"
     },
     "raven-js": {
-      "version": "3.7.0",
-      "from": "raven-js@*",
-      "resolved": "https://registry.npmjs.org/raven-js/-/raven-js-3.7.0.tgz"
+      "version": "3.10.0",
+      "from": "raven-js@>=3.7.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/raven-js/-/raven-js-3.10.0.tgz"
     },
     "raw-loader": {
       "version": "0.5.1",
