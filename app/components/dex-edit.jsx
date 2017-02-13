@@ -114,7 +114,7 @@ export class DexEdit extends Component {
     }
 
     return (
-      <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={() => this.onRequestClose()}>
+      <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={() => this.onRequestClose()} contentLabel="Edit Dex">
         <div className="dex-delete-container">
           {dexDelete}
         </div>

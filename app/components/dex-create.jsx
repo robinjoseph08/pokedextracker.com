@@ -67,7 +67,7 @@ export class DexCreate extends Component {
     const { error, generation, region, url } = this.state;
 
     return (
-      <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose}>
+      <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose} contentLabel="Create a New Dex">
         <div className="form" ref={(c) => this._form = c}>
           <h1>Create New Dex</h1>
           <form onSubmit={this.onSubmit} className="form-column">
