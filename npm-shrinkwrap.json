@@ -691,9 +691,9 @@
       "resolved": "https://registry.npmjs.org/block-stream/-/block-stream-0.0.9.tgz"
     },
     "bluebird": {
-      "version": "3.3.4",
+      "version": "3.4.7",
       "from": "bluebird@>=3.0.6 <4.0.0",
-      "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.3.4.tgz"
+      "resolved": "https://registry.npmjs.org/bluebird/-/bluebird-3.4.7.tgz"
     },
     "boom": {
       "version": "2.10.1",
@@ -1483,9 +1483,8 @@
       "resolved": "https://registry.npmjs.org/gaze/-/gaze-1.1.1.tgz"
     },
     "generate-changelog": {
-      "version": "1.0.1",
-      "from": "generate-changelog@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/generate-changelog/-/generate-changelog-1.0.1.tgz"
+      "version": "1.1.0",
+      "from": "generate-changelog@1.1.0"
     },
     "generate-function": {
       "version": "2.0.0",
@@ -1520,9 +1519,9 @@
       }
     },
     "github-url-from-git": {
-      "version": "1.4.0",
+      "version": "1.5.0",
       "from": "github-url-from-git@>=1.4.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/github-url-from-git/-/github-url-from-git-1.4.0.tgz"
+      "resolved": "https://registry.npmjs.org/github-url-from-git/-/github-url-from-git-1.5.0.tgz"
     },
     "glob": {
       "version": "7.0.6",
