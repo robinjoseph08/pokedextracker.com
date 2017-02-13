@@ -11,8 +11,7 @@ const PLUGINS = [
 ];
 
 if (PRODUCTION) {
-  PLUGINS.push(new Webpack.optimize.DedupePlugin());
-  PLUGINS.push(new Webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }));
+  PLUGINS.push(new Webpack.optimize.UglifyJsPlugin({ sourceMap: true }));
 }
 
 module.exports = {
@@ -23,7 +22,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.jsx', '.js']
+    extensions: ['.jsx', '.js']
   },
   devtool: PRODUCTION ? 'source-map' : 'inline-source-map',
   devServer: {
@@ -31,11 +30,10 @@ module.exports = {
     historyApiFallback: true
   },
   module: {
-    loaders: [
-      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules/ },
-      { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
-      { test: /\.json/, loader: 'json' },
-      { test: /\.html/, loader: 'raw' }
+    rules: [
+      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
+      { test: /\.html/, loader: 'raw-loader' }
     ]
   },
   plugins: PLUGINS

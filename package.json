@@ -17,7 +17,7 @@
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
-    "start": "webpack-dev-server --inline --hot --progress --host 0.0.0.0"
+    "start": "webpack-dev-server --port 8080 --hot --progress --host 0.0.0.0"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -53,8 +53,8 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.1"
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   },
   "optionalDependencies": {
     "fsevents": "^1.0.8"
