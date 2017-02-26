@@ -1,3 +1,33 @@
+### 2.3.0 (2017-2-26)
+
+##### Chores
+
+* **yarn:** switch to yarn ([cb7982ac](https://github.com/robinjoseph08/pokedextracker.com/commit/cb7982ac4243cb1da54ed74813de25d67df0809f))
+* **deps:**
+  * update babel packages to v6.22.0 ([2f017b2e](https://github.com/robinjoseph08/pokedextracker.com/commit/2f017b2e941add3957bd86524c24c1f7d7997496))
+  * update babel-loader from v6.2.5 to v6.2.10 ([47cf4dad](https://github.com/robinjoseph08/pokedextracker.com/commit/47cf4dad1d6949f14cd9d69e89c2333ce8d48cff))
+  * update eslint-plugin-react from v6.8.0 to v6.9.0 ([8c8aef32](https://github.com/robinjoseph08/pokedextracker.com/commit/8c8aef3248c82dd30976f50e79b9971c62112632))
+  * update eslint from v3.6.0 to v3.15.0 ([d333e696](https://github.com/robinjoseph08/pokedextracker.com/commit/d333e696b0a4b989963fb9eff331bab2e1158cdc))
+  * update redux-thunk from v2.1.0 to v2.2.0 ([c1ded915](https://github.com/robinjoseph08/pokedextracker.com/commit/c1ded9157581020e7d14c4ed9ecbdda8d56836b6))
+  * update react-router-redux from v4.0.6 to v4.0.8 ([9bd6f6c8](https://github.com/robinjoseph08/pokedextracker.com/commit/9bd6f6c88c3c451bb869fbc2345569c559bd2f6c))
+  * update react-modal from v1.5.2 to v1.6.5 ([0715640f](https://github.com/robinjoseph08/pokedextracker.com/commit/0715640fc664b04da290a03fa5d742cf6b10d67c))
+  * update react and react-dom from v15.3.1 to v15.4.2 ([f59e826a](https://github.com/robinjoseph08/pokedextracker.com/commit/f59e826aaee1f012db26ef2a0d5f441ec8b3e9dd))
+  * update raven-js from v3.7.0 to v3.10.0 ([29f0c4e1](https://github.com/robinjoseph08/pokedextracker.com/commit/29f0c4e18e8062f2085e787adb80a9ab141c62a2))
+  * update qs from v6.2.1 to v6.3.0 ([4eec07c9](https://github.com/robinjoseph08/pokedextracker.com/commit/4eec07c9ceda34b2a4ba9b8c5d284d95354b00d1))
+  * update css-loader from v0.25.0 to v0.26.1 ([3e79dcca](https://github.com/robinjoseph08/pokedextracker.com/commit/3e79dcca53d86571725543e42147cb3c0a64c318))
+  * update babel-eslint from v6.1.2 to v7.1.1 ([f93f97ec](https://github.com/robinjoseph08/pokedextracker.com/commit/f93f97ece0bb7543d82dd9f3df4dc5574d63d3a8))
+  * update node-sass and sass-loader ([6ad8b289](https://github.com/robinjoseph08/pokedextracker.com/commit/6ad8b2896d5a8d2805ea88845ace46277d6abc7c))
+  * update webpack and webpack-dev-server to v2 ([486b8642](https://github.com/robinjoseph08/pokedextracker.com/commit/486b86427cf2953aa1dd7c5e421af3d644df657c))
+  * update lodash from v4.16.2 to v4.17.4 ([c0e6d8ed](https://github.com/robinjoseph08/pokedextracker.com/commit/c0e6d8ed45f0d0f981e49cf150058c20694d5785))
+  * update generate-changelog from v1.0.0 to v1.1.0 ([557559a2](https://github.com/robinjoseph08/pokedextracker.com/commit/557559a27e57143a4e38bdda8a2e4c735e7f04b9))
+  * update react-router from v2.8.1 to v3.0.2 ([6f3efe7e](https://github.com/robinjoseph08/pokedextracker.com/commit/6f3efe7ecabf0900072309a0ec0542896ac88cab))
+  * update react-redux from v4.4.5 to v5.0.2 ([2835377e](https://github.com/robinjoseph08/pokedextracker.com/commit/2835377e5d11aeb482535ebd3343cfc56fb37f48))
+* **devtools:** Add hook for redux devtools ([3348944c](https://github.com/robinjoseph08/pokedextracker.com/commit/3348944c657664642cfd2e2e6625e71f8c262d94))
+
+##### Documentation Changes
+
+* **readme:** add badges ([e5d0e8a5](https://github.com/robinjoseph08/pokedextracker.com/commit/e5d0e8a558825872173072bddab5a46c29cb437b))
+
 ### 2.2.0 (2017-2-4)
 
 ##### New Features
