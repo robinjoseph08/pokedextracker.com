@@ -19,10 +19,8 @@
     "start": "webpack-dev-server --port 8080 --hot --progress --host 0.0.0.0"
   },
   "dependencies": {
-    "babel-core": "^6.23.1",
     "classnames": "^2.2.5",
     "isomorphic-fetch": "^2.2.1",
-    "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "qs": "^6.3.0",
     "raven-js": "^3.10.0",
@@ -39,6 +37,7 @@
     "slug": "^0.9.1"
   },
   "devDependencies": {
+    "babel-core": "^6.23.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "babel-polyfill": "^6.22.0",
