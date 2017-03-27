@@ -51,7 +51,7 @@ export class Pokemon extends Component {
   }
 
   render () {
-    const { capture, dex, region, session, user } = this.props;
+    const { capture, dex, region, session, user, hideCaughtPokemon } = this.props;
 
     if (!capture) {
       return (
@@ -60,6 +60,10 @@ export class Pokemon extends Component {
           <div className="set-captured-mobile" />
         </div>
       );
+    }
+
+    if (hideCaughtPokemon && capture.captured) {
+      return null;
     }
 
     const classes = {
@@ -90,17 +94,15 @@ export class Pokemon extends Component {
 
 }
 
-function mapStateToProps ({ currentDex, currentUser, region, session, users }) {
-  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], region, session, user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, region, session, users, filters }) {
+  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], region, session, user: users[currentUser], hideCaughtPokemon: filters.hideCaughtPokemon };
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    createCaptures: (payload) => dispatch(createCaptures(payload)),
-    deleteCaptures: (payload) => dispatch(deleteCaptures(payload)),
-    setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
-    setShowInfo: (show) => dispatch(setShowInfo(show))
-  };
-}
+const mapDispatchToProps = {
+  createCaptures,
+  deleteCaptures,
+  setCurrentPokemon,
+  setShowInfo
+};
 
 export const PokemonComponent = connect(mapStateToProps, mapDispatchToProps)(Pokemon);
