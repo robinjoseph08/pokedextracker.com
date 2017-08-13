@@ -8,7 +8,6 @@ import { FriendCodeComponent }                   from './friend-code';
 import { HeaderComponent }                       from './header';
 import { NavComponent }                          from './nav';
 import { NotFoundComponent }                     from './not-found';
-import { NotificationComponent }                 from './notification';
 import { ReloadComponent }                       from './reload';
 import { checkVersion }                          from '../actions/utils';
 import { retrieveUser, setCurrentUser, setUser } from '../actions/user';
@@ -84,7 +83,6 @@ export class Profile extends Component {
           <div className="profile">
             <div className="wrapper">
               <header>
-                <NotificationComponent />
                 <HeaderComponent profile />
                 <FriendCodeComponent />
               </header>
