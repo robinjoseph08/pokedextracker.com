@@ -1,9 +1,9 @@
 .profile {
   @include animation(slide .5s ease-out forwards);
-  @include flex-grow(1);
+  @include flex(1 0 auto);
   @include overflow-y-scroll;
 
-  padding: 100px 0;
+  padding: 100px 0 60px;
   position: relative;
   top: 70px;
 }
@@ -145,7 +145,7 @@
 
 @media (max-width: 750px) {
   .profile {
-    padding: 40px 15px;
+    padding: 40px 15px 20px;
   }
 
   .dex-preview {

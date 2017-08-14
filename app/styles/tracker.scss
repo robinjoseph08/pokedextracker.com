@@ -12,6 +12,13 @@
     bottom: 1px;
     font-size: .7em;
   }
+
+  .tracker-left-column {
+    @include flexbox();
+    @include flex-direction(column);
+    @include flex-grow(1);
+    @include overflow-y-scroll;
+  }
 }
 
 .info {
@@ -220,8 +227,7 @@
 }
 
 .dex {
-  @include flex-grow(1);
-  @include overflow-y-scroll;
+  @include flex(1 0 auto);
 
   padding: 100px 0;
 

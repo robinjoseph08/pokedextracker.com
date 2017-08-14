@@ -5,6 +5,7 @@ import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
 import { AlertComponent }  from './alert';
+import { FooterComponent } from './footer';
 import { NavComponent }    from './nav';
 import { ReactGA }         from '../utils/analytics';
 import { ReloadComponent } from './reload';
@@ -77,6 +78,7 @@ export class Login extends Component {
               <p>Don't have an account yet? <Link className="link" to="/register">Register here</Link>!</p>
             </form>
           </div>
+          <FooterComponent />
         </div>
       </DocumentTitle>
     );
