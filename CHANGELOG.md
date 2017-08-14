@@ -1,3 +1,9 @@
+#### 2.4.1 (2017-8-13)
+
+##### Bug Fixes
+
+* **footer:** add mobile styles ([5cf99606](https://github.com/robinjoseph08/pokedextracker.com/commit/5cf99606ee2311f3aca9948fb8d3c8fa52d8084e))
+
 ### 2.4.0 (2017-8-13)
 
 ##### Chores
