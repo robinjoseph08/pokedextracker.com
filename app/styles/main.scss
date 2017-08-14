@@ -382,7 +382,7 @@ select {
     font-size: 15px;
 
     &[type="password"] {
-      font-family: $font-secondary;
+      letter-spacing: 2px;
     }
   }
 
