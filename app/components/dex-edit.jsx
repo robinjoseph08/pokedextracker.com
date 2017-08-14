@@ -8,9 +8,9 @@ import { FormWarningComponent } from './form-warning';
 import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
 
-const URL_WARNING = 'The old URL to your dex will not function anymore.';
-const REGION_WARNING = 'Any non-Alola Dex capture info will be lost.';
 const GENERATION_WARNING = 'Any Gen 7 capture info will be lost.';
+const REGION_WARNING = 'Any non-Alola Dex capture info will be lost.';
+const URL_WARNING = 'The old URL to your dex will not function anymore.';
 
 export class DexEdit extends Component {
 
@@ -58,6 +58,27 @@ export class DexEdit extends Component {
     onRequestClose(shouldReload);
   }
 
+  get showGenerationWarning () {
+    const { dex } = this.props;
+    const { gen } = this.state;
+
+    return gen < dex.generation;
+  }
+
+  get showRegionWarning () {
+    const { dex } = this.props;
+    const { region } = this.state;
+
+    return region === 'alola' && dex.region === 'national';
+  }
+
+  get showURLWarning () {
+    const { dex } = this.props;
+    const { url } = this.state;
+
+    return slug(url || 'Living Dex', { lower: true }) !== dex.slug;
+  }
+
   deleteDex = () => {
     const { deleteDex, dex, session } = this.props;
 
@@ -75,9 +96,9 @@ export class DexEdit extends Component {
   updateDex = (e) => {
     e.preventDefault();
     const { dex, session, updateDex } = this.props;
-    const { confirmingEdit, gen, region, url } = this.state;
+    const { confirmingEdit, gen, region } = this.state;
 
-    if (!confirmingEdit && (slug(url || 'Living Dex', { lower: true }) !== dex.slug || gen !== dex.generation || (region === 'alola' && dex.region === 'national'))) {
+    if (!confirmingEdit && (this.showGenerationWarning || this.showRegionWarning || this.showURLWarning)) {
       return this.setState({ confirmingEdit: true });
     }
 
@@ -125,12 +146,12 @@ export class DexEdit extends Component {
             <div className="form-group">
               <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex', { lower: true })}</div>
               <label htmlFor="dex_title">Title</label>
-              <FormWarningComponent message={slug(url || 'Living Dex', { lower: true }) !== dex.slug ? URL_WARNING : null} />
+              <FormWarningComponent message={this.showURLWarning ? URL_WARNING : null} />
               <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" defaultValue={dex.title} onChange={() => this.setState({ url: this._title.value })} />
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">
-              <FormWarningComponent message={gen < dex.generation ? GENERATION_WARNING : null} />
+              <FormWarningComponent message={this.showGenerationWarning ? GENERATION_WARNING : null} />
               <label htmlFor="generation">Generation</label>
               <select className="form-control" onChange={this.onChange} value={gen}>
                 <option value="7">Seven</option>
@@ -139,7 +160,7 @@ export class DexEdit extends Component {
               <i className="fa fa-chevron-down" />
             </div>
             <div className="form-group">
-              <FormWarningComponent message={region === 'alola' && dex.region === 'national' ? REGION_WARNING : null} />
+              <FormWarningComponent message={this.showRegionWarning ? REGION_WARNING : null} />
               <label htmlFor="region">Regionality</label>
               <div className="radio">
                 <label>
