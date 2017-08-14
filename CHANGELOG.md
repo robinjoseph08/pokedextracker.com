@@ -1,3 +1,23 @@
+### 2.4.0 (2017-8-13)
+
+##### Chores
+
+* **deps:** Removed unused direct dependency on json-loader ([3ea51660](https://github.com/robinjoseph08/pokedextracker.com/commit/3ea5166096174ef0ee5e0cd3bbce8c8809774fe6))
+
+##### New Features
+
+* **footer:** add footer ([2d1c51aa](https://github.com/robinjoseph08/pokedextracker.com/commit/2d1c51aa1943f730f38bc12e4e6643db465a6146))
+* **info:** show gen 6 for gen 7 national ([1045d36c](https://github.com/robinjoseph08/pokedextracker.com/commit/1045d36c5a90889a6c887ee73aa2e948a295bd0c))
+* **notif:** remove alola support notification ([c4a462d3](https://github.com/robinjoseph08/pokedextracker.com/commit/c4a462d30391dff1c2b2aec8b15492a9d2a788e0))
+* **tracker:** Add name of pokemon on hover in evolution chain ([87946a81](https://github.com/robinjoseph08/pokedextracker.com/commit/87946a81d09b80e0ffa066c2d27edcf53babe445))
+
+##### Bug Fixes
+
+* **styles:** various style fixes ([571aa355](https://github.com/robinjoseph08/pokedextracker.com/commit/571aa355aef78eef1513a33fc4f204c1f709d958))
+* **local-storage:** make site usable without local storage ([2afda049](https://github.com/robinjoseph08/pokedextracker.com/commit/2afda0498e9886aad817570dce2880869e1f57ac))
+* **edit-dex:** only show generation warning when there's loss of info ([bf48cfa4](https://github.com/robinjoseph08/pokedextracker.com/commit/bf48cfa4b10546496e040f771e47ddca85b23cfe))
+* **fonts:** add semibold montserrat ([c084e8b6](https://github.com/robinjoseph08/pokedextracker.com/commit/c084e8b6d3b87327709caf31fa2c7c3cff6fcb9c))
+
 ### 2.3.0 (2017-2-26)
 
 ##### Chores
