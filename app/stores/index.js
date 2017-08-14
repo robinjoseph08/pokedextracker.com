@@ -3,7 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware }                      from 'react-router-redux';
 import thunkMiddleware                           from 'redux-thunk';
 
-import { loadState, saveState } from '../utils/local-storage';
+import { loadState, saveState } from '../utils/state';
 import { reducer }              from '../reducers';
 
 const initialState = loadState();

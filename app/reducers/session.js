@@ -1,5 +1,5 @@
 import { SET_TOKEN }   from '../actions/session';
-import { tokenToUser } from '../utils/local-storage';
+import { tokenToUser } from '../utils/state';
 
 export function session (state = null, action) {
   switch (action.type) {

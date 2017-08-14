@@ -1,34 +1,33 @@
-import { Raven } from '../utils/analytics';
-
-export function tokenToUser (token) {
-  if (!token) {
-    Raven.setUserContext();
-    return null;
+function testLocalStorage () {
+  try {
+    window.localStorage.setItem('_', '_');
+  } catch (e) {
+    return false;
   }
 
-  const user = JSON.parse(atob(token.split('.')[1]));
-
-  Raven.setUserContext({ id: user.id, username: user.username });
-
-  return user;
+  return true;
 }
 
-export function loadState () {
-  const notif20170204 = localStorage.getItem('notif-2017.02.04') === 'true' || undefined;
-  const token = localStorage.getItem('token');
-  const session = tokenToUser(token);
-  const showInfo = localStorage.getItem('showInfo') === 'true' || undefined;
+let storage;
 
-  return { notification: notif20170204, token, session, showInfo };
+if (testLocalStorage()) {
+  storage = window.localStorage;
+} else {
+  storage = {
+    _data: {},
+    setItem: function (id, val) {
+      this._data[id] = String(val);
+    },
+    getItem: function (id) {
+      this._data.hasOwnProperty(id) ? this._data[id] : undefined;
+    },
+    removeItem: function (id) {
+      Reflect.deleteProperty(this._data, id);
+    },
+    clear: function () {
+      this._data = {};
+    }
+  };
 }
 
-export function saveState ({ notification, showInfo, token }) {
-  if (token) {
-    localStorage.setItem('token', token);
-  } else {
-    localStorage.removeItem('token');
-  }
-
-  localStorage.setItem('notif-2017.02.04', notification);
-  localStorage.setItem('showInfo', showInfo);
-}
+export const localStorage = storage;
