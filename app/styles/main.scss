@@ -276,7 +276,7 @@ nav {
 }
 
 .form {
-  @include flex-grow(1);
+  @include flex(1 0 auto);
   @include flexbox();
   @include flex-direction(column);
   @include overflow-y-scroll;
@@ -649,6 +649,28 @@ reload div {
     margin-top: 0;
     text-align: center;
     font-size: 14px;
+  }
+}
+
+.main-footer {
+  padding: 100px 0;
+  text-align: center;
+  background-color: $gray-light;
+  font-family: $font-secondary;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  .link {
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .fa {
+    vertical-align: middle;
+    font-size: 5px;
+    margin: 0 10px;
+    color: $gray-medium;
   }
 }
 

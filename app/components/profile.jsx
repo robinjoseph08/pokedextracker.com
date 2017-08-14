@@ -4,6 +4,7 @@ import { connect }   from 'react-redux';
 
 import { DexCreateComponent }                    from './dex-create';
 import { DexPreviewComponent }                   from './dex-preview';
+import { FooterComponent }                       from './footer';
 import { FriendCodeComponent }                   from './friend-code';
 import { HeaderComponent }                       from './header';
 import { NavComponent }                          from './nav';
@@ -92,6 +93,7 @@ export class Profile extends Component {
               {createDexButton}
             </div>
           </div>
+          <FooterComponent />
         </div>
       </DocumentTitle>
     );

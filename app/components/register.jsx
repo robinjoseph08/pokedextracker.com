@@ -5,6 +5,7 @@ import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
 import { AlertComponent }                from './alert';
+import { FooterComponent }               from './footer';
 import { NavComponent }                  from './nav';
 import { ReactGA }                       from '../utils/analytics';
 import { ReloadComponent }               from './reload';
@@ -169,6 +170,7 @@ export class Register extends Component {
               </div>
             </form>
           </div>
+          <FooterComponent />
         </div>
       </DocumentTitle>
     );

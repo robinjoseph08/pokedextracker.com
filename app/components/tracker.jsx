@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
 import { DexComponent }                           from './dex';
+import { FooterComponent }                        from './footer';
 import { InfoComponent }                          from './info';
 import { NavComponent }                           from './nav';
 import { NotFoundComponent }                      from './not-found';
@@ -94,7 +95,10 @@ export class Tracker extends Component {
           <NavComponent />
           <ReloadComponent />
           <div className="tracker">
-            <DexComponent />
+            <div className="tracker-left-column">
+              <DexComponent />
+              <FooterComponent />
+            </div>
             <InfoComponent />
           </div>
         </div>
