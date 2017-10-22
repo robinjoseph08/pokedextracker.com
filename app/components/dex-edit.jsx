@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Modal         from 'react-modal';
 import { connect }   from 'react-redux';
-import slug          from 'slug';
+import slugify       from 'slugify';
 
 import { AlertComponent }       from './alert';
 import { FormWarningComponent } from './form-warning';
@@ -76,7 +76,7 @@ export class DexEdit extends Component {
     const { dex } = this.props;
     const { url } = this.state;
 
-    return slug(url || 'Living Dex', { lower: true }) !== dex.slug;
+    return slugify(url || 'Living Dex', { lower: true }) !== dex.slug;
   }
 
   deleteDex = () => {
@@ -144,7 +144,7 @@ export class DexEdit extends Component {
           <form onSubmit={this.updateDex} className="form-column">
             <AlertComponent message={error} type="error" />
             <div className="form-group">
-              <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex', { lower: true })}</div>
+              <div className="form-note">/u/{session.username}/{slugify(url || 'Living Dex', { lower: true })}</div>
               <label htmlFor="dex_title">Title</label>
               <FormWarningComponent message={this.showURLWarning ? URL_WARNING : null} />
               <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" defaultValue={dex.title} onChange={() => this.setState({ url: this._title.value })} />

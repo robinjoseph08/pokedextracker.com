@@ -34,7 +34,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "slug": "^0.9.1"
+    "slugify": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
