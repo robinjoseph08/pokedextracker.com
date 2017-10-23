@@ -48,7 +48,19 @@ export class DonateForm extends Component {
 
   render () {
     const { session } = this.props;
-    const { amount, error, months, years } = this.state;
+    const { amount, error } = this.state;
+
+    const stripeStyles = {
+      base: {
+        fontFamily: '"Alegreya Sans", "Helvetica", sans-serif',
+        fontSmoothing: 'antialiased',
+        color: '#000000',
+        fontSize: '15px'
+      },
+      invalid: {
+        color: '#ff0000'
+      }
+    };
 
     let sessionWarning = null;
     let otherAmount = null;
@@ -63,7 +75,7 @@ export class DonateForm extends Component {
 
     if (amount === 'other') {
       otherAmount = (
-        <p>Note about signing in.</p>
+        <input className="form-control" name="amount" id="amount" type="text"  placeholder="$34.20" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
       );
     }
 
@@ -75,89 +87,52 @@ export class DonateForm extends Component {
         </div>
         <div className="form-column">
           <AlertComponent message={error} type="error" />
-        </div>
-        <div className="form-row">
-          <div className="form-column">
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input className="form-control" name="name" id="name" type="text" placeholder="Ash Ketchum" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">E-Mail</label>
-              <input className="form-control" name="email" id="email" type="email" required placeholder="ash.ketchum@gmail.com" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-              <i className="fa fa-asterisk" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="message">Drop us a Note?</label>
-              <textarea className="form-control" name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-            </div>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input className="form-control" name="name" id="name" type="text" placeholder="Ash Ketchum" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
           </div>
-          <div className="form-column">
-            <div className="form-group">
-              <label htmlFor="ccname">Credit Card Number</label>
-              <CardElement className="form-control" />
-              <input className="form-control" name="ccname" id="ccname" type="text" required placeholder="1234123412341234" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-              <i className="fa fa-asterisk" />
-            </div>
-            <div className="form-group form-group-flex">
-              <div>
-                <label htmlFor="ccexpmonth">Exp Month</label>
-                <select className="form-control">
-                  {months.map((month) => <option key={month} value={month}>{month}</option>)}
-                </select>
-                <i className="fa fa-chevron-down" />
-              </div>
-              <div>
-                <label htmlFor="ccexpyear">Exp Year</label>
-                <select className="form-control">
-                  {years.map((year) => <option key={year} value={year}>{year}</option>)}
-                </select>
-                <i className="fa fa-chevron-down" />
-              </div>
-            </div>
-            <div className="form-group form-group-flex">
-              <div>
-                <label htmlFor="cvc">CVC</label>
-                <input className="form-control" name="cvc" id="cvc" type="text" required placeholder="327" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <i className="fa fa-asterisk" />
-              </div>
-              <div>
-                <label htmlFor="cczip">Billing ZIP</label>
-                <input className="form-control" name="cczip" id="cczip" type="text" required placeholder="94107" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <i className="fa fa-asterisk" />
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="amount">Donation Amount</label>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="amount" checked={amount === '1'} value="1" onChange={() => this.setState({ amount: '1' })} />
-                  <span className="radio-custom"><span /></span>$1
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="amount" checked={amount === '5'} value="5" onChange={() => this.setState({ amount: '5' })} />
-                  <span className="radio-custom"><span /></span>$5
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="amount" checked={amount === '10'} value="10" onChange={() => this.setState({ amount: '10' })} />
-                  <span className="radio-custom"><span /></span>$10
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="amount" checked={amount === 'other'} value="other" onChange={() => this.setState({ amount: 'other' })} />
-                  <span className="radio-custom"><span /></span>Other
-                </label>
-              </div>
-              {otherAmount}
-            </div>
+          <div className="form-group">
+            <label htmlFor="email">E-Mail</label>
+            <input className="form-control" name="email" id="email" type="email" required placeholder="ash.ketchum@gmail.com" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+            <i className="fa fa-asterisk" />
           </div>
-        </div>
-        <div className="form-column">
+          <div className="form-group">
+            <label htmlFor="amount">Donation Amount</label>
+            <div className="radio">
+              <label>
+                <input type="radio" name="amount" checked={amount === '1'} value="1" onChange={() => this.setState({ amount: '1' })} />
+                <span className="radio-custom"><span /></span>$1
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input type="radio" name="amount" checked={amount === '5'} value="5" onChange={() => this.setState({ amount: '5' })} />
+                <span className="radio-custom"><span /></span>$5
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input type="radio" name="amount" checked={amount === '10'} value="10" onChange={() => this.setState({ amount: '10' })} />
+                <span className="radio-custom"><span /></span>$10
+              </label>
+            </div>
+            <div className="radio">
+              <label>
+                <input type="radio" name="amount" checked={amount === 'other'} value="other" onChange={() => this.setState({ amount: 'other' })} />
+                <span className="radio-custom"><span /></span>Other
+              </label>
+            </div>
+            {otherAmount}
+          </div>
+          <div className="form-group">
+            <label htmlFor="ccname">Credit Card</label>
+            <CardElement className="form-control" style={stripeStyles} />
+            <i className="fa fa-asterisk" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="message">Drop us a Note?</label>
+            <textarea className="form-control" name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+          </div>
           <button className="btn btn-blue" type="submit">Donate <i className="fa fa-long-arrow-right" /></button>
           <p><i className="fa fa-lock" /> Secure payment transfer powered by <a className="link" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">Stripe</a>.</p>
         </div>

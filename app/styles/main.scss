@@ -404,6 +404,14 @@ select {
     &[type="password"] {
       letter-spacing: 2px;
     }
+
+    &.StripeElement {
+      padding-top: 11px;
+    }
+
+    &.StripeElement--focus {
+      border-color: $brand-secondary-dark;
+    }
   }
 
   textarea.form-control {

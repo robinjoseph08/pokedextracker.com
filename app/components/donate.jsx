@@ -14,7 +14,7 @@ export function DonateComponent () {
         <ReloadComponent />
         <div className="form">
           <h1>Help us out!</h1>
-          <Elements>
+          <Elements fonts={[{ cssSrc: 'https://fonts.googleapis.com/css?family=Alegreya+Sans:400,400italic' }]}>
             <DonateFormComponent />
           </Elements>
         </div>
