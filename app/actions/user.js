@@ -1,10 +1,10 @@
 import { push } from 'react-router-redux';
-import slugify  from 'slugify';
 
 import { Config }       from '../../config';
 import { API }          from '../utils/api';
 import { checkVersion } from './utils';
 import { setToken }     from './session';
+import { slug }         from '../utils/formatting';
 
 export const SET_USER         = 'SET_USER';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -26,7 +26,7 @@ export function createUser (payload) {
     })
     .then(({ token }) => {
       dispatch(setToken(token));
-      dispatch(push(`/u/${username}/${slugify(title, { lower: true })}`));
+      dispatch(push(`/u/${username}/${slug(title)}`));
     });
   };
 }

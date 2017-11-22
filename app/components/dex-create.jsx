@@ -2,11 +2,11 @@ import { Component } from 'react';
 import Modal         from 'react-modal';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
-import slugify       from 'slugify';
 
 import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
 import { createDex }      from '../actions/dex';
+import { slug }           from '../utils/formatting';
 
 export class DexCreate extends Component {
 
@@ -73,7 +73,7 @@ export class DexCreate extends Component {
           <form onSubmit={this.onSubmit} className="form-column">
             <AlertComponent message={error} type="error" />
             <div className="form-group">
-              <div className="form-note">/u/{session.username}/{slugify(url || 'Living Dex', { lower: true })}</div>
+              <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex')}</div>
               <label htmlFor="dex_title">Title</label>
               <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" onChange={() => this.setState({ url: this._title.value })} />
               <i className="fa fa-asterisk" />

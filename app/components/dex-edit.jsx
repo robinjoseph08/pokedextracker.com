@@ -1,12 +1,12 @@
 import { Component } from 'react';
 import Modal         from 'react-modal';
 import { connect }   from 'react-redux';
-import slugify       from 'slugify';
 
 import { AlertComponent }       from './alert';
 import { FormWarningComponent } from './form-warning';
 import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
+import { slug }                 from '../utils/formatting';
 
 const GENERATION_WARNING = 'Any Gen 7 capture info will be lost.';
 const REGION_WARNING = 'Any non-Alola Dex capture info will be lost.';
@@ -76,7 +76,7 @@ export class DexEdit extends Component {
     const { dex } = this.props;
     const { url } = this.state;
 
-    return slugify(url || 'Living Dex', { lower: true }) !== dex.slug;
+    return slug(url || 'Living Dex') !== dex.slug;
   }
 
   deleteDex = () => {
@@ -144,7 +144,7 @@ export class DexEdit extends Component {
           <form onSubmit={this.updateDex} className="form-column">
             <AlertComponent message={error} type="error" />
             <div className="form-group">
-              <div className="form-note">/u/{session.username}/{slugify(url || 'Living Dex', { lower: true })}</div>
+              <div className="form-note">/u/{session.username}/{slug(url || 'Living Dex')}</div>
               <label htmlFor="dex_title">Title</label>
               <FormWarningComponent message={this.showURLWarning ? URL_WARNING : null} />
               <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" defaultValue={dex.title} onChange={() => this.setState({ url: this._title.value })} />

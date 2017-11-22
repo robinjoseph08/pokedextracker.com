@@ -1,3 +1,5 @@
+import slugify from 'slugify';
+
 const FRIEND_CODE_REGEX = /(\d{4})(?=\d)/g;
 
 export function capitalize (input) {
@@ -14,4 +16,8 @@ export function friendCode (code) {
 
 export function padding (number, digits, value = '0') {
   return `${value.repeat(digits)}${number}`.slice(-1 * digits);
+}
+
+export function slug (str) {
+  return slugify(str, { lower: true, remove: /[^\w\s\-\.\_~]/g });
 }
