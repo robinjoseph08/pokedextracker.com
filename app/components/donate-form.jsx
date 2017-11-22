@@ -16,6 +16,7 @@ export class DonateForm extends Component {
     this.state = {
       amount: '1',
       error: null,
+      loading: false,
       months: Reflect.apply(Array, null, Array(12)).map((_, i) => padding(i + 1, 2)),
       years: Reflect.apply(Array, null, Array(10)).map((_, i) => new Date().getUTCFullYear() + i)
     };
@@ -43,7 +44,7 @@ export class DonateForm extends Component {
     const message = this._message.value || undefined;
     const otherAmount = amount === 'other' && this._otherAmount.value;
 
-    this.setState({ error: null });
+    this.setState({ error: null, loading: true });
 
     stripe.createToken({ name })
     .then(({ error, token }) => {
@@ -59,16 +60,20 @@ export class DonateForm extends Component {
         amount: amount === 'other' ? parseFloat(otherAmount.replace(/[^\d\.]/g, '')) : amount
       });
     })
-    .then(() => ReactGA.event({ action: 'donate', category: 'Donation' }))
+    .then(() => {
+      ReactGA.event({ action: 'donate', category: 'Donation' });
+
+      this.setState({ loading: false });
+    })
     .catch((err) => {
-      this.setState({ error: err.message });
+      this.setState({ error: err.message, loading: false });
       this.scrollToTop();
     });
   }
 
   render () {
     const { session } = this.props;
-    const { amount, error } = this.state;
+    const { amount, error, loading } = this.state;
 
     const stripeStyles = {
       base: {
@@ -153,7 +158,10 @@ export class DonateForm extends Component {
             <label htmlFor="message">Drop us a Note?</label>
             <textarea className="form-control" ref={(c) => this._message = c} name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
           </div>
-          <button className="btn btn-blue" type="submit">Donate <i className="fa fa-long-arrow-right" /></button>
+          <button className="btn btn-blue" type="submit" disabled={loading}>
+            <span className={loading ? 'hidden' : ''}>Donate <i className="fa fa-long-arrow-right" /></span>
+            {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
+          </button>
           <p><i className="fa fa-lock" /> Secure payment transfer powered by <a className="link" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">Stripe</a>.</p>
         </div>
       </form>
