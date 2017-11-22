@@ -1,11 +1,13 @@
-import { Component }    from 'react';
-import { Link }         from 'react-router';
-import { connect }      from 'react-redux';
+import { Component }                 from 'react';
+import { Link }                      from 'react-router';
+import { connect }                   from 'react-redux';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 
 import { AlertComponent }  from './alert';
+import { ReactGA }         from '../utils/analytics';
 import { checkVersion }    from '../actions/utils';
-import { padding }         from '../utils/formatting';
+import { dollar, padding } from '../utils/formatting';
+import { donate }          from '../actions/donation';
 
 export class DonateForm extends Component {
 
@@ -34,16 +36,34 @@ export class DonateForm extends Component {
   donate = (e) => {
     e.preventDefault();
 
-    this.setState({ ...this.state, error: null });
+    const { donate, stripe } = this.props;
+    const { amount } = this.state;
+    const name = this._name.value || undefined;
+    const email = this._email.value;
+    const message = this._message.value || undefined;
+    const otherAmount = amount === 'other' && this._otherAmount.value;
 
-    // Stripe.createToken({
+    this.setState({ error: null });
 
-    // })
-    // .then(() => ReactGA.event({ action: 'login', category: 'Session' }))
-    // .catch((err) => {
-    //   this.setState({ ...this.state, error: err.message });
-    //   this.scrollToTop();
-    // });
+    stripe.createToken({ name })
+    .then(({ error, token }) => {
+      if (error) {
+        throw error;
+      }
+
+      return donate({
+        name,
+        email,
+        token: token.id,
+        message,
+        amount: amount === 'other' ? parseFloat(otherAmount.replace(/[^\d\.]/g, '')) : amount
+      });
+    })
+    .then(() => ReactGA.event({ action: 'donate', category: 'Donation' }))
+    .catch((err) => {
+      this.setState({ error: err.message });
+      this.scrollToTop();
+    });
   }
 
   render () {
@@ -75,7 +95,7 @@ export class DonateForm extends Component {
 
     if (amount === 'other') {
       otherAmount = (
-        <input className="form-control" name="amount" id="amount" type="text"  placeholder="$34.20" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+        <input className="form-control" ref={(c) => this._otherAmount = c} name="amount" id="amount" type="text" placeholder="$34.20" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onBlur={(e) => this._otherAmount.value = dollar(e.target.value)} />
       );
     }
 
@@ -89,11 +109,11 @@ export class DonateForm extends Component {
           <AlertComponent message={error} type="error" />
           <div className="form-group">
             <label htmlFor="name">Name</label>
-            <input className="form-control" name="name" id="name" type="text" placeholder="Ash Ketchum" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+            <input className="form-control" ref={(c) => this._name = c} name="name" id="name" type="text" placeholder="Ash Ketchum" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
           </div>
           <div className="form-group">
             <label htmlFor="email">E-Mail</label>
-            <input className="form-control" name="email" id="email" type="email" required placeholder="ash.ketchum@gmail.com" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+            <input className="form-control" ref={(c) => this._email = c} name="email" id="email" type="email" required placeholder="ash.ketchum@gmail.com" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
             <i className="fa fa-asterisk" />
           </div>
           <div className="form-group">
@@ -131,7 +151,7 @@ export class DonateForm extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="message">Drop us a Note?</label>
-            <textarea className="form-control" name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+            <textarea className="form-control" ref={(c) => this._message = c} name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
           </div>
           <button className="btn btn-blue" type="submit">Donate <i className="fa fa-long-arrow-right" /></button>
           <p><i className="fa fa-lock" /> Secure payment transfer powered by <a className="link" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">Stripe</a>.</p>
@@ -148,7 +168,8 @@ function mapStateToProps ({ session }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    checkVersion: () => dispatch(checkVersion())
+    checkVersion: () => dispatch(checkVersion()),
+    donate: (payload) => dispatch(donate(payload))
   };
 }
 

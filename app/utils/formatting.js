@@ -4,8 +4,19 @@ export function capitalize (input) {
   return input.replace(/([^\W_]+[^\s-]*) */g, (word) => word[0].toUpperCase() + word.substr(1).toLowerCase());
 }
 
-export function decimal (number, percision) {
-  return parseInt(number * percision * 10, 10) / (percision * 10);
+export function decimal (number, precision) {
+  return number.toFixed(precision);
+}
+
+export function dollar (amount) {
+  const str = `${amount}`;
+  const number = parseFloat(str.replace(/[^\d\.]/g, ''));
+
+  if (isNaN(number)) {
+    return '$';
+  }
+
+  return `$${decimal(number, 2)}`;
 }
 
 export function friendCode (code) {
