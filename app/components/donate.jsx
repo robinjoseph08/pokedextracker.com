@@ -2,9 +2,9 @@ import DocumentTitle from 'react-document-title';
 import { Elements }  from 'react-stripe-elements';
 
 import { DonateFormComponent } from './donate-form';
-import { FooterComponent } from './footer';
-import { NavComponent }    from './nav';
-import { ReloadComponent } from './reload';
+import { FooterComponent }     from './footer';
+import { NavComponent }        from './nav';
+import { ReloadComponent }     from './reload';
 
 export function DonateComponent () {
   return (

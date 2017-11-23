@@ -1,7 +1,7 @@
+import { CardElement, injectStripe } from 'react-stripe-elements';
 import { Component }                 from 'react';
 import { Link }                      from 'react-router';
 import { connect }                   from 'react-redux';
-import { CardElement, injectStripe } from 'react-stripe-elements';
 
 import { AlertComponent }  from './alert';
 import { ReactGA }         from '../utils/analytics';
@@ -18,6 +18,7 @@ export class DonateForm extends Component {
       error: null,
       loading: false,
       months: Reflect.apply(Array, null, Array(12)).map((_, i) => padding(i + 1, 2)),
+      success: false,
       years: Reflect.apply(Array, null, Array(10)).map((_, i) => new Date().getUTCFullYear() + i)
     };
   }
@@ -63,7 +64,7 @@ export class DonateForm extends Component {
     .then(() => {
       ReactGA.event({ action: 'donate', category: 'Donation' });
 
-      this.setState({ loading: false });
+      this.setState({ loading: false, success: true });
     })
     .catch((err) => {
       this.setState({ error: err.message, loading: false });
@@ -73,7 +74,13 @@ export class DonateForm extends Component {
 
   render () {
     const { session } = this.props;
-    const { amount, error, loading } = this.state;
+    const { amount, error, loading, success } = this.state;
+
+    if (success) {
+      return (
+        <p>Thanks for the donation!</p>
+      );
+    }
 
     const stripeStyles = {
       base: {
