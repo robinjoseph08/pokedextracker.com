@@ -151,6 +151,7 @@ nav {
   width: 100%;
   padding: 15px;
   border: 0;
+  border-radius: 0;
   font-family: $font-secondary;
   font-size: 11px;
   font-weight: 700;
@@ -678,7 +679,7 @@ reload div {
   .wrapper {
     width: 100%;
   }
-  
+
   .main-footer {
     padding: 50px 0;
   }
