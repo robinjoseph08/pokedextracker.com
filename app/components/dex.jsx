@@ -5,6 +5,7 @@ import throttle      from 'lodash/throttle';
 
 import { BoxComponent }                                            from './box';
 import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD, ScrollComponent } from './scroll';
+import { DonatedFlairComponent }                                   from './donated-flair';
 import { FriendCodeComponent }                                     from './friend-code';
 import { HeaderComponent }                                         from './header';
 import { ProgressComponent }                                       from './progress';
@@ -38,7 +39,10 @@ export class Dex extends Component {
           <ScrollComponent onClick={() => this._dex ? this._dex.scrollTop = 0 : null} />
           <header>
             <HeaderComponent />
-            <h3><Link to={`/u/${username}`} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}>/u/{username}</Link></h3>
+            <h3>
+              <Link to={`/u/${username}`} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}>/u/{username}</Link>
+              <DonatedFlairComponent donated="username.donated" />
+            </h3>
             <FriendCodeComponent />
           </header>
           <RegionComponent />

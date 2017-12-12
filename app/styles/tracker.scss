@@ -267,6 +267,10 @@ header {
   .header-row {
     @include flexbox();
     @include align-items(center);
+
+    .donated-flair {
+      margin-left: auto;
+    }
   }
 
   h1 {
@@ -275,14 +279,6 @@ header {
     margin: 0;
     color: $brand-secondary;
     font-size: 40px;
-
-    .dex-indicator {
-      left: -20px;
-
-      .fa-star {
-        font-size: 12px;
-      }
-    }
   }
 
   h3 {
@@ -294,6 +290,11 @@ header {
       &:hover {
         color: lighten(#000, 25%);
       }
+    }
+
+    .donated-flair {
+      margin-left: 4px;
+      font-size: 13px;
     }
   }
 

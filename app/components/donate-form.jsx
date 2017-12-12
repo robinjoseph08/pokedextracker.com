@@ -76,9 +76,33 @@ export class DonateForm extends Component {
     const { session } = this.props;
     const { amount, error, loading, success } = this.state;
 
+    let header = null;
+    let successNote = null;
+
+    if (session) {
+      successNote = (
+        <p>We'll be adding your profile to our project's <a href="https://github.com/pokedextracker/pokedextracker.com" target="_blank" rel="noopener noreferrer" className="link">list of supporters</a> shortly (if you're not already there). P.S.&mdash;check out your <Link className="link" to={`/u/${session.username}`}>new profile flair</Link>!</p>
+      );
+    }
+
     if (success) {
+      header = (
+        <h1>Thanks for the donation! 💕</h1>
+      );
+
       return (
-        <p>Thanks for the donation!</p>
+        <div className="form">
+          {header}
+          <form>
+            <div className="form-intro">
+              {successNote}
+            </div>
+          </form>
+        </div>
+      );
+    } else {
+      header = (
+        <h1>Help us out!</h1>
       );
     }
 
@@ -112,66 +136,69 @@ export class DonateForm extends Component {
     }
 
     return (
-      <form onSubmit={this.donate}>
-        <div className="form-intro">
-          <p>This project is completely open source, so every contribution, no matter how little, is greatly appreciated. Your donation will go towards server and development costs for the site. To show our gratitude, we'll add a special flair to your profile page!</p>
-          {sessionWarning}
-        </div>
-        <div className="form-column">
-          <AlertComponent message={error} type="error" />
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input className="form-control" ref={(c) => this._name = c} name="name" id="name" type="text" placeholder="Ash Ketchum" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+      <div className="form">
+        {header}
+        <form onSubmit={this.donate}>
+          <div className="form-intro">
+            <p>This project is completely open source, so every contribution, no matter how little, is greatly appreciated. Your donation will go towards server and development costs for the site. To show our gratitude, we'll add a special flair to your profile page!</p>
+            {sessionWarning}
           </div>
-          <div className="form-group">
-            <label htmlFor="email">E-Mail</label>
-            <input className="form-control" ref={(c) => this._email = c} name="email" id="email" type="email" required placeholder="ash.ketchum@gmail.com" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-            <i className="fa fa-asterisk" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="amount">Donation Amount</label>
-            <div className="radio">
-              <label>
-                <input type="radio" name="amount" checked={amount === '1'} value="1" onChange={() => this.setState({ amount: '1' })} />
-                <span className="radio-custom"><span /></span>$1
-              </label>
+          <div className="form-column">
+            <AlertComponent message={error} type="error" />
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input className="form-control" ref={(c) => this._name = c} name="name" id="name" type="text" placeholder="Ash Ketchum" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
             </div>
-            <div className="radio">
-              <label>
-                <input type="radio" name="amount" checked={amount === '5'} value="5" onChange={() => this.setState({ amount: '5' })} />
-                <span className="radio-custom"><span /></span>$5
-              </label>
+            <div className="form-group">
+              <label htmlFor="email">E-Mail</label>
+              <input className="form-control" ref={(c) => this._email = c} name="email" id="email" type="email" required placeholder="ash.ketchum@gmail.com" maxLength="100" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+              <i className="fa fa-asterisk" />
             </div>
-            <div className="radio">
-              <label>
-                <input type="radio" name="amount" checked={amount === '10'} value="10" onChange={() => this.setState({ amount: '10' })} />
-                <span className="radio-custom"><span /></span>$10
-              </label>
+            <div className="form-group">
+              <label htmlFor="amount">Donation Amount</label>
+              <div className="radio">
+                <label>
+                  <input type="radio" name="amount" checked={amount === '1'} value="1" onChange={() => this.setState({ amount: '1' })} />
+                  <span className="radio-custom"><span /></span>$1
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" name="amount" checked={amount === '5'} value="5" onChange={() => this.setState({ amount: '5' })} />
+                  <span className="radio-custom"><span /></span>$5
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" name="amount" checked={amount === '10'} value="10" onChange={() => this.setState({ amount: '10' })} />
+                  <span className="radio-custom"><span /></span>$10
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input type="radio" name="amount" checked={amount === 'other'} value="other" onChange={() => this.setState({ amount: 'other' })} />
+                  <span className="radio-custom"><span /></span>Other
+                </label>
+              </div>
+              {otherAmount}
             </div>
-            <div className="radio">
-              <label>
-                <input type="radio" name="amount" checked={amount === 'other'} value="other" onChange={() => this.setState({ amount: 'other' })} />
-                <span className="radio-custom"><span /></span>Other
-              </label>
+            <div className="form-group">
+              <label htmlFor="ccname">Credit Card</label>
+              <CardElement className="form-control" style={stripeStyles} />
+              <i className="fa fa-asterisk" />
             </div>
-            {otherAmount}
+            <div className="form-group">
+              <label htmlFor="message">Drop us a Note?</label>
+              <textarea className="form-control" ref={(c) => this._message = c} name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
+            </div>
+            <button className="btn btn-blue" type="submit" disabled={loading}>
+              <span className={loading ? 'hidden' : ''}>Donate <i className="fa fa-long-arrow-right" /></span>
+              {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
+            </button>
+            <p><i className="fa fa-lock" /> Secure payment transfer powered by <a className="link" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">Stripe</a>.</p>
           </div>
-          <div className="form-group">
-            <label htmlFor="ccname">Credit Card</label>
-            <CardElement className="form-control" style={stripeStyles} />
-            <i className="fa fa-asterisk" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">Drop us a Note?</label>
-            <textarea className="form-control" ref={(c) => this._message = c} name="message" id="message" type="text" placeholder="We'd love to hear from you!" maxLength="500" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-          </div>
-          <button className="btn btn-blue" type="submit" disabled={loading}>
-            <span className={loading ? 'hidden' : ''}>Donate <i className="fa fa-long-arrow-right" /></span>
-            {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
-          </button>
-          <p><i className="fa fa-lock" /> Secure payment transfer powered by <a className="link" href="https://stripe.com/" target="_blank" rel="noopener noreferrer">Stripe</a>.</p>
-        </div>
-      </form>
+        </form>
+      </div>
     );
   }
 
