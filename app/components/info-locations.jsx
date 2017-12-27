@@ -1,4 +1,4 @@
-export function InfoLocationsComponent ({ generation, pokemon, region }) {
+export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
   const orLocations = (
     pokemon.or_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.or_locations.map((location) => <li key={location}>{location}</li>)
   );
@@ -59,8 +59,8 @@ export function InfoLocationsComponent ({ generation, pokemon, region }) {
 
   return (
     <div className="info-locations">
-      {generation === 7 ? gen7 : null}
-      {region === 'national' ? gen6 : null}
+      {gameFamily.generation === 7 ? gen7 : null}
+      {regional ? null : gen6}
     </div>
   );
 }
