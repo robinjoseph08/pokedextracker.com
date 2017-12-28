@@ -23,7 +23,7 @@ export class Info extends Component {
     const { currentPokemon, dex, pokemon, retrievePokemon } = this.props;
 
     if (!pokemon) {
-      retrievePokemon(currentPokemon, { generation: dex.generation, region: dex.region });
+      retrievePokemon(currentPokemon, { game_family: dex.game.game_family.id, regional: dex.regional });
     }
   }
 
@@ -37,7 +37,7 @@ export class Info extends Component {
 
   render () {
     const { dex, pokemon, showInfo } = this.props;
-    const serebiiPath = dex.generation === 6 ? 'pokedex-xy' : 'pokedex-sm';
+    const serebiiPath = dex.game.game_family.generation === 6 ? 'pokedex-xy' : 'pokedex-sm';
 
     if (!pokemon) {
       return (
@@ -64,7 +64,7 @@ export class Info extends Component {
             <h2>#{padding(pokemon.national_id, 3)}</h2>
           </div>
 
-          <InfoLocationsComponent generation={dex.generation} pokemon={pokemon} region={dex.region} />
+          <InfoLocationsComponent gameFamily={dex.game.game_family} pokemon={pokemon} regional={dex.regional} />
 
           <EvolutionFamilyComponent family={pokemon.evolution_family} />
 

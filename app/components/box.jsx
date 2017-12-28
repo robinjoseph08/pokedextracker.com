@@ -10,10 +10,12 @@ export function Box ({ captures, dex }) {
   const empties = Array.from({ length: BOX_SIZE - captures.length }).map((_, i) => i);
   const firstPokemon = captures[0].pokemon;
   const lastPokemon = captures[captures.length - 1].pokemon;
-  let title = <h1>{padding(firstPokemon[`${dex.region}_id`], 3)} - {padding(lastPokemon[`${dex.region}_id`], 3)}</h1>;
+  let title = <h1>{firstPokemon.box}</h1>;
 
-  if (firstPokemon.box) {
-    title = <h1>{firstPokemon.box}</h1>;
+  if (!firstPokemon.box) {
+    const firstNumber = dex.regional ? firstPokemon[`${dex.game.game_family.id}_id`] : firstPokemon.national_id;
+    const lastNumber = dex.regional ? lastPokemon[`${dex.game.game_family.id}_id`] : lastPokemon.national_id;
+    title = <h1>{padding(firstNumber, 3)} - {padding(lastNumber, 3)}</h1>;
   }
 
   return (

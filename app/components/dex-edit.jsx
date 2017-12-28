@@ -9,7 +9,8 @@ import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
 
 const GENERATION_WARNING = 'Any Gen 7 capture info will be lost.';
-const REGION_WARNING = 'Any non-Alola Dex capture info will be lost.';
+const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
+const REGIONAL_WARNING = 'Any non-Alola Dex capture info will be lost.';
 const URL_WARNING = 'The old URL to your dex will not function anymore.';
 
 export class DexEdit extends Component {
@@ -18,9 +19,9 @@ export class DexEdit extends Component {
     super(props);
     this.state = {
       error: null,
-      gen: props.dex.generation,
+      game: props.dex.game.id,
       loading: false,
-      region: props.dex.region,
+      regional: props.dex.regional,
       url: props.dex.title,
       confirmingDelete: false,
       confirmingEdit: false
@@ -28,13 +29,13 @@ export class DexEdit extends Component {
   }
 
   onChange = (e) => {
-    const gen = parseInt(e.target.value);
+    const game = e.target.value;
 
-    if (gen === 6) {
-      this.setState({ region: 'national' });
+    if (NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+      this.setState({ regional: false });
     }
 
-    this.setState({ gen });
+    this.setState({ game });
   }
 
   scrollToTop () {
@@ -48,9 +49,9 @@ export class DexEdit extends Component {
 
     this.setState({
       error: null,
-      gen: dex.generation,
+      game: dex.game.id,
       loading: false,
-      region: dex.region,
+      regional: dex.regional,
       url: dex.title,
       confirmingDelete: false,
       confirmingEdit: false
@@ -60,16 +61,16 @@ export class DexEdit extends Component {
 
   get showGenerationWarning () {
     const { dex } = this.props;
-    const { gen } = this.state;
+    const { game } = this.state;
 
-    return gen < dex.generation;
+    return game === 'omega_ruby' && dex.game.id === 'sun';
   }
 
-  get showRegionWarning () {
+  get showRegionalWarning () {
     const { dex } = this.props;
-    const { region } = this.state;
+    const { regional } = this.state;
 
-    return region === 'alola' && dex.region === 'national';
+    return regional && !dex.regional;
   }
 
   get showURLWarning () {
@@ -96,19 +97,18 @@ export class DexEdit extends Component {
   updateDex = (e) => {
     e.preventDefault();
     const { dex, session, updateDex } = this.props;
-    const { confirmingEdit, gen, region } = this.state;
+    const { confirmingEdit, game, regional } = this.state;
 
-    if (!confirmingEdit && (this.showGenerationWarning || this.showRegionWarning || this.showURLWarning)) {
+    if (!confirmingEdit && (this.showGenerationWarning || this.showRegionalWarning || this.showURLWarning)) {
       return this.setState({ confirmingEdit: true });
     }
 
     const title = this._title.value;
     const shiny = this._shiny.checked;
-    const generation = gen;
     const payload = {
       slug: dex.slug,
       username: session.username,
-      payload: { title, shiny, generation, region }
+      payload: { title, shiny, game, regional }
     };
 
     updateDex(payload)
@@ -124,7 +124,7 @@ export class DexEdit extends Component {
 
   render () {
     const { dex, isOpen, session } = this.props;
-    const { confirmingDelete, confirmingEdit, error, gen, region, url } = this.state;
+    const { confirmingDelete, confirmingEdit, error, game, regional, url } = this.state;
 
     let dexDelete = null;
 
@@ -153,24 +153,24 @@ export class DexEdit extends Component {
             <div className="form-group">
               <FormWarningComponent message={this.showGenerationWarning ? GENERATION_WARNING : null} />
               <label htmlFor="generation">Generation</label>
-              <select className="form-control" onChange={this.onChange} value={gen}>
-                <option value="7">Seven</option>
-                <option value="6">Six</option>
+              <select className="form-control" onChange={this.onChange} value={game}>
+                <option value="sun">Seven</option>
+                <option value="omega_ruby">Six</option>
               </select>
               <i className="fa fa-chevron-down" />
             </div>
             <div className="form-group">
-              <FormWarningComponent message={this.showRegionWarning ? REGION_WARNING : null} />
-              <label htmlFor="region">Regionality</label>
+              <FormWarningComponent message={this.showRegionalWarning ? REGIONAL_WARNING : null} />
+              <label htmlFor="regional">Regionality</label>
               <div className="radio">
                 <label>
-                  <input type="radio" name="region" checked={region === 'national'} value="national" onChange={() => this.setState({ region: 'national' })} />
+                  <input type="radio" name="regional" checked={!regional} value="national" onChange={() => this.setState({ regional: false })} />
                   <span className="radio-custom"><span /></span>National
                 </label>
               </div>
-              <div className={`radio ${gen === 6 ? 'disabled' : ''}`}>
-                <label title={gen === 6 ? 'Regional dexes only supported for Gen 7.' : ''}>
-                  <input type="radio" name="region" checked={region === 'alola'} disabled={gen === 6} value="alola" onChange={() => this.setState({ region: 'alola' })} />
+              <div className={`radio ${game === 'omega_ruby' ? 'disabled' : ''}`}>
+                <label title={game === 'omega_ruby' ? 'Regional dexes only supported for Gen 7.' : ''}>
+                  <input type="radio" name="regional" checked={regional} disabled={game === 'omega_ruby'} value="regional" onChange={() => this.setState({ regional: true })} />
                   <span className="radio-custom"><span /></span>Regional
                 </label>
               </div>
