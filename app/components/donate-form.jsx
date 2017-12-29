@@ -9,6 +9,18 @@ import { checkVersion }    from '../actions/utils';
 import { dollar, padding } from '../utils/formatting';
 import { donate }          from '../actions/donation';
 
+const STRIPE_STYLES = {
+  base: {
+    fontFamily: '"Alegreya Sans", "Helvetica", sans-serif',
+    fontSmoothing: 'antialiased',
+    color: '#000000',
+    fontSize: '15px'
+  },
+  invalid: {
+    color: '#ff0000'
+  }
+};
+
 export class DonateForm extends Component {
 
   constructor (props) {
@@ -76,72 +88,32 @@ export class DonateForm extends Component {
     const { session } = this.props;
     const { amount, error, loading, success } = this.state;
 
-    let header = null;
-    let successNote = null;
-
-    if (session) {
-      successNote = (
-        <p>We'll be adding your profile to our project's <a href="https://github.com/pokedextracker/pokedextracker.com" target="_blank" rel="noopener noreferrer" className="link">list of supporters</a> shortly (if you're not already there). P.S.&mdash;check out your <Link className="link" to={`/u/${session.username}`}>new profile flair</Link>!</p>
-      );
-    }
-
     if (success) {
-      header = (
-        <h1>Thanks for the donation! 💕</h1>
-      );
-
       return (
         <div className="form">
-          {header}
+          <h1>Thanks for the donation! 💕</h1>
           <form>
             <div className="form-intro">
-              {successNote}
+              {!session ? null : (
+                <p>We'll be adding your profile to our project's <a href="https://github.com/pokedextracker/pokedextracker.com" target="_blank" rel="noopener noreferrer" className="link">list of supporters</a> shortly (if you're not already there). P.S.&mdash;check out your <Link className="link" to={`/u/${session.username}`}>new profile flair</Link>!</p>
+              )}
             </div>
           </form>
         </div>
-      );
-    } else {
-      header = (
-        <h1>Help us out!</h1>
-      );
-    }
-
-    const stripeStyles = {
-      base: {
-        fontFamily: '"Alegreya Sans", "Helvetica", sans-serif',
-        fontSmoothing: 'antialiased',
-        color: '#000000',
-        fontSize: '15px'
-      },
-      invalid: {
-        color: '#ff0000'
-      }
-    };
-
-    let sessionWarning = null;
-    let otherAmount = null;
-
-    if (!session) {
-      sessionWarning = (
-        <p>
-          <Link className="link" to="/login">Login</Link> in first so we can attribute your donation to your account.
-        </p>
-      );
-    }
-
-    if (amount === 'other') {
-      otherAmount = (
-        <input className="form-control" ref={(c) => this._otherAmount = c} name="amount" id="amount" type="text" placeholder="$34.20" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onBlur={(e) => this._otherAmount.value = dollar(e.target.value)} />
       );
     }
 
     return (
       <div className="form">
-        {header}
+        <h1>Help us out!</h1>
         <form onSubmit={this.donate}>
           <div className="form-intro">
             <p>This project is completely open source, so every contribution, no matter how little, is greatly appreciated. Your donation will go towards server and development costs for the site. To show our gratitude, we'll add a special flair to your profile page!</p>
-            {sessionWarning}
+            {session ? null : (
+              <p>
+                <Link className="link" to="/login">Login</Link> in first so we can attribute your donation to your account.
+              </p>
+            )}
           </div>
           <div className="form-column">
             <AlertComponent message={error} type="error" />
@@ -180,11 +152,13 @@ export class DonateForm extends Component {
                   <span className="radio-custom"><span /></span>Other
                 </label>
               </div>
-              {otherAmount}
+              {amount !== 'other' ? null : (
+                <input className="form-control" ref={(c) => this._otherAmount = c} name="amount" id="amount" type="text" placeholder="$34.20" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onBlur={(e) => this._otherAmount.value = dollar(e.target.value)} />
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="ccname">Credit Card</label>
-              <CardElement className="form-control" style={stripeStyles} />
+              <CardElement className="form-control" style={STRIPE_STYLES} />
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">

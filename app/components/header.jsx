@@ -35,14 +35,6 @@ export class Header extends Component {
     const { dex, profile, session, showShare, user } = this.props;
     const ownPage = session && session.id === user.id;
 
-    let donatedFlair = null;
-
-    if (profile) {
-      donatedFlair = (
-        <DonatedFlairComponent donated={user.donated} />
-      );
-    }
-
     return (
       <div className="header-row">
         <h1>
@@ -55,7 +47,7 @@ export class Header extends Component {
             <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`} target="_blank" rel="noopener noreferrer" onClick={() => ReactGA.event({ action: 'click tweet', category: 'Share' })}><i className="fa fa-twitter" /></a>
           </div>
         </h1>
-        {donatedFlair}
+        {profile ? <DonatedFlairComponent /> : null}
         <DexIndicatorComponent dex={dex} />
       </div>
     );

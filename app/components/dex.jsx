@@ -41,7 +41,7 @@ export class Dex extends Component {
             <HeaderComponent />
             <h3>
               <Link to={`/u/${username}`} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}>/u/{username}</Link>
-              <DonatedFlairComponent donated="username.donated" />
+              <DonatedFlairComponent />
             </h3>
             <FriendCodeComponent />
           </header>
