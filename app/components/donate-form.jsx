@@ -95,7 +95,7 @@ export class DonateForm extends Component {
           <form>
             <div className="form-intro">
               {!session ? null : (
-                <p>We'll be adding your profile to our project's <a href="https://github.com/pokedextracker/pokedextracker.com" target="_blank" rel="noopener noreferrer" className="link">list of supporters</a> shortly (if you're not already there). P.S.&mdash;check out your <Link className="link" to={`/u/${session.username}`}>new profile flair</Link>!</p>
+                <p>We'll be adding your profile to our project's <a href="https://github.com/pokedextracker/pokedextracker.com/blob/master/SUPPORTERS.md" target="_blank" rel="noopener noreferrer" className="link">list of supporters</a> shortly (if you're not already there). P.S.&mdash;check out your <Link className="link" to={`/u/${session.username}`}>new profile flair</Link>!</p>
               )}
             </div>
           </form>
