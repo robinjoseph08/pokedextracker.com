@@ -13,11 +13,13 @@ import { checkVersion, setNotification } from '../actions/utils';
 import { createUser }                    from '../actions/user';
 import { friendCode }                    from '../utils/formatting';
 
+const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
+
 export class Register extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, generation: 7, region: 'national' };
+    this.state = { error: null, game: 'sun', regional: false };
   }
 
   componentWillMount () {
@@ -31,13 +33,13 @@ export class Register extends Component {
   }
 
   onChange = (e) => {
-    const generation = parseInt(e.target.value);
+    const game = e.target.value;
 
-    if (generation === 6) {
-      this.setState({ region: 'national' });
+    if (NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+      this.setState({ regional: false });
     }
 
-    this.setState({ generation });
+    this.setState({ game });
   }
 
   scrollToTop () {
@@ -50,7 +52,7 @@ export class Register extends Component {
     e.preventDefault();
 
     const { register, setNotification } = this.props;
-    const { generation, region } = this.state;
+    const { game, regional } = this.state;
     const username = this._username.value;
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
@@ -60,7 +62,7 @@ export class Register extends Component {
 
     this.setState({ error: null });
 
-    register({ username, password, password_confirm, friend_code, title, shiny, generation, region })
+    register({ username, password, password_confirm, friend_code, title, shiny, game, regional })
     .then(() => {
       ReactGA.event({ action: 'register', category: 'Session' });
       setNotification(true);
@@ -72,7 +74,7 @@ export class Register extends Component {
   }
 
   render () {
-    const { error, generation, region } = this.state;
+    const { error, game, regional } = this.state;
 
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
@@ -125,23 +127,23 @@ export class Register extends Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="generation">Generation</label>
-                    <select className="form-control" onChange={this.onChange} value={generation}>
-                      <option value="7">Seven</option>
-                      <option value="6">Six</option>
+                    <select className="form-control" onChange={this.onChange} value={game}>
+                      <option value="sun">Seven</option>
+                      <option value="omega_ruby">Six</option>
                     </select>
                     <i className="fa fa-chevron-down" />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="region">Regionality</label>
+                    <label htmlFor="regional">Regionality</label>
                     <div className="radio">
                       <label>
-                        <input type="radio" name="region" checked={region === 'national'} value="national" onChange={() => this.setState({ region: 'national' })} />
+                        <input type="radio" name="regional" checked={!regional} value="national" onChange={() => this.setState({ regional: false })} />
                         <span className="radio-custom"><span /></span>National
                       </label>
                     </div>
-                    <div className={`radio ${generation === 6 ? 'disabled' : ''}`}>
-                      <label title={generation === 6 ? 'Regional dexes only supported for Gen 7.' : ''}>
-                        <input type="radio" name="region" checked={region === 'alola'} disabled={generation === 6} value="alola" onChange={() => this.setState({ region: 'alola' })} />
+                    <div className={`radio ${game === 'omega_ruby' ? 'disabled' : ''}`}>
+                      <label title={game === 'omega_ruby' ? 'Regional dexes only supported for Gen 7.' : ''}>
+                        <input type="radio" name="regional" checked={regional} disabled={game === 'omega_ruby'} value="regional" onChange={() => this.setState({ regional: true })} />
                         <span className="radio-custom"><span /></span>Regional
                       </label>
                     </div>

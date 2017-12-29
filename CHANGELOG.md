@@ -1,3 +1,15 @@
+### 2.5.0 (2017-12-27)
+
+##### Chores
+
+* **game:** replace usage of generation/region with game/regional (#288) ([857d3ae6](https://github.com/robinjoseph08/pokedextracker.com/commit/857d3ae69cef6aed58c0b027d5d8836e435c8096))
+* **styles:** remove border radius from buttons ([f2f5bf0b](https://github.com/robinjoseph08/pokedextracker.com/commit/f2f5bf0b3ad1100549ae0b24b49683704f1f7115))
+* **deps:** upgrade a few react modules (#281) ([cdb5b7cc](https://github.com/robinjoseph08/pokedextracker.com/commit/cdb5b7ccd96c4e99aa9dd25cf7144479af7c944a))
+
+##### Bug Fixes
+
+* **locations:** add empty state to locations ([202b608d](https://github.com/robinjoseph08/pokedextracker.com/commit/202b608dbb0b4b6486cf5ed7be170ee50e2a40a6))
+
 #### 2.4.1 (2017-8-13)
 
 ##### Bug Fixes

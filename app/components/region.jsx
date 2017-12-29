@@ -46,7 +46,7 @@ export class Region extends Component {
   render () {
     const { dex, mobile, region } = this.props;
 
-    if (dex.region !== 'national') {
+    if (dex.regional) {
       return null;
     }
 
@@ -56,7 +56,7 @@ export class Region extends Component {
       if (this.state.dropdown) {
         dropdown = (
           <div className="dropdown">
-            {REGIONS[dex.generation].map((r) => <div key={r} style={{ display: region === r ? 'none' : 'block' }} onClick={() => this.setRegion(r)}>{r}</div>)}
+            {REGIONS[dex.game.game_family.generation].map((r) => <div key={r} style={{ display: region === r ? 'none' : 'block' }} onClick={() => this.setRegion(r)}>{r}</div>)}
           </div>
         );
       }
@@ -74,7 +74,7 @@ export class Region extends Component {
 
     return (
       <div className="region-filter">
-        {REGIONS[dex.generation].map((r) => <div key={r} className={region === r ? 'active' : ''} onClick={() => this.setRegion(r)}>{r}</div>)}
+        {REGIONS[dex.game.game_family.generation].map((r) => <div key={r} className={region === r ? 'active' : ''} onClick={() => this.setRegion(r)}>{r}</div>)}
       </div>
     );
   }

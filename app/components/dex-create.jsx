@@ -8,21 +8,23 @@ import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
 import { createDex }      from '../actions/dex';
 
+const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
+
 export class DexCreate extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, generation: 7, region: 'national' };
+    this.state = { error: null, game: 'sun', regional: false };
   }
 
   onChange = (e) => {
-    const generation = parseInt(e.target.value);
+    const game = e.target.value;
 
-    if (generation === 6) {
-      this.setState({ region: 'national' });
+    if (NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+      this.setState({ regional: false });
     }
 
-    this.setState({ generation });
+    this.setState({ game });
   }
 
   scrollToTop () {
@@ -32,7 +34,7 @@ export class DexCreate extends Component {
   }
 
   onRequestClose = () => {
-    this.setState({ error: null, url: null, generation: 7, region: 'national' });
+    this.setState({ error: null, url: null, game: 'sun', regional: false });
     this.props.onRequestClose();
   }
 
@@ -40,12 +42,12 @@ export class DexCreate extends Component {
     e.preventDefault();
 
     const { createDex, redirect, session } = this.props;
-    const { generation, region } = this.state;
+    const { game, regional } = this.state;
     const title = this._title.value;
     const shiny = this._shiny.checked;
     const payload = {
       username: session.username,
-      payload: { title, shiny, generation, region }
+      payload: { title, shiny, game, regional }
     };
 
     this.setState({ ...this.state, error: null });
@@ -64,7 +66,7 @@ export class DexCreate extends Component {
 
   render () {
     const { isOpen, session } = this.props;
-    const { error, generation, region, url } = this.state;
+    const { error, game, regional, url } = this.state;
 
     return (
       <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose} contentLabel="Create a New Dex">
@@ -80,23 +82,23 @@ export class DexCreate extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="generation">Generation</label>
-              <select className="form-control" onChange={this.onChange} value={generation}>
-                <option value="7">Seven</option>
-                <option value="6">Six</option>
+              <select className="form-control" onChange={this.onChange} value={game}>
+                <option value="sun">Seven</option>
+                <option value="omega_ruby">Six</option>
               </select>
               <i className="fa fa-chevron-down" />
             </div>
             <div className="form-group">
-              <label htmlFor="region">Regionality</label>
+              <label htmlFor="regional">Regionality</label>
               <div className="radio">
                 <label>
-                  <input type="radio" name="region" checked={region === 'national'} value="national" onChange={() => this.setState({ region: 'national' })} />
+                  <input type="radio" name="regional" checked={!regional} value="national" onChange={() => this.setState({ regional: false })} />
                   <span className="radio-custom"><span /></span>National
                 </label>
               </div>
-              <div className={`radio ${generation === 6 ? 'disabled' : ''}`}>
-                <label title={generation === 6 ? 'Regional dexes only supported for Gen 7.' : ''}>
-                  <input type="radio" name="region" checked={region === 'alola'} disabled={generation === 6} value="alola" onChange={() => this.setState({ region: 'alola' })} />
+              <div className={`radio ${game === 'omega_ruby' ? 'disabled' : ''}`}>
+                <label title={game === 'omega_ruby' ? 'Regional dexes only supported for Gen 7.' : ''}>
+                  <input type="radio" name="regional" checked={regional} disabled={game === 'omega_ruby'} value="regional" onChange={() => this.setState({ regional: true })} />
                   <span className="radio-custom"><span /></span>Regional
                 </label>
               </div>

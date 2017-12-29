@@ -1,21 +1,45 @@
-export function InfoLocationsComponent ({ generation, pokemon, region }) {
+export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
+  const orLocations = (
+    pokemon.or_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.or_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
+  const asLocations = (
+    pokemon.as_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.as_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
+  const xLocations = (
+    pokemon.x_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.x_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
+  const yLocations = (
+    pokemon.y_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.y_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
+  const sunLocations = (
+    pokemon.sun_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.sun_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
+  const moonLocations = (
+    pokemon.moon_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.moon_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
   const gen6 = (
     <div>
       <h3>Pokémon Omega Ruby</h3>
       <ul>
-        {pokemon.or_locations.map((location) => <li key={location}>{location}</li>)}
+        {orLocations}
       </ul>
       <h3>Pokémon Alpha Sapphire</h3>
       <ul>
-        {pokemon.as_locations.map((location) => <li key={location}>{location}</li>)}
+        {asLocations}
       </ul>
       <h3>Pokémon X</h3>
       <ul>
-        {pokemon.x_locations.map((location) => <li key={location}>{location}</li>)}
+        {xLocations}
       </ul>
       <h3>Pokémon Y</h3>
       <ul>
-        {pokemon.y_locations.map((location) => <li key={location}>{location}</li>)}
+        {yLocations}
       </ul>
     </div>
   );
@@ -24,19 +48,19 @@ export function InfoLocationsComponent ({ generation, pokemon, region }) {
     <div>
       <h3>Pokémon Sun</h3>
       <ul>
-        {pokemon.sun_locations.map((location) => <li key={location}>{location}</li>)}
+        {sunLocations}
       </ul>
       <h3>Pokémon Moon</h3>
       <ul>
-        {pokemon.moon_locations.map((location) => <li key={location}>{location}</li>)}
+        {moonLocations}
       </ul>
     </div>
   );
 
   return (
     <div className="info-locations">
-      {generation === 7 ? gen7 : null}
-      {region === 'national' ? gen6 : null}
+      {gameFamily.generation === 7 ? gen7 : null}
+      {regional ? null : gen6}
     </div>
   );
 }
