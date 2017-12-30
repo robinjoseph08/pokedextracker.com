@@ -91,7 +91,7 @@ export class DonateForm extends Component {
     if (success) {
       return (
         <div className="form">
-          <h1>Thanks for the donation! 💕</h1>
+          <h1>Thanks for the donation! <img className="emoji" src="/emoji_two_hearts.png" /></h1>
           <form>
             <div className="form-intro">
               {!session ? null : (
@@ -108,7 +108,7 @@ export class DonateForm extends Component {
         <h1>Help us out!</h1>
         <form onSubmit={this.donate}>
           <div className="form-intro">
-            <p>This project is completely open source, so every contribution, no matter how little, is greatly appreciated. Your donation will go towards server and development costs for the site. To show our gratitude, we'll add a special flair to your profile page!</p>
+            <p>This project is completely open source, so every contribution, no matter how little, is greatly appreciated. Your donation will go towards server and development costs for the site. To show our gratitude, we'll add a special flair to your profile page and add you to our <a href="https://github.com/pokedextracker/pokedextracker.com/blob/master/SUPPORTERS.md" target="_blank" rel="noopener noreferrer" className="link">list of supporters</a> (if you're signed in)!</p>
             {session ? null : (
               <p>
                 <Link className="link" to="/login">Login</Link> in first so we can attribute your donation to your account.

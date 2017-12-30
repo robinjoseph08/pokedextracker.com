@@ -5,7 +5,7 @@ export function DonatedFlair ({ user }) {
     return null;
   }
 
-  return <span className="donated-flair" title="This user has donated!">🌟</span>;
+  return <img className="donated-flair emoji" title="This user has donated!" src="/emoji_star2.png" />;
 }
 
 function mapStateToProps ({ currentUser, users }) {
