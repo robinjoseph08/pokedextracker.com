@@ -23,6 +23,14 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
     pokemon.moon_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.moon_locations.map((location) => <li key={location}>{location}</li>)
   );
 
+  const ultraSunLocations = (
+    pokemon.us_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.us_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
+  const ultraMoonLocations = (
+    pokemon.um_locations.length === 0 ? <li><i>Not available</i></li> : pokemon.um_locations.map((location) => <li key={location}>{location}</li>)
+  );
+
   const gen6 = (
     <div>
       <h3>Pokémon Omega Ruby</h3>
@@ -44,7 +52,7 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
     </div>
   );
 
-  const gen7 = (
+  const sun_moon = (
     <div>
       <h3>Pokémon Sun</h3>
       <ul>
@@ -57,10 +65,24 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
     </div>
   );
 
+  const us_um = (
+    <div>
+      <h3>Pokémon Ultra Sun</h3>
+      <ul>
+        {ultraSunLocations}
+      </ul>
+      <h3>Pokémon Ultra Moon</h3>
+      <ul>
+        {ultraMoonLocations}
+      </ul>
+    </div>
+  );
+
   return (
     <div className="info-locations">
-      {gameFamily.generation === 7 ? gen7 : null}
-      {regional ? null : gen6}
+      {gameFamily.id === 'ultra_sun_ultra_moon' ? us_um : null}
+      {gameFamily.id === 'sun_moon' || gameFamily.id === 'ultra_sun_ultra_moon' && !regional ? sun_moon : null}
+      {!regional ? gen6 : null}
     </div>
   );
 }

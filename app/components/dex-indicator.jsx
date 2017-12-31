@@ -15,7 +15,7 @@ export function DexIndicatorComponent ({ dex }) {
     <div className="dex-indicator">
       {shiny}
       <span className="label">{dex.regional ? 'Regional' : 'National'}</span>
-      <span className="label">Gen {dex.game.game_family.generation}</span>
+      <span className="label">{dex.game.name}</span>
     </div>
   );
 }

@@ -7,8 +7,9 @@ import { AlertComponent }       from './alert';
 import { FormWarningComponent } from './form-warning';
 import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
+import { listGames }            from '../actions/games';
 
-const GENERATION_WARNING = 'Any Gen 7 capture info will be lost.';
+const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
 const REGIONAL_WARNING = 'Any non-Alola Dex capture info will be lost.';
 const URL_WARNING = 'The old URL to your dex will not function anymore.';
@@ -20,12 +21,27 @@ export class DexEdit extends Component {
     this.state = {
       error: null,
       game: props.dex.game.id,
+      games: [],
       loading: false,
       regional: props.dex.regional,
       url: props.dex.title,
       confirmingDelete: false,
       confirmingEdit: false
     };
+  }
+
+  componentWillMount () {
+    this.reset();
+  }
+
+  reset (props) {
+    const { listGames } = props || this.props;
+
+    listGames()
+    .then((games) => {
+      games.sort((a, b) => b.order - a.order);
+      this.setState({ games });
+    });
   }
 
   onChange = (e) => {
@@ -59,11 +75,17 @@ export class DexEdit extends Component {
     onRequestClose(shouldReload);
   }
 
-  get showGenerationWarning () {
+  get showGameWarning () {
     const { dex } = this.props;
     const { game } = this.state;
 
-    return game === 'omega_ruby' && dex.game.id === 'sun';
+    if ((dex.game.game_family.id === 'sun_moon') && NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+      return true;
+    } else if ((dex.game.game_family.id === 'ultra_sun_ultra_moon') && game !== 'ultra_sun' && game !== 'ultra_moon') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   get showRegionalWarning () {
@@ -99,7 +121,7 @@ export class DexEdit extends Component {
     const { dex, session, updateDex } = this.props;
     const { confirmingEdit, game, regional } = this.state;
 
-    if (!confirmingEdit && (this.showGenerationWarning || this.showRegionalWarning || this.showURLWarning)) {
+    if (!confirmingEdit && (this.showGameWarning || this.showRegionalWarning || this.showURLWarning)) {
       return this.setState({ confirmingEdit: true });
     }
 
@@ -124,7 +146,7 @@ export class DexEdit extends Component {
 
   render () {
     const { dex, isOpen, session } = this.props;
-    const { confirmingDelete, confirmingEdit, error, game, regional, url } = this.state;
+    const { confirmingDelete, confirmingEdit, error, game, games, regional, url } = this.state;
 
     let dexDelete = null;
 
@@ -151,11 +173,10 @@ export class DexEdit extends Component {
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">
-              <FormWarningComponent message={this.showGenerationWarning ? GENERATION_WARNING : null} />
-              <label htmlFor="generation">Generation</label>
+              <FormWarningComponent message={this.showGameWarning ? GAME_WARNING : null} />
+              <label htmlFor="game">Game</label>
               <select className="form-control" onChange={this.onChange} value={game}>
-                <option value="sun">Seven</option>
-                <option value="omega_ruby">Six</option>
+                {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
               </select>
               <i className="fa fa-chevron-down" />
             </div>
@@ -168,9 +189,9 @@ export class DexEdit extends Component {
                   <span className="radio-custom"><span /></span>National
                 </label>
               </div>
-              <div className={`radio ${game === 'omega_ruby' ? 'disabled' : ''}`}>
-                <label title={game === 'omega_ruby' ? 'Regional dexes only supported for Gen 7.' : ''}>
-                  <input type="radio" name="regional" checked={regional} disabled={game === 'omega_ruby'} value="regional" onChange={() => this.setState({ regional: true })} />
+              <div className={`radio ${NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'disabled' : ''}`}>
+                <label title={NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'Regional dexes only supported for Gen 7.' : ''}>
+                  <input type="radio" name="regional" checked={regional} disabled={NATIONAL_ONLY_GAMES.indexOf(game) > -1} value="regional" onChange={() => this.setState({ regional: true })} />
                   <span className="radio-custom"><span /></span>Regional
                 </label>
               </div>
@@ -208,6 +229,7 @@ function mapStateToProps ({ session }) {
 function mapDispatchToProps (dispatch) {
   return {
     deleteDex: (slug, username) => dispatch(deleteDex(slug, username)),
+    listGames: () => dispatch(listGames()),
     updateDex: (payload) => dispatch(updateDex(payload))
   };
 }

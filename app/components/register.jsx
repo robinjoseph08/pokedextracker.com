@@ -12,6 +12,7 @@ import { ReloadComponent }               from './reload';
 import { checkVersion, setNotification } from '../actions/utils';
 import { createUser }                    from '../actions/user';
 import { friendCode }                    from '../utils/formatting';
+import { listGames }                     from '../actions/games';
 
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
 
@@ -23,11 +24,21 @@ export class Register extends Component {
   }
 
   componentWillMount () {
-    const { checkVersion, redirectToProfile, session } = this.props;
+    this.reset();
+  }
+
+  reset (props) {
+    const { checkVersion, listGames, redirectToProfile, session } = props || this.props;
 
     if (session) {
       redirectToProfile(session.username);
     }
+
+    listGames()
+    .then((games) => {
+      games.sort((a, b) => b.order - a.order);
+      this.setState({ games });
+    });
 
     checkVersion();
   }
@@ -74,7 +85,7 @@ export class Register extends Component {
   }
 
   render () {
-    const { error, game, regional } = this.state;
+    const { error, game, games, regional } = this.state;
 
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
@@ -126,10 +137,9 @@ export class Register extends Component {
                     <i className="fa fa-asterisk" />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="generation">Generation</label>
+                    <label htmlFor="game">Game</label>
                     <select className="form-control" onChange={this.onChange} value={game}>
-                      <option value="sun">Seven</option>
-                      <option value="omega_ruby">Six</option>
+                      {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
                     </select>
                     <i className="fa fa-chevron-down" />
                   </div>
@@ -187,6 +197,7 @@ function mapStateToProps ({ session }) {
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
+    listGames: () => dispatch(listGames()),
     register: (payload) => dispatch(createUser(payload)),
     redirectToProfile: (username) => dispatch(push(`/u/${username}/`)),
     setNotification: (value) => dispatch(setNotification(value))
