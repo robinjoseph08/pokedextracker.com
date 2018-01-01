@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { connect }   from 'react-redux';
 
 import { DexIndicatorComponent } from './dex-indicator';
+import { DonatedFlairComponent } from './donated-flair';
 import { ReactGA }               from '../utils/analytics';
 import { ShareComponent }        from './share';
 import { setShowShare }          from '../actions/tracker';
@@ -46,6 +47,7 @@ export class Header extends Component {
             <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`} target="_blank" rel="noopener noreferrer" onClick={() => ReactGA.event({ action: 'click tweet', category: 'Share' })}><i className="fa fa-twitter" /></a>
           </div>
         </h1>
+        {profile ? <DonatedFlairComponent /> : null}
         <DexIndicatorComponent dex={dex} />
       </div>
     );
