@@ -78,6 +78,7 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
     </div>
   );
 
+  // TODO: refactor this logic to more scalable and easier to understand
   return (
     <div className="info-locations">
       {gameFamily.id === 'ultra_sun_ultra_moon' ? ultraSunUltraMoon : null}

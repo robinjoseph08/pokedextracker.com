@@ -63,6 +63,7 @@ export class DexEdit extends Component {
     const { dex } = this.props;
     const { game } = this.state;
 
+    // TODO: refactor this logic to more scalable and easier to understand
     if ((dex.game.game_family.id === 'sun_moon') && NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
       return true;
     } else if ((dex.game.game_family.id === 'ultra_sun_ultra_moon') && game !== 'ultra_sun' && game !== 'ultra_moon') {
