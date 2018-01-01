@@ -15,12 +15,12 @@ export function tokenToUser (token) {
 }
 
 export function loadState () {
-  const notif20170204 = localStorage.getItem('notif-2017.02.04') === 'true' || undefined;
+  const notif20180102 = localStorage.getItem('notif-2018.01.02') === 'true' || undefined;
   const token = localStorage.getItem('token');
   const session = tokenToUser(token);
   const showInfo = localStorage.getItem('showInfo') === 'true' || undefined;
 
-  return { notification: notif20170204, token, session, showInfo };
+  return { notification: notif20180102, token, session, showInfo };
 }
 
 export function saveState ({ notification, showInfo, token }) {
@@ -30,6 +30,6 @@ export function saveState ({ notification, showInfo, token }) {
     localStorage.removeItem('token');
   }
 
-  localStorage.setItem('notif-2017.02.04', notification);
+  localStorage.setItem('notif-2018.01.02', notification);
   localStorage.setItem('showInfo', showInfo);
 }
