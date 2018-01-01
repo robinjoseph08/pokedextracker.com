@@ -4,7 +4,6 @@ import { connect }   from 'react-redux';
 import { ReactGA }                        from '../utils/analytics';
 import { createCaptures, deleteCaptures } from '../actions/capture';
 import { padding }                        from '../utils/formatting';
-import { regionCheck }                    from '../utils/pokemon';
 
 export class MarkAllButton extends Component {
 
@@ -14,9 +13,9 @@ export class MarkAllButton extends Component {
   }
 
   toggleCaptured = () => {
-    const { captures, createCaptures, currentDex, deleteCaptures, dex, region, user } = this.props;
-    const deleting = captures.reduce((total, capture) => total + (!regionCheck(capture.pokemon, region) || capture.captured ? 0 : 1), 0) === 0;
-    const pokemon = captures.filter((capture) => regionCheck(capture.pokemon, region) && capture.captured === deleting).map((capture) => capture.pokemon.id);
+    const { captures, createCaptures, currentDex, deleteCaptures, dex, user } = this.props;
+    const deleting = captures.reduce((total, capture) => total + (capture.captured ? 0 : 1), 0) === 0;
+    const pokemon = captures.filter((capture) => capture.captured === deleting).map((capture) => capture.pokemon.id);
     const payload = { dex: dex.id, pokemon };
 
     Promise.resolve()
@@ -43,7 +42,7 @@ export class MarkAllButton extends Component {
   }
 
   render () {
-    const { captures, region, session, user } = this.props;
+    const { captures, session, user } = this.props;
     const { loading } = this.state;
     const ownPage = session && session.id === user.id;
 
@@ -51,7 +50,7 @@ export class MarkAllButton extends Component {
       return null;
     }
 
-    const uncaught = captures.reduce((total, capture) => total + (!regionCheck(capture.pokemon, region) || capture.captured ? 0 : 1), 0);
+    const uncaught = captures.reduce((total, capture) => total + (capture.captured ? 0 : 1), 0);
 
     return (
       <button className="btn btn-blue" onClick={this.toggleCaptured} disabled={loading}>
@@ -63,8 +62,8 @@ export class MarkAllButton extends Component {
 
 }
 
-function mapStateToProps ({ currentDex, currentUser, region, session, users }) {
-  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], region, session, user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, session, users }) {
+  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], session, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {

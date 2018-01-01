@@ -7,7 +7,6 @@ import { AlertComponent }       from './alert';
 import { FormWarningComponent } from './form-warning';
 import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
-import { listGames }            from '../actions/game';
 
 const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];

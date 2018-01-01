@@ -13,7 +13,7 @@ import { listCaptures }                           from '../actions/capture';
 import { retrieveDex, setCurrentDex }             from '../actions/dex';
 import { retrieveUser, setUser }                  from '../actions/user';
 import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
-import { setRegion, setShowScroll, setShowShare } from '../actions/tracker';
+import { setShowScroll, setShowShare } from '../actions/tracker';
 
 export class Tracker extends Component {
 
@@ -45,7 +45,6 @@ export class Tracker extends Component {
       retrieveUser,
       setCurrentDex,
       setCurrentPokemon,
-      setRegion,
       setShowScroll,
       setShowShare,
       setUser
@@ -55,7 +54,6 @@ export class Tracker extends Component {
 
     checkVersion();
     clearPokemon();
-    setRegion('national');
     setShowScroll(false);
     setShowShare(false);
     setCurrentDex(slug, username);
@@ -121,7 +119,6 @@ function mapDispatchToProps (dispatch) {
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
     setCurrentDex: (slug, username) => dispatch(setCurrentDex(slug, username)),
-    setRegion: (region) => dispatch(setRegion(region)),
     setShowScroll: (show) => dispatch(setShowScroll(show)),
     setShowShare: (show) => dispatch(setShowShare(show)),
     setUser: (user) => dispatch(setUser(user))
