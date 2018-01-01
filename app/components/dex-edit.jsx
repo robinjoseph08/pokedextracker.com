@@ -7,7 +7,7 @@ import { AlertComponent }       from './alert';
 import { FormWarningComponent } from './form-warning';
 import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
-import { listGames }            from '../actions/games';
+import { listGames }            from '../actions/game';
 
 const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
@@ -21,27 +21,12 @@ export class DexEdit extends Component {
     this.state = {
       error: null,
       game: props.dex.game.id,
-      games: [],
       loading: false,
       regional: props.dex.regional,
       url: props.dex.title,
       confirmingDelete: false,
       confirmingEdit: false
     };
-  }
-
-  componentWillMount () {
-    this.reset();
-  }
-
-  reset (props) {
-    const { listGames } = props || this.props;
-
-    listGames()
-    .then((games) => {
-      games.sort((a, b) => b.order - a.order);
-      this.setState({ games });
-    });
   }
 
   onChange = (e) => {
@@ -145,8 +130,8 @@ export class DexEdit extends Component {
   }
 
   render () {
-    const { dex, isOpen, session } = this.props;
-    const { confirmingDelete, confirmingEdit, error, game, games, regional, url } = this.state;
+    const { dex, games, isOpen, session } = this.props;
+    const { confirmingDelete, confirmingEdit, error, game, regional, url } = this.state;
 
     let dexDelete = null;
 
@@ -154,6 +139,10 @@ export class DexEdit extends Component {
       dexDelete = <a className="link" onClick={() => this.setState({ confirmingDelete: true })}><i className="fa fa-trash" /></a>;
     } else {
       dexDelete = <div>Are you sure? <a className="link" onClick={this.deleteDex}>Yes</a> <a className="link" onClick={() => this.setState({ confirmingDelete: false })}>No</a></div>;
+    }
+
+    if (!isOpen || !games) {
+      return null;
     }
 
     return (
@@ -222,14 +211,13 @@ export class DexEdit extends Component {
 
 }
 
-function mapStateToProps ({ session }) {
-  return { session };
+function mapStateToProps ({ games, session }) {
+  return { games, session };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     deleteDex: (slug, username) => dispatch(deleteDex(slug, username)),
-    listGames: () => dispatch(listGames()),
     updateDex: (payload) => dispatch(updateDex(payload))
   };
 }

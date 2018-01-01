@@ -52,7 +52,7 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
     </div>
   );
 
-  const sun_moon = (
+  const sunMoon = (
     <div>
       <h3>Pokémon Sun</h3>
       <ul>
@@ -65,7 +65,7 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
     </div>
   );
 
-  const us_um = (
+  const ultraSunUltraMoon = (
     <div>
       <h3>Pokémon Ultra Sun</h3>
       <ul>
@@ -80,8 +80,8 @@ export function InfoLocationsComponent ({ gameFamily, pokemon, regional }) {
 
   return (
     <div className="info-locations">
-      {gameFamily.id === 'ultra_sun_ultra_moon' ? us_um : null}
-      {gameFamily.id === 'sun_moon' || gameFamily.id === 'ultra_sun_ultra_moon' && !regional ? sun_moon : null}
+      {gameFamily.id === 'ultra_sun_ultra_moon' ? ultraSunUltraMoon : null}
+      {(gameFamily.id === 'sun_moon' || gameFamily.id === 'ultra_sun_ultra_moon') && !regional ? sunMoon : null}
       {!regional ? gen6 : null}
     </div>
   );

@@ -7,7 +7,7 @@ import slug          from 'slug';
 import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
 import { createDex }      from '../actions/dex';
-import { listGames }      from '../actions/games';
+import { listGames }      from '../actions/game';
 
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
 
@@ -15,21 +15,7 @@ export class DexCreate extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, game: 'ultra_moon', games: [], regional: false };
-  }
-
-  componentWillMount () {
-    this.reset();
-  }
-
-  reset (props) {
-    const { listGames } = props || this.props;
-
-    listGames()
-    .then((games) => {
-      games.sort((a, b) => b.order - a.order);
-      this.setState({ games });
-    });
+    this.state = { error: null, game: 'ultra_sun', regional: false };
   }
 
   onChange = (e) => {
@@ -80,8 +66,12 @@ export class DexCreate extends Component {
   }
 
   render () {
-    const { isOpen, session } = this.props;
-    const { error, game, games, regional, url } = this.state;
+    const { games, isOpen, session } = this.props;
+    const { error, game, regional, url } = this.state;
+
+    if (!isOpen || !games) {
+      return null;
+    }
 
     return (
       <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose} contentLabel="Create a New Dex">
@@ -142,8 +132,8 @@ export class DexCreate extends Component {
 
 }
 
-function mapStateToProps ({ session }) {
-  return { session };
+function mapStateToProps ({ games, session }) {
+  return { games, session };
 }
 
 function mapDispatchToProps (dispatch) {

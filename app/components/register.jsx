@@ -12,7 +12,7 @@ import { ReloadComponent }               from './reload';
 import { checkVersion, setNotification } from '../actions/utils';
 import { createUser }                    from '../actions/user';
 import { friendCode }                    from '../utils/formatting';
-import { listGames }                     from '../actions/games';
+import { listGames }                     from '../actions/game';
 
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
 
@@ -20,27 +20,17 @@ export class Register extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, game: 'sun', regional: false };
+    this.state = { error: null, game: 'ultra_sun', regional: false };
   }
 
-  componentWillMount () {
-    this.reset();
-  }
-
-  reset (props) {
-    const { checkVersion, listGames, redirectToProfile, session } = props || this.props;
+  componentWillMount (props) {
+    const { listGames, redirectToProfile, session } = props || this.props;
 
     if (session) {
       redirectToProfile(session.username);
     }
 
-    listGames()
-    .then((games) => {
-      games.sort((a, b) => b.order - a.order);
-      this.setState({ games });
-    });
-
-    checkVersion();
+    listGames();
   }
 
   onChange = (e) => {
@@ -85,7 +75,8 @@ export class Register extends Component {
   }
 
   render () {
-    const { error, game, games, regional } = this.state;
+    const { games } = this.props;
+    const { error, game, regional } = this.state;
 
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
@@ -190,8 +181,8 @@ export class Register extends Component {
 
 }
 
-function mapStateToProps ({ session }) {
-  return { session };
+function mapStateToProps ({ games, session }) {
+  return { games, session };
 }
 
 function mapDispatchToProps (dispatch) {
