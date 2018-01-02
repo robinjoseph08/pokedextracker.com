@@ -9,8 +9,10 @@ import { FriendCodeComponent }                   from './friend-code';
 import { HeaderComponent }                       from './header';
 import { NavComponent }                          from './nav';
 import { NotFoundComponent }                     from './not-found';
+import { NotificationComponent }                 from './notification';
 import { ReloadComponent }                       from './reload';
 import { checkVersion }                          from '../actions/utils';
+import { listGames }                             from '../actions/game';
 import { retrieveUser, setCurrentUser, setUser } from '../actions/user';
 import { setShowShare }                          from '../actions/tracker';
 
@@ -32,13 +34,14 @@ export class Profile extends Component {
   }
 
   reset (props) {
-    const { checkVersion, params: { username }, retrieveUser, setCurrentUser, setShowShare, setUser } = props || this.props;
+    const { checkVersion, params: { username }, listGames, retrieveUser, setCurrentUser, setShowShare, setUser } = props || this.props;
 
     this.setState({ ...this.state, loading: true });
 
     checkVersion();
     setCurrentUser(username);
     setShowShare(false);
+    listGames();
 
     retrieveUser(username)
     .then((user) => {
@@ -84,6 +87,7 @@ export class Profile extends Component {
           <div className="profile">
             <div className="wrapper">
               <header>
+                <NotificationComponent />
                 <HeaderComponent profile />
                 <FriendCodeComponent />
               </header>
@@ -108,6 +112,7 @@ function mapStateToProps ({ currentUser, session, users }) {
 function mapDispatchToProps (dispatch) {
   return {
     checkVersion: () => dispatch(checkVersion()),
+    listGames: () => dispatch(listGames()),
     retrieveUser: (username) => dispatch(retrieveUser(username)),
     setCurrentUser: (username) => dispatch(setCurrentUser(username)),
     setShowShare: (show) => dispatch(setShowShare(show)),

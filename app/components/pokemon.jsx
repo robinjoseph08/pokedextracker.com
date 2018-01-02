@@ -2,30 +2,28 @@ import { Component } from 'react';
 import classNames    from 'classnames';
 import { connect }   from 'react-redux';
 
-import { ReactGA }                          from '../utils/analytics';
-import { createCaptures, deleteCaptures }   from '../actions/capture';
-import { htmlName, iconClass, regionCheck } from '../utils/pokemon';
-import { padding }                          from '../utils/formatting';
-import { setCurrentPokemon }                from '../actions/pokemon';
-import { setShowInfo }                      from '../actions/tracker';
+import { ReactGA }                        from '../utils/analytics';
+import { createCaptures, deleteCaptures } from '../actions/capture';
+import { htmlName, iconClass }            from '../utils/pokemon';
+import { padding }                        from '../utils/formatting';
+import { setCurrentPokemon }              from '../actions/pokemon';
+import { setShowInfo }                    from '../actions/tracker';
 
 export class Pokemon extends Component {
 
   setCurrentPokemon = () => {
-    const { capture, region, setCurrentPokemon, setShowInfo } = this.props;
+    const { capture, setCurrentPokemon, setShowInfo } = this.props;
 
-    if (regionCheck(capture.pokemon, region)) {
-      ReactGA.event({ action: 'show info', category: 'Pokemon', label: capture.pokemon.name });
+    ReactGA.event({ action: 'show info', category: 'Pokemon', label: capture.pokemon.name });
 
-      setCurrentPokemon(capture.pokemon.id);
-      setShowInfo(true);
-    }
+    setCurrentPokemon(capture.pokemon.id);
+    setShowInfo(true);
   }
 
   toggleCaptured = () => {
-    const { capture, createCaptures, currentDex, deleteCaptures, dex, region, session, user } = this.props;
+    const { capture, createCaptures, currentDex, deleteCaptures, dex, session, user } = this.props;
 
-    if (!session || session.id !== user.id || !regionCheck(capture.pokemon, region)) {
+    if (!session || session.id !== user.id) {
       return;
     }
 
@@ -51,7 +49,7 @@ export class Pokemon extends Component {
   }
 
   render () {
-    const { capture, dex, region, session, user } = this.props;
+    const { capture, dex, session, user } = this.props;
 
     if (!capture) {
       return (
@@ -65,7 +63,6 @@ export class Pokemon extends Component {
     const classes = {
       pokemon: true,
       viewing: !session || session.id !== user.id,
-      disabled: !regionCheck(capture.pokemon, region),
       captured: capture.captured
     };
 
@@ -90,8 +87,8 @@ export class Pokemon extends Component {
 
 }
 
-function mapStateToProps ({ currentDex, currentUser, region, session, users }) {
-  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], region, session, user: users[currentUser] };
+function mapStateToProps ({ currentDex, currentUser, session, users }) {
+  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], session, user: users[currentUser] };
 }
 
 function mapDispatchToProps (dispatch) {

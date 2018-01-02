@@ -7,6 +7,7 @@ import slug          from 'slug';
 import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
 import { createDex }      from '../actions/dex';
+import { listGames }      from '../actions/game';
 
 const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
 
@@ -14,7 +15,7 @@ export class DexCreate extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, game: 'sun', regional: false };
+    this.state = { error: null, game: 'ultra_sun', regional: false };
   }
 
   onChange = (e) => {
@@ -65,8 +66,12 @@ export class DexCreate extends Component {
   }
 
   render () {
-    const { isOpen, session } = this.props;
+    const { games, isOpen, session } = this.props;
     const { error, game, regional, url } = this.state;
+
+    if (!isOpen || !games) {
+      return null;
+    }
 
     return (
       <Modal className="modal" overlayClassName="modal-overlay" isOpen={isOpen} onRequestClose={this.onRequestClose} contentLabel="Create a New Dex">
@@ -81,10 +86,9 @@ export class DexCreate extends Component {
               <i className="fa fa-asterisk" />
             </div>
             <div className="form-group">
-              <label htmlFor="generation">Generation</label>
+              <label htmlFor="game">Game</label>
               <select className="form-control" onChange={this.onChange} value={game}>
-                <option value="sun">Seven</option>
-                <option value="omega_ruby">Six</option>
+                {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
               </select>
               <i className="fa fa-chevron-down" />
             </div>
@@ -96,9 +100,9 @@ export class DexCreate extends Component {
                   <span className="radio-custom"><span /></span>National
                 </label>
               </div>
-              <div className={`radio ${game === 'omega_ruby' ? 'disabled' : ''}`}>
-                <label title={game === 'omega_ruby' ? 'Regional dexes only supported for Gen 7.' : ''}>
-                  <input type="radio" name="regional" checked={regional} disabled={game === 'omega_ruby'} value="regional" onChange={() => this.setState({ regional: true })} />
+              <div className={`radio ${NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'disabled' : ''}`}>
+                <label title={NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'Regional dexes only supported for Gen 7.' : ''}>
+                  <input type="radio" name="regional" checked={regional} disabled={NATIONAL_ONLY_GAMES.indexOf(game) > -1} value="regional" onChange={() => this.setState({ regional: true })} />
                   <span className="radio-custom"><span /></span>Regional
                 </label>
               </div>
@@ -128,13 +132,14 @@ export class DexCreate extends Component {
 
 }
 
-function mapStateToProps ({ session }) {
-  return { session };
+function mapStateToProps ({ games, session }) {
+  return { games, session };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     createDex: (payload) => dispatch(createDex(payload)),
+    listGames: () => dispatch(listGames()),
     redirect: (path) => dispatch(push(path))
   };
 }

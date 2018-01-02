@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 
-import { Config } from '../../config';
 import { API }    from '../utils/api';
+import { Config } from '../../config';
 
 export const SET_SESSION_USER = 'SET_SESSION_USER';
 export const SET_TOKEN        = 'SET_TOKEN';

@@ -1,8 +1,8 @@
 import { push } from 'react-router-redux';
 import slug     from 'slug';
 
-import { Config }       from '../../config';
 import { API }          from '../utils/api';
+import { Config }       from '../../config';
 import { checkVersion } from './utils';
 import { setToken }     from './session';
 
