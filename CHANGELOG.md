@@ -1,3 +1,11 @@
+### 2.6.0 (2018-1-2)
+
+##### New Features
+
+* **usum:** ultra sun ultra moon support (#290) ([9511fcb5](https://github.com/robinjoseph08/pokedextracker.com/commit/9511fcb5170ab40b031e4df913e5545ac140609c))
+* **donate:** add donation form (#279) ([312b12e5](https://github.com/robinjoseph08/pokedextracker.com/commit/312b12e5483a95c946f041bd229648a06063aa85))
+* **sprites:** update spritesheet and associated scss for usum (#289) ([121c904d](https://github.com/robinjoseph08/pokedextracker.com/commit/121c904d615babcad0b9afa02bbc8136f0f8654f))
+
 ### 2.5.0 (2017-12-27)
 
 ##### Chores
