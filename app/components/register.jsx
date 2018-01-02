@@ -23,8 +23,8 @@ export class Register extends Component {
     this.state = { error: null, game: 'ultra_sun', regional: false };
   }
 
-  componentWillMount (props) {
-    const { listGames, redirectToProfile, session } = props || this.props;
+  componentWillMount () {
+    const { listGames, redirectToProfile, session } = this.props;
 
     if (session) {
       redirectToProfile(session.username);

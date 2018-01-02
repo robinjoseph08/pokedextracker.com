@@ -2,18 +2,18 @@ import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 
-import { DexComponent }                           from './dex';
-import { FooterComponent }                        from './footer';
-import { InfoComponent }                          from './info';
-import { NavComponent }                           from './nav';
-import { NotFoundComponent }                      from './not-found';
-import { ReloadComponent }                        from './reload';
-import { checkVersion }                           from '../actions/utils';
-import { listCaptures }                           from '../actions/capture';
-import { retrieveDex, setCurrentDex }             from '../actions/dex';
-import { retrieveUser, setUser }                  from '../actions/user';
-import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
-import { setShowScroll, setShowShare } from '../actions/tracker';
+import { DexComponent }                    from './dex';
+import { FooterComponent }                 from './footer';
+import { InfoComponent }                   from './info';
+import { NavComponent }                    from './nav';
+import { NotFoundComponent }               from './not-found';
+import { ReloadComponent }                 from './reload';
+import { checkVersion }                    from '../actions/utils';
+import { listCaptures }                    from '../actions/capture';
+import { retrieveDex, setCurrentDex }      from '../actions/dex';
+import { retrieveUser, setUser }           from '../actions/user';
+import { clearPokemon, setCurrentPokemon } from '../actions/pokemon';
+import { setShowScroll, setShowShare }     from '../actions/tracker';
 
 export class Tracker extends Component {
 

@@ -2,12 +2,12 @@ import { Component } from 'react';
 import classNames    from 'classnames';
 import { connect }   from 'react-redux';
 
-import { ReactGA }                          from '../utils/analytics';
-import { createCaptures, deleteCaptures }   from '../actions/capture';
-import { htmlName, iconClass } from '../utils/pokemon';
-import { padding }                          from '../utils/formatting';
-import { setCurrentPokemon }                from '../actions/pokemon';
-import { setShowInfo }                      from '../actions/tracker';
+import { ReactGA }                        from '../utils/analytics';
+import { createCaptures, deleteCaptures } from '../actions/capture';
+import { htmlName, iconClass }            from '../utils/pokemon';
+import { padding }                        from '../utils/formatting';
+import { setCurrentPokemon }              from '../actions/pokemon';
+import { setShowInfo }                    from '../actions/tracker';
 
 export class Pokemon extends Component {
 
