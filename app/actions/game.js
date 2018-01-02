@@ -1,5 +1,5 @@
-import { Config }       from '../../config';
 import { API }          from '../utils/api';
+import { Config }       from '../../config';
 import { checkVersion } from './utils';
 
 export const SET_GAMES = 'SET_GAMES';
