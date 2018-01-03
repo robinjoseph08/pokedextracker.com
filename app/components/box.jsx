@@ -12,7 +12,7 @@ export function Box ({ captures, dex }) {
   const lastPokemon = captures[captures.length - 1].pokemon;
   let title = <h1>{firstPokemon.box}</h1>;
 
-  if (!firstPokemon.box) {
+  if (dex.regional || !firstPokemon.box) {
     const firstNumber = dex.regional ? firstPokemon[`${dex.game.game_family.id}_id`] : firstPokemon.national_id;
     const lastNumber = dex.regional ? lastPokemon[`${dex.game.game_family.id}_id`] : lastPokemon.national_id;
     title = <h1>{padding(firstNumber, 3)} - {padding(lastNumber, 3)}</h1>;
