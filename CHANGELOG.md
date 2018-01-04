@@ -1,3 +1,9 @@
+#### 2.6.1 (2018-1-3)
+
+##### Bug Fixes
+
+* **box:** only show alolan box on national dexes (#291) ([52e161f7](https://github.com/robinjoseph08/pokedextracker.com/commit/52e161f7e80813d2a28fc65e2a3ac3ad17680d0c))
+
 ### 2.6.0 (2018-1-2)
 
 ##### New Features
