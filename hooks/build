@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build --build-arg NODE_ENV=staging -t $DOCKER_REPO:$SOURCE_COMMIT-staging .
+docker build --build-arg NODE_ENV=production -t $DOCKER_REPO:$SOURCE_COMMIT-production .
