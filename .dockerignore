@@ -26,3 +26,6 @@ version
 .DS_Store
 
 xunit.xml
+
+.git
+test
