@@ -13,7 +13,7 @@ This project has been tested to work with Node.js v5 (at least v5.10) and v6 (th
 
 When on Linux or Mac OS X, we recommend using [`nvm`](https://github.com/creationix/nvm) so that you can easily switch between Node versions. This is so that they don't conflict with each other when working on different Node projects.
 
-```bash
+```sh
 $ nvm install 5
 $ nvm use 5
 $ yarn
@@ -35,7 +35,7 @@ While there is [`nvm` for Windows](https://github.com/coreybutler/nvm-windows), 
 
 To run the development server to test it locally, you only need to run:
 
-```bash
+```sh
 $ yarn start
 ```
 
@@ -45,8 +45,16 @@ Once the bundle becomes valid, you should be able to go to [http://localhost:808
 
 To ensure your files are following the preferred style guide, you can run:
 
-```bash
+```sh
 $ yarn run lint
 ```
 
 This is run on Travis whenever a commit is made so if you're going to [contribute](CONTRIBUTING.md), you should make sure your files pass the linter.
+
+## Docker
+
+Every merge into the `master` branch on GitHub triggers a new build for a Docker image. That image will overwrite the `latest` tag, and there will be an explicit tag with the first 7 characters of the commit hash. The server will be listening on port 4939 so if you run a container locally, make sure that traffic is forwarded to that port. For example:
+
+```sh
+$ docker run --rm --publish 3000:4939 --name pokedextracker pokedextracker/pokedextracker.com:latest
+```
