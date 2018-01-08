@@ -1,4 +1,3 @@
 #!/bin/bash
 
-docker push $DOCKER_REPO:$SOURCE_COMMIT-staging
-docker push $DOCKER_REPO:$SOURCE_COMMIT-production
+docker push $DOCKER_REPO:$SOURCE_COMMIT

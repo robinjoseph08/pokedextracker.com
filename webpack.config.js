@@ -6,7 +6,7 @@ const Webpack = require('webpack');
 const PRODUCTION = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production';
 
 const PLUGINS = [
-  new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development') }),
+  new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'undefined' }),
   new Webpack.ProvidePlugin({ React: 'react' })
 ];
 

@@ -1,7 +1,5 @@
 FROM node:6.12.3 as build
 
-ARG NODE_ENV
-
 RUN mkdir /app
 WORKDIR /app
 
