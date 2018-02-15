@@ -5,3 +5,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [ITmaester](https://pokedextracker.com/u/ITmaester)
 - [Dark_Weavile](https://pokedextracker.com/u/Dark_Weavile)
 - [nalexander6474](https://pokedextracker.com/u/nalexander6474)
+- [MalikTH](https://pokedextracker.com/u/MalikTH)
