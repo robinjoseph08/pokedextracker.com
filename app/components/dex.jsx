@@ -8,7 +8,7 @@ import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD, ScrollComponent } from './scrol
 import { DonatedFlairComponent }                                   from './donated-flair';
 import { FriendCodeComponent }                                     from './friend-code';
 import { HeaderComponent }                                         from './header';
-import { NotificationComponent }                                   from './notification';
+// import { NotificationComponent }                                   from './notification';
 import { ProgressComponent }                                       from './progress';
 import { ReactGA }                                                 from '../utils/analytics';
 import { groupBoxes }                                              from '../utils/pokemon';
@@ -37,7 +37,7 @@ export class Dex extends Component {
       <div className="dex" ref={(c) => this._dex = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
         <div className="wrapper">
           <ScrollComponent onClick={() => this._dex ? this._dex.scrollTop = 0 : null} />
-          <NotificationComponent />
+          {/* <NotificationComponent /> */}
           <header>
             <HeaderComponent />
             <h3>
