@@ -1,19 +1,21 @@
-import { Component } from 'react';
 import DocumentTitle from 'react-document-title';
+import throttle      from 'lodash/throttle';
+import { Component } from 'react';
 import { connect }   from 'react-redux';
 
-import { DexComponent }                    from './dex';
-import { FooterComponent }                 from './footer';
-import { InfoComponent }                   from './info';
-import { NavComponent }                    from './nav';
-import { NotFoundComponent }               from './not-found';
-import { ReloadComponent }                 from './reload';
-import { checkVersion }                    from '../actions/utils';
-import { listCaptures }                    from '../actions/capture';
-import { retrieveDex, setCurrentDex }      from '../actions/dex';
-import { retrieveUser, setUser }           from '../actions/user';
-import { clearPokemon, setCurrentPokemon } from '../actions/pokemon';
-import { setShowScroll, setShowShare }     from '../actions/tracker';
+import { DexComponent }                           from './dex';
+import { FooterComponent }                        from './footer';
+import { InfoComponent }                          from './info';
+import { NavComponent }                           from './nav';
+import { NotFoundComponent }                      from './not-found';
+import { ReloadComponent }                        from './reload';
+import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './scroll';
+import { checkVersion }                           from '../actions/utils';
+import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
+import { listCaptures }                           from '../actions/capture';
+import { retrieveDex, setCurrentDex }             from '../actions/dex';
+import { retrieveUser, setUser }                  from '../actions/user';
+import { setShowScroll, setShowShare }            from '../actions/tracker';
 
 export class Tracker extends Component {
 
@@ -71,6 +73,16 @@ export class Tracker extends Component {
     .catch(() => this.setState({ ...this.state, loading: false }));
   }
 
+  onScroll = () => {
+    const { setShowScroll, showScroll } = this.props;
+
+    if (!showScroll && this._tracker && this._tracker.scrollTop >= SHOW_SCROLL_THRESHOLD) {
+      setShowScroll(true);
+    } else if (showScroll && this._tracker && this._tracker.scrollTop < SHOW_SCROLL_THRESHOLD) {
+      setShowScroll(false);
+    }
+  }
+
   render () {
     const { dex, params: { username } } = this.props;
     const { loading } = this.state;
@@ -93,8 +105,8 @@ export class Tracker extends Component {
           <NavComponent />
           <ReloadComponent />
           <div className="tracker">
-            <div className="tracker-left-column">
-              <DexComponent />
+            <div className="tracker-left-column" ref={(c) => this._tracker = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
+              <DexComponent onScrollButtonClick={() => this._tracker ? this._tracker.scrollTop = 0 : null} />
               <FooterComponent />
             </div>
             <InfoComponent />
@@ -106,8 +118,11 @@ export class Tracker extends Component {
 
 }
 
-function mapStateToProps ({ currentDex, currentUser, users }) {
-  return { dex: users[currentUser] && users[currentUser].dexesBySlug[currentDex] };
+function mapStateToProps ({ currentDex, currentUser, showScroll, users }) {
+  return {
+    dex: users[currentUser] && users[currentUser].dexesBySlug[currentDex],
+    showScroll
+  };
 }
 
 function mapDispatchToProps (dispatch) {
