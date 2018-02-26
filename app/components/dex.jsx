@@ -12,7 +12,7 @@ import { ScrollComponent }        from './scroll';
 import { SearchResultsComponent } from './search-results';
 import { groupBoxes }             from '../utils/pokemon';
 
-export function Dex ({ captures, dex, onScrollButtonClick, username }) {
+export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
   const caught = captures.filter(({ captured }) => captured).length;
   const total = captures.length;
   const boxes = groupBoxes(captures, dex);
@@ -33,18 +33,17 @@ export function Dex ({ captures, dex, onScrollButtonClick, username }) {
         <div className="percentage">
           <ProgressComponent caught={caught} total={total} />
         </div>
-        {/* show based on search query */}
-        <SearchResultsComponent />
-        {boxes.map((box) => <BoxComponent key={box[0].pokemon.id} captures={box} />)}
+        {query.length > 0 ? <SearchResultsComponent captures={captures} /> : boxes.map((box) => <BoxComponent key={box[0].pokemon.id} captures={box} />)}
       </div>
     </div>
   );
 }
 
-function mapStateToProps ({ currentDex, currentUser, users }) {
+function mapStateToProps ({ currentDex, currentUser, query, users }) {
   return {
     captures: users[currentUser].dexesBySlug[currentDex].captures,
     dex: users[currentUser].dexesBySlug[currentDex],
+    query,
     username: currentUser
   };
 }
