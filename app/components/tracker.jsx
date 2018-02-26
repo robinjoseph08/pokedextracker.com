@@ -10,6 +10,7 @@ import { NavComponent }                           from './nav';
 import { NotFoundComponent }                      from './not-found';
 import { ReloadComponent }                        from './reload';
 import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './scroll';
+import { SearchBarComponent }                     from './search-bar';
 import { checkVersion }                           from '../actions/utils';
 import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
 import { listCaptures }                           from '../actions/capture';
@@ -105,9 +106,12 @@ export class Tracker extends Component {
           <NavComponent />
           <ReloadComponent />
           <div className="tracker">
-            <div className="tracker-left-column" ref={(c) => this._tracker = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
-              <DexComponent onScrollButtonClick={() => this._tracker ? this._tracker.scrollTop = 0 : null} />
-              <FooterComponent />
+            <div className="dex-wrapper">
+              <SearchBarComponent />
+              <div className="dex-column" ref={(c) => this._tracker = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
+                <DexComponent onScrollButtonClick={() => this._tracker ? this._tracker.scrollTop = 0 : null} />
+                <FooterComponent />
+              </div>
             </div>
             <InfoComponent />
           </div>

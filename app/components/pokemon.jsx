@@ -23,6 +23,8 @@ export class Pokemon extends Component {
   toggleCaptured = () => {
     const { capture, createCaptures, currentDex, deleteCaptures, dex, session, user } = this.props;
 
+    console.log(JSON.stringify(capture));
+
     if (!session || session.id !== user.id) {
       return;
     }

@@ -1,15 +1,16 @@
 import { Link }    from 'react-router';
 import { connect } from 'react-redux';
 
-import { BoxComponent }          from './box';
-import { DonatedFlairComponent } from './donated-flair';
-import { FriendCodeComponent }   from './friend-code';
-import { HeaderComponent }       from './header';
-// import { NotificationComponent } from './notification';
-import { ProgressComponent }     from './progress';
-import { ReactGA }               from '../utils/analytics';
-import { ScrollComponent }       from './scroll';
-import { groupBoxes }            from '../utils/pokemon';
+import { BoxComponent }           from './box';
+import { DonatedFlairComponent }  from './donated-flair';
+import { FriendCodeComponent }    from './friend-code';
+import { HeaderComponent }        from './header';
+// import { NotificationComponent }  from './notification';
+import { ProgressComponent }      from './progress';
+import { ReactGA }                from '../utils/analytics';
+import { ScrollComponent }        from './scroll';
+import { SearchResultsComponent } from './search-results';
+import { groupBoxes }             from '../utils/pokemon';
 
 export function Dex ({ captures, dex, onScrollButtonClick, username }) {
   const caught = captures.filter(({ captured }) => captured).length;
@@ -32,6 +33,8 @@ export function Dex ({ captures, dex, onScrollButtonClick, username }) {
         <div className="percentage">
           <ProgressComponent caught={caught} total={total} />
         </div>
+        {/* show based on search query */}
+        <SearchResultsComponent />
         {boxes.map((box) => <BoxComponent key={box[0].pokemon.id} captures={box} />)}
       </div>
     </div>
