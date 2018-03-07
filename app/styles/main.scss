@@ -43,6 +43,7 @@ a.link {
   color: $brand-secondary-light;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: underline;
 
   &:hover,
   &:focus {
