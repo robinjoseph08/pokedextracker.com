@@ -5,14 +5,21 @@ import { setQuery } from '../actions/search';
 
 export class SearchBar extends Component {
 
+  componentWillMount () {
+    this.props.setQuery('');
+  }
+
   onClick = () => {
     this.props.setQuery('');
-    this._search.value = '';
     this._search.focus();
   }
 
   render () {
     const { query, setQuery } = this.props;
+
+    if (this._search) {
+      this._search.value = query;
+    }
 
     return (
       <div className="dex-search-bar">
