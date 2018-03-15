@@ -36,6 +36,10 @@ export class Tracker extends Component {
     if (!samePage) {
       this.reset(nextProps);
     }
+
+    if (this._tracker && this.props.query !== nextProps.query) {
+      this._tracker.scrollTop = 0;
+    }
   }
 
   reset (props) {
@@ -122,9 +126,10 @@ export class Tracker extends Component {
 
 }
 
-function mapStateToProps ({ currentDex, currentUser, showScroll, users }) {
+function mapStateToProps ({ currentDex, currentUser, query, showScroll, users }) {
   return {
     dex: users[currentUser] && users[currentUser].dexesBySlug[currentDex],
+    query,
     showScroll
   };
 }
