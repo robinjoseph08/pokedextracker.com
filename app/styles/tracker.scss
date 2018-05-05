@@ -576,6 +576,10 @@ header {
   @include flex-wrap(wrap);
 
   margin-top: 60px;
+
+  &-empty {
+    @include justify-content(center);
+  }
 }
 
 @media (min-width: 751px) {

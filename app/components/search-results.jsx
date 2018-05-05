@@ -17,7 +17,7 @@ export class SearchResults extends Component {
 
     if (filteredCaptures.length === 0) {
       return (
-        <div className="search-results">
+        <div className="search-results search-results-empty">
           <p>No results. <a className="link" onClick={this.onClick}>Clear your search?</a></p>
         </div>
       );
