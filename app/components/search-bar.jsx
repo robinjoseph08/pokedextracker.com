@@ -39,7 +39,7 @@ export class SearchBar extends Component {
         <div className="wrapper">
           <div className="form-group">
             <i className="fa fa-search" />
-            <input className="form-control" ref={(c) => this._search = c} name="search" id="search" type="text" placeholder="Search by Pokémon name (press / to focus)" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onChange={(e) => setQuery(e.target.value)} />
+            <input className="form-control" ref={(c) => this._search = c} name="search" id="search" type="text" placeholder="Search by Pokémon name (press / to quick search)" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onChange={(e) => setQuery(e.target.value)} />
             {query.length > 0 ? <a onClick={this.onClick}><i className="fa fa-times" /></a> : null}
           </div>
         </div>
