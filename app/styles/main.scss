@@ -688,8 +688,9 @@ reload div {
   @include overflow-y-scroll();
 
   position: relative;
-  margin: 100px auto;
+  margin: 10vh auto;
   width: 500px;
+  max-height: 80vh;
   border: 2px solid $brand-secondary-light;
   background: #fff;
   outline: none;
