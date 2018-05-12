@@ -9,3 +9,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [PirateCactus](https://pokedextracker.com/u/PirateCactus)
 - [werewolf963](https://pokedextracker.com/u/werewolf963)
 - [TheRandor69](https://pokedextracker.com/u/TheRandor69)
+- [Laatsch](https://pokedextracker.com/u/Laatsch)
