@@ -1,3 +1,20 @@
+### 2.7.0 (2018-5-12)
+
+##### Chores
+
+* **notif:** remove ultra sun / moon notif (#296) ([8517d647](https://github.com/robinjoseph08/pokedextracker.com/commit/8517d6479d3ab14c7cb4febcb12ee3092fc0475a))
+
+##### New Features
+
+* **search:** add search element (#299) ([ed97a5b8](https://github.com/robinjoseph08/pokedextracker.com/commit/ed97a5b823c54ebae79457e4abbedeed402dcdfb))
+* **supporters:** add supporters!! ([81f6a5c8](https://github.com/robinjoseph08/pokedextracker.com/commit/81f6a5c81c1089c2587fc63cd3c69bbefde00bb4))
+* **docker:** add dockerfile and nginx.conf (#292) ([687995f3](https://github.com/robinjoseph08/pokedextracker.com/commit/687995f3848f8b3d91c07bbf2b12c9e3bf29513c))
+
+##### Bug Fixes
+
+* **modal:** make modal vertically scrollable ([c3c4548f](https://github.com/robinjoseph08/pokedextracker.com/commit/c3c4548f3c559d9c5e169c5cf92a13be59b3ca7d))
+* **scroll:** fix scroll button (#298) ([ab066204](https://github.com/robinjoseph08/pokedextracker.com/commit/ab066204b8a8349492bc8c5ecd3d232a554dc139))
+
 #### 2.6.1 (2018-1-3)
 
 ##### Bug Fixes
