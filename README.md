@@ -1,6 +1,6 @@
 # pokedextracker.com
 
-[![Build Status](https://travis-ci.org/pokedextracker/pokedextracker.com.svg?branch=master)](https://travis-ci.org/pokedextracker/pokedextracker.com)
+[![CircleCI](https://circleci.com/gh/pokedextracker/pokedextracker.com.svg?style=shield)](https://circleci.com/gh/pokedextracker/pokedextracker.com)
 [![Dependency Status](https://david-dm.org/pokedextracker/pokedextracker.com.svg)](https://david-dm.org/pokedextracker/pokedextracker.com)
 
 A website to track your completion of a Living Pokedex.
