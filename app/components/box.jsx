@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { MarkAllButtonComponent } from './mark-all-button';
 import { PokemonComponent }       from './pokemon';
+import { deferComponentRender }   from '../utils/defer-component-render';
 import { padding }                from '../utils/formatting';
 
 export const BOX_SIZE = 30;
@@ -36,4 +37,5 @@ function mapStateToProps ({ currentDex, currentUser, users }) {
   return { dex: users[currentUser].dexesBySlug[currentDex] };
 }
 
+export const DeferredBoxComponent = deferComponentRender(connect(mapStateToProps)(Box));
 export const BoxComponent = connect(mapStateToProps)(Box);

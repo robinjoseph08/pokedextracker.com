@@ -13,11 +13,17 @@
     font-size: .7em;
   }
 
-  .tracker-left-column {
+  .dex-wrapper {
     @include flexbox();
     @include flex-direction(column);
     @include flex-grow(1);
-    @include overflow-y-scroll;
+
+    .dex-column {
+      @include flexbox();
+      @include flex-direction(column);
+      @include flex-grow(1);
+      @include overflow-y-scroll;
+    }
   }
 }
 
@@ -226,6 +232,43 @@
   }
 }
 
+.dex-search-bar {
+  background-color: white;
+  border-bottom: 1px solid $gray-light;
+  padding: 10px;
+
+  .form-group {
+    margin-bottom: 0;
+
+    input {
+      padding-left: 32px;
+    }
+
+    .fa-search {
+      position: absolute;
+      bottom: 15px;
+      left: 14px;
+      font-size: 13px;
+      color: $brand-secondary;
+    }
+
+    .fa-times {
+      color: $gray-medium;
+      height: 100%;
+      width: 30px;
+      right: 0;
+      bottom: 0;
+      padding-top: 16px;
+      text-align: center;
+
+      &:hover {
+        cursor: pointer;
+        color: $gray-dark;
+      }
+    }
+  }
+}
+
 .dex {
   @include flex(1 0 auto);
 
@@ -408,122 +451,154 @@ header {
 
     border: 1px solid $gray-light;
   }
+}
 
-  .pokemon {
-    @include flexbox();
+.pokemon {
+  @include flexbox();
 
-    position: relative;
-    width: $pokemon-box-size;
-    height: $pokemon-box-size;
+  position: relative;
+  width: $pokemon-box-size;
+  height: $pokemon-box-size;
 
-    &.captured {
-      background-color: $brand-primary-light;
+  &.captured {
+    background-color: $brand-primary-light;
+
+    .set-captured,
+    .set-captured-mobile {
+      border-color: darken($brand-primary-light, 5%);
+    }
+  }
+
+  &.disabled {
+    opacity: .1;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  &:not(.empty):not(.disabled):hover {
+    .set-info {
+      opacity: 1;
+
+      &:hover {
+        cursor: pointer;
+        right: -1px;
+        bottom: -1px;
+
+        .fa-info {
+          padding: 5px 8px;
+          border-color: darken($brand-secondary-dark, 5%);
+          color: darken($brand-secondary-dark, 5%);
+        }
+      }
+    }
+
+    &:not(.viewing) {
+      cursor: pointer;
 
       .set-captured,
-      .set-captured-mobile {
+      .set-capture-mobile:hover {
         border-color: darken($brand-primary-light, 5%);
       }
     }
+  }
+}
 
-    &.disabled {
-      opacity: .1;
+.set-captured {
+  @include flex-grow(1);
+  @include flexbox();
+  @include flex-direction(column);
+  @include align-items(center);
+  @include justify-content(center);
 
-      &:hover {
-        cursor: default;
-      }
-    }
+  border: 1px solid $gray-light;
 
-    &:not(.empty):not(.disabled):hover {
-      .set-info {
-        opacity: 1;
-
-        &:hover {
-          cursor: pointer;
-          right: -1px;
-          bottom: -1px;
-
-          .fa-info {
-            padding: 5px 8px;
-            border-color: darken($brand-secondary-dark, 5%);
-            color: darken($brand-secondary-dark, 5%);
-          }
-        }
-      }
-
-      &:not(.viewing) {
-        cursor: pointer;
-
-        .set-captured,
-        .set-capture-mobile:hover {
-          border-color: darken($brand-primary-light, 5%);
-        }
-      }
-    }
+  h4 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 400;
   }
 
-  .set-captured {
+  p {
+    margin: 0;
+    font-family: $font-secondary;
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+.set-captured-mobile {
+  @include flex-grow(1);
+  @include align-items(center);
+
+  display: none;
+  border: 1px solid $gray-light;
+
+  .pkicon {
+    margin: 0 8px;
+  }
+
+  h4 {
     @include flex-grow(1);
-    @include flexbox();
-    @include flex-direction(column);
-    @include align-items(center);
+
+    margin: 0;
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+    padding-right: 10px;
+    font-family: $font-secondary;
+    font-size: 11px;
+  }
+}
+
+.set-info {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+
+  .fa-info {
+    padding: 4px 7px;
+    border-radius: 50%;
+    border: 2px solid $brand-secondary-light;
+    color: $brand-secondary-light;
+    font-size: 10px;
+  }
+}
+
+.search-results {
+  @include flexbox();
+  @include flex-wrap(wrap);
+
+  margin-top: 60px;
+
+  &-empty {
     @include justify-content(center);
-
-    border: 1px solid $gray-light;
-
-    h4 {
-      margin: 0;
-      font-size: 17px;
-      font-weight: 400;
-    }
-
-    p {
-      margin: 0;
-      font-family: $font-secondary;
-      font-size: 12px;
-      font-weight: 400;
-    }
   }
+}
 
-  .set-captured-mobile {
-    @include flex-grow(1);
-    @include align-items(center);
+@media (min-width: 751px) {
+  .search-results .pokemon {
+    margin-left: -2px;
+    margin-top: -2px;
+    height: $pokemon-box-size + 2;
+    width: $pokemon-box-size + 2;
 
-    display: none;
-    border: 1px solid $gray-light;
-
-    .pkicon {
-      margin: 0 8px;
+    &:nth-child(6n+1) {
+      margin-left: 0;
     }
 
-    h4 {
-      @include flex-grow(1);
-
-      margin: 0;
-      font-size: 20px;
-      font-weight: 400;
+    .set-captured {
+      border-width: 2px;
     }
 
-    p {
-      margin: 0;
-      padding-right: 10px;
-      font-family: $font-secondary;
-      font-size: 11px;
-    }
-  }
-
-  .set-info {
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding: 5px;
-
-    .fa-info {
-      padding: 4px 7px;
-      border-radius: 50%;
-      border: 2px solid $brand-secondary-light;
-      color: $brand-secondary-light;
-      font-size: 10px;
+    &:hover {
+      z-index: 1;
     }
   }
 }
@@ -577,42 +652,42 @@ header {
     .box-container {
       @include flex-direction(column);
     }
+  }
 
-    .pokemon {
-      width: 100%;
-      height: 80px;
+  .pokemon {
+    width: 100%;
+    height: 80px;
 
-      &.captured .set-info {
-        border-color: darken($brand-primary-light, 5%);
+    &.captured .set-info {
+      border-color: darken($brand-primary-light, 5%);
+    }
+
+    .set-captured {
+      display: none;
+    }
+
+    .set-captured-mobile {
+      @include flexbox();
+    }
+
+    .set-info {
+      @include flexbox();
+      @include align-items(center);
+      @include justify-content(center);
+
+      opacity: 1;
+      border: 1px solid $gray-light;
+      position: relative;
+      width: 50px;
+
+      &:hover {
+        right: 0 !important;
+        bottom: 0 !important;
       }
+    }
 
-      .set-captured {
-        display: none;
-      }
-
-      .set-captured-mobile {
-        @include flexbox();
-      }
-
-      .set-info {
-        @include flexbox();
-        @include align-items(center);
-        @include justify-content(center);
-
-        opacity: 1;
-        border: 1px solid $gray-light;
-        position: relative;
-        width: 50px;
-
-        &:hover {
-          right: 0 !important;
-          bottom: 0 !important;
-        }
-      }
-
-      &.empty {
-        display: none;
-      }
+    &.empty {
+      display: none;
     }
   }
 }
