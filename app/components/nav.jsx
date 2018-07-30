@@ -60,8 +60,9 @@ export class Nav extends Component {
           <div className="dropdown">
             <a href="#">{session.username} <i className="fa fa-caret-down" /></a>
             <ul>
-              {user.dexes.map((dex) => <li key={dex.id}><Link to={`/u/${session.username}/${dex.slug}`}><i className="fa fa-th" /> {dex.title}</Link></li>)}
-
+              <div className="dropdown-scroll">
+                {user.dexes.map((dex) => <li key={dex.id}><Link to={`/u/${session.username}/${dex.slug}`}><i className="fa fa-th" /> {dex.title}</Link></li>)}
+              </div>
               <li><Link to={`/u/${session.username}`}><i className="fa fa-user" /> Profile</Link></li>
               <li><Link to="/account"><i className="fa fa-cog" /> Account Settings</Link></li>
               <li><a onClick={this.signOut}><i className="fa fa-sign-out" /> Sign Out</a></li>

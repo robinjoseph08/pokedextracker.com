@@ -99,6 +99,11 @@ nav {
       }
     }
 
+    .dropdown-scroll {
+      max-height: 242px;
+      overflow-y: scroll;
+    }
+
     ul {
       @include transition(all .1s ease-out);
 
