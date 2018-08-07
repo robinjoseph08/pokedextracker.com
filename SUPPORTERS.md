@@ -13,3 +13,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [chadzelda](https://pokedextracker.com/u/chadzelda)
 - [kmj2318](https://pokedextracker.com/u/kmj2318)
 - [Miss_BlackHeart](https://pokedextracker.com/u/Miss_BlackHeart)
+- [Tomtom9874](https://pokedextracker.com/u/Tomtom9874)
