@@ -64,7 +64,7 @@ export class Info extends Component {
             <h2>#{padding(pokemon.national_id, 3)}</h2>
           </div>
 
-          <InfoLocationsComponent gameFamily={dex.game.game_family} pokemon={pokemon} regional={dex.regional} />
+          <InfoLocationsComponent pokemon={pokemon} />
 
           <EvolutionFamilyComponent family={pokemon.evolution_family} />
 
