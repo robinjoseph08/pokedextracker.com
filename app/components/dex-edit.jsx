@@ -9,8 +9,7 @@ import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
 
 const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
-const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
-const REGIONAL_WARNING = 'Any non-Alola Dex capture info will be lost.';
+const REGIONAL_WARNING = 'Any non-regional capture info will be lost.';
 const URL_WARNING = 'The old URL to your dex will not function anymore.';
 
 export class DexEdit extends Component {
@@ -29,10 +28,15 @@ export class DexEdit extends Component {
   }
 
   onChange = (e) => {
+    const { gamesById } = this.props;
     const game = e.target.value;
 
-    if (NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+    if (!gamesById[game].game_family.regional_support) {
       this.setState({ regional: false });
+    }
+
+    if (!gamesById[game].game_family.national_support) {
+      this.setState({ regional: true });
     }
 
     this.setState({ game });
@@ -60,17 +64,13 @@ export class DexEdit extends Component {
   }
 
   get showGameWarning () {
-    const { dex } = this.props;
+    const { dex, gamesById } = this.props;
     const { game } = this.state;
 
-    // TODO: refactor this logic to more scalable and easier to understand
-    if ((dex.game.game_family.id === 'sun_moon') && NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
-      return true;
-    } else if ((dex.game.game_family.id === 'ultra_sun_ultra_moon') && game !== 'ultra_sun' && game !== 'ultra_moon') {
-      return true;
-    } else {
-      return false;
-    }
+    const differentFamily = gamesById[game].game_family.id !== dex.game.game_family.id;
+    const lessNationalCount = gamesById[game].game_family.national_total < dex.game.game_family.national_total;
+
+    return differentFamily && lessNationalCount;
   }
 
   get showRegionalWarning () {
@@ -130,7 +130,7 @@ export class DexEdit extends Component {
   }
 
   render () {
-    const { dex, games, isOpen, session } = this.props;
+    const { dex, games, gamesById, isOpen, session } = this.props;
     const { confirmingDelete, confirmingEdit, error, game, regional, url } = this.state;
 
     let dexDelete = null;
@@ -172,15 +172,15 @@ export class DexEdit extends Component {
             <div className="form-group">
               <FormWarningComponent message={this.showRegionalWarning ? REGIONAL_WARNING : null} />
               <label htmlFor="regional">Regionality</label>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="regional" checked={!regional} value="national" onChange={() => this.setState({ regional: false })} />
+              <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
+                <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
+                  <input type="radio" name="regional" checked={!regional} disabled={!gamesById[game].game_family.national_support} value="national" onChange={() => this.setState({ regional: false })} />
                   <span className="radio-custom"><span /></span>National
                 </label>
               </div>
-              <div className={`radio ${NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'disabled' : ''}`}>
-                <label title={NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'Regional dexes only supported for Gen 7.' : ''}>
-                  <input type="radio" name="regional" checked={regional} disabled={NATIONAL_ONLY_GAMES.indexOf(game) > -1} value="regional" onChange={() => this.setState({ regional: true })} />
+              <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
+                <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
+                  <input type="radio" name="regional" checked={regional} disabled={!gamesById[game].game_family.regional_support} value="regional" onChange={() => this.setState({ regional: true })} />
                   <span className="radio-custom"><span /></span>Regional
                 </label>
               </div>
@@ -211,8 +211,8 @@ export class DexEdit extends Component {
 
 }
 
-function mapStateToProps ({ games, session }) {
-  return { games, session };
+function mapStateToProps ({ games, gamesById, session }) {
+  return { games, gamesById, session };
 }
 
 function mapDispatchToProps (dispatch) {

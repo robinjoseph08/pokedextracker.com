@@ -7,22 +7,32 @@ import slug          from 'slug';
 import { AlertComponent } from './alert';
 import { ReactGA }        from '../utils/analytics';
 import { createDex }      from '../actions/dex';
-import { listGames }      from '../actions/game';
-
-const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
 
 export class DexCreate extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, game: 'ultra_sun', regional: false };
+    const { games } = props;
+    const latestGame = games[0];
+
+    this.state = {
+      error: null,
+      url: null,
+      game: latestGame.id,
+      regional: !latestGame.game_family.national_support
+    };
   }
 
   onChange = (e) => {
+    const { gamesById } = this.props;
     const game = e.target.value;
 
-    if (NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+    if (!gamesById[game].game_family.regional_support) {
       this.setState({ regional: false });
+    }
+
+    if (!gamesById[game].game_family.national_support) {
+      this.setState({ regional: true });
     }
 
     this.setState({ game });
@@ -35,7 +45,15 @@ export class DexCreate extends Component {
   }
 
   onRequestClose = () => {
-    this.setState({ error: null, url: null, game: 'sun', regional: false });
+    const { games } = this.props;
+    const latestGame = games[0];
+
+    this.setState({
+      error: null,
+      url: null,
+      game: latestGame.id,
+      regional: !latestGame.game_family.national_support
+    });
     this.props.onRequestClose();
   }
 
@@ -66,7 +84,7 @@ export class DexCreate extends Component {
   }
 
   render () {
-    const { games, isOpen, session } = this.props;
+    const { games, gamesById, isOpen, session } = this.props;
     const { error, game, regional, url } = this.state;
 
     if (!isOpen || !games) {
@@ -94,15 +112,15 @@ export class DexCreate extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="regional">Regionality</label>
-              <div className="radio">
-                <label>
-                  <input type="radio" name="regional" checked={!regional} value="national" onChange={() => this.setState({ regional: false })} />
+              <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
+                <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
+                  <input type="radio" name="regional" checked={!regional} disabled={!gamesById[game].game_family.national_support} value="national" onChange={() => this.setState({ regional: false })} />
                   <span className="radio-custom"><span /></span>National
                 </label>
               </div>
-              <div className={`radio ${NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'disabled' : ''}`}>
-                <label title={NATIONAL_ONLY_GAMES.indexOf(game) > -1 ? 'Regional dexes only supported for Gen 7.' : ''}>
-                  <input type="radio" name="regional" checked={regional} disabled={NATIONAL_ONLY_GAMES.indexOf(game) > -1} value="regional" onChange={() => this.setState({ regional: true })} />
+              <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
+                <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
+                  <input type="radio" name="regional" checked={regional} disabled={!gamesById[game].game_family.regional_support} value="regional" onChange={() => this.setState({ regional: true })} />
                   <span className="radio-custom"><span /></span>Regional
                 </label>
               </div>
@@ -132,14 +150,13 @@ export class DexCreate extends Component {
 
 }
 
-function mapStateToProps ({ games, session }) {
-  return { games, session };
+function mapStateToProps ({ games, gamesById, session }) {
+  return { games, gamesById, session };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     createDex: (payload) => dispatch(createDex(payload)),
-    listGames: () => dispatch(listGames()),
     redirect: (path) => dispatch(push(path))
   };
 }
