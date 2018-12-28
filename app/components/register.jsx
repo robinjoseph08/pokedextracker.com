@@ -14,13 +14,11 @@ import { createUser }                    from '../actions/user';
 import { friendCode }                    from '../utils/formatting';
 import { listGames }                     from '../actions/game';
 
-const NATIONAL_ONLY_GAMES = ['x', 'y', 'omega_ruby', 'alpha_sapphire'];
-
 export class Register extends Component {
 
   constructor (props) {
     super(props);
-    this.state = { error: null, game: 'ultra_sun', regional: false };
+    this.state = { error: null };
   }
 
   componentWillMount () {
@@ -30,14 +28,29 @@ export class Register extends Component {
       redirectToProfile(session.username);
     }
 
-    listGames();
+    listGames()
+    .then((games) => {
+      const latestGame = games[0];
+
+      this.setState({
+        error: null,
+        url: null,
+        game: latestGame.id,
+        regional: !latestGame.game_family.national_support
+      });
+    });
   }
 
   onChange = (e) => {
+    const { gamesById } = this.props;
     const game = e.target.value;
 
-    if (NATIONAL_ONLY_GAMES.indexOf(game) > -1) {
+    if (!gamesById[game].game_family.regional_support) {
       this.setState({ regional: false });
+    }
+
+    if (!gamesById[game].game_family.national_support) {
+      this.setState({ regional: true });
     }
 
     this.setState({ game });
@@ -75,8 +88,12 @@ export class Register extends Component {
   }
 
   render () {
-    const { games } = this.props;
+    const { games, gamesById } = this.props;
     const { error, game, regional } = this.state;
+
+    if (!game) {
+      return null;
+    }
 
     return (
       <DocumentTitle title="Register | Pokédex Tracker">
@@ -136,15 +153,15 @@ export class Register extends Component {
                   </div>
                   <div className="form-group">
                     <label htmlFor="regional">Regionality</label>
-                    <div className="radio">
-                      <label>
-                        <input type="radio" name="regional" checked={!regional} value="national" onChange={() => this.setState({ regional: false })} />
+                    <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
+                      <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
+                        <input type="radio" name="regional" checked={!regional} disabled={!gamesById[game].game_family.national_support} value="national" onChange={() => this.setState({ regional: false })} />
                         <span className="radio-custom"><span /></span>National
                       </label>
                     </div>
-                    <div className={`radio ${game === 'omega_ruby' ? 'disabled' : ''}`}>
-                      <label title={game === 'omega_ruby' ? 'Regional dexes only supported for Gen 7.' : ''}>
-                        <input type="radio" name="regional" checked={regional} disabled={game === 'omega_ruby'} value="regional" onChange={() => this.setState({ regional: true })} />
+                    <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
+                      <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
+                        <input type="radio" name="regional" checked={regional} disabled={!gamesById[game].game_family.regional_support} value="regional" onChange={() => this.setState({ regional: true })} />
                         <span className="radio-custom"><span /></span>Regional
                       </label>
                     </div>
@@ -181,8 +198,8 @@ export class Register extends Component {
 
 }
 
-function mapStateToProps ({ games, session }) {
-  return { games, session };
+function mapStateToProps ({ games, gamesById, session }) {
+  return { games, gamesById, session };
 }
 
 function mapDispatchToProps (dispatch) {

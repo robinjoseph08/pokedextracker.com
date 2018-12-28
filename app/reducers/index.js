@@ -5,6 +5,7 @@ import { currentDex }     from './current-dex';
 import { currentPokemon } from './current-pokemon';
 import { currentUser }    from './current-user';
 import { games }          from './games';
+import { gamesById }      from './games-by-id';
 import { notification }   from './notification';
 import { pokemon }        from './pokemon';
 import { query }          from './query';
@@ -22,6 +23,7 @@ export const reducer = combineReducers({
   currentPokemon,
   currentUser,
   games,
+  gamesById,
   notification,
   pokemon,
   query,

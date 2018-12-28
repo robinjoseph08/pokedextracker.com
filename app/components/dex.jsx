@@ -19,7 +19,7 @@ export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
   const caught = captures.filter(({ captured }) => captured).length;
   const total = captures.length;
 
-  if (query.length === 0 && !BOX_COMPONENTS[dex.id]) {
+  if (query.length === 0) {
     const boxes = groupBoxes(captures, dex);
     BOX_COMPONENTS[dex.id] = boxes.map((box, i) => {
       if (i > DEFER_CUTOFF) {
