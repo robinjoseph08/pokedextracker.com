@@ -1,3 +1,18 @@
+### 2.8.0 (2019-1-1)
+
+##### New Features
+
+* **games:** use regional_support and national_support (#314) ([2ec19806](https://github.com/robinjoseph08/pokedextracker.com/commit/2ec198064c5724a1b34f849712cc440924fadd09))
+* **locations:** use pokemon.locations to simplify logic (#312) ([c1baa574](https://github.com/robinjoseph08/pokedextracker.com/commit/c1baa5749a69b5749ace883ffa85ac384c7f61f1))
+
+##### Bug Fixes
+
+* **dropdown:** add scroll for over 6 dexes (#308) ([bc6410d4](https://github.com/robinjoseph08/pokedextracker.com/commit/bc6410d442d2e7024f6d0413d6c7ce8194e7c6f1))
+
+##### Tests
+
+* **circle:** switch from travis to circle (#303) ([93d461e0](https://github.com/robinjoseph08/pokedextracker.com/commit/93d461e0a1832e899d47535905f7229cb3f763f5))
+
 ### 2.7.0 (2018-5-12)
 
 ##### Chores
