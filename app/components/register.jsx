@@ -11,7 +11,8 @@ import { ReactGA }                       from '../utils/analytics';
 import { ReloadComponent }               from './reload';
 import { checkVersion, setNotification } from '../actions/utils';
 import { createUser }                    from '../actions/user';
-import { friendCode }                    from '../utils/formatting';
+import { friendCode3DS }                 from '../utils/formatting';
+import { friendCodeSwitch }              from '../utils/formatting';
 import { listGames }                     from '../actions/game';
 
 export class Register extends Component {
@@ -70,13 +71,14 @@ export class Register extends Component {
     const username = this._username.value;
     const password = this._password.value;
     const password_confirm = this._password_confirm.value;
-    const friend_code = this._friend_code.value;
+    const friend_code_3ds = this._friend_code_3ds.value;
+    const friend_code_switch = this._friend_code_switch.value;
     const title = this._title.value;
     const shiny = this._shiny.checked;
 
     this.setState({ error: null });
 
-    register({ username, password, password_confirm, friend_code, title, shiny, game, regional })
+    register({ username, password, password_confirm, friend_code_3ds, friend_code_switch, title, shiny, game, regional })
     .then(() => {
       ReactGA.event({ action: 'register', category: 'Session' });
       setNotification(true);
@@ -126,8 +128,12 @@ export class Register extends Component {
                     <i className="fa fa-asterisk" />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="friend_code">Friend Code</label>
-                    <input className="form-control" ref={(c) => this._friend_code = c} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
+                    <label htmlFor="friend_code_3ds">3DS Friend Code</label>
+                    <input className="form-control" ref={(c) => this._friend_code_3ds = c} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="friend_code_switch">Switch Friend Code</label>
+                    <input className="form-control" ref={(c) => this._friend_code_switch = c} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
                   </div>
                 </div>
 

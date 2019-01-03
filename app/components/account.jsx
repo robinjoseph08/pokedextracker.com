@@ -3,14 +3,15 @@ import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }  from './alert';
-import { FooterComponent } from './footer';
-import { NavComponent }    from './nav';
-import { ReactGA }         from '../utils/analytics';
-import { ReloadComponent } from './reload';
-import { checkVersion }    from '../actions/utils';
-import { friendCode }      from '../utils/formatting';
-import { updateUser }      from '../actions/user';
+import { AlertComponent }   from './alert';
+import { FooterComponent }  from './footer';
+import { NavComponent }     from './nav';
+import { ReactGA }          from '../utils/analytics';
+import { ReloadComponent }  from './reload';
+import { checkVersion }     from '../actions/utils';
+import { friendCode3DS }    from '../utils/formatting';
+import { friendCodeSwitch } from '../utils/formatting';
+import { updateUser }       from '../actions/user';
 
 export class Account extends Component {
 
@@ -52,7 +53,8 @@ export class Account extends Component {
       payload: {
         password: this._password && this._password.value || undefined,
         password_confirm: this._password_confirm && this._password_confirm.value || undefined,
-        friend_code: this._friend_code.value
+        friend_code_3ds: this._friend_code_3ds.value,
+        friend_code_switch: this._friend_code_switch.value
       }
     };
 
@@ -113,8 +115,12 @@ export class Account extends Component {
               </div>
               {passwordInputs}
               <div className="form-group">
-                <label htmlFor="friend_code">Friend Code</label>
-                <input className="form-control" ref={(c) => this._friend_code = c} defaultValue={session.friend_code} name="friend_code" id="friend_code" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code.value = friendCode(e.target.value)} />
+                <label htmlFor="friend_code_3ds">3DS Friend Code</label>
+                <input className="form-control" ref={(c) => this._friend_code_3ds = c} defaultValue={session.friend_code_3ds} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="friend_code_switch">Switch Friend Code</label>
+                <input className="form-control" ref={(c) => this._friend_code_switch = c} defaultValue={session.friend_code_switch} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="language">Pokémon Name Language</label>
