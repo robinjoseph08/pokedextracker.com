@@ -5,7 +5,7 @@ import { BoxComponent, DeferredBoxComponent } from './box';
 import { DonatedFlairComponent }              from './donated-flair';
 import { FriendCodeComponent }                from './friend-code';
 import { HeaderComponent }                    from './header';
-// import { NotificationComponent }              from './notification';
+import { NotificationComponent }              from './notification';
 import { ProgressComponent }                  from './progress';
 import { ReactGA }                            from '../utils/analytics';
 import { ScrollComponent }                    from './scroll';
@@ -34,7 +34,7 @@ export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
     <div className="dex">
       <div className="wrapper">
         <ScrollComponent onClick={onScrollButtonClick} />
-        {/* <NotificationComponent /> */}
+        <NotificationComponent />
         <header>
           <HeaderComponent />
           <h3>

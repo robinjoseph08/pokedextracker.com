@@ -10,7 +10,7 @@ export function Notification ({ notification, setNotification }) {
   return (
     <div className="alert alert-muted">
       <i className="fa fa-times" onClick={() => setNotification(true)} />
-      <p>We've added support for Ultra Sun &amp; Ultra Moon dexes! Read more about the update <a href="http://bit.ly/pt-usum" target="_blank" rel="noopener noreferrer">on our blog</a>.</p>
+      <p>Let's Go, Pikachu and Let's Go, Eevee support is here! <a href="http://bit.ly/pt-letsgo" target="_blank" rel="noopener noreferrer">Read more</a>.</p>
     </div>
   );
 }

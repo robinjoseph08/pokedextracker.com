@@ -100,8 +100,9 @@ nav {
     }
 
     .dropdown-scroll {
+      @include overflow-y-scroll();
+
       max-height: 242px;
-      overflow-y: scroll;
     }
 
     ul {

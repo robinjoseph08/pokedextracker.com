@@ -8,6 +8,7 @@
     @include flexbox();
     @include flex-direction(column);
     @include justify-content(center);
+    @include overflow-y-scroll();
   }
 
   .hero {
@@ -44,21 +45,24 @@
     top: 100px;
 
     h2,
-    p {
+    p,
+    ul {
       max-width: 570px;
-      margin: 30px 0;
+      margin: 20px 0 0;
       padding: 0 20px;
       font-size: 15px;
       font-weight: 400;
     }
 
-    h2 {
-      margin-bottom: 0;
+    ul {
+      display: inline-block;
+      text-align: left;
     }
 
     .btn {
       display: inline-block;
       width: 180px;
+      margin-top: 20px;
 
       &:first-child {
         margin-right: 15px;
@@ -66,8 +70,8 @@
     }
 
     .social {
-      margin-top: 30px;
-      
+      margin-top: 20px;
+
       a {
         margin: 0 5px;
       }
