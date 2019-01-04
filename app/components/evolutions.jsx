@@ -13,6 +13,9 @@ export function EvolutionsComponent ({ evolutions }) {
       case 'stone':
         trigger = <span>{capitalize(evolution.stone)} Stone </span>;
         break;
+      case 'candy':
+        trigger = <span>{evolution.candy_count} Candies </span>;
+        break;
       default:
         trigger = <span>{capitalize(evolution.trigger)} </span>;
     }
