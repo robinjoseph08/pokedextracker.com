@@ -74,10 +74,20 @@ export class Account extends Component {
 
   render () {
     const { session } = this.props;
+    let { user } = this.props;
     const { error, loading, password, success } = this.state;
 
     if (!session) {
       return null;
+    }
+
+    // If the session user hasn't been loaded yet, temporarily substitute it
+    // with the normal session. If there are things that are expected to be in
+    // the session user that isn't in the normal session (e.g. dexes), this
+    // could cause some problems and might need to be reworked, but right now,
+    // it works.
+    if (!user) {
+      user = session;
     }
 
     let passwordInputs = null;
@@ -103,7 +113,7 @@ export class Account extends Component {
           <NavComponent />
           <ReloadComponent />
           <div className="form" ref={(c) => this._form = c}>
-            <h1>{session.username}'s Account</h1>
+            <h1>{user.username}'s Account</h1>
             <form onSubmit={this.onSubmit} className="form-column">
               <AlertComponent message={error} type="error" />
               <AlertComponent message={success} type="success" />
@@ -116,11 +126,11 @@ export class Account extends Component {
               {passwordInputs}
               <div className="form-group">
                 <label htmlFor="friend_code_3ds">3DS Friend Code</label>
-                <input className="form-control" ref={(c) => this._friend_code_3ds = c} defaultValue={session.friend_code_3ds} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
+                <input className="form-control" ref={(c) => this._friend_code_3ds = c} defaultValue={user.friend_code_3ds} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="friend_code_switch">Switch Friend Code</label>
-                <input className="form-control" ref={(c) => this._friend_code_switch = c} defaultValue={session.friend_code_switch} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
+                <input className="form-control" ref={(c) => this._friend_code_switch = c} defaultValue={user.friend_code_switch} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
               </div>
               <div className="form-group">
                 <label htmlFor="language">Pokémon Name Language</label>
@@ -143,8 +153,8 @@ export class Account extends Component {
 
 }
 
-function mapStateToProps ({ session }) {
-  return { session };
+function mapStateToProps ({ session, sessionUser }) {
+  return { session, user: sessionUser };
 }
 
 function mapDispatchToProps (dispatch) {
