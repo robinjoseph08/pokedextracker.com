@@ -3,15 +3,14 @@ import DocumentTitle from 'react-document-title';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }   from './alert';
-import { FooterComponent }  from './footer';
-import { NavComponent }     from './nav';
-import { ReactGA }          from '../utils/analytics';
-import { ReloadComponent }  from './reload';
-import { checkVersion }     from '../actions/utils';
-import { friendCode3DS }    from '../utils/formatting';
-import { friendCodeSwitch } from '../utils/formatting';
-import { updateUser }       from '../actions/user';
+import { AlertComponent }                  from './alert';
+import { FooterComponent }                 from './footer';
+import { NavComponent }                    from './nav';
+import { ReactGA }                         from '../utils/analytics';
+import { ReloadComponent }                 from './reload';
+import { checkVersion }                    from '../actions/utils';
+import { friendCode3DS, friendCodeSwitch } from '../utils/formatting';
+import { updateUser }                      from '../actions/user';
 
 export class Account extends Component {
 

@@ -4,16 +4,15 @@ import { Link }      from 'react-router';
 import { connect }   from 'react-redux';
 import { push }      from 'react-router-redux';
 
-import { AlertComponent }                from './alert';
-import { FooterComponent }               from './footer';
-import { NavComponent }                  from './nav';
-import { ReactGA }                       from '../utils/analytics';
-import { ReloadComponent }               from './reload';
-import { checkVersion, setNotification } from '../actions/utils';
-import { createUser }                    from '../actions/user';
-import { friendCode3DS }                 from '../utils/formatting';
-import { friendCodeSwitch }              from '../utils/formatting';
-import { listGames }                     from '../actions/game';
+import { AlertComponent }                  from './alert';
+import { FooterComponent }                 from './footer';
+import { NavComponent }                    from './nav';
+import { ReactGA }                         from '../utils/analytics';
+import { ReloadComponent }                 from './reload';
+import { checkVersion, setNotification }   from '../actions/utils';
+import { createUser }                      from '../actions/user';
+import { friendCode3DS, friendCodeSwitch } from '../utils/formatting';
+import { listGames }                       from '../actions/game';
 
 export class Register extends Component {
 
