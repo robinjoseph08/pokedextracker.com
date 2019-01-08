@@ -76,6 +76,10 @@
 
     .pkicon {
       margin-right: 3px;
+
+      &.pkicon-809 {
+        margin-right: 8px;
+      }
     }
 
     h1 {
@@ -135,9 +139,15 @@
       @include justify-content(space-around);
     }
 
-    .evolution-pokemon-column a {
-      cursor: pointer;
-      padding: 0 5px;
+    .evolution-pokemon-column {
+      .pkicon-809 {
+        margin-left: 3px;
+      }
+
+      a {
+        cursor: pointer;
+        padding: 0 5px;
+      }
     }
 
     .evolution-trigger-column {
