@@ -1,3 +1,13 @@
+### 2.9.0 (2019-1-12)
+
+##### New Features
+
+* **lets-go:**
+  * support switch friend codes (#316) ([d2a1a856](https://github.com/robinjoseph08/pokedextracker.com/commit/d2a1a856cff23af7a652ac0d01bb347ec1f8094d))
+  * launch lgpe support (#317) ([2250d55e](https://github.com/robinjoseph08/pokedextracker.com/commit/2250d55e8f14fd4bf70cb807c376cdaa6200e719))
+  * add new spritesheet/css (#315) ([5d74c31a](https://github.com/robinjoseph08/pokedextracker.com/commit/5d74c31acd245dc98d80d6bd02e4d055f9936de3))
+* **robots:** disallow /u/ pages from being indexed (#318) ([dbaa0c58](https://github.com/robinjoseph08/pokedextracker.com/commit/dbaa0c582886e73bf82be6ccc99f22fa711fb538))
+
 ### 2.8.0 (2019-1-1)
 
 ##### New Features
