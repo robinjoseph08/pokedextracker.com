@@ -41,8 +41,18 @@ export class Home extends Component {
             </div>
 
             <div className="sub">
-              <h2>A tool for tracking your Living Dex progress for Pokémon Ultra Sun &amp; Ultra Moon (both Gen 7 <Link className="link" alt="Sample Ultra Sun Regional Living Dex" to="/u/ashketchum10/ultra-sun-regional-living-dex">Alola Dex</Link> and <Link className="link" alt="Sample Ultra Sun National Living Dex" to="/u/ashketchum10/ultra-sun-national-living-dex">National Dex</Link>) or <Link className="link" alt="Sample Omega Ruby Living Dex" to="/u/ashketchum10/omega-ruby-living-dex">Gen 6</Link>. Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, and share a public link with others to see how you can help each other out. Manage all your dexes on one <Link className="link" alt="Sample Profile" to="/u/ashketchum10">profile</Link>, and even track a <Link className="link" alt="Sample Shiny Living Dex" to="/u/ashketchum10/shinies">shiny living dex</Link>!</h2>
-
+              <h2>A tool for tracking your Living Dex progress! We currently support:</h2>
+              <ul>
+                <li><h2><Link className="link" alt="Sample Let's Go, Pikachu Regional Living Dex" to="/u/ashketchum10/lets-go-pikachu-regional-living-dex">Pokémon Let's Go, Pikachu &amp; Let's Go, Eevee Regional Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample Generation 7 National Living Dex" to="/u/ashketchum10/ultra-sun-national-living-dex">Generation 7 National Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample Ultra Sun Regional Living Dex" to="/u/ashketchum10/ultra-sun-regional-living-dex">Pokémon Ultra Sun &amp; Ultra Moon Regional Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample Sun Regional Living Dex" to="/u/ashketchum10/sun-regional-living-dex">Pokémon Sun &amp; Moon Regional Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample Generation 6 National Living Dex" to="/u/ashketchum10/omega-ruby-national-living-dex">Generation 6 National Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample Omega Ruby Regional Living Dex" to="/u/ashketchum10/omega-ruby-regional-living-dex">Pokémon Omega Ruby &amp; Alpha Sapphire Regional Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample X Regional Living Dex" to="/u/ashketchum10/x-regional-living-dex">Pokémon X &amp; Y Regional Dex</Link></h2></li>
+                <li><h2><Link className="link" alt="Sample Shiny Living Dex" to="/u/ashketchum10/shinies">Shiny Dexes</Link> for all of the above!</h2></li>
+              </ul>
+              <h2>Easily toggle between and track your captured Pokémon, find the locations of those left to be captured, manage all your dexes on one <Link className="link" alt="Sample Profile" to="/u/ashketchum10">profile</Link>, and share a public link with others to see how you can help each other out.</h2>
               <p>This project is open source, and you can find the code on <a href="https://github.com/pokedextracker" target="_blank" rel="noopener noreferrer" className="link">GitHub</a>. Feel free to report issues, suggest features, or even submit a pull request. Help support this project financially by <Link className="link" to="/donate">donating</Link>&mdash;every little bit helps!</p>
 
               {ctas}

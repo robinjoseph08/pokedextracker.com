@@ -100,8 +100,9 @@ nav {
     }
 
     .dropdown-scroll {
+      @include overflow-y-scroll();
+
       max-height: 242px;
-      overflow-y: scroll;
     }
 
     ul {
@@ -709,7 +710,7 @@ reload div {
 }
 
 .main-footer {
-  padding: 100px 0;
+  padding: 100px 20px;
   text-align: center;
   background-color: $gray-light;
   font-family: $font-secondary;
@@ -737,7 +738,7 @@ reload div {
   }
 
   .main-footer {
-    padding: 50px 0;
+    padding: 50px 20px;
   }
 }
 
@@ -754,6 +755,11 @@ reload div {
     .form-group:last-child {
       margin-bottom: 25px;
     }
+  }
+
+  nav a {
+    padding: 14px 10px;
+    font-size: 10px;
   }
 }
 

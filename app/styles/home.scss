@@ -8,6 +8,9 @@
     @include flexbox();
     @include flex-direction(column);
     @include justify-content(center);
+    @include overflow-y-scroll();
+
+    padding-top: 20px;
   }
 
   .hero {
@@ -44,30 +47,34 @@
     top: 100px;
 
     h2,
-    p {
+    p,
+    ul {
       max-width: 570px;
-      margin: 30px 0;
+      margin: 20px 0 0;
       padding: 0 20px;
       font-size: 15px;
       font-weight: 400;
     }
 
-    h2 {
-      margin-bottom: 0;
+    ul {
+      display: inline-block;
+      text-align: left;
+
+      h2 {
+        margin-top: 0;
+        padding: 0;
+      }
     }
 
     .btn {
       display: inline-block;
       width: 180px;
-
-      &:first-child {
-        margin-right: 15px;
-      }
+      margin: 20px 8px 0;
     }
 
     .social {
-      margin-top: 30px;
-      
+      margin: 20px 0;
+
       a {
         margin: 0 5px;
       }
@@ -112,20 +119,11 @@
     .sub {
       h2,
       p {
-        margin-top: 15px;
         font-size: 14px;
       }
 
-      p {
-        margin-bottom: 15px;
-      }
-
       .btn {
-        width: 130px;
-      }
-
-      .social {
-        margin-top: 15px;
+        width: 150px;
       }
     }
   }
