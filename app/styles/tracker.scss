@@ -418,12 +418,16 @@ header {
 
   h2 {
     margin: 0;
-    font-size: 17px;
+    font-size: 15px;
     font-family: $font-secondary;
     font-weight: 400;
 
     span.fc-missing {
-      color: $gray-light;
+      color: $gray-medium;
+    }
+
+    b {
+      font-weight: 500;
     }
   }
 }
