@@ -17,3 +17,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [TheRandor69](https://pokedextracker.com/u/TheRandor69)
 - [Elmo](https://pokedextracker.com/u/Elmo)
 - [slester](https://pokedextracker.com/u/slester)
+- [bearzo124](https://pokedextracker.com/u/bearzo124)
