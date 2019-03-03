@@ -18,3 +18,8 @@ This will be where we add the names for all of the users who've donated any amou
 - [Elmo](https://pokedextracker.com/u/Elmo)
 - [slester](https://pokedextracker.com/u/slester)
 - [bearzo124](https://pokedextracker.com/u/bearzo124)
+- [NickMiller150](https://pokedextracker.com/u/NickMiller150)
+- [PsyMar](https://pokedextracker.com/u/PsyMar)
+- [brendangalvin](https://pokedextracker.com/u/brendangalvin)
+- [doeiqts](https://pokedextracker.com/u/doeiqts)
+
