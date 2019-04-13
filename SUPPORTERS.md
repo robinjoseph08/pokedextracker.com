@@ -22,4 +22,5 @@ This will be where we add the names for all of the users who've donated any amou
 - [PsyMar](https://pokedextracker.com/u/PsyMar)
 - [brendangalvin](https://pokedextracker.com/u/brendangalvin)
 - [doeiqts](https://pokedextracker.com/u/doeiqts)
-
+- [Jay](https://pokedextracker.com/u/Jay)
+- [tylertrbo21](https://pokedextracker.com/u/tylertrbo21)
