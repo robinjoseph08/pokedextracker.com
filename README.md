@@ -58,3 +58,18 @@ Every merge into the `master` branch on GitHub triggers a new build for a Docker
 ```sh
 $ docker run --rm --publish 3000:4939 --name pokedextracker pokedextracker/pokedextracker.com:latest
 ```
+
+## Deployments
+
+>Note: you need the necessary permissions to be able to deploy.
+
+The [deploy script](script/deploy.sh) uses [Helm](https://helm.sh/) and the
+[`web-app` Helm
+chart](https://github.com/pokedextracker/charts/tree/master/src/web-app) to
+create a new release in the PokedexTracker Kubernetes cluster. Pass in the
+newly created Docker tag to deploy that version to the cluster.
+
+```sh
+$ yarn deploy:staging 123abcd
+$ yarn deploy:production 123abcd
+```
