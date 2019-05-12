@@ -41,10 +41,12 @@ export class Profile extends Component {
     checkVersion();
     setCurrentUser(username);
     setShowShare(false);
-    listGames();
 
-    retrieveUser(username)
-    .then((user) => {
+    Promise.all([
+      retrieveUser(username),
+      listGames()
+    ])
+    .then(([user]) => {
       setUser(user);
       this.setState({ ...this.state, loading: false });
     })
