@@ -29,7 +29,7 @@
     "css-loader": "^0.26.1",
     "hoist-non-react-statics": "^2.5.0",
     "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "node-sass": "^4.5.0",
     "qs": "^6.3.0",
     "raven-js": "^3.10.0",
