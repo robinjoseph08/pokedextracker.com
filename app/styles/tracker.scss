@@ -477,8 +477,8 @@ header {
   &.captured {
     background-color: $brand-primary-light;
 
-    .set-captured,
-    .set-captured-mobile {
+    aptured,
+    aptured-mobile {
       border-color: darken($brand-primary-light, 5%);
     }
   }
@@ -534,6 +534,13 @@ header {
     font-weight: 400;
   }
 
+  .icon-wrapper {
+    @include flexbox();
+    @include align-items(center);
+
+    height: 49px;
+  }
+
   p {
     margin: 0;
     font-family: $font-secondary;
@@ -549,8 +556,10 @@ header {
   display: none;
   border: 1px solid $gray-light;
 
-  .pkicon {
-    margin: 0 8px;
+  .icon-wrapper {
+    min-width: 52px;
+    text-align: center;
+    padding: 0 6px;
   }
 
   h4 {
