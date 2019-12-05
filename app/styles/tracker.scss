@@ -477,8 +477,8 @@ header {
   &.captured {
     background-color: $brand-primary-light;
 
-    aptured,
-    aptured-mobile {
+    .set-captured,
+    .set-captured-mobile {
       border-color: darken($brand-primary-light, 5%);
     }
   }
