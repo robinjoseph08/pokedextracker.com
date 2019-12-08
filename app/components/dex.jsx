@@ -20,7 +20,7 @@ export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
   const total = captures.length;
 
   if (query.length === 0) {
-    const boxes = groupBoxes(captures, dex);
+    const boxes = groupBoxes(captures);
     BOX_COMPONENTS[dex.id] = boxes.map((box, i) => {
       if (i > DEFER_CUTOFF) {
         return <DeferredBoxComponent key={box[0].pokemon.id} captures={box} />;

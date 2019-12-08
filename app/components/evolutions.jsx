@@ -1,8 +1,14 @@
+import uniqBy from 'lodash/uniqBy';
+
 import { capitalize } from '../utils/formatting';
 
+function evolutionKey (evolution) {
+  return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
+}
+
 export function EvolutionsComponent ({ evolutions }) {
-  const elements = evolutions.map((evolution) => {
-    const key = `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
+  const elements = uniqBy(evolutions, evolutionKey).map((evolution) => {
+    const key = evolutionKey(evolution);
     let trigger = null;
     let notes = null;
 
@@ -15,6 +21,8 @@ export function EvolutionsComponent ({ evolutions }) {
         break;
       case 'candy':
         trigger = <span>{evolution.candy_count} Candies </span>;
+        break;
+      case 'other':
         break;
       default:
         trigger = <span>{capitalize(evolution.trigger)} </span>;
