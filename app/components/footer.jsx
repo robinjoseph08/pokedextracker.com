@@ -9,7 +9,7 @@ export function FooterComponent () {
       <i className="fa fa-circle" />
       <a href="https://github.com/pokedextracker" className="link" target="_blank" rel="noopener noreferrer">Github</a>
       <i className="fa fa-circle" />
-      <a href="https://www.patreon.com/pokedextracker" className="link" target="_blank" rel="noopener noreferrer">Donate</a>
+      <a href="https://www.patreon.com/pokedextracker" className="link" target="_blank" rel="noopener noreferrer">Patreon</a>
     </footer>
   );
 }

@@ -1,6 +1,6 @@
 # Supporters
 
-This will be where we add the names for all of the users who've donated any amount to supporting this project. We can't thank them enough for their contribution. If you want to be added to this list, you visit our [Patreon](https://www.patreon.com/pokedextracker). Let us know your username on and then we can add you here! Thanks again!
+This will be where we add the names for all of the users who've donated any amount to supporting this project. We can't thank them enough for their contribution. If you want to be added to this list, donate via our [Patreon](https://www.patreon.com/pokedextracker). Afterwards, let us know your username and we can add you to this list! Thanks again!
 
 - [ITmaester](https://pokedextracker.com/u/ITmaester)
 - [Dark_Weavile](https://pokedextracker.com/u/Dark_Weavile)
