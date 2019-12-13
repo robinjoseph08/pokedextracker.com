@@ -27,3 +27,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [pkmncast](https://pokedextracker.com/u/pkmncast)
 - [Kaosu](https://pokedextracker.com/u/Kaosu)
 - [poussifeu](https://pokedextracker.com/u/poussifeu)
+- [themize](https://pokedextracker.com/u/themize)
