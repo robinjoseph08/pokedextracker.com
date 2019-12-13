@@ -56,7 +56,7 @@ export class Nav extends Component {
       return (
         <nav>
           <Link to="/">Pokédex Tracker</Link>
-          <Link to="/donate">Donate</Link>
+          <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Donate</a>
           <div className="dropdown">
             <a href="#">{session.username} <i className="fa fa-caret-down" /></a>
             <ul>
@@ -75,7 +75,7 @@ export class Nav extends Component {
     return (
       <nav>
         <Link to="/">Pokédex Tracker</Link>
-        <Link to="/donate">Donate</Link>
+        <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Donate</a>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
       </nav>
