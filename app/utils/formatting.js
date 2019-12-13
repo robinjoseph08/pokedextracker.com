@@ -9,17 +9,6 @@ export function decimal (number, precision) {
   return number.toFixed(precision);
 }
 
-export function dollar (amount) {
-  const str = `${amount}`;
-  const number = parseFloat(str.replace(/[^\d\.]/g, ''));
-
-  if (isNaN(number)) {
-    return '$';
-  }
-
-  return `$${decimal(number, 2)}`;
-}
-
 export function friendCode3DS (code) {
   return code && code.replace(FRIEND_CODE_3DS_REGEX, '$1-');
 }

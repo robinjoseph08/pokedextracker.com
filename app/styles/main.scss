@@ -27,7 +27,6 @@ body {
   .register-container,
   .login-container,
   .account-container,
-  .donate-container,
   .profile-container {
     @include flex(1 1 auto);
     @include flexbox();
@@ -296,11 +295,6 @@ nav {
   h1 {
     color: $brand-secondary;
     margin-bottom: 17px;
-
-    .emoji {
-      height: 24px;
-      margin-left: 3px;
-    }
   }
 
   .form-column {
@@ -345,11 +339,6 @@ form {
     margin: 20px 0 0;
     text-align: center;
     font-size: 14px;
-
-    .fa {
-      font-size: 10px;
-      margin-right: 3px;
-    }
   }
 
   .btn:not(.btn-inline) {
@@ -358,19 +347,6 @@ form {
     &.form-confirm {
       margin-top: 0;
     }
-  }
-
-  .form-intro {
-    margin: 0 auto 30px;
-    max-width: 400px;
-
-    p:first-child {
-      margin-top: 0;
-    }
-  }
-
-  #amount {
-    margin-top: 15px;
   }
 }
 
@@ -416,20 +392,6 @@ select {
     &[type="password"] {
       letter-spacing: 2px;
     }
-
-    &.StripeElement {
-      padding-top: 11px;
-    }
-
-    &.StripeElement--focus {
-      border-color: $brand-secondary-dark;
-    }
-  }
-
-  textarea.form-control {
-    height: 120px;
-    padding: 10px;
-    resize: vertical;
   }
 
   .radio {
@@ -520,16 +482,6 @@ select {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-}
-
-.form-group-flex {
-  @include flexbox();
-  @include justify-content(space-between);
-
-  > div {
-    position: relative;
-    width: 47%;
   }
 }
 

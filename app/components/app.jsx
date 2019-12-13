@@ -2,7 +2,6 @@ import { Router, Route, browserHistory } from 'react-router';
 import { syncHistoryWithStore }          from 'react-router-redux';
 
 import { AccountComponent }  from './account';
-import { DonateComponent }   from './donate';
 import { HomeComponent }     from './home';
 import { LoginComponent }    from './login';
 import { NotFoundComponent } from './not-found';
@@ -23,7 +22,6 @@ export function AppComponent () {
       <Route path='/account' component={AccountComponent} />
       <Route path='/u/:username' component={ProfileComponent} />
       <Route path='/u/:username/:slug' component={TrackerComponent} />
-      <Route path='/donate' component={DonateComponent} />
       <Route path='*' component={NotFoundComponent} />
     </Router>
   );
