@@ -28,3 +28,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [Kaosu](https://pokedextracker.com/u/Kaosu)
 - [poussifeu](https://pokedextracker.com/u/poussifeu)
 - [themize](https://pokedextracker.com/u/themize)
+- [virtualdom](https://pokedextracker.com/u/virtualdom)
