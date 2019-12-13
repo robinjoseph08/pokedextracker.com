@@ -6,7 +6,7 @@ function evolutionKey (evolution) {
   return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
 }
 
-export function EvolutionsComponent ({ evolutions, pokemon }) {
+export function EvolutionsComponent ({ evolutions, pokemonId }) {
   const elements = uniqBy(evolutions, evolutionKey).map((evolution) => {
     const key = evolutionKey(evolution);
     let trigger = null;
@@ -55,6 +55,6 @@ export function EvolutionsComponent ({ evolutions, pokemon }) {
 
   return (
     // styling hack for mr.rime
-    <div className={`evolution-trigger-column ${pokemon === 866 ? 'push' : ''}`}>{elements}</div>
+    <div className={`evolution-trigger-column ${pokemonId === 866 ? 'push' : ''}`}>{elements}</div>
   );
 }

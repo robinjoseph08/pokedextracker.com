@@ -39,7 +39,7 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
       </div>
       {family.evolutions.length > 0 ? <EvolutionsComponent evolutions={family.evolutions[0]} /> : null}
       {column1}
-      {family.evolutions.length > 1 ? <EvolutionsComponent evolutions={family.evolutions[1]} pokemon={family.pokemon[2][0].national_id} /> : null}
+      {family.evolutions.length > 1 ? <EvolutionsComponent evolutions={family.evolutions[1]} pokemonId={family.pokemon[2][0].national_id} /> : null}
       {column2}
     </div>
   );
