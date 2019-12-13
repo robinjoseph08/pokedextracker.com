@@ -133,6 +133,10 @@
       @include flexbox();
       @include flex-direction(column);
       @include justify-content(space-around);
+
+      &.push {
+        @include justify-content(flex-end);
+      }
     }
 
     .evolution-pokemon-column {

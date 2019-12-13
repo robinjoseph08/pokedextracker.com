@@ -37,7 +37,13 @@ export class Info extends Component {
 
   render () {
     const { dex, pokemon, showInfo } = this.props;
-    const serebiiPath = dex.game.game_family.generation === 6 ? 'pokedex-xy' : 'pokedex-sm';
+
+    let serebiiPath = 'pokedex-swsh';
+    if (dex.game.game_family.generation === 6) {
+      serebiiPath = 'pokedex-xy';
+    } else if (dex.game.game_family.generation === 7) {
+      serebiiPath = 'pokedex-sm';
+    }
 
     if (!pokemon) {
       return (
