@@ -30,3 +30,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [themize](https://pokedextracker.com/u/themize)
 - [virtualdom](https://pokedextracker.com/u/virtualdom)
 - [mrnorr](https://pokedextracker.com/u/mrnorr)
+- [GenreShinobi](https://pokedextracker.com/u/GenreShinobi)
