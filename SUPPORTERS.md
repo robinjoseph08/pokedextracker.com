@@ -32,3 +32,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [mrnorr](https://pokedextracker.com/u/mrnorr)
 - [GenreShinobi](https://pokedextracker.com/u/GenreShinobi)
 - [Metalhead324](https://pokedextracker.com/u/Metalhead324)
+- [Romh](https://pokedextracker.com/u/Romh)
