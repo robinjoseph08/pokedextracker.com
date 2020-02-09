@@ -15,12 +15,12 @@ export function tokenToUser (token) {
 }
 
 export function loadState () {
-  const notif20191212 = localStorage.getItem('notif-2019.12.12') === 'true' || undefined;
+  const notif20200209 = localStorage.getItem('notif-2020.02.09') === 'true' || undefined;
   const token = localStorage.getItem('token');
   const session = tokenToUser(token);
   const showInfo = localStorage.getItem('showInfo') === 'true' || undefined;
 
-  return { notification: notif20191212, token, session, showInfo };
+  return { notification: notif20200209, token, session, showInfo };
 }
 
 export function saveState ({ notification, showInfo, token }) {
@@ -30,6 +30,6 @@ export function saveState ({ notification, showInfo, token }) {
     localStorage.removeItem('token');
   }
 
-  localStorage.setItem('notif-2019.12.12', notification);
+  localStorage.setItem('notif-2020.02.09', notification);
   localStorage.setItem('showInfo', showInfo);
 }

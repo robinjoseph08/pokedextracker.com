@@ -10,7 +10,7 @@ export function Notification ({ notification, setNotification }) {
   return (
     <div className="alert alert-muted">
       <i className="fa fa-times" onClick={() => setNotification(true)} />
-      <p>Sword and Shield support is here! <a href="http://bit.ly/pt-swsh" target="_blank" rel="noopener noreferrer">Read more</a>.</p>
+      <p>Track a National Generation 8 dex now! <a href="http://bit.ly/pt-gen8" target="_blank" rel="noopener noreferrer">Read more</a>.</p>
     </div>
   );
 }
