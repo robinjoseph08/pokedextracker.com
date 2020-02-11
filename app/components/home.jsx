@@ -43,7 +43,7 @@ export class Home extends Component {
             <div className="sub">
               <h2>A tool for tracking your Living Dex progress! We currently support:</h2>
               <ul>
-                <li><h2><Link className="link" alt="Sample Generation 8 National Living Dex" to="/u/ashketchum10/sword-national-living-dex">Generation 8 National Dex</Link> (and Generations 7 + 6)</h2></li>
+                <li><h2><Link className="link" alt="Sample Generation 8 National Living Dex" to="/u/ashketchum10/sword-national-living-dex">Generation 8 National Dex</Link> (and Generations 6 + 7)</h2></li>
                 <li><h2><Link className="link" alt="Sample Shield Regional Living Dex" to="/u/ashketchum10/sword-regional-living-dex">Pokémon Sword &amp; Shield Regional Dex</Link></h2></li>
                 <li><h2><Link className="link" alt="Sample Let's Go, Pikachu Regional Living Dex" to="/u/ashketchum10/lets-go-pikachu-regional-living-dex">Pokémon Let's Go, Pikachu &amp; Let's Go, Eevee Regional Dex</Link></h2></li>
                 <li><h2><Link className="link" alt="Sample Ultra Sun Regional Living Dex" to="/u/ashketchum10/ultra-sun-regional-living-dex">Pokémon Ultra Sun &amp; Ultra Moon Regional Dex</Link></h2></li>
