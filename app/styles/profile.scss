@@ -85,6 +85,7 @@
   position: absolute;
   top: 10px;
   right: 12px;
+  z-index: 1;
 
   a:first-child {
     color: $error;

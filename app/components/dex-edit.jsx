@@ -151,7 +151,7 @@ export class DexEdit extends Component {
           {dexDelete}
         </div>
         <div className="form" ref={(c) => this._form = c}>
-          <h1>Edit a Dex</h1>
+          <h1>{this.state.confirmingDelete}</h1>
           <form onSubmit={this.updateDex} className="form-column">
             <AlertComponent message={error} type="error" />
             <div className="form-group">
