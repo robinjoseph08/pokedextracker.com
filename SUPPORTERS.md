@@ -36,3 +36,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [Nindira](https://pokedextracker.com/u/Nindira)
 - [CCBat](https://pokedextracker.com/u/CCBat)
 - [Librarianista](https://pokedextracker.com/u/Librarianista)
+- [Gossymer9](https://pokedextracker.com/u/Gossymer9)
