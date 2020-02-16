@@ -14,6 +14,7 @@ import { session }        from './session';
 import { showInfo }       from './show-info';
 import { showScroll }     from './show-scroll';
 import { showShare }      from './show-share';
+import { nightMode }      from './night-mode';
 import { token }          from './token';
 import { users }          from './users';
 
@@ -23,6 +24,7 @@ export const reducer = combineReducers({
   currentUser,
   games,
   gamesById,
+  nightMode,
   notification,
   pokemon,
   query,

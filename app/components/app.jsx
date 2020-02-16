@@ -21,6 +21,7 @@ logPageView();
 export function App () {
   const dispatch = useDispatch();
 
+  const nightMode = useSelector(({ nightMode }) => nightMode);
   const session = useSelector(({ session }) => session);
 
   useEffect(() => {
@@ -34,15 +35,17 @@ export function App () {
 
   return (
     <Router history={history}>
-      <Switch>
-        <Route component={Home} exact path="/" />
-        <Route component={Login} exact path="/login" />
-        <Route component={Register} exact path="/register" />
-        <Route component={Account} exact path="/account" />
-        <Route component={Profile} exact path="/u/:username" />
-        <Route component={Tracker} exact path="/u/:username/:slug" />
-        <Route component={NotFound} path="/" />
-      </Switch>
+      <div className={`root ${nightMode ? 'night-mode' : ''}`}>
+        <Switch>
+          <Route component={Home} exact path="/" />
+          <Route component={Login} exact path="/login" />
+          <Route component={Register} exact path="/register" />
+          <Route component={Account} exact path="/account" />
+          <Route component={Profile} exact path="/u/:username" />
+          <Route component={Tracker} exact path="/u/:username/:slug" />
+          <Route component={NotFound} path="/" />
+        </Switch>
+      </div>
     </Router>
   );
 }
