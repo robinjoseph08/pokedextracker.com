@@ -350,7 +350,7 @@ form {
   }
 }
 
-.form-control,
+.form-control:not([type='checkbox']),
 select {
   width: 100%;
   -webkit-appearance: none;
@@ -383,7 +383,7 @@ select {
     letter-spacing: 1px;
   }
 
-  .form-control,
+  .form-control:not([type='checkbox']),
   select {
     height: 43px;
     padding: 0 32px 0 10px;

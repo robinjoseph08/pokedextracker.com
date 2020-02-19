@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect }   from 'react-redux';
 
 import { ReactGA }  from '../utils/analytics';
-import { setQuery } from '../actions/search';
+import { setQuery, toggleFilterCompleted } from '../actions/search';
 
 export class SearchBar extends Component {
 
@@ -28,7 +28,7 @@ export class SearchBar extends Component {
   }
 
   render () {
-    const { query, setQuery } = this.props;
+    const { query, setQuery, filterCompleted, toggleFilterCompleted } = this.props;
 
     if (this._search) {
       this._search.value = query;
@@ -42,6 +42,10 @@ export class SearchBar extends Component {
             <input className="form-control" ref={(c) => this._search = c} name="search" id="search" type="text" placeholder="Search by Pokémon name (press / to quick search)" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onChange={(e) => setQuery(e.target.value)} />
             {query.length > 0 ? <a onClick={this.onClick}><i className="fa fa-times" /></a> : null}
           </div>
+          <div className="form-group">
+            <input className="form-control" name="filter-completed" id="filter-completed" type="checkbox" onChange={(e) => toggleFilterCompleted()} checked={filterCompleted} />
+            Hide Completed
+          </div>
         </div>
       </div>
     );
@@ -49,13 +53,14 @@ export class SearchBar extends Component {
 
 }
 
-function mapStateToProps ({ query }) {
+function mapStateToProps ({ query, filterCompleted }) {
   return { query };
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    setQuery: (query) => dispatch(setQuery(query))
+    setQuery: (query) => dispatch(setQuery(query)),
+    toggleFilterCompleted: (query) => dispatch(toggleFilterCompleted(query))
   };
 }
 
