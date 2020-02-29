@@ -38,3 +38,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [Librarianista](https://pokedextracker.com/u/Librarianista)
 - [Gossymer9](https://pokedextracker.com/u/Gossymer9)
 - [jarle](https://pokedextracker.com/u/jarle)
+- [Pikachucrusher26](https://pokedextracker.com/u/Pikachucrusher26)
