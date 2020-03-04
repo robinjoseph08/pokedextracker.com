@@ -1,5 +1,7 @@
-import PropTypes from 'prop-types';
-import uniqBy    from 'lodash/uniqBy';
+import PropTypes                                                 from 'prop-types';
+import uniqBy                                                    from 'lodash/uniqBy';
+import { FontAwesomeIcon }                                       from '@fortawesome/react-fontawesome';
+import { faLongArrowAltLeft, faLongArrowAltRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { capitalize } from '../utils/formatting';
 
@@ -35,7 +37,7 @@ export function Evolutions ({ evolutions, pokemonId }) {
       } else {
         notes = (
           <div className="tooltip">
-            <i className="fa fa-plus-circle" />
+            <FontAwesomeIcon icon={faPlusCircle} />
             <span className="tooltip-text">{evolution.notes}</span>
           </div>
         );
@@ -44,7 +46,7 @@ export function Evolutions ({ evolutions, pokemonId }) {
 
     return (
       <div className="evolution-trigger" key={key}>
-        <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`} />
+        <FontAwesomeIcon icon={evolution.trigger === 'breed' ? faLongArrowAltLeft : faLongArrowAltRight} />
         <div>
           {trigger}
           {evolution.held_item ? <span>holding {capitalize(evolution.held_item)} </span> : null}

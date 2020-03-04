@@ -1,5 +1,7 @@
 import PropTypes                    from 'prop-types';
 import classNames                   from 'classnames';
+import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
+import { faInfo }                   from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactGA }                        from '../utils/analytics';
@@ -58,7 +60,7 @@ export function Pokemon ({ capture }) {
   return (
     <div className={classNames(classes)}>
       <div className="set-captured" onClick={handleSetCapturedClick}>
-        <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
+        <h4>{htmlName(capture.pokemon.name)}</h4>
         <div className="icon-wrapper">
           <i className={iconClass(capture.pokemon, dex)} />
         </div>
@@ -68,11 +70,11 @@ export function Pokemon ({ capture }) {
         <div className="icon-wrapper">
           <i className={iconClass(capture.pokemon, dex)} />
         </div>
-        <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
+        <h4>{htmlName(capture.pokemon.name)}</h4>
         <p>#{padding(capture.pokemon.national_id, 3)}</p>
       </div>
       <div className="set-info" onClick={handleSetInfoClick}>
-        <i className="fa fa-info" />
+        <FontAwesomeIcon icon={faInfo} />
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
+import { faSearch, faTimes }        from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef }        from 'react';
 
@@ -39,7 +41,7 @@ export function SearchBar () {
     <div className="dex-search-bar">
       <div className="wrapper">
         <div className="form-group">
-          <i className="fa fa-search" />
+          <FontAwesomeIcon icon={faSearch} />
           <input
             autoCapitalize="off"
             autoComplete="off"
@@ -55,8 +57,8 @@ export function SearchBar () {
             value={query}
           />
           {query.length > 0 ?
-            <a onClick={handleClearClick}>
-              <i className="fa fa-times" />
+            <a className="clear-btn" onClick={handleClearClick}>
+              <FontAwesomeIcon icon={faTimes} />
             </a> :
             null
           }

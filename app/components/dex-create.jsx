@@ -1,9 +1,11 @@
-import Modal                        from 'react-modal';
-import PropTypes                    from 'prop-types';
-import slug                         from 'slug';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory }               from 'react-router';
-import { useRef, useState }         from 'react';
+import Modal                                              from 'react-modal';
+import PropTypes                                          from 'prop-types';
+import slug                                               from 'slug';
+import { FontAwesomeIcon }                                from '@fortawesome/react-fontawesome';
+import { faAsterisk, faChevronDown, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector }                       from 'react-redux';
+import { useHistory }                                     from 'react-router';
+import { useRef, useState }                               from 'react';
 
 import { Alert }     from './alert';
 import { ReactGA }   from '../utils/analytics';
@@ -103,7 +105,7 @@ export function DexCreate ({ isOpen, onRequestClose }) {
               type="text"
               value={title}
             />
-            <i className="fa fa-asterisk" />
+            <FontAwesomeIcon icon={faAsterisk} />
           </div>
           <div className="form-group">
             <label htmlFor="game">Game</label>
@@ -114,7 +116,7 @@ export function DexCreate ({ isOpen, onRequestClose }) {
             >
               {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
             </select>
-            <i className="fa fa-chevron-down" />
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
           <div className="form-group">
             <label htmlFor="regional">Regionality</label>
@@ -168,7 +170,7 @@ export function DexCreate ({ isOpen, onRequestClose }) {
               </label>
             </div>
           </div>
-          <button className="btn btn-blue" type="submit">Create <i className="fa fa-long-arrow-right" /></button>
+          <button className="btn btn-blue" type="submit">Create <FontAwesomeIcon icon={faLongArrowAltRight} /></button>
         </form>
       </div>
       <p><a className="link" onClick={handleRequestClose}>Go Back</a></p>

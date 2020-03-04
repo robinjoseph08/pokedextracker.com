@@ -1,5 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect }                from 'react';
+import { FontAwesomeIcon }                                from '@fortawesome/react-fontawesome';
+import { faCaretLeft, faCaretRight, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector }                       from 'react-redux';
+import { useEffect }                                      from 'react';
 
 import { EvolutionFamily }     from './evolution-family';
 import { InfoLocations }       from './info-locations';
@@ -42,7 +44,7 @@ export function Info () {
     return (
       <div className={`info ${showInfo ? '' : 'collapsed'}`}>
         <div className="info-collapse" onClick={handleInfoClick}>
-          <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`} />
+          <FontAwesomeIcon icon={showInfo ? faCaretRight : faCaretLeft} />
         </div>
 
         <div className="info-main" />
@@ -53,13 +55,13 @@ export function Info () {
   return (
     <div className={`info ${showInfo ? '' : 'collapsed'}`}>
       <div className="info-collapse" onClick={handleInfoClick}>
-        <i className={`fa ${showInfo ? 'fa-caret-right' : 'fa-caret-left'}`} />
+        <FontAwesomeIcon icon={showInfo ? faCaretRight : faCaretLeft} />
       </div>
 
       <div className="info-main">
         <div className="info-header">
           <i className={iconClass(pokemon, dex)} />
-          <h1 dangerouslySetInnerHTML={htmlName(pokemon.name)} />
+          <h1>{htmlName(pokemon.name)}</h1>
           <h2>#{padding(pokemon.national_id, 3)}</h2>
         </div>
 
@@ -74,7 +76,7 @@ export function Info () {
             rel="noopener noreferrer"
             target="_blank"
           >
-            Bulbapedia <i className="fa fa-long-arrow-right" />
+            Bulbapedia <FontAwesomeIcon icon={faLongArrowAltRight} />
           </a>
           <a
             href={`http://www.serebii.net/${serebiiPath}/${padding(pokemon.national_id, 3)}.shtml`}
@@ -82,7 +84,7 @@ export function Info () {
             rel="noopener noreferrer"
             target="_blank"
           >
-            Serebii <i className="fa fa-long-arrow-right" />
+            Serebii <FontAwesomeIcon icon={faLongArrowAltRight} />
           </a>
         </div>
       </div>

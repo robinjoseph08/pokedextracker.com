@@ -1,5 +1,7 @@
-import { Link }        from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link }            from 'react-router-dom';
+import { faPencilAlt }     from '@fortawesome/free-solid-svg-icons';
+import { useSelector }     from 'react-redux';
 
 import { ReactGA } from '../utils/analytics';
 
@@ -15,7 +17,7 @@ export function FriendCode () {
     const handleClick = () => ReactGA.event({ action: 'click edit friend code', category: 'User' });
 
     editAccountBtn = (
-      <Link onClick={handleClick} to="/account"><i className="fa fa-pencil" /></Link>
+      <Link onClick={handleClick} to="/account"><FontAwesomeIcon icon={faPencilAlt} /></Link>
     );
   }
 

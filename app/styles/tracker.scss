@@ -170,8 +170,9 @@
           margin-bottom: 0;
         }
 
-        > .fa {
+        > .svg-inline--fa {
           margin-bottom: 3px;
+          width: unset;
         }
 
         .tooltip {
@@ -221,7 +222,7 @@
         border-left: 1px solid darken($brand-secondary-dark, 3%);
       }
 
-      .fa {
+      .svg-inline--fa {
         @include transition(all .1s ease-out);
 
         font-size: 10px;
@@ -258,22 +259,31 @@
       position: absolute;
       bottom: 15px;
       left: 14px;
-      font-size: 13px;
+      font-size: 12px;
       color: $brand-secondary;
     }
 
-    .fa-times {
-      color: $gray-medium;
+    .clear-btn {
+      @include flexbox();
+
+      align-items: center;
+      cursor: pointer;
       height: 100%;
-      width: 30px;
+      justify-content: center;
+      position: absolute;
       right: 0;
-      bottom: 0;
-      padding-top: 16px;
-      text-align: center;
+      top: 0;
+      width: 30px;
+
+      .fa-times {
+        color: $gray-medium;
+        position: initial;
+      }
 
       &:hover {
-        cursor: pointer;
-        color: $gray-dark;
+        .fa-times {
+          color: $gray-dark;
+        }
       }
     }
   }
@@ -357,17 +367,16 @@ header {
     font-size: 16px;
     color: lighten(#000, 25%);
 
-    .fa {
+    .svg-inline--fa {
       position: relative;
-      padding: 5px 0 5px 5px;
+      margin-left: 5px;
       bottom: 4px;
+      font-size: 14px;
     }
 
-    .fa-pencil {
-      font-size: 14px;
-      padding: 3px;
-      margin-left: 2px;
+    .fa-pencil-alt {
       bottom: 1px;
+      font-size: 12px;
     }
 
     &:hover {
@@ -501,9 +510,11 @@ header {
         bottom: -1px;
 
         .fa-info {
-          padding: 5px 8px;
           border-color: darken($brand-secondary-dark, 5%);
           color: darken($brand-secondary-dark, 5%);
+          width: 22px;
+          height: 22px;
+          margin: 3px;
         }
       }
     }
@@ -579,6 +590,8 @@ header {
 }
 
 .set-info {
+  @include flexbox();
+
   opacity: 0;
   position: absolute;
   right: 0;
@@ -586,11 +599,14 @@ header {
   padding: 5px;
 
   .fa-info {
-    padding: 4px 7px;
     border-radius: 50%;
     border: 2px solid $brand-secondary-light;
     color: $brand-secondary-light;
-    font-size: 10px;
+    padding: 4px;
+    width: 21px;
+    height: 21px;
+    margin: 2px;
+    font-size: 14px;
   }
 }
 

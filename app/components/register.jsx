@@ -1,8 +1,10 @@
-import slug                         from 'slug';
-import { Link }                     from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState }      from 'react';
-import { useHistory }               from 'react-router';
+import slug                                                                 from 'slug';
+import { FontAwesomeIcon }                                                  from '@fortawesome/react-fontawesome';
+import { Link }                                                             from 'react-router-dom';
+import { faAsterisk, faChevronDown, faLongArrowAltRight, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector }                                         from 'react-redux';
+import { useEffect, useState }                                              from 'react';
+import { useHistory }                                                       from 'react-router';
 
 import { Alert }                                             from './alert';
 import { Footer }                                            from './footer';
@@ -137,7 +139,7 @@ export function Register () {
                   type="text"
                   value={username}
                 />
-                <i className="fa fa-asterisk" />
+                <FontAwesomeIcon icon={faAsterisk} />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -151,7 +153,7 @@ export function Register () {
                   type="password"
                   value={password}
                 />
-                <i className="fa fa-asterisk" />
+                <FontAwesomeIcon icon={faAsterisk} />
               </div>
               <div className="form-group">
                 <label htmlFor="password_confirm">Confirm Password</label>
@@ -165,7 +167,7 @@ export function Register () {
                   type="password"
                   value={passwordConfirm}
                 />
-                <i className="fa fa-asterisk" />
+                <FontAwesomeIcon icon={faAsterisk} />
               </div>
               <div className="form-group">
                 <label htmlFor="friend_code_3ds">3DS Friend Code</label>
@@ -197,7 +199,7 @@ export function Register () {
               <h2>
                 First Dex Info
                 <div className="tooltip">
-                  <i className="fa fa-question-circle" />
+                  <FontAwesomeIcon icon={faQuestionCircle} />
                   <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
                 </div>
               </h2>
@@ -214,7 +216,7 @@ export function Register () {
                   type="text"
                   value={title}
                 />
-                <i className="fa fa-asterisk" />
+                <FontAwesomeIcon icon={faAsterisk} />
               </div>
               <div className="form-group">
                 <label htmlFor="game">Game</label>
@@ -225,7 +227,7 @@ export function Register () {
                 >
                   {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
                 </select>
-                <i className="fa fa-chevron-down" />
+                <FontAwesomeIcon icon={faChevronDown} />
               </div>
               <div className="form-group">
                 <label htmlFor="regional">Regionality</label>
@@ -283,7 +285,7 @@ export function Register () {
           </div>
 
           <div className="form-column">
-            <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
+            <button className="btn btn-blue" type="submit">Let's go! <FontAwesomeIcon icon={faLongArrowAltRight} /></button>
             <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
           </div>
         </form>

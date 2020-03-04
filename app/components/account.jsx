@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState }      from 'react';
-import { useHistory }               from 'react-router';
+import { FontAwesomeIcon }                                           from '@fortawesome/react-fontawesome';
+import { faAsterisk, faChevronDown, faLongArrowAltRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector }                                  from 'react-redux';
+import { useEffect, useState }                                       from 'react';
+import { useHistory }                                                from 'react-router';
 
 import { Alert }                                             from './alert';
 import { Footer }                                            from './footer';
@@ -113,7 +115,7 @@ export function Account () {
                   type="password"
                   value={password}
                 />
-                <i className="fa fa-asterisk" />
+                <FontAwesomeIcon icon={faAsterisk} />
               </div>
               <div className="form-group">
                 <input
@@ -126,7 +128,7 @@ export function Account () {
                   type="password"
                   value={passwordConfirm}
                 />
-                <i className="fa fa-asterisk" />
+                <FontAwesomeIcon icon={faAsterisk} />
               </div>
             </div>
           }
@@ -159,11 +161,11 @@ export function Account () {
             <select className="form-control">
               <option>English</option>
             </select>
-            <i className="fa fa-chevron-down" />
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
           <button className="btn btn-blue" type="submit">
-            <span className={isLoading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right" /></span>
-            {isLoading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
+            <span className={isLoading ? 'hidden' : ''}>Save <FontAwesomeIcon icon={faLongArrowAltRight} /></span>
+            {isLoading ? <span className="spinner"><FontAwesomeIcon icon={faSpinner} spin /></span> : null}
           </button>
         </form>
       </div>

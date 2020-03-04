@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux';
+import { FontAwesomeIcon }     from '@fortawesome/react-fontawesome';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { useSelector }         from 'react-redux';
 
 export function Reload () {
   const reload = useSelector(({ reload }) => reload);
@@ -11,7 +13,7 @@ export function Reload () {
 
   return (
     <div className="reload">
-      <i className="fa fa-exclamation-circle" />
+      <FontAwesomeIcon icon={faExclamationCircle} />
       There's a new version of the app available &ndash; <a className="link" onClick={handleClick}>Refresh your browser</a> now!
     </div>
   );

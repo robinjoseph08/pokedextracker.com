@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types';
+import PropTypes                 from 'prop-types';
+import { FontAwesomeIcon }       from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 export function FormWarning ({ message }) {
   if (!message) {
@@ -8,7 +10,7 @@ export function FormWarning ({ message }) {
   return (
     <div className="form-warning">
       <div className="tooltip">
-        <i className="fa fa-exclamation-triangle" />
+        <FontAwesomeIcon icon={faExclamationTriangle} />
         <span className="tooltip-text">{message}</span>
       </div>
     </div>
