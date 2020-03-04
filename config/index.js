@@ -15,6 +15,6 @@ const ENVIRONMENTS = {
   'staging.pokedextracker.com': 'staging'
 };
 
-const environment = process.env.NODE_ENV || ENVIRONMENTS[window.location.hostname] || 'development';
+const environment = ENVIRONMENTS[window.location.hostname] || process.env.NODE_ENV || 'development';
 
 export const Config = CONFIG[environment];
