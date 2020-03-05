@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-fetch';
-
 export const SET_NOTIFICATION = 'SET_NOTIFICATION';
 export const SET_RELOAD       = 'SET_RELOAD';
 

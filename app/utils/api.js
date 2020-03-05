@@ -1,4 +1,3 @@
-import fetch         from 'isomorphic-fetch';
 import { stringify } from 'qs';
 
 import { Store } from '../stores';
