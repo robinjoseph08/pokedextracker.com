@@ -1,98 +1,73 @@
-import { Component } from 'react';
-import { Link }      from 'react-router-dom';
-import { connect }   from 'react-redux';
+import { Link }                     from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState }      from 'react';
 
 import { ReactGA }                  from '../utils/analytics';
 import { retrieveUser }             from '../actions/user';
 import { setSessionUser, setToken } from '../actions/session';
 
-export class Nav extends Component {
+export function NavComponent () {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { loading: false };
-  }
+  const session = useSelector(({ session }) => session);
+  const user = useSelector(({ sessionUser }) => sessionUser);
 
-  componentWillMount () {
-    this.reset();
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
-  reset (props) {
-    const { retrieveUser, session, setSessionUser } = props || this.props;
-
+  useEffect(() => {
     if (session) {
-      this.setState({ ...this.state, loading: true });
+      (async () => {
+        setIsLoading(true);
 
-      retrieveUser(session.username)
-      .then((user) => {
-        setSessionUser(user);
-        this.setState({ ...this.state, loading: false });
-      })
-      .catch(() => this.setState({ ...this.state, loading: false }));
+        try  {
+          const u = await dispatch(retrieveUser(session.username));
+          dispatch(setSessionUser(u));
+        } catch (err) {}
+
+        setIsLoading(false);
+      })();
     }
-  }
+  }, [session]);
 
-  signOut = () => {
-    const { clearToken } = this.props;
-
+  const handleSignOut = () => {
     ReactGA.event({ action: 'sign out', category: 'Session' });
+    dispatch(setToken(null));
+  };
 
-    clearToken();
+  if (isLoading) {
+    return (
+      <nav>
+        <Link to="/">Pokédex Tracker</Link>
+      </nav>
+    );
   }
 
-  render () {
-    const { session, user } = this.props;
-    const { loading } = this.state;
-
-    if (loading) {
-      return (
-        <nav>
-          <Link to="/">Pokédex Tracker</Link>
-        </nav>
-      );
-    }
-
-    if (session && user) {
-      return (
-        <nav>
-          <Link to="/">Pokédex Tracker</Link>
-          <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Patreon</a>
-          <div className="dropdown">
-            <a href="#">{session.username} <i className="fa fa-caret-down" /></a>
-            <ul>
-              <div className="dropdown-scroll">
-                {user.dexes.map((dex) => <li key={dex.id}><Link to={`/u/${session.username}/${dex.slug}`}><i className="fa fa-th" /> {dex.title}</Link></li>)}
-              </div>
-              <li><Link to={`/u/${session.username}`}><i className="fa fa-user" /> Profile</Link></li>
-              <li><Link to="/account"><i className="fa fa-cog" /> Account Settings</Link></li>
-              <li><a onClick={this.signOut}><i className="fa fa-sign-out" /> Sign Out</a></li>
-            </ul>
-          </div>
-        </nav>
-      );
-    }
-
+  if (session && user) {
     return (
       <nav>
         <Link to="/">Pokédex Tracker</Link>
         <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Patreon</a>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        <div className="dropdown">
+          <a href="#">{session.username} <i className="fa fa-caret-down" /></a>
+          <ul>
+            <div className="dropdown-scroll">
+              {user.dexes.map((dex) => <li key={dex.id}><Link to={`/u/${session.username}/${dex.slug}`}><i className="fa fa-th" /> {dex.title}</Link></li>)}
+            </div>
+            <li><Link to={`/u/${session.username}`}><i className="fa fa-user" /> Profile</Link></li>
+            <li><Link to="/account"><i className="fa fa-cog" /> Account Settings</Link></li>
+            <li><a onClick={handleSignOut}><i className="fa fa-sign-out" /> Sign Out</a></li>
+          </ul>
+        </div>
       </nav>
     );
   }
-}
 
-function mapStateToProps ({ session, sessionUser }) {
-  return { session, user: sessionUser };
+  return (
+    <nav>
+      <Link to="/">Pokédex Tracker</Link>
+      <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Patreon</a>
+      <Link to="/login">Login</Link>
+      <Link to="/register">Register</Link>
+    </nav>
+  );
 }
-
-function mapDispatchToProps (dispatch) {
-  return {
-    clearToken: () => dispatch(setToken(null)),
-    retrieveUser: (username) => dispatch(retrieveUser(username)),
-    setSessionUser: (user) => dispatch(setSessionUser(user))
-  };
-}
-
-export const NavComponent = connect(mapStateToProps, mapDispatchToProps)(Nav);
