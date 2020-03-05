@@ -15,8 +15,8 @@ export function NavComponent () {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (session) {
-      (async () => {
+    (async () => {
+      if (session) {
         setIsLoading(true);
 
         try  {
@@ -25,8 +25,8 @@ export function NavComponent () {
         } catch (err) {}
 
         setIsLoading(false);
-      })();
-    }
+      }
+    })();
   }, [session]);
 
   const handleSignOut = () => {
