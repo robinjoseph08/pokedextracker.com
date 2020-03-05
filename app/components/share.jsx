@@ -1,35 +1,35 @@
-import { Component } from 'react';
-import { connect }   from 'react-redux';
+import { useParams }   from 'react-router';
+import { useRef }      from 'react';
+import { useSelector } from 'react-redux';
 
 import { ReactGA } from '../utils/analytics';
 
-export class Share extends Component {
+export function ShareComponent ({ profile }) {
+  const { slug, username } = useParams();
 
-  handleClick = () => {
+  const inputRef = useRef(null);
+
+  const showShare = useSelector(({ showShare }) => showShare);
+
+  if (!showShare) {
+    return null;
+  }
+
+  const handleClick = () => {
     ReactGA.event({ action: 'select link', category: 'Share' });
+    inputRef.current.select();
+  };
 
-    this._share.select();
-  }
-
-  render () {
-    const { profile, showShare, slug, username } = this.props;
-
-    if (!showShare) {
-      return null;
-    }
-
-    return (
-      <div className="share" onClick={(e) => e.stopPropagation()}>
-        Share this {profile ? 'Profile' : 'Living Dex'}:
-        <input className="form-control" ref={(c) => this._share = c} value={`https://pokedextracker.com/u/${username}${profile ? '' : `/${slug}`}`} readOnly onClick={this.handleClick} />
-      </div>
-    );
-  }
-
+  return (
+    <div className="share" onClick={(e) => e.stopPropagation()}>
+      Share this {profile ? 'Profile' : 'Living Dex'}:
+      <input
+        className="form-control"
+        onClick={handleClick}
+        readOnly
+        ref={inputRef}
+        value={`https://pokedextracker.com/u/${username}${profile ? '' : `/${slug}`}`}
+      />
+    </div>
+  );
 }
-
-function mapStateToProps ({ currentDex, currentUser, showShare }) {
-  return { showShare, slug: currentDex, username: currentUser };
-}
-
-export const ShareComponent = connect(mapStateToProps)(Share);
