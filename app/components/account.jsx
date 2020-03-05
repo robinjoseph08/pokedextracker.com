@@ -71,7 +71,7 @@ export function AccountComponent () {
     window.scrollTo({ top: 0 });
   };
 
-  const toggleIsEditingPassword = () => setIsEditingPassword(!isEditingPassword);
+  const handleChangePasswordClick = () => setIsEditingPassword(!isEditingPassword);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handlePasswordConfirmChange = (e) => setPasswordConfirm(e.target.value);
   const handleFriendCode3dsChange = (e) => setFriendCode3ds(friendCode3dsFormatter(e.target.value));
@@ -90,7 +90,7 @@ export function AccountComponent () {
             <label htmlFor="password">Password</label>
             <button
               className="btn btn-inline btn-yellow"
-              onClick={toggleIsEditingPassword}
+              onClick={handleChangePasswordClick}
               type="button"
             >
               {isEditingPassword ? 'Cancel' : 'Change'}

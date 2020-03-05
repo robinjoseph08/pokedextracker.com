@@ -1,6 +1,5 @@
-import { Component } from 'react';
-import classNames    from 'classnames';
-import { connect }   from 'react-redux';
+import classNames                   from 'classnames';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactGA }                        from '../utils/analytics';
 import { createCaptures, deleteCaptures } from '../actions/capture';
@@ -9,99 +8,73 @@ import { padding }                        from '../utils/formatting';
 import { setCurrentPokemon }              from '../actions/pokemon';
 import { setShowInfo }                    from '../actions/tracker';
 
-export class Pokemon extends Component {
+export function PokemonComponent ({ capture }) {
+  const dispatch = useDispatch();
 
-  setCurrentPokemon = () => {
-    const { capture, setCurrentPokemon, setShowInfo } = this.props;
+  const currentDex = useSelector(({ currentDex }) => currentDex);
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+  const session = useSelector(({ session }) => session);
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
-    ReactGA.event({ action: 'show info', category: 'Pokemon', label: capture.pokemon.name });
-
-    setCurrentPokemon(capture.pokemon.id);
-    setShowInfo(true);
+  if (!capture) {
+    return (
+      <div className="pokemon empty">
+        <div className="set-captured" />
+        <div className="set-captured-mobile" />
+      </div>
+    );
   }
 
-  toggleCaptured = () => {
-    const { capture, createCaptures, currentDex, deleteCaptures, dex, session, user } = this.props;
-
+  const handleSetCapturedClick = async () => {
     if (!session || session.id !== user.id) {
       return;
     }
 
     const payload = { dex: dex.id, pokemon: [capture.pokemon.id] };
 
-    Promise.resolve()
-    .then(() => {
+    try {
       if (capture.captured) {
-        deleteCaptures({ payload, slug: currentDex, username: user.username });
+        await dispatch(deleteCaptures({ payload, slug: currentDex, username: user.username }));
+        ReactGA.event({ category: 'Pokemon', label: capture.pokemon.name, action: 'unmark' });
       } else {
-        createCaptures({ payload, slug: currentDex, username: user.username });
+        await dispatch(createCaptures({ payload, slug: currentDex, username: user.username }));
+        ReactGA.event({ category: 'Pokemon', label: capture.pokemon.name, action: 'mark' });
       }
-    })
-    .then(() => {
-      const event = { category: 'Pokemon', label: capture.pokemon.name };
-
-      if (capture.captured) {
-        ReactGA.event({ ...event, action: 'unmark' });
-      } else {
-        ReactGA.event({ ...event, action: 'mark' });
-      }
-    });
-  }
-
-  render () {
-    const { capture, dex, session, user } = this.props;
-
-    if (!capture) {
-      return (
-        <div className="pokemon empty">
-          <div className="set-captured" />
-          <div className="set-captured-mobile" />
-        </div>
-      );
-    }
-
-    const classes = {
-      pokemon: true,
-      viewing: !session || session.id !== user.id,
-      captured: capture.captured
-    };
-
-    return (
-      <div className={classNames(classes)}>
-        <div className="set-captured" onClick={this.toggleCaptured}>
-          <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
-          <div className="icon-wrapper">
-            <i className={iconClass(capture.pokemon, dex)} />
-          </div>
-          <p>#{padding(capture.pokemon.national_id, 3)}</p>
-        </div>
-        <div className="set-captured-mobile" onClick={this.toggleCaptured}>
-          <div className="icon-wrapper">
-            <i className={iconClass(capture.pokemon, dex)} />
-          </div>
-          <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
-          <p>#{padding(capture.pokemon.national_id, 3)}</p>
-        </div>
-        <div className="set-info" onClick={this.setCurrentPokemon}>
-          <i className="fa fa-info" />
-        </div>
-      </div>
-    );
-  }
-
-}
-
-function mapStateToProps ({ currentDex, currentUser, session, users }) {
-  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], session, user: users[currentUser] };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    createCaptures: (payload) => dispatch(createCaptures(payload)),
-    deleteCaptures: (payload) => dispatch(deleteCaptures(payload)),
-    setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
-    setShowInfo: (show) => dispatch(setShowInfo(show))
+    } catch (err) {}
   };
-}
 
-export const PokemonComponent = connect(mapStateToProps, mapDispatchToProps)(Pokemon);
+  const handleSetInfoClick = () => {
+    ReactGA.event({ action: 'show info', category: 'Pokemon', label: capture.pokemon.name });
+
+    dispatch(setCurrentPokemon(capture.pokemon.id));
+    dispatch(setShowInfo(true));
+  };
+
+  const classes = {
+    pokemon: true,
+    viewing: !session || session.id !== user.id,
+    captured: capture.captured
+  };
+
+  return (
+    <div className={classNames(classes)}>
+      <div className="set-captured" onClick={handleSetCapturedClick}>
+        <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
+        <div className="icon-wrapper">
+          <i className={iconClass(capture.pokemon, dex)} />
+        </div>
+        <p>#{padding(capture.pokemon.national_id, 3)}</p>
+      </div>
+      <div className="set-captured-mobile" onClick={handleSetCapturedClick}>
+        <div className="icon-wrapper">
+          <i className={iconClass(capture.pokemon, dex)} />
+        </div>
+        <h4 dangerouslySetInnerHTML={htmlName(capture.pokemon.name)} />
+        <p>#{padding(capture.pokemon.national_id, 3)}</p>
+      </div>
+      <div className="set-info" onClick={handleSetInfoClick}>
+        <i className="fa fa-info" />
+      </div>
+    </div>
+  );
+}
