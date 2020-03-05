@@ -1,6 +1,5 @@
-import DocumentTitle from 'react-document-title';
 import throttle      from 'lodash/throttle';
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import { connect }   from 'react-redux';
 
 import { DexComponent }                           from './dex';
@@ -92,12 +91,12 @@ export class Tracker extends Component {
     const { dex, params: { username } } = this.props;
     const { loading } = this.state;
 
+    useEffect(() => {
+      document.title = `${username}'s Living Dex | Pokédex Tracker`;
+    }, []);
+
     if (loading) {
-      return (
-        <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
-          <div className="loading">Loading...</div>
-        </DocumentTitle>
-      );
+      return <div className="loading">Loading...</div>;
     }
 
     if (!dex) {
@@ -105,22 +104,20 @@ export class Tracker extends Component {
     }
 
     return (
-      <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
-        <div className="tracker-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="tracker">
-            <div className="dex-wrapper">
-              <SearchBarComponent />
-              <div className="dex-column" ref={(c) => this._tracker = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
-                <DexComponent onScrollButtonClick={() => this._tracker ? this._tracker.scrollTop = 0 : null} />
-                <FooterComponent />
-              </div>
+      <div className="tracker-container">
+        <NavComponent />
+        <ReloadComponent />
+        <div className="tracker">
+          <div className="dex-wrapper">
+            <SearchBarComponent />
+            <div className="dex-column" ref={(c) => this._tracker = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
+              <DexComponent onScrollButtonClick={() => this._tracker ? this._tracker.scrollTop = 0 : null} />
+              <FooterComponent />
             </div>
-            <InfoComponent />
           </div>
+          <InfoComponent />
         </div>
-      </DocumentTitle>
+      </div>
     );
   }
 

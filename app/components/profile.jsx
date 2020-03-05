@@ -1,5 +1,4 @@
-import { Component } from 'react';
-import DocumentTitle from 'react-document-title';
+import { Component, useEffect } from 'react';
 import { connect }   from 'react-redux';
 
 import { DexCreateComponent }                    from './dex-create';
@@ -57,12 +56,12 @@ export class Profile extends Component {
     const { params: { username }, session, user } = this.props;
     const { loading, showCreateDex } = this.state;
 
+    useEffect(() => {
+      document.title = `${username}'s Profile | Pokédex Tracker`;
+    }, []);
+
     if (loading) {
-      return (
-        <DocumentTitle title={`${username}'s Profile | Pokédex Tracker`}>
-          <div className="loading">Loading...</div>
-        </DocumentTitle>
-      );
+      return <div className="loading">Loading...</div>;
     }
 
     if (!user) {
@@ -82,26 +81,24 @@ export class Profile extends Component {
     }
 
     return (
-      <DocumentTitle title={`${username}'s Profile | Pokédex Tracker`}>
-        <div className="profile-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="profile">
-            <div className="wrapper">
-              <header>
-                <NotificationComponent />
-                <HeaderComponent profile />
-                <FriendCodeComponent />
-              </header>
+      <div className="profile-container">
+        <NavComponent />
+        <ReloadComponent />
+        <div className="profile">
+          <div className="wrapper">
+            <header>
+              <NotificationComponent />
+              <HeaderComponent profile />
+              <FriendCodeComponent />
+            </header>
 
-              {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} reload={() => this.reset()} />)}
+            {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} reload={() => this.reset()} />)}
 
-              {createDexButton}
-            </div>
+            {createDexButton}
           </div>
-          <FooterComponent />
         </div>
-      </DocumentTitle>
+        <FooterComponent />
+      </div>
     );
   }
 
