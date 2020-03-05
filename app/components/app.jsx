@@ -18,12 +18,12 @@ export function AppComponent () {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path='/' component={HomeComponent} />
-        <Route path='/login' component={LoginComponent} />
-        <Route path='/register' component={RegisterComponent} />
-        <Route path='/account' component={AccountComponent} />
-        <Route path='/u/:username' component={ProfileComponent} />
-        <Route path='/u/:username/:slug' component={TrackerComponent} />
+        <Route path='/' exact component={HomeComponent} />
+        <Route path='/login' exact component={LoginComponent} />
+        <Route path='/register' exact component={RegisterComponent} />
+        <Route path='/account' exact component={AccountComponent} />
+        <Route path='/u/:username' exact component={ProfileComponent} />
+        <Route path='/u/:username/:slug' exact component={TrackerComponent} />
         <Route path='/' component={NotFoundComponent} />
       </Switch>
     </Router>
