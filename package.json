@@ -13,7 +13,7 @@
     "deploy:production": "./scripts/deploy.sh production",
     "deploy:staging": "./scripts/deploy.sh staging",
     "lint": "eslint -c .eslintrc --ext .js,.jsx app config",
-    "start": "webpack-dev-server --port 8080 --hot --inline --host 0.0.0.0"
+    "start": "webpack-dev-server --port 8080 --hot --inline"
   },
   "dependencies": {
     "@babel/core": "^7.8.6",
@@ -38,6 +38,7 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.2",
     "slug": "^2.1.1",

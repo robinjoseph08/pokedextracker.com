@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { MarkAllButtonComponent } from './mark-all-button';
 import { PokemonComponent }       from './pokemon';
@@ -7,7 +7,9 @@ import { padding }                from '../utils/formatting';
 
 export const BOX_SIZE = 30;
 
-export function Box ({ captures, dex }) {
+export function Box ({ captures }) {
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+
   const empties = Array.from({ length: BOX_SIZE - captures.length }).map((_, i) => i);
   const firstPokemon = captures[0].pokemon;
   const lastPokemon = captures[captures.length - 1].pokemon;
@@ -33,9 +35,5 @@ export function Box ({ captures, dex }) {
   );
 }
 
-function mapStateToProps ({ currentDex, currentUser, users }) {
-  return { dex: users[currentUser].dexesBySlug[currentDex] };
-}
-
-export const DeferredBoxComponent = deferComponentRender(connect(mapStateToProps)(Box));
-export const BoxComponent = connect(mapStateToProps)(Box);
+export const DeferredBoxComponent = deferComponentRender(Box);
+export const BoxComponent = Box;

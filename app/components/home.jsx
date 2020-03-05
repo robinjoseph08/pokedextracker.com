@@ -13,9 +13,9 @@ export class Home extends Component {
   render () {
     const { session } = this.props;
 
-    useEffect(() => {
-      document.title = 'Pokédex Tracker | Track the Progress of Your Living Dex Completion';
-    }, []);
+    // useEffect(() => {
+    //   document.title = 'Pokédex Tracker | Track the Progress of Your Living Dex Completion';
+    // }, []);
 
     let ctas = null;
 

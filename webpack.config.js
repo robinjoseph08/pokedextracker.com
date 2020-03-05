@@ -9,7 +9,7 @@ const PRODUCTION = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV ==
 const PLUGINS = [
   new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'undefined' }),
   new Webpack.ProvidePlugin({ React: 'react' }),
-  new HtmlWebpackPlugin({ template: './index.html', filename: 'index.html', inject: 'body' })
+  new HtmlWebpackPlugin({ template: './app/index.html', filename: 'index.html', inject: 'body' })
 ];
 
 if (PRODUCTION) {
@@ -17,8 +17,7 @@ if (PRODUCTION) {
 }
 
 module.exports = {
-  context: Path.join(__dirname, 'app'),
-  entry: './index.jsx',
+  entry: './app/index.jsx',
   output: {
     path: `${__dirname}/public`,
     filename: 'bundle.js',
@@ -30,7 +29,8 @@ module.exports = {
   devtool: PRODUCTION ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: 'public/',
-    historyApiFallback: true
+    historyApiFallback: true,
+    host: '0.0.0.0'
   },
   mode: PRODUCTION ? 'production' : 'development',
   module: {

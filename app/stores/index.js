@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools }          from 'redux-devtools-extension';
 import thunkMiddleware                           from 'redux-thunk';
 
 import { loadState, saveState } from '../utils/state';
@@ -6,8 +7,6 @@ import { reducer }              from '../reducers';
 
 const initialState = loadState();
 
-const composeEnhancers = process.env.NODE_ENV !== 'production' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-export const Store = createStore(reducer, initialState, composeEnhancers(applyMiddleware(thunkMiddleware)));
+export const Store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 Store.subscribe(() => saveState(Store.getState()));

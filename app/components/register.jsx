@@ -9,7 +9,7 @@ import { ReactGA }                         from '../utils/analytics';
 import { ReloadComponent }                 from './reload';
 import { checkVersion, setNotification }   from '../actions/utils';
 import { createUser }                      from '../actions/user';
-import { friendCode3DS, friendCodeSwitch } from '../utils/formatting';
+import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../utils/formatting';
 import { listGames }                       from '../actions/game';
 
 export class Register extends Component {
@@ -129,11 +129,11 @@ export class Register extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="friend_code_3ds">3DS Friend Code</label>
-                  <input className="form-control" ref={(c) => this._friend_code_3ds = c} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
+                  <input className="form-control" ref={(c) => this._friend_code_3ds = c} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3dsFormatter(e.target.value)} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="friend_code_switch">Switch Friend Code</label>
-                  <input className="form-control" ref={(c) => this._friend_code_switch = c} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
+                  <input className="form-control" ref={(c) => this._friend_code_switch = c} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitchFormatter(e.target.value)} />
                 </div>
               </div>
 
