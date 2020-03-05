@@ -1,5 +1,5 @@
 import { Component, useEffect } from 'react';
-import { Link }      from 'react-router';
+import { Link }      from 'react-router-dom';
 import { connect }   from 'react-redux';
 
 import { checkVersion } from '../actions/utils';

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { routerReducer }   from 'react-router-redux';
 
 import { currentDex }     from './current-dex';
 import { currentPokemon } from './current-pokemon';
@@ -28,7 +27,6 @@ export const reducer = combineReducers({
   pokemon,
   query,
   reload,
-  routing: routerReducer,
   sessionUser,
   session,
   showInfo,

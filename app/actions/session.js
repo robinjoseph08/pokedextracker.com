@@ -1,5 +1,3 @@
-import { push } from 'react-router-redux';
-
 import { API }    from '../utils/api';
 import { Config } from '../../config';
 

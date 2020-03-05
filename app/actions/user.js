@@ -1,4 +1,3 @@
-import { push } from 'react-router-redux';
 import slug     from 'slug';
 
 import { API }          from '../utils/api';

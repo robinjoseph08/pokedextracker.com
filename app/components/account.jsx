@@ -1,6 +1,5 @@
 import { Component, useEffect } from 'react';
 import { connect }   from 'react-redux';
-import { push }      from 'react-router-redux';
 
 import { AlertComponent }                  from './alert';
 import { FooterComponent }                 from './footer';
