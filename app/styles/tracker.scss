@@ -244,7 +244,6 @@
 
 .dex-search-bar {
   background-color: white;
-  border-bottom: 1px solid $gray-light;
   padding: 10px;
 
   .form-group {
@@ -275,6 +274,29 @@
         cursor: pointer;
         color: $gray-dark;
       }
+    }
+  }
+}
+
+.dex-search-filters {
+  border-bottom: 1px solid $gray-light;
+  padding-bottom: 10px;
+
+  .form-group {
+    margin-bottom: 0;
+
+    input {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 0;
+      vertical-align: middle;
+      padding-top: 1px;
+      padding-left: 5px;
+      white-space: nowrap;
     }
   }
 }

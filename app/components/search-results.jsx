@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import { connect }   from 'react-redux';
 
-import { PokemonComponent } from './pokemon';
-import { setQuery }         from '../actions/search';
+import { PokemonComponent }                from './pokemon';
+import { setQuery, SearchFilters }         from '../actions/search';
 
 export class SearchResults extends Component {
 
@@ -11,9 +11,13 @@ export class SearchResults extends Component {
   }
 
   render () {
-    const { captures, query } = this.props;
+    const { captures, query, filter } = this.props;
 
-    const filteredCaptures = captures.filter((capture) => capture.pokemon.name.toLowerCase().indexOf(query.toLowerCase()) === 0);
+    let filteredCaptures = captures.filter((capture) => capture.pokemon.name.toLowerCase().indexOf(query.toLowerCase()) === 0);
+
+    if (SearchFilters.SHOW_UNCAPTURED === filter) {
+      filteredCaptures = filteredCaptures.filter((capture) => !capture.captured);
+    }
 
     if (filteredCaptures.length === 0) {
       return (
@@ -32,8 +36,8 @@ export class SearchResults extends Component {
 
 }
 
-function mapStateToProps ({ query }) {
-  return { query };
+function mapStateToProps ({ query, filter }) {
+  return { query, filter };
 }
 
 function mapDispatchToProps (dispatch) {

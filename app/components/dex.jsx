@@ -15,7 +15,7 @@ import { groupBoxes }                         from '../utils/pokemon';
 const BOX_COMPONENTS = {};
 const DEFER_CUTOFF = 1;
 
-export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
+export function Dex ({ captures, dex, onScrollButtonClick, query, username, filter }) {
   const caught = captures.filter(({ captured }) => captured).length;
   const total = captures.length;
 
@@ -46,18 +46,19 @@ export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
         <div className="percentage">
           <ProgressComponent caught={caught} total={total} />
         </div>
-        {query.length > 0 ? <SearchResultsComponent captures={captures} /> : BOX_COMPONENTS[dex.id]}
+        {query.length > 0 || filter.length > 0 ? <SearchResultsComponent captures={captures} /> : BOX_COMPONENTS[dex.id]}
       </div>
     </div>
   );
 }
 
-function mapStateToProps ({ currentDex, currentUser, query, users }) {
+function mapStateToProps ({ currentDex, currentUser, query, users, filter }) {
   return {
     captures: users[currentUser].dexesBySlug[currentDex].captures,
     dex: users[currentUser].dexesBySlug[currentDex],
     query,
-    username: currentUser
+    username: currentUser,
+    filter
   };
 }
 

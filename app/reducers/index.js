@@ -4,6 +4,7 @@ import { routerReducer }   from 'react-router-redux';
 import { currentDex }     from './current-dex';
 import { currentPokemon } from './current-pokemon';
 import { currentUser }    from './current-user';
+import { filter }         from './filter';
 import { games }          from './games';
 import { gamesById }      from './games-by-id';
 import { notification }   from './notification';
@@ -22,6 +23,7 @@ export const reducer = combineReducers({
   currentDex,
   currentPokemon,
   currentUser,
+  filter,
   games,
   gamesById,
   notification,
