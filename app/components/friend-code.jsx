@@ -1,16 +1,21 @@
-import { Link }    from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Link }        from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { ReactGA } from '../utils/analytics';
 
-export function FriendCode ({ session, user }) {
+export function FriendCodeComponent () {
+  const session = useSelector(({ session }) => session);
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
+
   const ownPage = session && session.id === user.id;
 
   let editAccountBtn = null;
 
   if (ownPage) {
+    const handleClick = () => ReactGA.event({ action: 'click edit friend code', category: 'User' });
+
     editAccountBtn = (
-      <Link to="/account" onClick={() => ReactGA.event({ action: 'click edit friend code', category: 'User' })}><i className="fa fa-pencil" /></Link>
+      <Link to="/account" onClick={handleClick}><i className="fa fa-pencil" /></Link>
     );
   }
 
@@ -25,9 +30,3 @@ export function FriendCode ({ session, user }) {
     </div>
   );
 }
-
-function mapStateToProps ({ currentUser, session, users }) {
-  return { session, user: users[currentUser] };
-}
-
-export const FriendCodeComponent = connect(mapStateToProps)(FriendCode);
