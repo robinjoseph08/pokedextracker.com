@@ -3,11 +3,11 @@ import { Link }        from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState }    from 'react';
 
-import { DexEditComponent }      from './dex-edit';
-import { DexIndicatorComponent } from './dex-indicator';
-import { ProgressComponent }     from './progress';
+import { DexEdit }      from './dex-edit';
+import { DexIndicator } from './dex-indicator';
+import { Progress }     from './progress';
 
-export function DexPreviewComponent ({ dex, reload }) {
+export function DexPreview ({ dex, reload }) {
   const session = useSelector(({ session }) => session);
   const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
@@ -32,19 +32,19 @@ export function DexPreviewComponent ({ dex, reload }) {
         {ownPage &&
           <div className="dex-edit">
             <a className="link" onClick={handleEditClick}><i className="fa fa-pencil" /></a>
-            <DexEditComponent dex={dex} isOpen={showEditDex} onRequestClose={handleRequestClose} />
+            <DexEdit dex={dex} isOpen={showEditDex} onRequestClose={handleRequestClose} />
           </div>
         }
-        <DexIndicatorComponent dex={dex} />
+        <DexIndicator dex={dex} />
       </div>
       <div className="percentage">
-        <ProgressComponent caught={dex.caught} total={dex.total} />
+        <Progress caught={dex.caught} total={dex.total} />
       </div>
     </div>
   );
 }
 
-DexPreviewComponent.propTypes = {
+DexPreview.propTypes = {
   dex: PropTypes.object.isRequired,
   reload: PropTypes.func.isRequired
 };

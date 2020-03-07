@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export function DexIndicatorComponent ({ dex }) {
+export function DexIndicator ({ dex }) {
   return (
     <div className="dex-indicator">
       {dex.shiny && <i className="fa fa-star" title="shiny" />}
@@ -10,6 +10,6 @@ export function DexIndicatorComponent ({ dex }) {
   );
 }
 
-DexIndicatorComponent.propTypes = {
+DexIndicator.propTypes = {
   dex: PropTypes.object.isRequired
 };

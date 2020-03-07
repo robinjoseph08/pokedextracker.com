@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-export function ReloadComponent () {
+export function Reload () {
   const reload = useSelector(({ reload }) => reload);
 
   if (!reload) {

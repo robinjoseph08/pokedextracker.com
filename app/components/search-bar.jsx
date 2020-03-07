@@ -4,7 +4,7 @@ import { useEffect, useRef }        from 'react';
 import { ReactGA }  from '../utils/analytics';
 import { setQuery } from '../actions/search';
 
-export function SearchBarComponent () {
+export function SearchBar () {
   const dispatch = useDispatch();
 
   const inputRef = useRef(null);

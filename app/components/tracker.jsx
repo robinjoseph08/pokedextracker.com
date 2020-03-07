@@ -3,14 +3,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector }                 from 'react-redux';
 import { useParams }                                from 'react-router';
 
-import { DexComponent }                           from './dex';
-import { FooterComponent }                        from './footer';
-import { InfoComponent }                          from './info';
-import { NavComponent }                           from './nav';
-import { NotFoundComponent }                      from './not-found';
-import { ReloadComponent }                        from './reload';
+import { Dex }                                    from './dex';
+import { Footer }                                 from './footer';
+import { Info }                                   from './info';
+import { Nav }                                    from './nav';
+import { NotFound }                               from './not-found';
+import { Reload }                                 from './reload';
 import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './scroll';
-import { SearchBarComponent }                     from './search-bar';
+import { SearchBar }                              from './search-bar';
 import { checkVersion }                           from '../actions/utils';
 import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
 import { listCaptures }                           from '../actions/capture';
@@ -18,7 +18,7 @@ import { retrieveDex, setCurrentDex }             from '../actions/dex';
 import { retrieveUser, setUser }                  from '../actions/user';
 import { setShowScroll, setShowShare }            from '../actions/tracker';
 
-export function TrackerComponent () {
+export function Tracker () {
   const dispatch = useDispatch();
 
   const { slug, username } = useParams();
@@ -76,22 +76,22 @@ export function TrackerComponent () {
   }
 
   if (!dex) {
-    return <NotFoundComponent />;
+    return <NotFound />;
   }
 
   return (
     <div className="tracker-container">
-      <NavComponent />
-      <ReloadComponent />
+      <Nav />
+      <Reload />
       <div className="tracker">
         <div className="dex-wrapper">
-          <SearchBarComponent />
+          <SearchBar />
           <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
-            <DexComponent onScrollButtonClick={handleScrollButtonClick} />
-            <FooterComponent />
+            <Dex onScrollButtonClick={handleScrollButtonClick} />
+            <Footer />
           </div>
         </div>
-        <InfoComponent />
+        <Info />
       </div>
     </div>
   );

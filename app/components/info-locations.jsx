@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export function InfoLocationsComponent ({ locations }) {
+export function InfoLocations ({ locations }) {
   return (
     <div className="info-locations">
       {locations.map((location) => {
@@ -17,6 +17,6 @@ export function InfoLocationsComponent ({ locations }) {
   );
 }
 
-InfoLocationsComponent.propTypes = {
+InfoLocations.propTypes = {
   locations: PropTypes.arrayOf(PropTypes.object).isRequired
 };

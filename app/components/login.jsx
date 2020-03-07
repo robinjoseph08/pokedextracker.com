@@ -3,15 +3,15 @@ import { Link }                     from 'react-router-dom';
 import { useHistory }               from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AlertComponent }  from './alert';
-import { FooterComponent } from './footer';
-import { NavComponent }    from './nav';
-import { ReactGA }         from '../utils/analytics';
-import { ReloadComponent } from './reload';
-import { checkVersion }    from '../actions/utils';
-import { login }           from '../actions/session';
+import { Alert }        from './alert';
+import { Footer }       from './footer';
+import { Nav }          from './nav';
+import { ReactGA }      from '../utils/analytics';
+import { Reload }       from './reload';
+import { checkVersion } from '../actions/utils';
+import { login }        from '../actions/session';
 
-export function LoginComponent () {
+export function Login () {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -58,12 +58,12 @@ export function LoginComponent () {
 
   return (
     <div className="login-container">
-      <NavComponent />
-      <ReloadComponent />
+      <Nav />
+      <Reload />
       <div className="form">
         <h1>Login</h1>
         <form className="form-column" onSubmit={handleSubmit}>
-          <AlertComponent message={error} type="error" />
+          <Alert message={error} type="error" />
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -102,7 +102,7 @@ export function LoginComponent () {
           <p>Don't have an account yet? <Link className="link" to="/register">Register here</Link>!</p>
         </form>
       </div>
-      <FooterComponent />
+      <Footer />
     </div>
   );
 }

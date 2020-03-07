@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { ReactGA } from '../utils/analytics';
 
-export function FriendCodeComponent () {
+export function FriendCode () {
   const session = useSelector(({ session }) => session);
   const user = useSelector(({ currentUser, users }) => users[currentUser]);
 

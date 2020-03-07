@@ -4,17 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState }      from 'react';
 import { useHistory }               from 'react-router';
 
-import { AlertComponent }                                    from './alert';
-import { FooterComponent }                                   from './footer';
-import { NavComponent }                                      from './nav';
+import { Alert }                                             from './alert';
+import { Footer }                                            from './footer';
+import { Nav }                                               from './nav';
 import { ReactGA }                                           from '../utils/analytics';
-import { ReloadComponent }                                   from './reload';
+import { Reload }                                            from './reload';
 import { createUser }                                        from '../actions/user';
 import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../utils/formatting';
 import { listGames }                                         from '../actions/game';
 import { setNotification }                                   from '../actions/utils';
 
-export function RegisterComponent () {
+export function Register () {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -109,13 +109,13 @@ export function RegisterComponent () {
 
   return (
     <div className="register-container">
-      <NavComponent />
-      <ReloadComponent />
+      <Nav />
+      <Reload />
       <div className="form register">
         <h1>Register</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-column">
-            <AlertComponent message={error} type="error" />
+            <Alert message={error} type="error" />
           </div>
 
           <div className="form-row">
@@ -288,7 +288,7 @@ export function RegisterComponent () {
           </div>
         </form>
       </div>
-      <FooterComponent />
+      <Footer />
     </div>
   );
 }

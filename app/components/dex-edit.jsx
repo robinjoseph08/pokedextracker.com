@@ -4,8 +4,8 @@ import slug                                     from 'slug';
 import { useDispatch, useSelector }             from 'react-redux';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { AlertComponent }       from './alert';
-import { FormWarningComponent } from './form-warning';
+import { Alert }                from './alert';
+import { FormWarning }          from './form-warning';
 import { ReactGA }              from '../utils/analytics';
 import { deleteDex, updateDex } from '../actions/dex';
 
@@ -13,7 +13,7 @@ const GAME_WARNING = 'Any capture info specific to your old game will be lost.';
 const REGIONAL_WARNING = 'Any non-regional capture info will be lost.';
 const URL_WARNING = 'The old URL to your dex will not function anymore.';
 
-export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
+export function DexEdit ({ dex, isOpen, onRequestClose }) {
   const dispatch = useDispatch();
 
   const formRef = useRef(null);
@@ -152,11 +152,11 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
       <div className="form" ref={formRef}>
         <h1>Edit a Dex</h1>
         <form className="form-column" onSubmit={handleUpdateSubmit}>
-          <AlertComponent message={error} type="error" />
+          <Alert message={error} type="error" />
           <div className="form-group">
             <div className="form-note">/u/{session.username}/{slug(title || 'Living Dex', { lower: true })}</div>
             <label htmlFor="dex_title">Title</label>
-            <FormWarningComponent message={showUrlWarning && URL_WARNING} />
+            <FormWarning message={showUrlWarning && URL_WARNING} />
             <input
               className="form-control"
               id="dex_title"
@@ -171,7 +171,7 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
             <i className="fa fa-asterisk" />
           </div>
           <div className="form-group">
-            <FormWarningComponent message={showGameWarning && GAME_WARNING} />
+            <FormWarning message={showGameWarning && GAME_WARNING} />
             <label htmlFor="game">Game</label>
             <select className="form-control" onChange={handleGameChange} value={game}>
               {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
@@ -179,7 +179,7 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
             <i className="fa fa-chevron-down" />
           </div>
           <div className="form-group">
-            <FormWarningComponent message={showRegionalWarning && REGIONAL_WARNING} />
+            <FormWarning message={showRegionalWarning && REGIONAL_WARNING} />
             <label htmlFor="regional">Regionality</label>
             <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
               <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
@@ -233,7 +233,7 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
               </label>
             </div>
           </div>
-          <AlertComponent className="form-confirm" message={isConfirmingUpdate && 'Please review the warnings above and confirm your edit!'} type="error" />
+          <Alert className="form-confirm" message={isConfirmingUpdate && 'Please review the warnings above and confirm your edit!'} type="error" />
           <button className="btn btn-blue form-confirm" type="submit">{isConfirmingUpdate ? 'Confirm' : ''} Edit <i className="fa fa-long-arrow-right" /></button>
         </form>
       </div>
@@ -242,7 +242,7 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
   );
 }
 
-DexEditComponent.propTypes = {
+DexEdit.propTypes = {
   dex: PropTypes.object.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired

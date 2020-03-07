@@ -1,11 +1,11 @@
 import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { EvolutionsComponent } from './evolutions';
-import { iconClass }           from '../utils/pokemon';
-import { setCurrentPokemon }   from '../actions/pokemon';
+import { Evolutions }        from './evolutions';
+import { iconClass }         from '../utils/pokemon';
+import { setCurrentPokemon } from '../actions/pokemon';
 
-export function EvolutionFamilyComponent ({ family }) {
+export function EvolutionFamily ({ family }) {
   const dispatch = useDispatch();
 
   const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
@@ -42,14 +42,14 @@ export function EvolutionFamilyComponent ({ family }) {
         </a>
         {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
       </div>
-      {family.evolutions.length > 0 ? <EvolutionsComponent evolutions={family.evolutions[0]} /> : null}
+      {family.evolutions.length > 0 ? <Evolutions evolutions={family.evolutions[0]} /> : null}
       {column1}
-      {family.evolutions.length > 1 ? <EvolutionsComponent evolutions={family.evolutions[1]} pokemonId={family.pokemon[2][0].national_id} /> : null}
+      {family.evolutions.length > 1 ? <Evolutions evolutions={family.evolutions[1]} pokemonId={family.pokemon[2][0].national_id} /> : null}
       {column2}
     </div>
   );
 }
 
-EvolutionFamilyComponent.propTypes = {
+EvolutionFamily.propTypes = {
   family: PropTypes.object.isRequired
 };

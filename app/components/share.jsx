@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { ReactGA } from '../utils/analytics';
 
-export function ShareComponent ({ profile }) {
+export function Share ({ profile }) {
   const { slug, username } = useParams();
 
   const inputRef = useRef(null);
@@ -35,6 +35,6 @@ export function ShareComponent ({ profile }) {
   );
 }
 
-ShareComponent.propTypes = {
+Share.propTypes = {
   profile: PropTypes.bool.isRequired
 };

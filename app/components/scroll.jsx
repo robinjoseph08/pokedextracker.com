@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 export const SCROLL_DEBOUNCE = 500;
 export const SHOW_SCROLL_THRESHOLD = 400;
 
-export function ScrollComponent ({ onClick }) {
+export function Scroll ({ onClick }) {
   const showScroll = useSelector(({ showScroll }) => showScroll);
 
   return (
@@ -14,6 +14,6 @@ export function ScrollComponent ({ onClick }) {
   );
 }
 
-ScrollComponent.propTypes = {
+Scroll.propTypes = {
   onClick: PropTypes.func.isRequired
 };

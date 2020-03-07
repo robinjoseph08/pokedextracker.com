@@ -4,7 +4,7 @@ import { useEffect }                from 'react';
 
 import { checkVersion } from '../actions/utils';
 
-export function HomeComponent () {
+export function Home () {
   const dispatch = useDispatch();
 
   const session = useSelector(({ session }) => session);

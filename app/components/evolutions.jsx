@@ -7,7 +7,7 @@ function evolutionKey (evolution) {
   return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
 }
 
-export function EvolutionsComponent ({ evolutions, pokemonId }) {
+export function Evolutions ({ evolutions, pokemonId }) {
   const elements = uniqBy(evolutions, evolutionKey).map((evolution) => {
     const key = evolutionKey(evolution);
     let trigger = null;
@@ -60,7 +60,7 @@ export function EvolutionsComponent ({ evolutions, pokemonId }) {
   );
 }
 
-EvolutionsComponent.propTypes = {
+Evolutions.propTypes = {
   evolutions: PropTypes.arrayOf(PropTypes.object).isRequired,
   pokemonId: PropTypes.number
 };

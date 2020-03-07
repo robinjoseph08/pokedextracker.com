@@ -1,4 +1,4 @@
-export function FooterComponent () {
+export function Footer () {
   return (
     <footer className="main-footer">
       <a className="link" href="/">PokédexTracker</a>

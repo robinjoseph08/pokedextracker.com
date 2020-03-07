@@ -2,10 +2,10 @@ import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo }                  from 'react';
 
-import { PokemonComponent } from './pokemon';
-import { setQuery }         from '../actions/search';
+import { Pokemon }  from './pokemon';
+import { setQuery } from '../actions/search';
 
-export function SearchResultsComponent ({ captures }) {
+export function SearchResults ({ captures }) {
   const dispatch = useDispatch();
 
   const query = useSelector(({ query }) => query.toLowerCase());
@@ -26,11 +26,11 @@ export function SearchResultsComponent ({ captures }) {
 
   return (
     <div className="search-results">
-      {filteredCaptures.map((capture) => <PokemonComponent capture={capture} key={capture.pokemon.id} />)}
+      {filteredCaptures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} />)}
     </div>
   );
 }
 
-SearchResultsComponent.propTypes = {
+SearchResults.propTypes = {
   captures: PropTypes.arrayOf(PropTypes.object).isRequired
 };

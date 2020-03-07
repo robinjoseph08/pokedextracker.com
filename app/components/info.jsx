@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect }                from 'react';
 
-import { EvolutionFamilyComponent } from './evolution-family';
-import { InfoLocationsComponent }   from './info-locations';
-import { ReactGA }                  from '../utils/analytics';
-import { htmlName, iconClass }      from '../utils/pokemon';
-import { padding }                  from '../utils/formatting';
-import { retrievePokemon }          from '../actions/pokemon';
-import { setShowInfo }              from '../actions/tracker';
+import { EvolutionFamily }     from './evolution-family';
+import { InfoLocations }       from './info-locations';
+import { ReactGA }             from '../utils/analytics';
+import { htmlName, iconClass } from '../utils/pokemon';
+import { padding }             from '../utils/formatting';
+import { retrievePokemon }     from '../actions/pokemon';
+import { setShowInfo }         from '../actions/tracker';
 
-export function InfoComponent () {
+export function Info () {
   const dispatch = useDispatch();
 
   const currentPokemon = useSelector(({ currentPokemon }) => currentPokemon);
@@ -63,13 +63,13 @@ export function InfoComponent () {
           <h2>#{padding(pokemon.national_id, 3)}</h2>
         </div>
 
-        <InfoLocationsComponent locations={pokemon.locations} />
+        <InfoLocations locations={pokemon.locations} />
 
-        <EvolutionFamilyComponent family={pokemon.evolution_family} />
+        <EvolutionFamily family={pokemon.evolution_family} />
 
         <div className="info-footer">
           <a
-            href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURIComponent(pokemon.name)}_(Pok%C3%A9mon)`}
+            href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURI(pokemon.name)}_(Pok%C3%A9mon)`}
             onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
             rel="noopener noreferrer"
             target="_blank"

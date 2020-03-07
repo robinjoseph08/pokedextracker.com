@@ -9,7 +9,7 @@ import { padding }                        from '../utils/formatting';
 import { setCurrentPokemon }              from '../actions/pokemon';
 import { setShowInfo }                    from '../actions/tracker';
 
-export function PokemonComponent ({ capture }) {
+export function Pokemon ({ capture }) {
   const dispatch = useDispatch();
 
   const currentDex = useSelector(({ currentDex }) => currentDex);
@@ -78,6 +78,6 @@ export function PokemonComponent ({ capture }) {
   );
 }
 
-PokemonComponent.propTypes = {
+Pokemon.propTypes = {
   capture: PropTypes.object
 };

@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 
-import { NavComponent } from './nav';
+import { Nav } from './nav';
 
-export function NotFoundComponent () {
+export function NotFound () {
   useEffect(() => {
     document.title = '404 Not Found | Pokédex Tracker';
   }, []);
 
   return (
     <div>
-      <NavComponent />
+      <Nav />
       <div className="not-found">
         <img src="/missingno.svg" />
         <div className="not-found-caption">

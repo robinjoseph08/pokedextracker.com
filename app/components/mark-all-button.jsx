@@ -6,7 +6,7 @@ import { ReactGA }                        from '../utils/analytics';
 import { createCaptures, deleteCaptures } from '../actions/capture';
 import { padding }                        from '../utils/formatting';
 
-export function MarkAllButtonComponent ({ captures }) {
+export function MarkAllButton ({ captures }) {
   const dispatch = useDispatch();
 
   const currentDex = useSelector(({ currentDex }) => currentDex);
@@ -63,6 +63,6 @@ export function MarkAllButtonComponent ({ captures }) {
   );
 }
 
-MarkAllButtonComponent.propTypes = {
+MarkAllButton.propTypes = {
   captures: PropTypes.arrayOf(PropTypes.object).isRequired
 };

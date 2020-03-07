@@ -2,13 +2,13 @@ import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect }                from 'react';
 
-import { DexIndicatorComponent } from './dex-indicator';
-import { DonatedFlairComponent } from './donated-flair';
-import { ReactGA }               from '../utils/analytics';
-import { ShareComponent }        from './share';
-import { setShowShare }          from '../actions/tracker';
+import { DexIndicator } from './dex-indicator';
+import { DonatedFlair } from './donated-flair';
+import { ReactGA }      from '../utils/analytics';
+import { Share }        from './share';
+import { setShowShare } from '../actions/tracker';
 
-export function HeaderComponent ({ profile }) {
+export function Header ({ profile }) {
   const dispatch = useDispatch();
 
   const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
@@ -43,7 +43,7 @@ export function HeaderComponent ({ profile }) {
         <div className="share-container">
           <a onClick={handleShareClick}>
             <i className="fa fa-link" />
-            <ShareComponent profile={profile} />
+            <Share profile={profile} />
           </a>
           <a
             href={`https://twitter.com/intent/tweet?text=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`}
@@ -55,16 +55,16 @@ export function HeaderComponent ({ profile }) {
           </a>
         </div>
       </h1>
-      {profile && <DonatedFlairComponent />}
-      {!profile && <DexIndicatorComponent dex={dex} />}
+      {profile && <DonatedFlair />}
+      {!profile && <DexIndicator dex={dex} />}
     </div>
   );
 }
 
-HeaderComponent.defaultProps = {
+Header.defaultProps = {
   profile: false
 };
 
-HeaderComponent.propTypes = {
+Header.propTypes = {
   profile: PropTypes.bool
 };

@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState }      from 'react';
 import { useHistory }               from 'react-router';
 
-import { AlertComponent }                                    from './alert';
-import { FooterComponent }                                   from './footer';
-import { NavComponent }                                      from './nav';
+import { Alert }                                             from './alert';
+import { Footer }                                            from './footer';
+import { Nav }                                               from './nav';
 import { ReactGA }                                           from '../utils/analytics';
-import { ReloadComponent }                                   from './reload';
+import { Reload }                                            from './reload';
 import { checkVersion }                                      from '../actions/utils';
 import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../utils/formatting';
 import { updateUser }                                        from '../actions/user';
 
-export function AccountComponent () {
+export function Account () {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -83,13 +83,13 @@ export function AccountComponent () {
 
   return (
     <div className="account-container">
-      <NavComponent />
-      <ReloadComponent />
+      <Nav />
+      <Reload />
       <div className="form">
         <h1>{user.username}'s Account</h1>
         <form className="form-column" onSubmit={handleSubmit}>
-          <AlertComponent message={error} type="error" />
-          <AlertComponent message={success} type="success" />
+          <Alert message={error} type="error" />
+          <Alert message={success} type="success" />
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <button
@@ -167,7 +167,7 @@ export function AccountComponent () {
           </button>
         </form>
       </div>
-      <FooterComponent />
+      <Footer />
     </div>
   );
 }

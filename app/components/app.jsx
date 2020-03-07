@@ -3,22 +3,22 @@ import { createBrowserHistory }     from 'history';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect }                from 'react';
 
-import { AccountComponent }  from './account';
-import { HomeComponent }     from './home';
-import { LoginComponent }    from './login';
-import { NotFoundComponent } from './not-found';
-import { ProfileComponent }  from './profile';
-import { RegisterComponent } from './register';
-import { TrackerComponent }  from './tracker';
-import { logPageView }       from '../utils/analytics';
-import { retrieveUser }      from '../actions/user';
-import { setSessionUser }    from '../actions/session';
+import { Account }        from './account';
+import { Home }           from './home';
+import { Login }          from './login';
+import { NotFound }       from './not-found';
+import { Profile }        from './profile';
+import { Register }       from './register';
+import { Tracker }        from './tracker';
+import { logPageView }    from '../utils/analytics';
+import { retrieveUser }   from '../actions/user';
+import { setSessionUser } from '../actions/session';
 
 const history = createBrowserHistory();
 history.listen(() => logPageView());
 logPageView();
 
-export function AppComponent () {
+export function App () {
   const dispatch = useDispatch();
 
   const session = useSelector(({ session }) => session);
@@ -35,13 +35,13 @@ export function AppComponent () {
   return (
     <Router history={history}>
       <Switch>
-        <Route component={HomeComponent} exact path="/" />
-        <Route component={LoginComponent} exact path="/login" />
-        <Route component={RegisterComponent} exact path="/register" />
-        <Route component={AccountComponent} exact path="/account" />
-        <Route component={ProfileComponent} exact path="/u/:username" />
-        <Route component={TrackerComponent} exact path="/u/:username/:slug" />
-        <Route component={NotFoundComponent} path="/" />
+        <Route component={Home} exact path="/" />
+        <Route component={Login} exact path="/login" />
+        <Route component={Register} exact path="/register" />
+        <Route component={Account} exact path="/account" />
+        <Route component={Profile} exact path="/u/:username" />
+        <Route component={Tracker} exact path="/u/:username/:slug" />
+        <Route component={NotFound} path="/" />
       </Switch>
     </Router>
   );

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-export function DonatedFlairComponent () {
+export function DonatedFlair () {
   const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
   if (!user.donated) {

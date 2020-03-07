@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import { decimal } from '../utils/formatting';
 
-export function ProgressComponent ({ caught, total }) {
+export function Progress ({ caught, total }) {
   const percent = 100 * caught / total;
 
   return (
@@ -16,7 +16,7 @@ export function ProgressComponent ({ caught, total }) {
   );
 }
 
-ProgressComponent.propTypes = {
+Progress.propTypes = {
   caught: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired
 };

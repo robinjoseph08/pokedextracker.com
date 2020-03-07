@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReactGA }  from '../utils/analytics';
 import { setToken } from '../actions/session';
 
-export function NavComponent () {
+export function Nav () {
   const dispatch = useDispatch();
 
   const session = useSelector(({ session }) => session);

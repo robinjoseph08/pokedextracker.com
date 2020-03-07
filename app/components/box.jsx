@@ -2,14 +2,14 @@ import PropTypes       from 'prop-types';
 import { useMemo }     from 'react';
 import { useSelector } from 'react-redux';
 
-import { MarkAllButtonComponent } from './mark-all-button';
-import { PokemonComponent }       from './pokemon';
-import { padding }                from '../utils/formatting';
-import { useDeferredRender }      from '../hooks/use-deferred-render';
+import { MarkAllButton }     from './mark-all-button';
+import { Pokemon }           from './pokemon';
+import { padding }           from '../utils/formatting';
+import { useDeferredRender } from '../hooks/use-deferred-render';
 
 export const BOX_SIZE = 30;
 
-export function BoxComponent ({ captures, deferred }) {
+export function Box ({ captures, deferred }) {
   const render = useDeferredRender(!deferred);
 
   const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
@@ -34,21 +34,21 @@ export function BoxComponent ({ captures, deferred }) {
     <div className="box">
       <div className="box-header">
         <h1>{title}</h1>
-        <MarkAllButtonComponent captures={captures} />
+        <MarkAllButton captures={captures} />
       </div>
       <div className="box-container">
-        {captures.map((capture) => <PokemonComponent capture={capture} key={capture.pokemon.id} />)}
-        {empties.map((index) => <PokemonComponent capture={null} key={index} />)}
+        {captures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} />)}
+        {empties.map((index) => <Pokemon capture={null} key={index} />)}
       </div>
     </div>
   );
 }
 
-BoxComponent.defaultProps = {
+Box.defaultProps = {
   deferred: false
 };
 
-BoxComponent.propTypes = {
+Box.propTypes = {
   captures: PropTypes.arrayOf(PropTypes.object).isRequired,
   deferred: PropTypes.bool
 };

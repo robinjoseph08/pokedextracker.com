@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory }               from 'react-router';
 import { useRef, useState }         from 'react';
 
-import { AlertComponent } from './alert';
-import { ReactGA }        from '../utils/analytics';
-import { createDex }      from '../actions/dex';
+import { Alert }     from './alert';
+import { ReactGA }   from '../utils/analytics';
+import { createDex } from '../actions/dex';
 
-export function DexCreateComponent ({ isOpen, onRequestClose }) {
+export function DexCreate ({ isOpen, onRequestClose }) {
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -88,7 +88,7 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
       <div className="form" ref={formRef}>
         <h1>Create New Dex</h1>
         <form className="form-column" onSubmit={handleSubmit}>
-          <AlertComponent message={error} type="error" />
+          <Alert message={error} type="error" />
           <div className="form-group">
             <div className="form-note">/u/{session.username}/{slug(title || 'Living Dex', { lower: true })}</div>
             <label htmlFor="dex_title">Title</label>
@@ -176,7 +176,7 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
   );
 }
 
-DexCreateComponent.propTypes = {
+DexCreate.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onRequestClose: PropTypes.func.isRequired
 };

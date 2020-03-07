@@ -3,20 +3,20 @@ import { Link }        from 'react-router-dom';
 import { useMemo }     from 'react';
 import { useSelector } from 'react-redux';
 
-import { BoxComponent }           from './box';
-import { DonatedFlairComponent }  from './donated-flair';
-import { FriendCodeComponent }    from './friend-code';
-import { HeaderComponent }        from './header';
-import { NotificationComponent }  from './notification';
-import { ProgressComponent }      from './progress';
-import { ReactGA }                from '../utils/analytics';
-import { ScrollComponent }        from './scroll';
-import { SearchResultsComponent } from './search-results';
-import { groupBoxes }             from '../utils/pokemon';
+import { Box }           from './box';
+import { DonatedFlair }  from './donated-flair';
+import { FriendCode }    from './friend-code';
+import { Header }        from './header';
+import { Notification }  from './notification';
+import { Progress }      from './progress';
+import { ReactGA }       from '../utils/analytics';
+import { Scroll }        from './scroll';
+import { SearchResults } from './search-results';
+import { groupBoxes }    from '../utils/pokemon';
 
 const DEFER_CUTOFF = 1;
 
-export function DexComponent ({ onScrollButtonClick }) {
+export function Dex ({ onScrollButtonClick }) {
   const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
   const query = useSelector(({ query }) => query);
   const username = useSelector(({ currentUser }) => currentUser);
@@ -25,9 +25,9 @@ export function DexComponent ({ onScrollButtonClick }) {
   const total = dex.captures.length;
 
   const boxes = useMemo(() => groupBoxes(dex.captures), [dex.captures]);
-  const boxComponents = useMemo(() => {
+  const boxs = useMemo(() => {
     return boxes.map((box, i) => (
-      <BoxComponent
+      <Box
         captures={box}
         deferred={i > DEFER_CUTOFF}
         key={box[0].pokemon.id}
@@ -38,25 +38,25 @@ export function DexComponent ({ onScrollButtonClick }) {
   return (
     <div className="dex">
       <div className="wrapper">
-        <ScrollComponent onClick={onScrollButtonClick} />
-        <NotificationComponent />
+        <Scroll onClick={onScrollButtonClick} />
+        <Notification />
         <header>
-          <HeaderComponent />
+          <Header />
           <h3>
             <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
-            <DonatedFlairComponent />
+            <DonatedFlair />
           </h3>
-          <FriendCodeComponent />
+          <FriendCode />
         </header>
         <div className="percentage">
-          <ProgressComponent caught={caught} total={total} />
+          <Progress caught={caught} total={total} />
         </div>
-        {query.length > 0 ? <SearchResultsComponent captures={dex.captures} /> : boxComponents}
+        {query.length > 0 ? <SearchResults captures={dex.captures} /> : boxs}
       </div>
     </div>
   );
 }
 
-DexComponent.propTypes = {
+Dex.propTypes = {
   onScrollButtonClick: PropTypes.func.isRequired
 };
