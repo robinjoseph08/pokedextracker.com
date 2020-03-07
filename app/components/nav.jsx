@@ -1,10 +1,8 @@
 import { Link }                     from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState }      from 'react';
 
-import { ReactGA }                  from '../utils/analytics';
-import { retrieveUser }             from '../actions/user';
-import { setSessionUser, setToken } from '../actions/session';
+import { ReactGA }  from '../utils/analytics';
+import { setToken } from '../actions/session';
 
 export function NavComponent () {
   const dispatch = useDispatch();
@@ -12,29 +10,12 @@ export function NavComponent () {
   const session = useSelector(({ session }) => session);
   const user = useSelector(({ sessionUser }) => sessionUser);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      if (session) {
-        setIsLoading(true);
-
-        try  {
-          const u = await dispatch(retrieveUser(session.username));
-          dispatch(setSessionUser(u));
-        } catch (err) {}
-
-        setIsLoading(false);
-      }
-    })();
-  }, [session]);
-
   const handleSignOut = () => {
     ReactGA.event({ action: 'sign out', category: 'Session' });
     dispatch(setToken(null));
   };
 
-  if (isLoading) {
+  if (session && !user) {
     return (
       <nav>
         <Link to="/">Pokédex Tracker</Link>
