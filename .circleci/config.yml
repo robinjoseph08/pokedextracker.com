@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:6.12.3
+      - image: circleci/node:12.16.1
     working_directory: ~/pokedextracker.com
     steps:
       - restore_cache:
@@ -17,13 +17,13 @@ jobs:
             - ~/pokedextracker.com/.git
       - restore_cache:
           keys:
-            - yarn-v2-{{ checksum "yarn.lock" }}
-            - yarn-v2-
+            - yarn-v1-{{ checksum "yarn.lock" }}
+            - yarn-v1-
       - run:
           name: Install dependencies
           command: yarn
       - save_cache:
-          key: yarn-v2-{{ checksum "yarn.lock" }}
+          key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
             - ~/pokedextracker.com/node_modules
             - ~/.cache/yarn
