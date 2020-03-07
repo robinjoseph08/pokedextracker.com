@@ -1,3 +1,4 @@
+import slug                         from 'slug';
 import { Link }                     from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState }      from 'react';
@@ -41,13 +42,15 @@ export function RegisterComponent () {
     if (session) {
       history.push(`/u/${session.username}`);
     }
-  }, [session]);
+  }, []);
 
   useEffect(() => {
     (async () => {
-      const g = await dispatch(listGames());
-      setGame(g[0].id);
-      setRegional(!g[0].game_family.national_support);
+      if (!session) {
+        const g = await dispatch(listGames());
+        setGame(g[0].id);
+        setRegional(!g[0].game_family.national_support);
+      }
     })();
   }, []);
 
@@ -69,9 +72,10 @@ export function RegisterComponent () {
     setError(null);
 
     try {
-      await dispatch(createUser(payload))
+      await dispatch(createUser(payload));
       ReactGA.event({ action: 'register', category: 'Session' });
       dispatch(setNotification(true));
+      history.push(`/u/${username}/${slug(title, { lower: true })}`);
     } catch (err) {
       setError(err.message);
       window.scrollTo({ top: 0 });

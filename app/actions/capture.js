@@ -3,14 +3,14 @@ import { Config }       from '../../config';
 import { checkVersion } from './utils';
 
 export const MARK_CAPTURED = 'MARK_CAPTURED';
-export const SET_CAPTURES  = 'SET_CAPTURES';
+export const SET_CAPTURES = 'SET_CAPTURES';
 
 export function createCaptures ({ payload, slug, username }) {
   return (dispatch) => {
     dispatch(checkVersion());
 
     return API.post(`${Config.API_HOST}/captures`, payload)
-    .then(() => dispatch(markCaptured(true, payload.pokemon, slug, username)));
+      .then(() => dispatch(markCaptured(true, payload.pokemon, slug, username)));
   };
 }
 
@@ -19,7 +19,7 @@ export function deleteCaptures ({ payload, slug, username }) {
     dispatch(checkVersion());
 
     return API.delete(`${Config.API_HOST}/captures`, payload)
-    .then(() => dispatch(markCaptured(false, payload.pokemon, slug, username)));
+      .then(() => dispatch(markCaptured(false, payload.pokemon, slug, username)));
   };
 }
 
@@ -28,10 +28,10 @@ export function listCaptures ({ id, slug }, username) {
     dispatch(checkVersion());
 
     return API.get(`${Config.API_HOST}/captures`, { dex: id })
-    .then((captures) => {
-      dispatch(setCaptures(captures, slug, username));
-      return captures;
-    });
+      .then((captures) => {
+        dispatch(setCaptures(captures, slug, username));
+        return captures;
+      });
   };
 }
 

@@ -15,9 +15,9 @@ export function EvolutionFamilyComponent ({ family }) {
   if (family.pokemon.length > 1) {
     column1 = (
       <div className="evolution-pokemon-column">
-        {family.pokemon[1].map((pokemon) => <a key={pokemon.id} onClick={() => dispatch(setCurrentPokemon(pokemon.id))} title={pokemon.name}>
+        {family.pokemon[1].map((pokemon) => (<a key={pokemon.id} onClick={() => dispatch(setCurrentPokemon(pokemon.id))} title={pokemon.name}>
           <i className={iconClass(pokemon, dex)} />
-        </a>)}
+        </a>))}
       </div>
     );
   }
@@ -26,9 +26,9 @@ export function EvolutionFamilyComponent ({ family }) {
     column2 = (
       // styling hack for mr.rime
       <div className={`evolution-pokemon-column ${family.pokemon[2][0].national_id === 866 ? 'push' : ''}`}>
-        {family.pokemon[2].map((pokemon) => <a key={pokemon.id} onClick={() => dispatch(setCurrentPokemon(pokemon.id))} title={pokemon.name}>
+        {family.pokemon[2].map((pokemon) => (<a key={pokemon.id} onClick={() => dispatch(setCurrentPokemon(pokemon.id))} title={pokemon.name}>
           <i className={iconClass(pokemon, dex)} />
-        </a>)}
+        </a>))}
       </div>
     );
   }

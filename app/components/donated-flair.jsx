@@ -7,5 +7,5 @@ export function DonatedFlairComponent () {
     return null;
   }
 
-  return <img className="donated-flair emoji" title="This user has donated!" src="/emoji_star2.png" />;
+  return <img className="donated-flair emoji" src="/emoji_star2.png" title="This user has donated!" />;
 }

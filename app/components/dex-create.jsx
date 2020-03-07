@@ -79,14 +79,14 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
   return (
     <Modal
       className="modal"
-      overlayClassName="modal-overlay"
+      contentLabel="Create a New Dex"
       isOpen={isOpen}
       onRequestClose={handleRequestClose}
-      contentLabel="Create a New Dex"
+      overlayClassName="modal-overlay"
     >
       <div className="form" ref={formRef}>
         <h1>Create New Dex</h1>
-        <form onSubmit={handleSubmit} className="form-column">
+        <form className="form-column" onSubmit={handleSubmit}>
           <AlertComponent message={error} type="error" />
           <div className="form-group">
             <div className="form-note">/u/{session.username}/{slug(title || 'Living Dex', { lower: true })}</div>

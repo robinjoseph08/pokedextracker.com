@@ -1,15 +1,15 @@
 export function FooterComponent () {
   return (
     <footer className="main-footer">
-      <a href="/" className="link">PokédexTracker</a>
+      <a className="link" href="/">PokédexTracker</a>
       <i className="fa fa-circle" />
-      <a href="/blog/" className="link">Blog</a>
+      <a className="link" href="/blog/">Blog</a>
       <i className="fa fa-circle" />
-      <a href="https://twitter.com/PokedexTracker" className="link" target="_blank" rel="noopener noreferrer">Twitter</a>
+      <a className="link" href="https://twitter.com/PokedexTracker" rel="noopener noreferrer" target="_blank">Twitter</a>
       <i className="fa fa-circle" />
-      <a href="https://github.com/pokedextracker" className="link" target="_blank" rel="noopener noreferrer">Github</a>
+      <a className="link" href="https://github.com/pokedextracker" rel="noopener noreferrer" target="_blank">Github</a>
       <i className="fa fa-circle" />
-      <a href="https://www.patreon.com/pokedextracker" className="link" target="_blank" rel="noopener noreferrer">Patreon</a>
+      <a className="link" href="https://www.patreon.com/pokedextracker" rel="noopener noreferrer" target="_blank">Patreon</a>
     </footer>
   );
 }

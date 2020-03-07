@@ -27,7 +27,7 @@ export function NavComponent () {
     return (
       <nav>
         <Link to="/">Pokédex Tracker</Link>
-        <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Patreon</a>
+        <a href="https://www.patreon.com/pokedextracker" rel="noopener noreferrer" target="_blank">Patreon</a>
         <div className="dropdown">
           <a href="#">{session.username} <i className="fa fa-caret-down" /></a>
           <ul>
@@ -46,7 +46,7 @@ export function NavComponent () {
   return (
     <nav>
       <Link to="/">Pokédex Tracker</Link>
-      <a href="https://www.patreon.com/pokedextracker" target="_blank" rel="noopener noreferrer">Patreon</a>
+      <a href="https://www.patreon.com/pokedextracker" rel="noopener noreferrer" target="_blank">Patreon</a>
       <Link to="/login">Login</Link>
       <Link to="/register">Register</Link>
     </nav>

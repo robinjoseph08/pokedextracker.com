@@ -2,8 +2,8 @@ import { API }          from '../utils/api';
 import { Config }       from '../../config';
 import { checkVersion } from './utils';
 
-export const CLEAR_POKEMON       = 'CLEAR_POKEMON';
-export const SET_POKEMON         = 'SET_POKEMON';
+export const CLEAR_POKEMON = 'CLEAR_POKEMON';
+export const SET_POKEMON = 'SET_POKEMON';
 export const SET_CURRENT_POKEMON = 'SET_CURRENT_POKEMON';
 
 export function retrievePokemon (id, query) {
@@ -11,7 +11,7 @@ export function retrievePokemon (id, query) {
     dispatch(checkVersion());
 
     return API.get(`${Config.API_HOST}/pokemon/${id}`, query)
-    .then((pokemon) => dispatch(setPokemon(pokemon)));
+      .then((pokemon) => dispatch(setPokemon(pokemon)));
   };
 }
 

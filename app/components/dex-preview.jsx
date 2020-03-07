@@ -27,7 +27,7 @@ export function DexPreviewComponent ({ dex, reload }) {
   return (
     <div className="dex-preview">
       <div className="dex-preview-header">
-        <h3><Link to={`/u/${user.username}/${dex.slug}`} className="link">{dex.title}</Link></h3>
+        <h3><Link className="link" to={`/u/${user.username}/${dex.slug}`}>{dex.title}</Link></h3>
         {ownPage &&
           <div className="dex-edit">
             <a className="link" onClick={handleEditClick}><i className="fa fa-pencil" /></a>

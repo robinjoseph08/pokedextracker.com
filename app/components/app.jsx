@@ -26,10 +26,8 @@ export function AppComponent () {
   useEffect(() => {
     (async () => {
       if (session) {
-        try  {
-          const user = await dispatch(retrieveUser(session.username));
-          dispatch(setSessionUser(user));
-        } catch (err) {}
+        const user = await dispatch(retrieveUser(session.username));
+        dispatch(setSessionUser(user));
       }
     })();
   }, [session]);
@@ -37,13 +35,13 @@ export function AppComponent () {
   return (
     <Router history={history}>
       <Switch>
-        <Route path='/' exact component={HomeComponent} />
-        <Route path='/login' exact component={LoginComponent} />
-        <Route path='/register' exact component={RegisterComponent} />
-        <Route path='/account' exact component={AccountComponent} />
-        <Route path='/u/:username' exact component={ProfileComponent} />
-        <Route path='/u/:username/:slug' exact component={TrackerComponent} />
-        <Route path='/' component={NotFoundComponent} />
+        <Route component={HomeComponent} exact path="/" />
+        <Route component={LoginComponent} exact path="/login" />
+        <Route component={RegisterComponent} exact path="/register" />
+        <Route component={AccountComponent} exact path="/account" />
+        <Route component={ProfileComponent} exact path="/u/:username" />
+        <Route component={TrackerComponent} exact path="/u/:username/:slug" />
+        <Route component={NotFoundComponent} path="/" />
       </Switch>
     </Router>
   );

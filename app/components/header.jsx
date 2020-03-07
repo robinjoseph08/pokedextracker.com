@@ -46,9 +46,9 @@ export function HeaderComponent ({ profile }) {
           </a>
           <a
             href={`https://twitter.com/intent/tweet?text=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={handleTweetClick}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             <i className="fa fa-twitter" />
           </a>
@@ -58,4 +58,4 @@ export function HeaderComponent ({ profile }) {
       <DexIndicatorComponent dex={dex} />
     </div>
   );
-};
+}

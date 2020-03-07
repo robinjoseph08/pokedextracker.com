@@ -15,7 +15,7 @@ export function FriendCodeComponent () {
     const handleClick = () => ReactGA.event({ action: 'click edit friend code', category: 'User' });
 
     editAccountBtn = (
-      <Link to="/account" onClick={handleClick}><i className="fa fa-pencil" /></Link>
+      <Link onClick={handleClick} to="/account"><i className="fa fa-pencil" /></Link>
     );
   }
 

@@ -70,17 +70,17 @@ export function InfoComponent () {
         <div className="info-footer">
           <a
             href={`http://bulbapedia.bulbagarden.net/wiki/${encodeURIComponent(pokemon.name)}_(Pok%C3%A9mon)`}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={() => ReactGA.event({ action: 'open Bulbapedia link', category: 'Info', label: pokemon.name })}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             Bulbapedia <i className="fa fa-long-arrow-right" />
           </a>
           <a
             href={`http://www.serebii.net/${serebiiPath}/${padding(pokemon.national_id, 3)}.shtml`}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={() => ReactGA.event({ action: 'open Serebii link', category: 'Info', label: pokemon.name })}
+            rel="noopener noreferrer"
+            target="_blank"
           >
             Serebii <i className="fa fa-long-arrow-right" />
           </a>

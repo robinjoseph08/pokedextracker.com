@@ -42,7 +42,7 @@ export function EvolutionsComponent ({ evolutions, pokemonId }) {
     }
 
     return (
-      <div key={key} className="evolution-trigger">
+      <div className="evolution-trigger" key={key}>
         <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`} />
         <div>
           {trigger}

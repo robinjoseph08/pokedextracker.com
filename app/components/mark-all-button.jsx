@@ -34,25 +34,23 @@ export function MarkAllButtonComponent ({ captures }) {
 
     setIsLoading(true);
 
-    try {
-      if (deleting) {
-        await dispatch(deleteCaptures({ payload, slug: currentDex, username: user.username }));
-      } else {
-        await dispatch(createCaptures({ payload, slug: currentDex, username: user.username }));
-      }
+    if (deleting) {
+      await dispatch(deleteCaptures({ payload, slug: currentDex, username: user.username }));
+    } else {
+      await dispatch(createCaptures({ payload, slug: currentDex, username: user.username }));
+    }
 
-      ReactGA.event({
-        category: 'Box',
-        label: `${padding(captures[0].pokemon.national_id, 3)} - ${padding(captures[captures.length - 1].pokemon.national_id, 3)}`,
-        action: deleting ? 'unmark all' : 'mark all'
-      });
+    ReactGA.event({
+      category: 'Box',
+      label: `${padding(captures[0].pokemon.national_id, 3)} - ${padding(captures[captures.length - 1].pokemon.national_id, 3)}`,
+      action: deleting ? 'unmark all' : 'mark all'
+    });
 
-      setIsLoading(false);
-    } catch (err) {}
+    setIsLoading(false);
   };
 
   return (
-    <button className="btn btn-blue" onClick={handleButtonClick} disabled={isLoading}>
+    <button className="btn btn-blue" disabled={isLoading} onClick={handleButtonClick}>
       <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
       {isLoading ?
         <span className="spinner">

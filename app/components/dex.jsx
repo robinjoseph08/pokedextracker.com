@@ -27,9 +27,9 @@ export function DexComponent ({ onScrollButtonClick }) {
   const boxComponents = useMemo(() => {
     return boxes.map((box, i) => (
       <BoxComponent
-        key={box[0].pokemon.id}
         captures={box}
         deferred={i > DEFER_CUTOFF}
+        key={box[0].pokemon.id}
       />
     ));
   }, [boxes]);
@@ -42,7 +42,7 @@ export function DexComponent ({ onScrollButtonClick }) {
         <header>
           <HeaderComponent />
           <h3>
-            <Link to={`/u/${username}`} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}>/u/{username}</Link>
+            <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
             <DonatedFlairComponent />
           </h3>
           <FriendCodeComponent />

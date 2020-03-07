@@ -51,13 +51,11 @@ export function TrackerComponent () {
       dispatch(setShowShare(false));
       dispatch(setCurrentDex(slug, username));
 
-      try {
-        const u = await dispatch(retrieveUser(username));
-        dispatch(setUser(u));
-        const d = await dispatch(retrieveDex(slug, username));
-        const captures = await dispatch(listCaptures(d, username));
-        dispatch(setCurrentPokemon(captures[0].pokemon.id));
-      } catch (err) {}
+      const u = await dispatch(retrieveUser(username));
+      dispatch(setUser(u));
+      const d = await dispatch(retrieveDex(slug, username));
+      const captures = await dispatch(listCaptures(d, username));
+      dispatch(setCurrentPokemon(captures[0].pokemon.id));
 
       setIsLoading(false);
     })();
@@ -88,7 +86,7 @@ export function TrackerComponent () {
       <div className="tracker">
         <div className="dex-wrapper">
           <SearchBarComponent />
-          <div className="dex-column" ref={trackerRef} onScroll={handleScroll}>
+          <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
             <DexComponent onScrollButtonClick={handleScrollButtonClick} />
             <FooterComponent />
           </div>

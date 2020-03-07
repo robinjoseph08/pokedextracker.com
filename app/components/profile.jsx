@@ -34,14 +34,12 @@ export function ProfileComponent () {
     dispatch(setCurrentUser(username));
     dispatch(setShowShare(false));
 
-    try {
-      const [u] = await Promise.all([
-        dispatch(retrieveUser(username)),
-        dispatch(listGames())
-      ]);
-      dispatch(setUser(u));
-    } catch (err) {}
+    const [u] = await Promise.all([
+      dispatch(retrieveUser(username)),
+      dispatch(listGames())
+    ]);
 
+    dispatch(setUser(u));
     setIsLoading(false);
   };
 
@@ -78,7 +76,7 @@ export function ProfileComponent () {
             <FriendCodeComponent />
           </header>
 
-          {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} reload={reload} />)}
+          {user.dexes.map((dex) => <DexPreviewComponent dex={dex} key={dex.id} reload={reload} />)}
 
           {ownPage &&
             <div className="dex-create">

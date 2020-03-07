@@ -40,7 +40,7 @@ export function AccountComponent () {
     if (!session) {
       history.push('/login');
     }
-  }, [session])
+  }, [session]);
 
   useEffect(() => {
     dispatch(checkVersion());
@@ -64,7 +64,7 @@ export function AccountComponent () {
     setSuccess(null);
 
     try {
-      await dispatch(updateUser(payload))
+      await dispatch(updateUser(payload));
       ReactGA.event({ action: 'update', category: 'User' });
       setSuccess('Account settings saved!');
     } catch (err) {
@@ -87,7 +87,7 @@ export function AccountComponent () {
       <ReloadComponent />
       <div className="form">
         <h1>{user.username}'s Account</h1>
-        <form onSubmit={handleSubmit} className="form-column">
+        <form className="form-column" onSubmit={handleSubmit}>
           <AlertComponent message={error} type="error" />
           <AlertComponent message={success} type="success" />
           <div className="form-group">

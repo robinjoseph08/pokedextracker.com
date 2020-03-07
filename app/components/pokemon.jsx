@@ -32,15 +32,13 @@ export function PokemonComponent ({ capture }) {
 
     const payload = { dex: dex.id, pokemon: [capture.pokemon.id] };
 
-    try {
-      if (capture.captured) {
-        await dispatch(deleteCaptures({ payload, slug: currentDex, username: user.username }));
-        ReactGA.event({ category: 'Pokemon', label: capture.pokemon.name, action: 'unmark' });
-      } else {
-        await dispatch(createCaptures({ payload, slug: currentDex, username: user.username }));
-        ReactGA.event({ category: 'Pokemon', label: capture.pokemon.name, action: 'mark' });
-      }
-    } catch (err) {}
+    if (capture.captured) {
+      await dispatch(deleteCaptures({ payload, slug: currentDex, username: user.username }));
+      ReactGA.event({ category: 'Pokemon', label: capture.pokemon.name, action: 'unmark' });
+    } else {
+      await dispatch(createCaptures({ payload, slug: currentDex, username: user.username }));
+      ReactGA.event({ category: 'Pokemon', label: capture.pokemon.name, action: 'mark' });
+    }
   };
 
   const handleSetInfoClick = () => {

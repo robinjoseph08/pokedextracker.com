@@ -131,10 +131,10 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
   return (
     <Modal
       className="modal"
-      overlayClassName="modal-overlay"
+      contentLabel="Edit Dex"
       isOpen={isOpen}
       onRequestClose={() => handleRequestClose(false)}
-      contentLabel="Edit Dex"
+      overlayClassName="modal-overlay"
     >
       <div className="dex-delete-container">
         {isConfirmingDelete ?
@@ -150,7 +150,7 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
       </div>
       <div className="form" ref={formRef}>
         <h1>Edit a Dex</h1>
-        <form onSubmit={handleUpdateSubmit} className="form-column">
+        <form className="form-column" onSubmit={handleUpdateSubmit}>
           <AlertComponent message={error} type="error" />
           <div className="form-group">
             <div className="form-note">/u/{session.username}/{slug(title || 'Living Dex', { lower: true })}</div>
@@ -183,12 +183,12 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
             <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
               <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
                 <input
-                  type="radio"
-                  name="regional"
                   checked={!regional}
                   disabled={!gamesById[game].game_family.national_support}
-                  value="national"
+                  name="regional"
                   onChange={() => setRegional(false)}
+                  type="radio"
+                  value="national"
                 />
                 <span className="radio-custom"><span /></span>National
               </label>
@@ -196,12 +196,12 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
             <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
               <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
                 <input
-                  type="radio"
-                  name="regional"
                   checked={regional}
                   disabled={!gamesById[game].game_family.regional_support}
-                  value="regional"
+                  name="regional"
                   onChange={() => setRegional(true)}
+                  type="radio"
+                  value="regional"
                 />
                 <span className="radio-custom"><span /></span>Regional
               </label>
@@ -212,10 +212,10 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
             <div className="radio">
               <label>
                 <input
-                  type="radio"
+                  checked={!shiny}
                   name="type"
                   onChange={() => setShiny(false)}
-                  checked={!shiny}
+                  type="radio"
                 />
                 <span className="radio-custom"><span /></span>Normal
               </label>
@@ -223,10 +223,10 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
             <div className="radio">
               <label>
                 <input
-                  type="radio"
+                  checked={shiny}
                   name="type"
                   onChange={() => setShiny(true)}
-                  checked={shiny}
+                  type="radio"
                 />
                 <span className="radio-custom"><span /></span>Shiny
               </label>

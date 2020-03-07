@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link }      from 'react-router-dom';
+import { useEffect, useState }      from 'react';
+import { Link }                     from 'react-router-dom';
 import { useHistory }               from 'react-router';
-import { useDispatch, useSelector }   from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AlertComponent }  from './alert';
 import { FooterComponent } from './footer';
@@ -30,7 +30,7 @@ export function LoginComponent () {
     if (session) {
       history.push(`/u/${session.username}`);
     }
-  }, [session]);
+  }, []);
 
   useEffect(() => {
     dispatch(checkVersion());
@@ -44,8 +44,9 @@ export function LoginComponent () {
     setError(null);
 
     try {
-      await dispatch(login(payload))
+      await dispatch(login(payload));
       ReactGA.event({ action: 'login', category: 'Session' });
+      history.push(`/u/${username}`);
     } catch (err) {
       setError(err.message);
       window.scrollTo({ top: 0 });
@@ -61,7 +62,7 @@ export function LoginComponent () {
       <ReloadComponent />
       <div className="form">
         <h1>Login</h1>
-        <form onSubmit={handleSubmit} className="form-column">
+        <form className="form-column" onSubmit={handleSubmit}>
           <AlertComponent message={error} type="error" />
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -86,13 +87,13 @@ export function LoginComponent () {
             <label htmlFor="password">Password</label>
             <input
               className="form-control"
-              name="password"
               id="password"
-              type="password"
-              required
-              placeholder="••••••••••••"
               maxLength="72"
+              name="password"
               onChange={handlePasswordChange}
+              placeholder="••••••••••••"
+              required
+              type="password"
               value={password}
             />
             <i className="fa fa-asterisk" />

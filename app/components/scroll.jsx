@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-export const SCROLL_DEBOUNCE       = 500;
+export const SCROLL_DEBOUNCE = 500;
 export const SHOW_SCROLL_THRESHOLD = 400;
 
 export function ScrollComponent ({ onClick }) {

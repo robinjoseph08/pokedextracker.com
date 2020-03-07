@@ -25,7 +25,7 @@ export function SearchResultsComponent ({ captures }) {
 
   return (
     <div className="search-results">
-      {filteredCaptures.map((capture) => <PokemonComponent key={capture.pokemon.id} capture={capture} />)}
+      {filteredCaptures.map((capture) => <PokemonComponent capture={capture} key={capture.pokemon.id} />)}
     </div>
   );
 }
