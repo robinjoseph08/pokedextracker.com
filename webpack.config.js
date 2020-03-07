@@ -1,20 +1,9 @@
 'use strict';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const Path              = require('path');
 const Webpack           = require('webpack');
 
 const PRODUCTION = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production';
-
-const PLUGINS = [
-  new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'undefined' }),
-  new Webpack.ProvidePlugin({ React: 'react' }),
-  new HtmlWebpackPlugin({ template: './app/index.html', filename: 'index.html', inject: 'body' })
-];
-
-if (PRODUCTION) {
-  PLUGINS.push(new Webpack.optimize.UglifyJsPlugin({ sourceMap: true }));
-}
 
 module.exports = {
   entry: './app/index.jsx',
@@ -39,5 +28,9 @@ module.exports = {
       { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] }
     ]
   },
-  plugins: PLUGINS
+  plugins: [
+    new HtmlWebpackPlugin({ template: './app/index.html', filename: 'index.html', inject: 'body' }),
+    new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'undefined' }),
+    new Webpack.ProvidePlugin({ React: 'react' })
+  ]
 };
