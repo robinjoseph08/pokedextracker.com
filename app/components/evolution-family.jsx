@@ -1,17 +1,21 @@
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { EvolutionsComponent } from './evolutions';
 import { iconClass }           from '../utils/pokemon';
 import { setCurrentPokemon }   from '../actions/pokemon';
 
-export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
+export function EvolutionFamilyComponent ({ family }) {
+  const dispatch = useDispatch();
+
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+
   let column1 = null;
   let column2 = null;
 
   if (family.pokemon.length > 1) {
     column1 = (
       <div className="evolution-pokemon-column">
-        {family.pokemon[1].map((pokemon) => <a key={pokemon.id} onClick={() => setCurrentPokemon(pokemon.id)} title={pokemon.name}>
+        {family.pokemon[1].map((pokemon) => <a key={pokemon.id} onClick={() => dispatch(setCurrentPokemon(pokemon.id))} title={pokemon.name}>
           <i className={iconClass(pokemon, dex)} />
         </a>)}
       </div>
@@ -22,7 +26,7 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
     column2 = (
       // styling hack for mr.rime
       <div className={`evolution-pokemon-column ${family.pokemon[2][0].national_id === 866 ? 'push' : ''}`}>
-        {family.pokemon[2].map((pokemon) => <a key={pokemon.id} onClick={() => setCurrentPokemon(pokemon.id)} title={pokemon.name}>
+        {family.pokemon[2].map((pokemon) => <a key={pokemon.id} onClick={() => dispatch(setCurrentPokemon(pokemon.id))} title={pokemon.name}>
           <i className={iconClass(pokemon, dex)} />
         </a>)}
       </div>
@@ -32,7 +36,7 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
   return (
     <div className="info-evolutions">
       <div className="evolution-pokemon-column">
-        <a onClick={() => setCurrentPokemon(family.pokemon[0][0].id)} title={family.pokemon[0][0].name}>
+        <a onClick={() => dispatch(setCurrentPokemon(family.pokemon[0][0].id))} title={family.pokemon[0][0].name}>
           <i className={iconClass(family.pokemon[0][0], dex)} />
         </a>
         {family.evolutions.length === 0 ? <div>Does not evolve</div> : null}
@@ -44,11 +48,3 @@ export function EvolutionFamily ({ dex, family, setCurrentPokemon }) {
     </div>
   );
 }
-
-function mapStateToProps ({ currentDex, currentUser, users }) {
-  return { dex: users[currentUser].dexesBySlug[currentDex] };
-}
-
-const mapDispatchToProps = { setCurrentPokemon };
-
-export const EvolutionFamilyComponent = connect(mapStateToProps, mapDispatchToProps)(EvolutionFamily);
