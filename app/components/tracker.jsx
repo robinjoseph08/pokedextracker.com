@@ -1,7 +1,7 @@
-import throttle                        from 'lodash/throttle';
-import { useDispatch, useSelector }    from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
-import { useParams }                   from 'react-router';
+import throttle                                     from 'lodash/throttle';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector }                 from 'react-redux';
+import { useParams }                                from 'react-router';
 
 import { DexComponent }                           from './dex';
 import { FooterComponent }                        from './footer';
@@ -71,7 +71,7 @@ export function TrackerComponent () {
     }
   }, SCROLL_DEBOUNCE);
 
-  const handleScrollButtonClick = () => trackerRef.current.scrollTop = 0;
+  const handleScrollButtonClick = useCallback(() => trackerRef.current.scrollTop = 0, [trackerRef.current]);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
