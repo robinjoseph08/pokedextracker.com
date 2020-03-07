@@ -36,11 +36,15 @@ export function AccountComponent () {
     document.title = 'Account | Pokédex Tracker';
   }, []);
 
-  if (!session) {
-    history.push('/login');
-  }
+  useEffect(() => {
+    if (!session) {
+      history.push('/login');
+    }
+  }, [session])
 
-  dispatch(checkVersion());
+  useEffect(() => {
+    dispatch(checkVersion());
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
