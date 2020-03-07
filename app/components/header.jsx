@@ -33,6 +33,8 @@ export function HeaderComponent ({ profile }) {
 
   const handleTweetClick = () => ReactGA.event({ action: 'click tweet', category: 'Share' });
 
+  const ownPage = session && session.id === user.id;
+
   return (
     <div className="header-row">
       <h1>
@@ -43,7 +45,7 @@ export function HeaderComponent ({ profile }) {
             <ShareComponent profile={profile} />
           </a>
           <a
-            href={`https://twitter.com/intent/tweet?text=Check out ${session && session.id === user.id ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`}
+            href={`https://twitter.com/intent/tweet?text=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleTweetClick}

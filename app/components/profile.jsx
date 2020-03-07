@@ -64,6 +64,8 @@ export function ProfileComponent () {
     return <NotFoundComponent />;
   }
 
+  const ownPage = session && session.id === user.id;
+
   return (
     <div className="profile-container">
       <NavComponent />
@@ -78,7 +80,7 @@ export function ProfileComponent () {
 
           {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} reload={reload} />)}
 
-          {session && session.id === user.id &&
+          {ownPage &&
             <div className="dex-create">
               <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
               <DexCreateComponent isOpen={isShowingDexCreate} onRequestClose={handleDexCreateRequestClose} />
