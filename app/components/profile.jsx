@@ -25,7 +25,7 @@ export function ProfileComponent () {
   const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [isShowingDexCreate, setIsShowingDexCreate] = useState(false);
+  const [showDexCreate, setShowDexCreate] = useState(false);
 
   const reload = async () => {
     setIsLoading(true);
@@ -53,8 +53,8 @@ export function ProfileComponent () {
     reload();
   }, [username]);
 
-  const handleCreateNewDexClick = () => setIsShowingDexCreate(true);
-  const handleDexCreateRequestClose = () => setIsShowingDexCreate(false);
+  const handleCreateNewDexClick = () => setShowDexCreate(true);
+  const handleDexCreateRequestClose = () => setShowDexCreate(false);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;
@@ -83,7 +83,7 @@ export function ProfileComponent () {
           {ownPage &&
             <div className="dex-create">
               <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
-              <DexCreateComponent isOpen={isShowingDexCreate} onRequestClose={handleDexCreateRequestClose} />
+              <DexCreateComponent isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
             </div>
           }
         </div>

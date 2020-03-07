@@ -48,6 +48,8 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
     setGame(newGame);
   };
 
+  const handleTitleChange = (e) => setTitle(e.target.value);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,8 +71,6 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
       }
     }
   };
-
-  const handleTitleChange = (e) => setTitle(e.target.value);
 
   if (!isOpen || !games) {
     return null;
