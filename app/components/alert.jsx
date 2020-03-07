@@ -1,3 +1,4 @@
+import PropTypes  from 'prop-types';
 import classNames from 'classnames';
 
 export function AlertComponent ({ className, message, type }) {
@@ -11,3 +12,9 @@ export function AlertComponent ({ className, message, type }) {
     </div>
   );
 }
+
+AlertComponent.propTypes = {
+  className: PropTypes.string,
+  message: PropTypes.any,
+  type: PropTypes.oneOf(['error', 'success']).isRequired
+};

@@ -1,3 +1,4 @@
+import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo }                  from 'react';
 
@@ -29,3 +30,7 @@ export function SearchResultsComponent ({ captures }) {
     </div>
   );
 }
+
+SearchResultsComponent.propTypes = {
+  captures: PropTypes.arrayOf(PropTypes.object).isRequired
+};

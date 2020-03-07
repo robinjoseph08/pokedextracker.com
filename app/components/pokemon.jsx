@@ -1,3 +1,4 @@
+import PropTypes                    from 'prop-types';
 import classNames                   from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -76,3 +77,7 @@ export function PokemonComponent ({ capture }) {
     </div>
   );
 }
+
+PokemonComponent.propTypes = {
+  capture: PropTypes.object
+};

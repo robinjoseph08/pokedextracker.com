@@ -1,3 +1,4 @@
+import PropTypes       from 'prop-types';
 import { Link }        from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState }    from 'react';
@@ -42,3 +43,8 @@ export function DexPreviewComponent ({ dex, reload }) {
     </div>
   );
 }
+
+DexPreviewComponent.propTypes = {
+  dex: PropTypes.object.isRequired,
+  reload: PropTypes.func.isRequired
+};

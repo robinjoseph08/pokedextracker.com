@@ -1,3 +1,4 @@
+import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo, useState }        from 'react';
 
@@ -61,3 +62,7 @@ export function MarkAllButtonComponent ({ captures }) {
     </button>
   );
 }
+
+MarkAllButtonComponent.propTypes = {
+  captures: PropTypes.arrayOf(PropTypes.object).isRequired
+};

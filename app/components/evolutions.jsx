@@ -1,4 +1,5 @@
-import uniqBy from 'lodash/uniqBy';
+import PropTypes from 'prop-types';
+import uniqBy    from 'lodash/uniqBy';
 
 import { capitalize } from '../utils/formatting';
 
@@ -58,3 +59,8 @@ export function EvolutionsComponent ({ evolutions, pokemonId }) {
     <div className={`evolution-trigger-column ${pokemonId === 866 ? 'push' : ''}`}>{elements}</div>
   );
 }
+
+EvolutionsComponent.propTypes = {
+  evolutions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pokemonId: PropTypes.number
+};

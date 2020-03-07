@@ -1,3 +1,4 @@
+import PropTypes       from 'prop-types';
 import { useMemo }     from 'react';
 import { useSelector } from 'react-redux';
 
@@ -19,7 +20,7 @@ export function BoxComponent ({ captures, deferred }) {
   const lastPokemon = captures[captures.length - 1].pokemon;
   let title = firstPokemon.box;
 
-  if (!firstPokemon.box) {
+  if (!title) {
     const firstNumber = dex.regional ? firstPokemon[`${dex.game.game_family.id}_id`] : firstPokemon.national_id;
     const lastNumber = dex.regional ? lastPokemon[`${dex.game.game_family.id}_id`] : lastPokemon.national_id;
     title = `${padding(firstNumber, 3)} - ${padding(lastNumber, 3)}`;
@@ -42,3 +43,12 @@ export function BoxComponent ({ captures, deferred }) {
     </div>
   );
 }
+
+BoxComponent.defaultProps = {
+  deferred: false
+};
+
+BoxComponent.propTypes = {
+  captures: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deferred: PropTypes.bool
+};

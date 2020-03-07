@@ -1,3 +1,4 @@
+import PropTypes       from 'prop-types';
 import { useParams }   from 'react-router';
 import { useRef }      from 'react';
 import { useSelector } from 'react-redux';
@@ -33,3 +34,7 @@ export function ShareComponent ({ profile }) {
     </div>
   );
 }
+
+ShareComponent.propTypes = {
+  profile: PropTypes.bool.isRequired
+};

@@ -1,4 +1,5 @@
 import Modal                        from 'react-modal';
+import PropTypes                    from 'prop-types';
 import slug                         from 'slug';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory }               from 'react-router';
@@ -174,3 +175,8 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
     </Modal>
   );
 }
+
+DexCreateComponent.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired
+};

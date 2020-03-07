@@ -1,3 +1,4 @@
+import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { EvolutionsComponent } from './evolutions';
@@ -48,3 +49,7 @@ export function EvolutionFamilyComponent ({ family }) {
     </div>
   );
 }
+
+EvolutionFamilyComponent.propTypes = {
+  family: PropTypes.object.isRequired
+};

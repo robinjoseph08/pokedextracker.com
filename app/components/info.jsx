@@ -63,7 +63,7 @@ export function InfoComponent () {
           <h2>#{padding(pokemon.national_id, 3)}</h2>
         </div>
 
-        <InfoLocationsComponent pokemon={pokemon} />
+        <InfoLocationsComponent locations={pokemon.locations} />
 
         <EvolutionFamilyComponent family={pokemon.evolution_family} />
 

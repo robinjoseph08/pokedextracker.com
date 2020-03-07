@@ -1,3 +1,4 @@
+import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect }                from 'react';
 
@@ -55,7 +56,15 @@ export function HeaderComponent ({ profile }) {
         </div>
       </h1>
       {profile && <DonatedFlairComponent />}
-      <DexIndicatorComponent dex={dex} />
+      {!profile && <DexIndicatorComponent dex={dex} />}
     </div>
   );
 }
+
+HeaderComponent.defaultProps = {
+  profile: false
+};
+
+HeaderComponent.propTypes = {
+  profile: PropTypes.bool
+};

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { decimal } from '../utils/formatting';
 
 export function ProgressComponent ({ caught, total }) {
@@ -13,3 +15,8 @@ export function ProgressComponent ({ caught, total }) {
     </div>
   );
 }
+
+ProgressComponent.propTypes = {
+  caught: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired
+};

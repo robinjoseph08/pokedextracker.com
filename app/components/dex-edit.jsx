@@ -1,4 +1,5 @@
 import Modal                                    from 'react-modal';
+import PropTypes                                from 'prop-types';
 import slug                                     from 'slug';
 import { useDispatch, useSelector }             from 'react-redux';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -240,3 +241,9 @@ export function DexEditComponent ({ dex, isOpen, onRequestClose }) {
     </Modal>
   );
 }
+
+DexEditComponent.propTypes = {
+  dex: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired
+};

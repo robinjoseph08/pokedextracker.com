@@ -1,3 +1,4 @@
+import PropTypes       from 'prop-types';
 import { Link }        from 'react-router-dom';
 import { useMemo }     from 'react';
 import { useSelector } from 'react-redux';
@@ -55,3 +56,7 @@ export function DexComponent ({ onScrollButtonClick }) {
     </div>
   );
 }
+
+DexComponent.propTypes = {
+  onScrollButtonClick: PropTypes.func.isRequired
+};

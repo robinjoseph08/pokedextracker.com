@@ -1,3 +1,4 @@
+import PropTypes       from 'prop-types';
 import { useSelector } from 'react-redux';
 
 export const SCROLL_DEBOUNCE = 500;
@@ -12,3 +13,7 @@ export function ScrollComponent ({ onClick }) {
     </div>
   );
 }
+
+ScrollComponent.propTypes = {
+  onClick: PropTypes.func.isRequired
+};
