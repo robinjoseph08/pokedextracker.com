@@ -93,13 +93,13 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
             <label htmlFor="dex_title">Title</label>
             <input
               className="form-control"
-              name="dex_title"
               id="dex_title"
-              type="text"
               maxLength="300"
-              required
-              placeholder="Living Dex"
+              name="dex_title"
               onChange={handleTitleChange}
+              placeholder="Living Dex"
+              required
+              type="text"
               value={title}
             />
             <i className="fa fa-asterisk" />
@@ -120,12 +120,11 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
             <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
               <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
                 <input
-                  type="radio"
-                  name="regional"
                   checked={!regional}
                   disabled={!gamesById[game].game_family.national_support}
-                  value="national"
+                  name="regional"
                   onChange={() => setRegional(false)}
+                  type="radio"
                 />
                 <span className="radio-custom"><span /></span>National
               </label>
@@ -133,12 +132,11 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
             <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
               <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
                 <input
-                  type="radio"
-                  name="regional"
                   checked={regional}
                   disabled={!gamesById[game].game_family.regional_support}
-                  value="regional"
+                  name="regional"
                   onChange={() => setRegional(true)}
+                  type="radio"
                 />
                 <span className="radio-custom"><span /></span>Regional
               </label>
@@ -149,10 +147,10 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
             <div className="radio">
               <label>
                 <input
-                  type="radio"
+                  checked={!shiny}
                   name="type"
                   onChange={() => setShiny(false)}
-                  checked={!shiny}
+                  type="radio"
                 />
                 <span className="radio-custom"><span /></span>Normal
               </label>
@@ -160,10 +158,10 @@ export function DexCreateComponent ({ isOpen, onRequestClose }) {
             <div className="radio">
               <label>
                 <input
-                  type="radio"
+                  checked={shiny}
                   name="type"
                   onChange={() => setShiny(true)}
-                  checked={shiny}
+                  type="radio"
                 />
                 <span className="radio-custom"><span /></span>Shiny
               </label>

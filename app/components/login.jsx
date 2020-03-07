@@ -30,7 +30,7 @@ export function LoginComponent () {
     if (session) {
       history.push(`/u/${session.username}`);
     }
-  }, [session])
+  }, [session]);
 
   useEffect(() => {
     dispatch(checkVersion());
