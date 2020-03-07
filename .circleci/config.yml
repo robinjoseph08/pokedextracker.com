@@ -17,13 +17,13 @@ jobs:
             - ~/pokedextracker.com/.git
       - restore_cache:
           keys:
-            - yarn-v1-{{ checksum "yarn.lock" }}
-            - yarn-v1-
+            - yarn-v2-{{ checksum "yarn.lock" }}
+            - yarn-v2-
       - run:
           name: Install dependencies
           command: yarn
       - save_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}
+          key: yarn-v2-{{ checksum "yarn.lock" }}
           paths:
             - ~/pokedextracker.com/node_modules
             - ~/.cache/yarn
