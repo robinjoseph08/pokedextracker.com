@@ -1,5 +1,5 @@
-import { useEffect }                from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect }                from 'react';
 
 import { EvolutionFamilyComponent } from './evolution-family';
 import { InfoLocationsComponent }   from './info-locations';

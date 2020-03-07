@@ -1,62 +1,67 @@
-import { Component } from 'react';
-import { connect }   from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef }        from 'react';
 
 import { ReactGA }  from '../utils/analytics';
 import { setQuery } from '../actions/search';
 
-export class SearchBar extends Component {
+export function SearchBarComponent () {
+  const dispatch = useDispatch();
 
-  componentWillMount () {
-    document.addEventListener('keyup', this.onKeyup);
-    this.props.setQuery('');
-  }
+  const inputRef = useRef(null);
 
-  componentWillUnmount () {
-    document.removeEventListener('keyup', this.onKeyup);
-  }
+  const query = useSelector(({ query }) => query);
 
-  onKeyup = (event) => {
-    if (event.target.tagName.toLowerCase() !== 'input' && event.key === '/') {
-      ReactGA.event({ action: 'used shortcut', category: 'Search' });
-      this._search && this._search.focus();
-    }
-  }
+  useEffect(() => {
+    const handleKeyup = (e) => {
+      if (e.target.tagName.toLowerCase() !== 'input' && e.key === '/') {
+        ReactGA.event({ action: 'used shortcut', category: 'Search' });
+        inputRef.current && inputRef.current.focus();
+      }
+    };
 
-  onClick = () => {
-    this.props.setQuery('');
-    this._search.focus();
-  }
+    document.addEventListener('keyup', handleKeyup);
 
-  render () {
-    const { query, setQuery } = this.props;
+    return () => document.removeEventListener('keyup', handleKeyup);
+  }, [inputRef.current]);
 
-    if (this._search) {
-      this._search.value = query;
-    }
+  useEffect(() => {
+    dispatch(setQuery(''));
+  }, []);
 
-    return (
-      <div className="dex-search-bar">
-        <div className="wrapper">
-          <div className="form-group">
-            <i className="fa fa-search" />
-            <input className="form-control" ref={(c) => this._search = c} name="search" id="search" type="text" placeholder="Search by Pokémon name (press / to quick search)" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" onChange={(e) => setQuery(e.target.value)} />
-            {query.length > 0 ? <a onClick={this.onClick}><i className="fa fa-times" /></a> : null}
-          </div>
+  const handleInputChange = (e) => dispatch(setQuery(e.target.value));
+
+  const handleClearClick = () => {
+    dispatch(setQuery(''));
+    inputRef.current && inputRef.current.focus();
+  };
+
+  return (
+    <div className="dex-search-bar">
+      <div className="wrapper">
+        <div className="form-group">
+          <i className="fa fa-search" />
+          <input
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            className="form-control"
+            id="search"
+            name="search"
+            onChange={handleInputChange}
+            placeholder="Search by Pokémon name (press / to quick search)"
+            ref={inputRef}
+            spellCheck="false"
+            type="text"
+            value={query}
+          />
+          {query.length > 0 ?
+            <a onClick={handleClearClick}>
+              <i className="fa fa-times" />
+            </a> :
+            null
+          }
         </div>
       </div>
-    );
-  }
-
+    </div>
+  );
 }
-
-function mapStateToProps ({ query }) {
-  return { query };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    setQuery: (query) => dispatch(setQuery(query))
-  };
-}
-
-export const SearchBarComponent = connect(mapStateToProps, mapDispatchToProps)(SearchBar);
