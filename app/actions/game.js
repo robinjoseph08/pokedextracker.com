@@ -9,10 +9,10 @@ export function listGames () {
     dispatch(checkVersion());
 
     return API.get(`${Config.API_HOST}/games`)
-    .then((games) => {
-      dispatch(setGames(games));
-      return games;
-    });
+      .then((games) => {
+        dispatch(setGames(games));
+        return games;
+      });
   };
 }
 

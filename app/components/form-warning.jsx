@@ -1,4 +1,6 @@
-export function FormWarningComponent ({ message }) {
+import PropTypes from 'prop-types';
+
+export function FormWarning ({ message }) {
   if (!message) {
     return null;
   }
@@ -12,3 +14,7 @@ export function FormWarningComponent ({ message }) {
     </div>
   );
 }
+
+FormWarning.propTypes = {
+  message: PropTypes.any
+};

@@ -1,15 +1,18 @@
 import './styles';
 
+import Modal        from 'react-modal';
 import { Provider } from 'react-redux';
 import { render }   from 'react-dom';
 
-import { AppComponent } from './components/app';
-import { Store }        from './stores';
+import { App }   from './components/app';
+import { Store } from './stores';
+
+Modal.setAppElement('#root');
 
 function run () {
   render(
     <Provider store={Store}>
-      <AppComponent />
+      <App />
     </Provider>,
     document.getElementById('root')
   );

@@ -1,19 +1,18 @@
-import fetch         from 'isomorphic-fetch';
 import { stringify } from 'qs';
 
 import { Store } from '../stores';
 
 function handleResponse (response) {
   return response.json()
-  .then((json) => {
-    if (response.status >= 200 && response.status < 300) {
-      return json;
-    }
+    .then((json) => {
+      if (response.status >= 200 && response.status < 300) {
+        return json;
+      }
 
-    const error = new Error(json.error.message);
-    error.response = response;
-    throw error;
-  });
+      const error = new Error(json.error.message);
+      error.response = response;
+      throw error;
+    });
 }
 
 function getHeaders () {
@@ -30,11 +29,11 @@ export const API = {
       body: JSON.stringify(payload),
       headers: getHeaders()
     })
-    .then((response) => handleResponse(response));
+      .then((response) => handleResponse(response));
   },
   get (url, params) {
     return fetch(`${url}?${stringify(params)}`)
-    .then((response) => handleResponse(response));
+      .then((response) => handleResponse(response));
   },
   post (url, payload) {
     return fetch(url, {
@@ -42,6 +41,6 @@ export const API = {
       body: JSON.stringify(payload),
       headers: getHeaders()
     })
-    .then((response) => handleResponse(response));
+      .then((response) => handleResponse(response));
   }
 };

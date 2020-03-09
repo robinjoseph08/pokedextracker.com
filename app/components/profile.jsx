@@ -1,125 +1,92 @@
-import { Component } from 'react';
-import DocumentTitle from 'react-document-title';
-import { connect }   from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState }      from 'react';
+import { useParams }                from 'react-router';
 
-import { DexCreateComponent }                    from './dex-create';
-import { DexPreviewComponent }                   from './dex-preview';
-import { FooterComponent }                       from './footer';
-import { FriendCodeComponent }                   from './friend-code';
-import { HeaderComponent }                       from './header';
-import { NavComponent }                          from './nav';
-import { NotFoundComponent }                     from './not-found';
-import { NotificationComponent }                 from './notification';
-import { ReloadComponent }                       from './reload';
+import { DexCreate }                             from './dex-create';
+import { DexPreview }                            from './dex-preview';
+import { Footer }                                from './footer';
+import { FriendCode }                            from './friend-code';
+import { Header }                                from './header';
+import { Nav }                                   from './nav';
+import { NotFound }                              from './not-found';
+import { Notification }                          from './notification';
+import { Reload }                                from './reload';
 import { checkVersion }                          from '../actions/utils';
 import { listGames }                             from '../actions/game';
 import { retrieveUser, setCurrentUser, setUser } from '../actions/user';
 import { setShowShare }                          from '../actions/tracker';
 
-export class Profile extends Component {
+export function Profile () {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { loading: false };
-  }
+  const { username } = useParams();
 
-  componentWillMount () {
-    this.reset();
-  }
+  const session = useSelector(({ session }) => session);
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.params.username !== this.props.params.username) {
-      this.reset(nextProps);
-    }
-  }
+  const [isLoading, setIsLoading] = useState(true);
+  const [showDexCreate, setShowDexCreate] = useState(false);
 
-  reset (props) {
-    const { checkVersion, params: { username }, listGames, retrieveUser, setCurrentUser, setShowShare, setUser } = props || this.props;
+  const reload = async () => {
+    setIsLoading(true);
 
-    this.setState({ ...this.state, loading: true });
+    dispatch(checkVersion());
+    dispatch(setCurrentUser(username));
+    dispatch(setShowShare(false));
 
-    checkVersion();
-    setCurrentUser(username);
-    setShowShare(false);
+    const [u] = await Promise.all([
+      dispatch(retrieveUser(username)),
+      dispatch(listGames())
+    ]);
 
-    Promise.all([
-      retrieveUser(username),
-      listGames()
-    ])
-    .then(([user]) => {
-      setUser(user);
-      this.setState({ ...this.state, loading: false });
-    })
-    .catch(() => this.setState({ ...this.state, loading: false }));
-  }
-
-  render () {
-    const { params: { username }, session, user } = this.props;
-    const { loading, showCreateDex } = this.state;
-
-    if (loading) {
-      return (
-        <DocumentTitle title={`${username}'s Profile | Pokédex Tracker`}>
-          <div className="loading">Loading...</div>
-        </DocumentTitle>
-      );
-    }
-
-    if (!user) {
-      return <NotFoundComponent />;
-    }
-
-    const ownPage = session && session.id === user.id;
-    let createDexButton = null;
-
-    if (ownPage) {
-      createDexButton = (
-        <div className="dex-create">
-          <div className="btn btn-blue" onClick={() => this.setState({ ...this.state, showCreateDex: true })}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
-          <DexCreateComponent isOpen={showCreateDex} onRequestClose={() => this.setState({ ...this.state, showCreateDex: false })} />
-        </div>
-      );
-    }
-
-    return (
-      <DocumentTitle title={`${username}'s Profile | Pokédex Tracker`}>
-        <div className="profile-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="profile">
-            <div className="wrapper">
-              <header>
-                <NotificationComponent />
-                <HeaderComponent profile />
-                <FriendCodeComponent />
-              </header>
-
-              {user.dexes.map((dex) => <DexPreviewComponent key={dex.id} dex={dex} reload={() => this.reset()} />)}
-
-              {createDexButton}
-            </div>
-          </div>
-          <FooterComponent />
-        </div>
-      </DocumentTitle>
-    );
-  }
-
-}
-
-function mapStateToProps ({ currentUser, session, users }) {
-  return { session, user: users[currentUser] };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    checkVersion: () => dispatch(checkVersion()),
-    listGames: () => dispatch(listGames()),
-    retrieveUser: (username) => dispatch(retrieveUser(username)),
-    setCurrentUser: (username) => dispatch(setCurrentUser(username)),
-    setShowShare: (show) => dispatch(setShowShare(show)),
-    setUser: (user) => dispatch(setUser(user))
+    dispatch(setUser(u));
+    setIsLoading(false);
   };
-}
 
-export const ProfileComponent = connect(mapStateToProps, mapDispatchToProps)(Profile);
+  useEffect(() => {
+    document.title = `${username}'s Profile | Pokédex Tracker`;
+  }, []);
+
+  useEffect(() => {
+    reload();
+  }, [username]);
+
+  const handleCreateNewDexClick = () => setShowDexCreate(true);
+  const handleDexCreateRequestClose = () => setShowDexCreate(false);
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (!user) {
+    return <NotFound />;
+  }
+
+  const ownPage = session && session.id === user.id;
+
+  return (
+    <div className="profile-container">
+      <Nav />
+      <Reload />
+      <div className="profile">
+        <div className="wrapper">
+          <header>
+            <Notification />
+            <Header profile />
+            <FriendCode />
+          </header>
+
+          {user.dexes.map((dex) => <DexPreview dex={dex} key={dex.id} reload={reload} />)}
+
+          {ownPage &&
+            <div className="dex-create">
+              <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
+              <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
+            </div>
+          }
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+}

@@ -1,68 +1,70 @@
-import { Component } from 'react';
-import { connect }   from 'react-redux';
+import PropTypes                    from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect }                from 'react';
 
-import { DexIndicatorComponent } from './dex-indicator';
-import { DonatedFlairComponent } from './donated-flair';
-import { ReactGA }               from '../utils/analytics';
-import { ShareComponent }        from './share';
-import { setShowShare }          from '../actions/tracker';
+import { DexIndicator } from './dex-indicator';
+import { DonatedFlair } from './donated-flair';
+import { ReactGA }      from '../utils/analytics';
+import { Share }        from './share';
+import { setShowShare } from '../actions/tracker';
 
-export class Header extends Component {
+export function Header ({ profile }) {
+  const dispatch = useDispatch();
 
-  componentDidMount () {
-    window.addEventListener('click', this.closeShare);
-  }
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+  const session = useSelector(({ session }) => session);
+  const showShare = useSelector(({ showShare }) => showShare);
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
-  componentWillUnmount () {
-    window.removeEventListener('click', this.closeShare);
-  }
+  useEffect(() => {
+    const closeShare = () => dispatch(setShowShare(false));
 
-  closeShare = () => {
-    this.props.setShowShare(false);
-  }
+    window.addEventListener('click', closeShare);
 
-  toggleShare = (e, showShare) => {
+    return () => window.removeEventListener('click', closeShare);
+  }, []);
+
+  const handleShareClick = (e) => {
     e.stopPropagation();
 
-    const { setShowShare } = this.props;
+    ReactGA.event({ action: showShare ? 'close' : 'open', category: 'Share' });
 
-    ReactGA.event({ action: showShare ? 'open' : 'close', category: 'Share' });
-
-    setShowShare(showShare);
-  }
-
-  render () {
-    const { dex, profile, session, showShare, user } = this.props;
-    const ownPage = session && session.id === user.id;
-
-    return (
-      <div className="header-row">
-        <h1>
-          {profile ? `${user.username}'s Profile` : dex.title}
-          <div className="share-container">
-            <a onClick={(e) => this.toggleShare(e, !showShare)}>
-              <i className="fa fa-link" />
-              <ShareComponent profile={profile} />
-            </a>
-            <a href={`http://twitter.com/home/?status=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`} target="_blank" rel="noopener noreferrer" onClick={() => ReactGA.event({ action: 'click tweet', category: 'Share' })}><i className="fa fa-twitter" /></a>
-          </div>
-        </h1>
-        {profile ? <DonatedFlairComponent /> : null}
-        <DexIndicatorComponent dex={dex} />
-      </div>
-    );
-  }
-
-}
-
-function mapStateToProps ({ currentDex, currentUser, session, showShare, users }) {
-  return { dex: users[currentUser].dexesBySlug[currentDex], session, showShare, user: users[currentUser] };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    setShowShare: (show) => dispatch(setShowShare(show))
+    dispatch(setShowShare(!showShare));
   };
+
+  const handleTweetClick = () => ReactGA.event({ action: 'click tweet', category: 'Share' });
+
+  const ownPage = session && session.id === user.id;
+
+  return (
+    <div className="header-row">
+      <h1>
+        {profile ? `${user.username}'s Profile` : dex.title}
+        <div className="share-container">
+          <a onClick={handleShareClick}>
+            <i className="fa fa-link" />
+            <Share profile={profile} />
+          </a>
+          <a
+            href={`https://twitter.com/intent/tweet?text=Check out ${ownPage ? 'my' : `${user.username}'s`} ${profile ? 'profile' : 'living dex progress'} on @PokedexTracker! https://pokedextracker.com/u/${user.username}${profile ? '' : `/${dex.slug}`}`}
+            onClick={handleTweetClick}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <i className="fa fa-twitter" />
+          </a>
+        </div>
+      </h1>
+      {profile && <DonatedFlair />}
+      {!profile && <DexIndicator dex={dex} />}
+    </div>
+  );
 }
 
-export const HeaderComponent = connect(mapStateToProps, mapDispatchToProps)(Header);
+Header.defaultProps = {
+  profile: false
+};
+
+Header.propTypes = {
+  profile: PropTypes.bool
+};

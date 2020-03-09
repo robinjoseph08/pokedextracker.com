@@ -1,16 +1,19 @@
-import { connect } from 'react-redux';
+import PropTypes       from 'prop-types';
+import { useSelector } from 'react-redux';
 
-export const SCROLL_DEBOUNCE       = 500;
+export const SCROLL_DEBOUNCE = 500;
 export const SHOW_SCROLL_THRESHOLD = 400;
 
-export function Scroll ({ onClick, showScroll }) {
+export function Scroll ({ onClick }) {
+  const showScroll = useSelector(({ showScroll }) => showScroll);
+
   return (
-    <div className={`scroll-up ${showScroll ? 'visible' : ''}`} onClick={onClick}><i className="fa fa-long-arrow-up" /></div>
+    <div className={`scroll-up ${showScroll ? 'visible' : ''}`} onClick={onClick}>
+      <i className="fa fa-long-arrow-up" />
+    </div>
   );
 }
 
-function mapStateToProps ({ showScroll }) {
-  return { showScroll };
-}
-
-export const ScrollComponent = connect(mapStateToProps)(Scroll);
+Scroll.propTypes = {
+  onClick: PropTypes.func.isRequired
+};

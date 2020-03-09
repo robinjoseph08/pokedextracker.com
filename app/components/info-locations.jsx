@@ -1,7 +1,9 @@
-export function InfoLocationsComponent ({ pokemon }) {
+import PropTypes from 'prop-types';
+
+export function InfoLocations ({ locations }) {
   return (
     <div className="info-locations">
-      {pokemon.locations.map((location) => {
+      {locations.map((location) => {
         return (
           <div key={location.game.id}>
             <h3>Pokémon {location.game.name}</h3>
@@ -14,3 +16,7 @@ export function InfoLocationsComponent ({ pokemon }) {
     </div>
   );
 }
+
+InfoLocations.propTypes = {
+  locations: PropTypes.arrayOf(PropTypes.object).isRequired
+};

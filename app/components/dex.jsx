@@ -1,64 +1,62 @@
-import { Link }    from 'react-router';
-import { connect } from 'react-redux';
+import PropTypes       from 'prop-types';
+import { Link }        from 'react-router-dom';
+import { useMemo }     from 'react';
+import { useSelector } from 'react-redux';
 
-import { BoxComponent, DeferredBoxComponent } from './box';
-import { DonatedFlairComponent }              from './donated-flair';
-import { FriendCodeComponent }                from './friend-code';
-import { HeaderComponent }                    from './header';
-import { NotificationComponent }              from './notification';
-import { ProgressComponent }                  from './progress';
-import { ReactGA }                            from '../utils/analytics';
-import { ScrollComponent }                    from './scroll';
-import { SearchResultsComponent }             from './search-results';
-import { groupBoxes }                         from '../utils/pokemon';
+import { Box }           from './box';
+import { DonatedFlair }  from './donated-flair';
+import { FriendCode }    from './friend-code';
+import { Header }        from './header';
+import { Notification }  from './notification';
+import { Progress }      from './progress';
+import { ReactGA }       from '../utils/analytics';
+import { Scroll }        from './scroll';
+import { SearchResults } from './search-results';
+import { groupBoxes }    from '../utils/pokemon';
 
-const BOX_COMPONENTS = {};
 const DEFER_CUTOFF = 1;
 
-export function Dex ({ captures, dex, onScrollButtonClick, query, username }) {
-  const caught = captures.filter(({ captured }) => captured).length;
-  const total = captures.length;
+export function Dex ({ onScrollButtonClick }) {
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+  const query = useSelector(({ query }) => query);
+  const username = useSelector(({ currentUser }) => currentUser);
 
-  if (query.length === 0) {
-    const boxes = groupBoxes(captures);
-    BOX_COMPONENTS[dex.id] = boxes.map((box, i) => {
-      if (i > DEFER_CUTOFF) {
-        return <DeferredBoxComponent key={box[0].pokemon.id} captures={box} />;
-      }
+  const caught = useMemo(() => dex.captures.filter(({ captured }) => captured).length, [dex.captures]);
+  const total = dex.captures.length;
 
-      return <BoxComponent key={box[0].pokemon.id} captures={box} />;
-    });
-  }
+  const boxes = useMemo(() => groupBoxes(dex.captures), [dex.captures]);
+  const boxs = useMemo(() => {
+    return boxes.map((box, i) => (
+      <Box
+        captures={box}
+        deferred={i > DEFER_CUTOFF}
+        key={box[0].pokemon.id}
+      />
+    ));
+  }, [boxes]);
 
   return (
     <div className="dex">
       <div className="wrapper">
-        <ScrollComponent onClick={onScrollButtonClick} />
-        <NotificationComponent />
+        <Scroll onClick={onScrollButtonClick} />
+        <Notification />
         <header>
-          <HeaderComponent />
+          <Header />
           <h3>
-            <Link to={`/u/${username}`} onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })}>/u/{username}</Link>
-            <DonatedFlairComponent />
+            <Link onClick={() => ReactGA.event({ action: 'click view profile', category: 'User' })} to={`/u/${username}`}>/u/{username}</Link>
+            <DonatedFlair />
           </h3>
-          <FriendCodeComponent />
+          <FriendCode />
         </header>
         <div className="percentage">
-          <ProgressComponent caught={caught} total={total} />
+          <Progress caught={caught} total={total} />
         </div>
-        {query.length > 0 ? <SearchResultsComponent captures={captures} /> : BOX_COMPONENTS[dex.id]}
+        {query.length > 0 ? <SearchResults captures={dex.captures} /> : boxs}
       </div>
     </div>
   );
 }
 
-function mapStateToProps ({ currentDex, currentUser, query, users }) {
-  return {
-    captures: users[currentUser].dexesBySlug[currentDex].captures,
-    dex: users[currentUser].dexesBySlug[currentDex],
-    query,
-    username: currentUser
-  };
-}
-
-export const DexComponent = connect(mapStateToProps)(Dex);
+Dex.propTypes = {
+  onScrollButtonClick: PropTypes.func.isRequired
+};

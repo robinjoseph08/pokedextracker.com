@@ -1,41 +1,54 @@
-import { connect } from 'react-redux';
+import PropTypes       from 'prop-types';
+import { useMemo }     from 'react';
+import { useSelector } from 'react-redux';
 
-import { MarkAllButtonComponent } from './mark-all-button';
-import { PokemonComponent }       from './pokemon';
-import { deferComponentRender }   from '../utils/defer-component-render';
-import { padding }                from '../utils/formatting';
+import { MarkAllButton }     from './mark-all-button';
+import { Pokemon }           from './pokemon';
+import { padding }           from '../utils/formatting';
+import { useDeferredRender } from '../hooks/use-deferred-render';
 
 export const BOX_SIZE = 30;
 
-export function Box ({ captures, dex }) {
-  const empties = Array.from({ length: BOX_SIZE - captures.length }).map((_, i) => i);
+export function Box ({ captures, deferred }) {
+  const render = useDeferredRender(!deferred);
+
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+
+  const empties = useMemo(() => Array.from({ length: BOX_SIZE - captures.length }).map((_, i) => i), [captures]);
+
   const firstPokemon = captures[0].pokemon;
   const lastPokemon = captures[captures.length - 1].pokemon;
-  let title = <h1>{firstPokemon.box}</h1>;
+  let title = firstPokemon.box;
 
-  if (!firstPokemon.box) {
+  if (!title) {
     const firstNumber = dex.regional ? firstPokemon[`${dex.game.game_family.id}_id`] : firstPokemon.national_id;
     const lastNumber = dex.regional ? lastPokemon[`${dex.game.game_family.id}_id`] : lastPokemon.national_id;
-    title = <h1>{padding(firstNumber, 3)} - {padding(lastNumber, 3)}</h1>;
+    title = `${padding(firstNumber, 3)} - ${padding(lastNumber, 3)}`;
+  }
+
+  if (!render) {
+    return null;
   }
 
   return (
     <div className="box">
       <div className="box-header">
-        {title}
-        <MarkAllButtonComponent captures={captures} />
+        <h1>{title}</h1>
+        <MarkAllButton captures={captures} />
       </div>
       <div className="box-container">
-        {captures.map((capture) => <PokemonComponent key={capture.pokemon.id} capture={capture} />)}
-        {empties.map((index) => <PokemonComponent key={index} capture={null} />)}
+        {captures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} />)}
+        {empties.map((index) => <Pokemon capture={null} key={index} />)}
       </div>
     </div>
   );
 }
 
-function mapStateToProps ({ currentDex, currentUser, users }) {
-  return { dex: users[currentUser].dexesBySlug[currentDex] };
-}
+Box.defaultProps = {
+  deferred: false
+};
 
-export const DeferredBoxComponent = deferComponentRender(connect(mapStateToProps)(Box));
-export const BoxComponent = connect(mapStateToProps)(Box);
+Box.propTypes = {
+  captures: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deferred: PropTypes.bool
+};

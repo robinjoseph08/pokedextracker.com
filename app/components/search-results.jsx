@@ -1,45 +1,36 @@
-import { Component } from 'react';
-import { connect }   from 'react-redux';
+import PropTypes                    from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMemo }                  from 'react';
 
-import { PokemonComponent } from './pokemon';
-import { setQuery }         from '../actions/search';
+import { Pokemon }  from './pokemon';
+import { setQuery } from '../actions/search';
 
-export class SearchResults extends Component {
+export function SearchResults ({ captures }) {
+  const dispatch = useDispatch();
 
-  onClick = () => {
-    this.props.setQuery('');
-  }
+  const query = useSelector(({ query }) => query.toLowerCase());
 
-  render () {
-    const { captures, query } = this.props;
+  const handleClearClick = () => dispatch(setQuery(''));
 
-    const filteredCaptures = captures.filter((capture) => capture.pokemon.name.toLowerCase().indexOf(query.toLowerCase()) === 0);
+  const filteredCaptures = useMemo(() => {
+    return captures.filter((capture) => capture.pokemon.name.toLowerCase().indexOf(query) === 0);
+  }, [captures, query]);
 
-    if (filteredCaptures.length === 0) {
-      return (
-        <div className="search-results search-results-empty">
-          <p>No results. <a className="link" onClick={this.onClick}>Clear your search?</a></p>
-        </div>
-      );
-    }
-
+  if (filteredCaptures.length === 0) {
     return (
-      <div className="search-results">
-        {filteredCaptures.map((capture) => <PokemonComponent key={capture.pokemon.id} capture={capture} />)}
+      <div className="search-results search-results-empty">
+        <p>No results. <a className="link" onClick={handleClearClick}>Clear your search?</a></p>
       </div>
     );
   }
 
+  return (
+    <div className="search-results">
+      {filteredCaptures.map((capture) => <Pokemon capture={capture} key={capture.pokemon.id} />)}
+    </div>
+  );
 }
 
-function mapStateToProps ({ query }) {
-  return { query };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    setQuery: (query) => dispatch(setQuery(query))
-  };
-}
-
-export const SearchResultsComponent = connect(mapStateToProps, mapDispatchToProps)(SearchResults);
+SearchResults.propTypes = {
+  captures: PropTypes.arrayOf(PropTypes.object).isRequired
+};

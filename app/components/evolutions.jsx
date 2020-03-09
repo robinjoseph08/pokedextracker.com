@@ -1,4 +1,5 @@
-import uniqBy from 'lodash/uniqBy';
+import PropTypes from 'prop-types';
+import uniqBy    from 'lodash/uniqBy';
 
 import { capitalize } from '../utils/formatting';
 
@@ -6,7 +7,7 @@ function evolutionKey (evolution) {
   return `${evolution.trigger}:${evolution.level}:${evolution.stone}:${evolution.held_item}:${evolution.notes}`;
 }
 
-export function EvolutionsComponent ({ evolutions, pokemonId }) {
+export function Evolutions ({ evolutions, pokemonId }) {
   const elements = uniqBy(evolutions, evolutionKey).map((evolution) => {
     const key = evolutionKey(evolution);
     let trigger = null;
@@ -42,7 +43,7 @@ export function EvolutionsComponent ({ evolutions, pokemonId }) {
     }
 
     return (
-      <div key={key} className="evolution-trigger">
+      <div className="evolution-trigger" key={key}>
         <i className={`fa ${evolution.trigger === 'breed' ? 'fa-long-arrow-left' : 'fa-long-arrow-right'}`} />
         <div>
           {trigger}
@@ -58,3 +59,8 @@ export function EvolutionsComponent ({ evolutions, pokemonId }) {
     <div className={`evolution-trigger-column ${pokemonId === 866 ? 'push' : ''}`}>{elements}</div>
   );
 }
+
+Evolutions.propTypes = {
+  evolutions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pokemonId: PropTypes.number
+};

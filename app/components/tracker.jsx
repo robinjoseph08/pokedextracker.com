@@ -1,16 +1,16 @@
-import DocumentTitle from 'react-document-title';
-import throttle      from 'lodash/throttle';
-import { Component } from 'react';
-import { connect }   from 'react-redux';
+import throttle                                     from 'lodash/throttle';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector }                 from 'react-redux';
+import { useParams }                                from 'react-router';
 
-import { DexComponent }                           from './dex';
-import { FooterComponent }                        from './footer';
-import { InfoComponent }                          from './info';
-import { NavComponent }                           from './nav';
-import { NotFoundComponent }                      from './not-found';
-import { ReloadComponent }                        from './reload';
+import { Dex }                                    from './dex';
+import { Footer }                                 from './footer';
+import { Info }                                   from './info';
+import { Nav }                                    from './nav';
+import { NotFound }                               from './not-found';
+import { Reload }                                 from './reload';
 import { SCROLL_DEBOUNCE, SHOW_SCROLL_THRESHOLD } from './scroll';
-import { SearchBarComponent }                     from './search-bar';
+import { SearchBar }                              from './search-bar';
 import { checkVersion }                           from '../actions/utils';
 import { clearPokemon, setCurrentPokemon }        from '../actions/pokemon';
 import { listCaptures }                           from '../actions/capture';
@@ -18,135 +18,81 @@ import { retrieveDex, setCurrentDex }             from '../actions/dex';
 import { retrieveUser, setUser }                  from '../actions/user';
 import { setShowScroll, setShowShare }            from '../actions/tracker';
 
-export class Tracker extends Component {
+export function Tracker () {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { loading: false };
+  const { slug, username } = useParams();
+
+  const trackerRef = useRef(null);
+
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser] && users[currentUser].dexesBySlug[currentDex]);
+  const query = useSelector(({ query }) => query);
+  const showScroll = useSelector(({ showScroll }) => showScroll);
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    document.title = `${username}'s Living Dex | Pokédex Tracker`;
+  }, []);
+
+  useEffect(() => {
+    if (trackerRef.current) {
+      trackerRef.current.scrollTop = 0;
+    }
+  }, [query]);
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+
+      dispatch(checkVersion());
+      dispatch(clearPokemon());
+      dispatch(setShowScroll(false));
+      dispatch(setShowShare(false));
+      dispatch(setCurrentDex(slug, username));
+
+      const u = await dispatch(retrieveUser(username));
+      dispatch(setUser(u));
+      const d = await dispatch(retrieveDex(slug, username));
+      const captures = await dispatch(listCaptures(d, username));
+      dispatch(setCurrentPokemon(captures[0].pokemon.id));
+
+      setIsLoading(false);
+    })();
+  }, [slug, username]);
+
+  const handleScroll = throttle(() => {
+    if (!showScroll && trackerRef.current.scrollTop >= SHOW_SCROLL_THRESHOLD) {
+      dispatch(setShowScroll(true));
+    } else if (showScroll && trackerRef.current.scrollTop < SHOW_SCROLL_THRESHOLD) {
+      dispatch(setShowScroll(false));
+    }
+  }, SCROLL_DEBOUNCE);
+
+  const handleScrollButtonClick = useCallback(() => trackerRef.current.scrollTop = 0, [trackerRef.current]);
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>;
   }
 
-  componentWillMount () {
-    this.reset();
+  if (!dex) {
+    return <NotFound />;
   }
 
-  componentWillReceiveProps (nextProps) {
-    const { slug, username } = this.props.params;
-    const samePage = nextProps.params.username === username && nextProps.params.slug === slug;
-
-    if (!samePage) {
-      this.reset(nextProps);
-    }
-
-    if (this._tracker && this.props.query !== nextProps.query) {
-      this._tracker.scrollTop = 0;
-    }
-  }
-
-  reset (props) {
-    const {
-      checkVersion,
-      clearPokemon,
-      listCaptures,
-      params: { slug, username },
-      retrieveDex,
-      retrieveUser,
-      setCurrentDex,
-      setCurrentPokemon,
-      setShowScroll,
-      setShowShare,
-      setUser
-    } = props || this.props;
-
-    this.setState({ ...this.state, loading: true });
-
-    checkVersion();
-    clearPokemon();
-    setShowScroll(false);
-    setShowShare(false);
-    setCurrentDex(slug, username);
-
-    retrieveUser(username)
-    .then((user) => {
-      setUser(user);
-      return retrieveDex(slug, username);
-    })
-    .then((dex) => listCaptures(dex, username))
-    .then((captures) => {
-      setCurrentPokemon(captures[0].pokemon.id);
-      this.setState({ ...this.state, loading: false });
-    })
-    .catch(() => this.setState({ ...this.state, loading: false }));
-  }
-
-  onScroll = () => {
-    const { setShowScroll, showScroll } = this.props;
-
-    if (!showScroll && this._tracker && this._tracker.scrollTop >= SHOW_SCROLL_THRESHOLD) {
-      setShowScroll(true);
-    } else if (showScroll && this._tracker && this._tracker.scrollTop < SHOW_SCROLL_THRESHOLD) {
-      setShowScroll(false);
-    }
-  }
-
-  render () {
-    const { dex, params: { username } } = this.props;
-    const { loading } = this.state;
-
-    if (loading) {
-      return (
-        <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
-          <div className="loading">Loading...</div>
-        </DocumentTitle>
-      );
-    }
-
-    if (!dex) {
-      return <NotFoundComponent />;
-    }
-
-    return (
-      <DocumentTitle title={`${username}'s Living Dex | Pokédex Tracker`}>
-        <div className="tracker-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="tracker">
-            <div className="dex-wrapper">
-              <SearchBarComponent />
-              <div className="dex-column" ref={(c) => this._tracker = c} onScroll={throttle(this.onScroll, SCROLL_DEBOUNCE)}>
-                <DexComponent onScrollButtonClick={() => this._tracker ? this._tracker.scrollTop = 0 : null} />
-                <FooterComponent />
-              </div>
-            </div>
-            <InfoComponent />
+  return (
+    <div className="tracker-container">
+      <Nav />
+      <Reload />
+      <div className="tracker">
+        <div className="dex-wrapper">
+          <SearchBar />
+          <div className="dex-column" onScroll={handleScroll} ref={trackerRef}>
+            <Dex onScrollButtonClick={handleScrollButtonClick} />
+            <Footer />
           </div>
         </div>
-      </DocumentTitle>
-    );
-  }
-
+        <Info />
+      </div>
+    </div>
+  );
 }
-
-function mapStateToProps ({ currentDex, currentUser, query, showScroll, users }) {
-  return {
-    dex: users[currentUser] && users[currentUser].dexesBySlug[currentDex],
-    query,
-    showScroll
-  };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    checkVersion: () => dispatch(checkVersion()),
-    clearPokemon: () => dispatch(clearPokemon()),
-    listCaptures: (dex, username) => dispatch(listCaptures(dex, username)),
-    retrieveDex: (slug, username) => dispatch(retrieveDex(slug, username)),
-    retrieveUser: (username) => dispatch(retrieveUser(username)),
-    setCurrentPokemon: (id) => dispatch(setCurrentPokemon(id)),
-    setCurrentDex: (slug, username) => dispatch(setCurrentDex(slug, username)),
-    setShowScroll: (show) => dispatch(setShowScroll(show)),
-    setShowShare: (show) => dispatch(setShowShare(show)),
-    setUser: (user) => dispatch(setUser(user))
-  };
-}
-
-export const TrackerComponent = connect(mapStateToProps, mapDispatchToProps)(Tracker);

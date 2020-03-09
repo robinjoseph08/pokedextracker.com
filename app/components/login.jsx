@@ -1,101 +1,108 @@
-import { Component } from 'react';
-import DocumentTitle from 'react-document-title';
-import { Link }      from 'react-router';
-import { connect }   from 'react-redux';
-import { push }      from 'react-router-redux';
+import { useEffect, useState }      from 'react';
+import { Link }                     from 'react-router-dom';
+import { useHistory }               from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { AlertComponent }  from './alert';
-import { FooterComponent } from './footer';
-import { NavComponent }    from './nav';
-import { ReactGA }         from '../utils/analytics';
-import { ReloadComponent } from './reload';
-import { checkVersion }    from '../actions/utils';
-import { login }           from '../actions/session';
+import { Alert }        from './alert';
+import { Footer }       from './footer';
+import { Nav }          from './nav';
+import { ReactGA }      from '../utils/analytics';
+import { Reload }       from './reload';
+import { checkVersion } from '../actions/utils';
+import { login }        from '../actions/session';
 
-export class Login extends Component {
+export function Login () {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { error: null };
-  }
+  const history = useHistory();
 
-  componentWillMount () {
-    const { checkVersion, redirectToProfile, session } = this.props;
+  const session = useSelector(({ session }) => session);
 
+  const [error, setError] = useState(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    document.title = 'Login | Pokédex Tracker';
+  }, []);
+
+  useEffect(() => {
     if (session) {
-      redirectToProfile(session.username);
+      history.push(`/u/${session.username}`);
     }
+  }, []);
 
-    checkVersion();
-  }
+  useEffect(() => {
+    dispatch(checkVersion());
+  }, []);
 
-  scrollToTop () {
-    if (this._form) {
-      this._form.scrollTop = 0;
-    }
-  }
-
-  login = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { login } = this.props;
-    const username = this._username.value;
-    const password = this._password.value;
+    const payload = { username, password };
 
-    this.setState({ ...this.state, error: null });
+    setError(null);
 
-    login({ username, password })
-    .then(() => ReactGA.event({ action: 'login', category: 'Session' }))
-    .catch((err) => {
-      this.setState({ ...this.state, error: err.message });
-      this.scrollToTop();
-    });
-  }
-
-  render () {
-    const { error } = this.state;
-
-    return (
-      <DocumentTitle title="Login | Pokédex Tracker">
-        <div className="login-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="form" ref={(c) => this._form = c}>
-            <h1>Login</h1>
-            <form onSubmit={this.login} className="form-column">
-              <AlertComponent message={error} type="error" />
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" maxLength="20" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                <i className="fa fa-asterisk" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" maxLength="72" />
-                <i className="fa fa-asterisk" />
-              </div>
-              <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
-              <p>Don't have an account yet? <Link className="link" to="/register">Register here</Link>!</p>
-            </form>
-          </div>
-          <FooterComponent />
-        </div>
-      </DocumentTitle>
-    );
-  }
-
-}
-
-function mapStateToProps ({ session }) {
-  return { session };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    checkVersion: () => dispatch(checkVersion()),
-    login: (payload) => dispatch(login(payload)),
-    redirectToProfile: (username) => dispatch(push(`/u/${username}`))
+    try {
+      await dispatch(login(payload));
+      ReactGA.event({ action: 'login', category: 'Session' });
+      history.push(`/u/${username}`);
+    } catch (err) {
+      setError(err.message);
+      window.scrollTo({ top: 0 });
+    }
   };
-}
 
-export const LoginComponent = connect(mapStateToProps, mapDispatchToProps)(Login);
+  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+
+  return (
+    <div className="login-container">
+      <Nav />
+      <Reload />
+      <div className="form">
+        <h1>Login</h1>
+        <form className="form-column" onSubmit={handleSubmit}>
+          <Alert message={error} type="error" />
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              autoCapitalize="off"
+              autoComplete="off"
+              autoCorrect="off"
+              className="form-control"
+              id="username"
+              maxLength="20"
+              name="username"
+              onChange={handleUsernameChange}
+              placeholder="ashketchum10"
+              required
+              spellCheck="false"
+              type="text"
+              value={username}
+            />
+            <i className="fa fa-asterisk" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              className="form-control"
+              id="password"
+              maxLength="72"
+              name="password"
+              onChange={handlePasswordChange}
+              placeholder="••••••••••••"
+              required
+              type="password"
+              value={password}
+            />
+            <i className="fa fa-asterisk" />
+          </div>
+          <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
+          <p>Don't have an account yet? <Link className="link" to="/register">Register here</Link>!</p>
+        </form>
+      </div>
+      <Footer />
+    </div>
+  );
+}

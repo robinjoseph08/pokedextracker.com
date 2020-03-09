@@ -1,167 +1,173 @@
-import { Component } from 'react';
-import DocumentTitle from 'react-document-title';
-import { connect }   from 'react-redux';
-import { push }      from 'react-router-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState }      from 'react';
+import { useHistory }               from 'react-router';
 
-import { AlertComponent }                  from './alert';
-import { FooterComponent }                 from './footer';
-import { NavComponent }                    from './nav';
-import { ReactGA }                         from '../utils/analytics';
-import { ReloadComponent }                 from './reload';
-import { checkVersion }                    from '../actions/utils';
-import { friendCode3DS, friendCodeSwitch } from '../utils/formatting';
-import { updateUser }                      from '../actions/user';
+import { Alert }                                             from './alert';
+import { Footer }                                            from './footer';
+import { Nav }                                               from './nav';
+import { ReactGA }                                           from '../utils/analytics';
+import { Reload }                                            from './reload';
+import { checkVersion }                                      from '../actions/utils';
+import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../utils/formatting';
+import { updateUser }                                        from '../actions/user';
 
-export class Account extends Component {
+export function Account () {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { error: null, password: false, success: null };
-  }
+  const history = useHistory();
 
-  componentWillMount () {
-    this.reset();
-  }
+  const session = useSelector(({ session }) => session);
+  // If the session user hasn't been loaded yet, temporarily substitute it with
+  // the normal session. If there are things that are expected to be in the
+  // session user that isn't in the normal session (e.g. dexes), this could
+  // cause some problems and might need to be reworked, but right now, it works.
+  const user = useSelector(({ session, sessionUser }) => sessionUser || session);
 
-  componentWillUpdate (props) {
-    this.reset(props);
-  }
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEditingPassword, setIsEditingPassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [friendCode3ds, setFriendCode3ds] = useState(user && user.friend_code_3ds);
+  const [friendCodeSwitch, setFriendCodeSwitch] = useState(user && user.friend_code_switch);
+  const [success, setSuccess] = useState(null);
 
-  reset (props) {
-    const { checkVersion, redirectToLogin, session } = props || this.props;
+  useEffect(() => {
+    document.title = 'Account | Pokédex Tracker';
+  }, []);
 
+  useEffect(() => {
     if (!session) {
-      redirectToLogin();
+      history.push('/login');
     }
+  }, [session]);
 
-    checkVersion();
-  }
+  useEffect(() => {
+    dispatch(checkVersion());
+  }, []);
 
-  scrollToTop () {
-    if (this._form) {
-      this._form.scrollTop = 0;
-    }
-  }
-
-  onSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { session, updateUser } = this.props;
     const payload = {
       username: session.username,
       payload: {
-        password: this._password && this._password.value || undefined,
-        password_confirm: this._password_confirm && this._password_confirm.value || undefined,
-        friend_code_3ds: this._friend_code_3ds.value,
-        friend_code_switch: this._friend_code_switch.value
+        password,
+        password_confirm: passwordConfirm,
+        friend_code_3ds: friendCode3ds,
+        friend_code_switch: friendCodeSwitch
       }
     };
 
-    this.setState({ ...this.state, error: null, loading: true, success: null });
+    setError(null);
+    setIsLoading(true);
+    setSuccess(null);
 
-    updateUser(payload)
-    .then(() => {
+    try {
+      await dispatch(updateUser(payload));
       ReactGA.event({ action: 'update', category: 'User' });
-
-      this.setState({ ...this.state, loading: false, success: 'Account settings saved!' });
-    })
-    .catch((err) => {
-      this.setState({ ...this.state, error: err.message, loading: false });
-      this.scrollToTop();
-    });
-  }
-
-  render () {
-    const { session } = this.props;
-    let { user } = this.props;
-    const { error, loading, password, success } = this.state;
-
-    if (!session) {
-      return null;
+      setSuccess('Account settings saved!');
+    } catch (err) {
+      setError(err.message);
     }
 
-    // If the session user hasn't been loaded yet, temporarily substitute it
-    // with the normal session. If there are things that are expected to be in
-    // the session user that isn't in the normal session (e.g. dexes), this
-    // could cause some problems and might need to be reworked, but right now,
-    // it works.
-    if (!user) {
-      user = session;
-    }
-
-    let passwordInputs = null;
-
-    if (password) {
-      passwordInputs = (
-        <div>
-          <div className="form-group">
-            <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
-            <i className="fa fa-asterisk" />
-          </div>
-          <div className="form-group">
-            <input className="form-control" ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
-            <i className="fa fa-asterisk" />
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <DocumentTitle title="Account | Pokédex Tracker">
-        <div className="account-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="form" ref={(c) => this._form = c}>
-            <h1>{user.username}'s Account</h1>
-            <form onSubmit={this.onSubmit} className="form-column">
-              <AlertComponent message={error} type="error" />
-              <AlertComponent message={success} type="success" />
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <button className="btn btn-inline btn-yellow" type="button" onClick={() => this.setState({ ...this.state, password: !password })}>
-                  {password ? 'Cancel' : 'Change'}
-                </button>
-              </div>
-              {passwordInputs}
-              <div className="form-group">
-                <label htmlFor="friend_code_3ds">3DS Friend Code</label>
-                <input className="form-control" ref={(c) => this._friend_code_3ds = c} defaultValue={user.friend_code_3ds} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="friend_code_switch">Switch Friend Code</label>
-                <input className="form-control" ref={(c) => this._friend_code_switch = c} defaultValue={user.friend_code_switch} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
-              </div>
-              <div className="form-group">
-                <label htmlFor="language">Pokémon Name Language</label>
-                <select className="form-control">
-                  <option>English</option>
-                </select>
-                <i className="fa fa-chevron-down" />
-              </div>
-              <button className="btn btn-blue" type="submit">
-                <span className={loading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right" /></span>
-                {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
-              </button>
-            </form>
-          </div>
-          <FooterComponent />
-        </div>
-      </DocumentTitle>
-    );
-  }
-
-}
-
-function mapStateToProps ({ session, sessionUser }) {
-  return { session, user: sessionUser };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    checkVersion: () => dispatch(checkVersion()),
-    redirectToLogin: () => dispatch(push('/login')),
-    updateUser: (payload) => dispatch(updateUser(payload))
+    setIsLoading(false);
+    window.scrollTo({ top: 0 });
   };
-}
 
-export const AccountComponent = connect(mapStateToProps, mapDispatchToProps)(Account);
+  const handleChangePasswordClick = () => setIsEditingPassword(!isEditingPassword);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handlePasswordConfirmChange = (e) => setPasswordConfirm(e.target.value);
+  const handleFriendCode3dsChange = (e) => setFriendCode3ds(friendCode3dsFormatter(e.target.value));
+  const handleFriendCodeSwitchChange = (e) => setFriendCodeSwitch(friendCodeSwitchFormatter(e.target.value));
+
+  return (
+    <div className="account-container">
+      <Nav />
+      <Reload />
+      <div className="form">
+        <h1>{user.username}'s Account</h1>
+        <form className="form-column" onSubmit={handleSubmit}>
+          <Alert message={error} type="error" />
+          <Alert message={success} type="success" />
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <button
+              className="btn btn-inline btn-yellow"
+              onClick={handleChangePasswordClick}
+              type="button"
+            >
+              {isEditingPassword ? 'Cancel' : 'Change'}
+            </button>
+          </div>
+          {isEditingPassword &&
+            <div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  onChange={handlePasswordChange}
+                  placeholder="••••••••••••"
+                  required
+                  type="password"
+                  value={password}
+                />
+                <i className="fa fa-asterisk" />
+              </div>
+              <div className="form-group">
+                <input
+                  className="form-control"
+                  id="password_confirm"
+                  name="password_confirm"
+                  onChange={handlePasswordConfirmChange}
+                  placeholder="••••••••••••"
+                  required
+                  type="password"
+                  value={passwordConfirm}
+                />
+                <i className="fa fa-asterisk" />
+              </div>
+            </div>
+          }
+          <div className="form-group">
+            <label htmlFor="friend_code_3ds">3DS Friend Code</label>
+            <input
+              className="form-control"
+              id="friend_code_3ds"
+              name="friend_code_3ds"
+              onChange={handleFriendCode3dsChange}
+              placeholder="XXXX-XXXX-XXXX"
+              type="text"
+              value={friendCode3ds}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="friend_code_switch">Switch Friend Code</label>
+            <input
+              className="form-control"
+              id="friend_code_switch"
+              name="friend_code_switch"
+              onChange={handleFriendCodeSwitchChange}
+              placeholder="SW-XXXX-XXXX-XXXX"
+              type="text"
+              value={friendCodeSwitch}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="language">Pokémon Name Language</label>
+            <select className="form-control">
+              <option>English</option>
+            </select>
+            <i className="fa fa-chevron-down" />
+          </div>
+          <button className="btn btn-blue" type="submit">
+            <span className={isLoading ? 'hidden' : ''}>Save <i className="fa fa-long-arrow-right" /></span>
+            {isLoading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
+          </button>
+        </form>
+      </div>
+      <Footer />
+    </div>
+  );
+}

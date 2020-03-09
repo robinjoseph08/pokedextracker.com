@@ -1,60 +1,50 @@
-import { Component } from 'react';
-import { Link }    from 'react-router';
-import { connect } from 'react-redux';
+import PropTypes       from 'prop-types';
+import { Link }        from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState }    from 'react';
 
-import { DexEditComponent }      from './dex-edit';
-import { DexIndicatorComponent } from './dex-indicator';
-import { ProgressComponent }     from './progress';
+import { DexEdit }      from './dex-edit';
+import { DexIndicator } from './dex-indicator';
+import { Progress }     from './progress';
 
-export class DexPreview extends Component {
+export function DexPreview ({ dex, reload }) {
+  const session = useSelector(({ session }) => session);
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
 
-  constructor (props) {
-    super(props);
-    this.state = {};
-  }
+  const [showEditDex, setShowEditDex] = useState(false);
 
-  onRequestClose = (shouldReload) => {
-    const { reload } = this.props;
-    this.setState({ ...this.state, showEditDex: false });
+  const handleRequestClose = (shouldReload) => {
+    setShowEditDex(false);
 
     if (shouldReload) {
       reload();
     }
-  }
+  };
 
-  render () {
-    const { dex, session, user } = this.props;
-    const { showEditDex } = this.state;
+  const handleEditClick = () => setShowEditDex(true);
 
-    const ownPage = session && session.id === user.id;
-    let editDexButton = null;
+  const ownPage = session && session.id === user.id;
 
-    if (ownPage) {
-      editDexButton = (
-        <div className="dex-edit">
-          <a className="link" onClick={() => this.setState({ ...this.state, showEditDex: true })}><i className="fa fa-pencil" /></a>
-          <DexEditComponent dex={dex} isOpen={showEditDex} onRequestClose={this.onRequestClose} />
-        </div>
-      );
-    }
-
-    return (
-      <div className="dex-preview">
-        <div className="dex-preview-header">
-          <h3><Link to={`/u/${user.username}/${dex.slug}`} className="link">{dex.title}</Link></h3>
-          {editDexButton}
-          <DexIndicatorComponent dex={dex} />
-        </div>
-        <div className="percentage">
-          <ProgressComponent caught={dex.caught} total={dex.total} />
-        </div>
+  return (
+    <div className="dex-preview">
+      <div className="dex-preview-header">
+        <h3><Link className="link" to={`/u/${user.username}/${dex.slug}`}>{dex.title}</Link></h3>
+        {ownPage &&
+          <div className="dex-edit">
+            <a className="link" onClick={handleEditClick}><i className="fa fa-pencil" /></a>
+            <DexEdit dex={dex} isOpen={showEditDex} onRequestClose={handleRequestClose} />
+          </div>
+        }
+        <DexIndicator dex={dex} />
       </div>
-    );
-  }
+      <div className="percentage">
+        <Progress caught={dex.caught} total={dex.total} />
+      </div>
+    </div>
+  );
 }
 
-function mapStateToProps ({ currentUser, session, users }) {
-  return { session, user: users[currentUser] };
-}
-
-export const DexPreviewComponent = connect(mapStateToProps)(DexPreview);
+DexPreview.propTypes = {
+  dex: PropTypes.object.isRequired,
+  reload: PropTypes.func.isRequired
+};

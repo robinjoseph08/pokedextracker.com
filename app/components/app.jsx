@@ -1,28 +1,48 @@
-import { Router, Route, browserHistory } from 'react-router';
-import { syncHistoryWithStore }          from 'react-router-redux';
+import { Route, Router, Switch }    from 'react-router-dom';
+import { createBrowserHistory }     from 'history';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect }                from 'react';
 
-import { AccountComponent }  from './account';
-import { HomeComponent }     from './home';
-import { LoginComponent }    from './login';
-import { NotFoundComponent } from './not-found';
-import { ProfileComponent }  from './profile';
-import { RegisterComponent } from './register';
-import { Store }             from '../stores';
-import { TrackerComponent }  from './tracker';
-import { logPageView }       from '../utils/analytics';
+import { Account }        from './account';
+import { Home }           from './home';
+import { Login }          from './login';
+import { NotFound }       from './not-found';
+import { Profile }        from './profile';
+import { Register }       from './register';
+import { Tracker }        from './tracker';
+import { logPageView }    from '../utils/analytics';
+import { retrieveUser }   from '../actions/user';
+import { setSessionUser } from '../actions/session';
 
-const history = syncHistoryWithStore(browserHistory, Store);
+const history = createBrowserHistory();
+history.listen(() => logPageView());
+logPageView();
 
-export function AppComponent () {
+export function App () {
+  const dispatch = useDispatch();
+
+  const session = useSelector(({ session }) => session);
+
+  useEffect(() => {
+    (async () => {
+      if (session) {
+        const user = await dispatch(retrieveUser(session.username));
+        dispatch(setSessionUser(user));
+      }
+    })();
+  }, [session]);
+
   return (
-    <Router history={history} onUpdate={logPageView}>
-      <Route path='/' component={HomeComponent} />
-      <Route path='/login' component={LoginComponent} />
-      <Route path='/register' component={RegisterComponent} />
-      <Route path='/account' component={AccountComponent} />
-      <Route path='/u/:username' component={ProfileComponent} />
-      <Route path='/u/:username/:slug' component={TrackerComponent} />
-      <Route path='*' component={NotFoundComponent} />
+    <Router history={history}>
+      <Switch>
+        <Route component={Home} exact path="/" />
+        <Route component={Login} exact path="/login" />
+        <Route component={Register} exact path="/register" />
+        <Route component={Account} exact path="/account" />
+        <Route component={Profile} exact path="/u/:username" />
+        <Route component={Tracker} exact path="/u/:username/:slug" />
+        <Route component={NotFound} path="/" />
+      </Switch>
     </Router>
   );
 }

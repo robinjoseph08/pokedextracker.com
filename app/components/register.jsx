@@ -1,220 +1,294 @@
-import { Component } from 'react';
-import DocumentTitle from 'react-document-title';
-import { Link }      from 'react-router';
-import { connect }   from 'react-redux';
-import { push }      from 'react-router-redux';
+import slug                         from 'slug';
+import { Link }                     from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState }      from 'react';
+import { useHistory }               from 'react-router';
 
-import { AlertComponent }                  from './alert';
-import { FooterComponent }                 from './footer';
-import { NavComponent }                    from './nav';
-import { ReactGA }                         from '../utils/analytics';
-import { ReloadComponent }                 from './reload';
-import { checkVersion, setNotification }   from '../actions/utils';
-import { createUser }                      from '../actions/user';
-import { friendCode3DS, friendCodeSwitch } from '../utils/formatting';
-import { listGames }                       from '../actions/game';
+import { Alert }                                             from './alert';
+import { Footer }                                            from './footer';
+import { Nav }                                               from './nav';
+import { ReactGA }                                           from '../utils/analytics';
+import { Reload }                                            from './reload';
+import { createUser }                                        from '../actions/user';
+import { friendCode3dsFormatter, friendCodeSwitchFormatter } from '../utils/formatting';
+import { listGames }                                         from '../actions/game';
+import { setNotification }                                   from '../actions/utils';
 
-export class Register extends Component {
+export function Register () {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { error: null };
-  }
+  const history = useHistory();
 
-  componentWillMount () {
-    const { listGames, redirectToProfile, session } = this.props;
+  const games = useSelector(({ games }) => games);
+  const gamesById = useSelector(({ gamesById }) => gamesById);
+  const session = useSelector(({ session }) => session);
 
+  const [error, setError] = useState(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [friendCode3ds, setFriendCode3ds] = useState('');
+  const [friendCodeSwitch, setFriendCodeSwitch] = useState('');
+  const [title, setTitle] = useState('');
+  const [game, setGame] = useState(games[0] && games[0].id);
+  const [regional, setRegional] = useState(games[0] ? !games[0].game_family.national_support : false);
+  const [shiny, setShiny] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Register | Pokédex Tracker';
+  }, []);
+
+  useEffect(() => {
     if (session) {
-      redirectToProfile(session.username);
+      history.push(`/u/${session.username}`);
     }
+  }, []);
 
-    listGames()
-    .then((games) => {
-      const latestGame = games[0];
+  useEffect(() => {
+    (async () => {
+      if (!session) {
+        const g = await dispatch(listGames());
+        setGame(g[0].id);
+        setRegional(!g[0].game_family.national_support);
+      }
+    })();
+  }, []);
 
-      this.setState({
-        error: null,
-        url: null,
-        game: latestGame.id,
-        regional: !latestGame.game_family.national_support
-      });
-    });
-  }
-
-  onChange = (e) => {
-    const { gamesById } = this.props;
-    const game = e.target.value;
-
-    if (!gamesById[game].game_family.regional_support) {
-      this.setState({ regional: false });
-    }
-
-    if (!gamesById[game].game_family.national_support) {
-      this.setState({ regional: true });
-    }
-
-    this.setState({ game });
-  }
-
-  scrollToTop () {
-    if (this._form) {
-      this._form.scrollTop = 0;
-    }
-  }
-
-  register = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { register, setNotification } = this.props;
-    const { game, regional } = this.state;
-    const username = this._username.value;
-    const password = this._password.value;
-    const password_confirm = this._password_confirm.value;
-    const friend_code_3ds = this._friend_code_3ds.value;
-    const friend_code_switch = this._friend_code_switch.value;
-    const title = this._title.value;
-    const shiny = this._shiny.checked;
+    const payload = {
+      username,
+      password,
+      password_confirm: passwordConfirm,
+      friend_code_3ds: friendCode3ds,
+      friend_code_switch: friendCodeSwitch,
+      title,
+      shiny,
+      game,
+      regional
+    };
 
-    this.setState({ error: null });
+    setError(null);
 
-    register({ username, password, password_confirm, friend_code_3ds, friend_code_switch, title, shiny, game, regional })
-    .then(() => {
+    try {
+      await dispatch(createUser(payload));
       ReactGA.event({ action: 'register', category: 'Session' });
-      setNotification(true);
-    })
-    .catch((err) => {
-      this.setState({ error: err.message });
-      this.scrollToTop();
-    });
-  }
+      dispatch(setNotification(true));
+      history.push(`/u/${username}/${slug(title, { lower: true })}`);
+    } catch (err) {
+      setError(err.message);
+      window.scrollTo({ top: 0 });
+    }
+  };
 
-  render () {
-    const { games, gamesById } = this.props;
-    const { error, game, regional } = this.state;
+  const handleUsernameChange = (e) => setUsername(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handlePasswordConfirmChange = (e) => setPasswordConfirm(e.target.value);
+  const handleFriendCode3dsChange = (e) => setFriendCode3ds(friendCode3dsFormatter(e.target.value));
+  const handleFriendCodeSwitchChange = (e) => setFriendCodeSwitch(friendCodeSwitchFormatter(e.target.value));
+  const handleTitleChange = (e) => setTitle(e.target.value);
 
-    if (!game) {
-      return null;
+  const handleGameChange = (e) => {
+    const newGame = e.target.value;
+
+    if (!gamesById[newGame].game_family.regional_support) {
+      setRegional(false);
     }
 
-    return (
-      <DocumentTitle title="Register | Pokédex Tracker">
-        <div className="register-container">
-          <NavComponent />
-          <ReloadComponent />
-          <div className="form register" ref={(c) => this._form = c}>
-            <h1>Register</h1>
-            <form onSubmit={this.register}>
-              <div className="form-column">
-                <AlertComponent message={error} type="error" />
-              </div>
+    if (!gamesById[newGame].game_family.national_support) {
+      setRegional(true);
+    }
 
-              <div className="form-row">
-                <div className="form-column">
-                  <h2>Account Info</h2>
-                  <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input className="form-control" ref={(c) => this._username = c} name="username" id="username" type="text" required placeholder="ashketchum10" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" />
-                    <i className="fa fa-asterisk" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input className="form-control" ref={(c) => this._password = c} name="password" id="password" type="password" required placeholder="••••••••••••" />
-                    <i className="fa fa-asterisk" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password_confirm">Confirm Password</label>
-                    <input className="form-control" ref={(c) => this._password_confirm = c} name="password_confirm" id="password_confirm" type="password" required placeholder="••••••••••••" />
-                    <i className="fa fa-asterisk" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="friend_code_3ds">3DS Friend Code</label>
-                    <input className="form-control" ref={(c) => this._friend_code_3ds = c} name="friend_code_3ds" id="friend_code_3ds" type="text" placeholder="XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_3ds.value = friendCode3DS(e.target.value)} />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="friend_code_switch">Switch Friend Code</label>
-                    <input className="form-control" ref={(c) => this._friend_code_switch = c} name="friend_code_switch" id="friend_code_switch" type="text" placeholder="SW-XXXX-XXXX-XXXX" onChange={(e) => this._friend_code_switch.value = friendCodeSwitch(e.target.value)} />
-                  </div>
-                </div>
+    setGame(newGame);
+  };
 
-                <div className="form-column">
-                  <h2>
-                    First Dex Info
-                    <div className="tooltip">
-                      <i className="fa fa-question-circle" />
-                      <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
-                    </div>
-                  </h2>
-                  <div className="form-group">
-                    <label htmlFor="dex_title">Title</label>
-                    <input className="form-control" ref={(c) => this._title = c} name="dex_title" id="dex_title" type="text" maxLength="300" required placeholder="Living Dex" />
-                    <i className="fa fa-asterisk" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="game">Game</label>
-                    <select className="form-control" onChange={this.onChange} value={game}>
-                      {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
-                    </select>
-                    <i className="fa fa-chevron-down" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="regional">Regionality</label>
-                    <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
-                      <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
-                        <input type="radio" name="regional" checked={!regional} disabled={!gamesById[game].game_family.national_support} value="national" onChange={() => this.setState({ regional: false })} />
-                        <span className="radio-custom"><span /></span>National
-                      </label>
-                    </div>
-                    <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
-                      <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
-                        <input type="radio" name="regional" checked={regional} disabled={!gamesById[game].game_family.regional_support} value="regional" onChange={() => this.setState({ regional: true })} />
-                        <span className="radio-custom"><span /></span>Regional
-                      </label>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="type">Type</label>
-                    <div className="radio">
-                      <label>
-                        <input type="radio" name="type" defaultChecked />
-                        <span className="radio-custom"><span /></span>Normal
-                      </label>
-                    </div>
-                    <div className="radio">
-                      <label>
-                        <input ref={(c) => this._shiny = c} type="radio" name="type" />
-                        <span className="radio-custom"><span /></span>Shiny
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-column">
-                <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
-                <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
-              </div>
-            </form>
-          </div>
-          <FooterComponent />
-        </div>
-      </DocumentTitle>
-    );
+  if (!game) {
+    return null;
   }
 
-}
+  return (
+    <div className="register-container">
+      <Nav />
+      <Reload />
+      <div className="form register">
+        <h1>Register</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="form-column">
+            <Alert message={error} type="error" />
+          </div>
 
-function mapStateToProps ({ games, gamesById, session }) {
-  return { games, gamesById, session };
-}
+          <div className="form-row">
+            <div className="form-column">
+              <h2>Account Info</h2>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                  autoCapitalize="off"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  className="form-control"
+                  id="username"
+                  name="username"
+                  onChange={handleUsernameChange}
+                  placeholder="ashketchum10"
+                  required
+                  spellCheck="false"
+                  type="text"
+                  value={username}
+                />
+                <i className="fa fa-asterisk" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  onChange={handlePasswordChange}
+                  placeholder="••••••••••••"
+                  required
+                  type="password"
+                  value={password}
+                />
+                <i className="fa fa-asterisk" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password_confirm">Confirm Password</label>
+                <input
+                  className="form-control"
+                  id="password_confirm"
+                  name="password_confirm"
+                  onChange={handlePasswordConfirmChange}
+                  placeholder="••••••••••••"
+                  required
+                  type="password"
+                  value={passwordConfirm}
+                />
+                <i className="fa fa-asterisk" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="friend_code_3ds">3DS Friend Code</label>
+                <input
+                  className="form-control"
+                  id="friend_code_3ds"
+                  name="friend_code_3ds"
+                  onChange={handleFriendCode3dsChange}
+                  placeholder="XXXX-XXXX-XXXX"
+                  type="text"
+                  value={friendCode3ds}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="friend_code_switch">Switch Friend Code</label>
+                <input
+                  className="form-control"
+                  id="friend_code_switch"
+                  name="friend_code_switch"
+                  onChange={handleFriendCodeSwitchChange}
+                  placeholder="SW-XXXX-XXXX-XXXX"
+                  type="text"
+                  value={friendCodeSwitch}
+                />
+              </div>
+            </div>
 
-function mapDispatchToProps (dispatch) {
-  return {
-    checkVersion: () => dispatch(checkVersion()),
-    listGames: () => dispatch(listGames()),
-    register: (payload) => dispatch(createUser(payload)),
-    redirectToProfile: (username) => dispatch(push(`/u/${username}/`)),
-    setNotification: (value) => dispatch(setNotification(value))
-  };
-}
+            <div className="form-column">
+              <h2>
+                First Dex Info
+                <div className="tooltip">
+                  <i className="fa fa-question-circle" />
+                  <span className="tooltip-text">You can track multiple dexes on our app! This sets the settings for the first dex on your account.</span>
+                </div>
+              </h2>
+              <div className="form-group">
+                <label htmlFor="dex_title">Title</label>
+                <input
+                  className="form-control"
+                  id="dex_title"
+                  maxLength="300"
+                  name="dex_title"
+                  onChange={handleTitleChange}
+                  placeholder="Living Dex"
+                  required
+                  type="text"
+                  value={title}
+                />
+                <i className="fa fa-asterisk" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="game">Game</label>
+                <select
+                  className="form-control"
+                  onChange={handleGameChange}
+                  value={game}
+                >
+                  {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
+                </select>
+                <i className="fa fa-chevron-down" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="regional">Regionality</label>
+                <div className={`radio ${gamesById[game].game_family.national_support ? '' : 'disabled'}`}>
+                  <label title={gamesById[game].game_family.national_support ? '' : 'National dex is not supported for this game at this time.'}>
+                    <input
+                      checked={!regional}
+                      disabled={!gamesById[game].game_family.national_support}
+                      name="regional"
+                      onChange={() => setRegional(false)}
+                      type="radio"
+                    />
+                    <span className="radio-custom"><span /></span>National
+                  </label>
+                </div>
+                <div className={`radio ${gamesById[game].game_family.regional_support ? '' : 'disabled'}`}>
+                  <label title={gamesById[game].game_family.regional_support ? '' : 'Regional dex is not supported for this game at this time.'}>
+                    <input
+                      checked={regional}
+                      disabled={!gamesById[game].game_family.regional_support}
+                      name="regional"
+                      onChange={() => setRegional(true)}
+                      type="radio"
+                    />
+                    <span className="radio-custom"><span /></span>Regional
+                  </label>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="type">Type</label>
+                <div className="radio">
+                  <label>
+                    <input
+                      checked={!shiny}
+                      name="type"
+                      onChange={() => setShiny(false)}
+                      type="radio"
+                    />
+                    <span className="radio-custom"><span /></span>Normal
+                  </label>
+                </div>
+                <div className="radio">
+                  <label>
+                    <input
+                      checked={shiny}
+                      name="type"
+                      onChange={() => setShiny(true)}
+                      type="radio"
+                    />
+                    <span className="radio-custom"><span /></span>Shiny
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
 
-export const RegisterComponent = connect(mapStateToProps, mapDispatchToProps)(Register);
+          <div className="form-column">
+            <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
+            <p>Already have an account? <Link className="link" to="/login">Login here</Link>!</p>
+          </div>
+        </form>
+      </div>
+      <Footer />
+    </div>
+  );
+}

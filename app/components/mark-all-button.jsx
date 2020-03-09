@@ -1,76 +1,68 @@
-import { Component } from 'react';
-import { connect }   from 'react-redux';
+import PropTypes                    from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useMemo, useState }        from 'react';
 
 import { ReactGA }                        from '../utils/analytics';
 import { createCaptures, deleteCaptures } from '../actions/capture';
 import { padding }                        from '../utils/formatting';
 
-export class MarkAllButton extends Component {
+export function MarkAllButton ({ captures }) {
+  const dispatch = useDispatch();
 
-  constructor (props) {
-    super(props);
-    this.state = { loading: false };
+  const currentDex = useSelector(({ currentDex }) => currentDex);
+  const dex = useSelector(({ currentDex, currentUser, users }) => users[currentUser].dexesBySlug[currentDex]);
+  const session = useSelector(({ session }) => session);
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const uncaught = useMemo(() => {
+    return captures.reduce((total, capture) => total + (capture.captured ? 0 : 1), 0);
+  }, [captures]);
+
+  const ownPage = session && session.id === user.id;
+
+  if (!ownPage) {
+    return null;
   }
 
-  toggleCaptured = () => {
-    const { captures, createCaptures, currentDex, deleteCaptures, dex, user } = this.props;
-    const deleting = captures.reduce((total, capture) => total + (capture.captured ? 0 : 1), 0) === 0;
-    const pokemon = captures.filter((capture) => capture.captured === deleting).map((capture) => capture.pokemon.id);
+  const handleButtonClick = async () => {
+    const deleting = uncaught === 0;
+    const pokemon = captures
+      .filter((capture) => capture.captured === deleting)
+      .map((capture) => capture.pokemon.id);
     const payload = { dex: dex.id, pokemon };
 
-    Promise.resolve()
-    .then(() => {
-      this.setState({ loading: true });
+    setIsLoading(true);
 
-      if (deleting) {
-        return deleteCaptures({ payload, slug: currentDex, username: user.username });
-      }
-
-      return createCaptures({ payload, slug: currentDex, username: user.username });
-    })
-    .then(() => {
-      const event = { category: 'Box', label: `${padding(captures[0].pokemon.national_id, 3)} - ${padding(captures[captures.length - 1].pokemon.national_id, 3)}` };
-
-      if (deleting) {
-        ReactGA.event({ ...event, action: 'unmark all' });
-      } else {
-        ReactGA.event({ ...event, action: 'mark all' });
-      }
-
-      this.setState({ loading: false });
-    });
-  }
-
-  render () {
-    const { captures, session, user } = this.props;
-    const { loading } = this.state;
-    const ownPage = session && session.id === user.id;
-
-    if (!ownPage) {
-      return null;
+    if (deleting) {
+      await dispatch(deleteCaptures({ payload, slug: currentDex, username: user.username }));
+    } else {
+      await dispatch(createCaptures({ payload, slug: currentDex, username: user.username }));
     }
 
-    const uncaught = captures.reduce((total, capture) => total + (capture.captured ? 0 : 1), 0);
+    ReactGA.event({
+      category: 'Box',
+      label: `${padding(captures[0].pokemon.national_id, 3)} - ${padding(captures[captures.length - 1].pokemon.national_id, 3)}`,
+      action: deleting ? 'unmark all' : 'mark all'
+    });
 
-    return (
-      <button className="btn btn-blue" onClick={this.toggleCaptured} disabled={loading}>
-        <span className={loading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
-        {loading ? <span className="spinner"><i className="fa fa-spinner fa-spin" /></span> : null}
-      </button>
-    );
-  }
-
-}
-
-function mapStateToProps ({ currentDex, currentUser, session, users }) {
-  return { currentDex, dex: users[currentUser].dexesBySlug[currentDex], session, user: users[currentUser] };
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    createCaptures: (payload) => dispatch(createCaptures(payload)),
-    deleteCaptures: (payload) => dispatch(deleteCaptures(payload))
+    setIsLoading(false);
   };
+
+  return (
+    <button className="btn btn-blue" disabled={isLoading} onClick={handleButtonClick}>
+      <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
+      {isLoading ?
+        <span className="spinner">
+          <i className="fa fa-spinner fa-spin" />
+        </span> :
+        null
+      }
+    </button>
+  );
 }
 
-export const MarkAllButtonComponent = connect(mapStateToProps, mapDispatchToProps)(MarkAllButton);
+MarkAllButton.propTypes = {
+  captures: PropTypes.arrayOf(PropTypes.object).isRequired
+};

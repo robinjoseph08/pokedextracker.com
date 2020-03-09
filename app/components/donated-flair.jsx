@@ -1,15 +1,11 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-export function DonatedFlair ({ user }) {
+export function DonatedFlair () {
+  const user = useSelector(({ currentUser, users }) => users[currentUser]);
+
   if (!user.donated) {
     return null;
   }
 
-  return <img className="donated-flair emoji" title="This user has donated!" src="/emoji_star2.png" />;
+  return <img className="donated-flair emoji" src="/emoji_star2.png" title="This user has donated!" />;
 }
-
-function mapStateToProps ({ currentUser, users }) {
-  return { user: users[currentUser] };
-}
-
-export const DonatedFlairComponent = connect(mapStateToProps)(DonatedFlair);

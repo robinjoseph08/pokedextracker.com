@@ -1,21 +1,15 @@
-export function DexIndicatorComponent ({ dex }) {
-  if (!dex) {
-    return null;
-  }
+import PropTypes from 'prop-types';
 
-  let shiny = null;
-
-  if (dex && dex.shiny) {
-    shiny = (
-      <i className="fa fa-star" title="shiny" />
-    );
-  }
-
+export function DexIndicator ({ dex }) {
   return (
     <div className="dex-indicator">
-      {shiny}
+      {dex.shiny && <i className="fa fa-star" title="shiny" />}
       <span className="label">{dex.regional ? 'Regional' : 'National'}</span>
       <span className="label">{dex.game.name}</span>
     </div>
   );
 }
+
+DexIndicator.propTypes = {
+  dex: PropTypes.object.isRequired
+};

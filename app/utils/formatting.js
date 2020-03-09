@@ -9,11 +9,11 @@ export function decimal (number, precision) {
   return number.toFixed(precision);
 }
 
-export function friendCode3DS (code) {
+export function friendCode3dsFormatter (code) {
   return code && code.replace(FRIEND_CODE_3DS_REGEX, '$1-');
 }
 
-export function friendCodeSwitch (code) {
+export function friendCodeSwitchFormatter (code) {
   if (!code) {
     return code;
   }
