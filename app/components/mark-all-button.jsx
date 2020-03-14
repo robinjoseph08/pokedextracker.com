@@ -2,7 +2,7 @@ import PropTypes                    from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMemo, useState }        from 'react';
 import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
-import { faSpinner }                from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch }            from '@fortawesome/free-solid-svg-icons';
 
 import { ReactGA }                        from '../utils/analytics';
 import { createCaptures, deleteCaptures } from '../actions/capture';
@@ -57,7 +57,7 @@ export function MarkAllButton ({ captures }) {
       <span className={isLoading ? 'hidden' : ''}>{uncaught === 0 ? 'Unmark' : 'Mark'} All</span>
       {isLoading ?
         <span className="spinner">
-          <FontAwesomeIcon icon={faSpinner} spin />
+          <FontAwesomeIcon icon={faCircleNotch} spin />
         </span> :
         null
       }
