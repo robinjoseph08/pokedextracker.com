@@ -1,3 +1,5 @@
+import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
+import { faLongArrowAltRight }      from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState }      from 'react';
 import { useParams }                from 'react-router';
@@ -80,7 +82,7 @@ export function Profile () {
 
           {ownPage &&
             <div className="dex-create">
-              <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <i className="fa fa-long-arrow-right" /></div>
+              <div className="btn btn-blue" onClick={handleCreateNewDexClick}>Create a New Dex <FontAwesomeIcon icon={faLongArrowAltRight} /></div>
               <DexCreate isOpen={showDexCreate} onRequestClose={handleDexCreateRequestClose} />
             </div>
           }

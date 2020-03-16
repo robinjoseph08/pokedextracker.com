@@ -1,6 +1,9 @@
-import { Link }                     from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect }                from 'react';
+import { FontAwesomeIcon }            from '@fortawesome/react-fontawesome';
+import { Link }                       from 'react-router-dom';
+import { faLongArrowAltRight, faRss } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter }                  from '@fortawesome/free-brands-svg-icons';
+import { useDispatch, useSelector }   from 'react-redux';
+import { useEffect }                  from 'react';
 
 import { checkVersion } from '../actions/utils';
 
@@ -40,17 +43,17 @@ export function Home () {
 
           {session ?
             <div>
-              <Link className="btn btn-blue" to={`/u/${session.username}`}>View Profile <i className="fa fa-long-arrow-right" /></Link>
+              <Link className="btn btn-blue" to={`/u/${session.username}`}>View Profile <FontAwesomeIcon icon={faLongArrowAltRight} /></Link>
             </div> :
             <div>
-              <Link className="btn btn-blue" to="/register">Register <i className="fa fa-long-arrow-right" /></Link>
-              <Link className="btn btn-white" to="/login">Login <i className="fa fa-long-arrow-right" /></Link>
+              <Link className="btn btn-blue" to="/register">Register <FontAwesomeIcon icon={faLongArrowAltRight} /></Link>
+              <Link className="btn btn-white" to="/login">Login <FontAwesomeIcon icon={faLongArrowAltRight} /></Link>
             </div>
           }
 
           <div className="social">
-            <a className="link" href="https://twitter.com/PokedexTracker" rel="noopener noreferrer" target="_blank"><i className="fa fa-twitter" /></a>
-            <a className="link" href="/blog/" rel="noopener noreferrer" target="_blank"><i className="fa fa-rss" /></a>
+            <a className="link" href="https://twitter.com/PokedexTracker" rel="noopener noreferrer" target="_blank"><FontAwesomeIcon icon={faTwitter} /></a>
+            <a className="link" href="/blog/" rel="noopener noreferrer" target="_blank"><FontAwesomeIcon icon={faRss} /></a>
           </div>
         </div>
       </div>

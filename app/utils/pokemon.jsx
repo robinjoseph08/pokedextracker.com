@@ -1,4 +1,7 @@
-import classNames from 'classnames';
+import classNames          from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Fragment }        from 'react';
+import { faVenus, faMars } from '@fortawesome/free-solid-svg-icons';
 
 import { BOX_SIZE } from '../components/box';
 import { padding }  from './formatting';
@@ -23,7 +26,20 @@ export function groupBoxes (captures) {
 }
 
 export function htmlName (name) {
-  return { __html: name.replace('♀', '<i class="fa fa-venus"></i>').replace('♂', '<i class="fa fa-mars"></i>') };
+  const male = name.indexOf('♂') > -1;
+  const female = name.indexOf('♀') > -1;
+
+  if (!male && !female) {
+    return name;
+  }
+
+  return (
+    <Fragment>
+      {name.replace(/[♂♀]/g, '')}
+      {male && <FontAwesomeIcon icon={faMars} />}
+      {female && <FontAwesomeIcon icon={faVenus} />}
+    </Fragment>
+  );
 }
 
 export function iconClass ({ national_id: nationalId, form }, dex) {

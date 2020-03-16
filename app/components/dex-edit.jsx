@@ -1,8 +1,10 @@
-import Modal                                    from 'react-modal';
-import PropTypes                                from 'prop-types';
-import slug                                     from 'slug';
-import { useDispatch, useSelector }             from 'react-redux';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import Modal                                                          from 'react-modal';
+import PropTypes                                                      from 'prop-types';
+import slug                                                           from 'slug';
+import { FontAwesomeIcon }                                            from '@fortawesome/react-fontawesome';
+import { faAsterisk, faChevronDown, faLongArrowAltRight, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector }                                   from 'react-redux';
+import { useEffect, useMemo, useRef, useState }                       from 'react';
 
 import { Alert }                from './alert';
 import { FormWarning }          from './form-warning';
@@ -145,7 +147,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
             <a className="link" onClick={() => setIsConfirmingDelete(false)}>No</a>
           </div> :
           <a className="link" onClick={handleDeleteClick}>
-            <i className="fa fa-trash" />
+            <FontAwesomeIcon icon={faTrashAlt} />
           </a>
         }
       </div>
@@ -168,7 +170,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
               type="text"
               value={title}
             />
-            <i className="fa fa-asterisk" />
+            <FontAwesomeIcon icon={faAsterisk} />
           </div>
           <div className="form-group">
             <FormWarning message={showGameWarning && GAME_WARNING} />
@@ -176,7 +178,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
             <select className="form-control" onChange={handleGameChange} value={game}>
               {games.map((game) => <option key={game.id} value={game.id}>{game.name}</option>)}
             </select>
-            <i className="fa fa-chevron-down" />
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
           <div className="form-group">
             <FormWarning message={showRegionalWarning && REGIONAL_WARNING} />
@@ -234,7 +236,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
             </div>
           </div>
           <Alert className="form-confirm" message={isConfirmingUpdate && 'Please review the warnings above and confirm your edit!'} type="error" />
-          <button className="btn btn-blue form-confirm" type="submit">{isConfirmingUpdate ? 'Confirm' : ''} Edit <i className="fa fa-long-arrow-right" /></button>
+          <button className="btn btn-blue form-confirm" type="submit">{isConfirmingUpdate ? 'Confirm' : ''} Edit <FontAwesomeIcon icon={faLongArrowAltRight} /></button>
         </form>
       </div>
       <p><a className="link" onClick={() => handleRequestClose(false)}>Go Back</a></p>

@@ -78,7 +78,7 @@ nav {
       margin-right: auto;
     }
 
-    .fa {
+    .svg-inline--fa {
       margin-left: 3px;
     }
   }
@@ -131,11 +131,11 @@ nav {
           background-color: lighten($brand-primary, 15%);
         }
 
-        .fa {
+        .svg-inline--fa {
           float: left;
           margin-top: 2px;
           margin-left: 0;
-          padding-right: 15px;
+          margin-right: 15px;
         }
       }
     }
@@ -181,7 +181,7 @@ nav {
     background-color: #fff;
   }
 
-  .fa {
+  .svg-inline--fa {
     @include transition(all .1s ease-out);
 
     font-size: 10px;
@@ -199,7 +199,7 @@ nav {
     top: 0;
     left: 0;
 
-    .fa {
+    .svg-inline--fa {
       margin: 0;
     }
   }
@@ -455,10 +455,10 @@ select {
     }
   }
 
-  .fa {
+  .svg-inline--fa {
     &:last-child {
       position: absolute;
-      bottom: 15px;
+      bottom: 16px;
       right: 15px;
       font-size: 10px;
       color: $brand-primary;
@@ -498,8 +498,9 @@ select {
   .tooltip {
     margin-left: 0;
 
-    .fa {
+    .svg-inline--fa {
       color: $error;
+      font-size: 10px;
     }
 
     .tooltip-text {
@@ -517,7 +518,7 @@ select {
   position: relative;
   margin-left: 3px;
 
-  .fa {
+  .svg-inline--fa {
     font-size: 11px;
     color: $brand-secondary;
   }
@@ -605,27 +606,15 @@ select {
   }
 }
 
-reload div {
-  text-align: center;
-  padding: 10px 30px;
-  background-color: lighten($brand-primary-light, 15%);
-  font-size: 14px;
-
-  .fa {
-    font-size: 11px;
-    padding-right: 2px;
-  }
-}
-
 .reload {
   text-align: center;
   padding: 10px 30px;
   background-color: lighten($brand-primary-light, 15%);
   font-size: 14px;
 
-  .fa {
-    font-size: 11px;
-    padding-right: 2px;
+  .svg-inline--fa {
+    font-size: 10px;
+    margin-right: 2px;
   }
 }
 
@@ -676,7 +665,7 @@ reload div {
     font-weight: 700;
   }
 
-  .fa {
+  .svg-inline--fa {
     vertical-align: middle;
     font-size: 5px;
     margin: 0 10px;

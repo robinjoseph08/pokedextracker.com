@@ -1,7 +1,9 @@
-import { useEffect, useState }      from 'react';
-import { Link }                     from 'react-router-dom';
-import { useHistory }               from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon }                 from '@fortawesome/react-fontawesome';
+import { Link }                            from 'react-router-dom';
+import { faAsterisk, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector }        from 'react-redux';
+import { useEffect, useState }             from 'react';
+import { useHistory }                      from 'react-router';
 
 import { Alert }        from './alert';
 import { Footer }       from './footer';
@@ -81,7 +83,7 @@ export function Login () {
               type="text"
               value={username}
             />
-            <i className="fa fa-asterisk" />
+            <FontAwesomeIcon icon={faAsterisk} />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
@@ -96,9 +98,9 @@ export function Login () {
               type="password"
               value={password}
             />
-            <i className="fa fa-asterisk" />
+            <FontAwesomeIcon icon={faAsterisk} />
           </div>
-          <button className="btn btn-blue" type="submit">Let's go! <i className="fa fa-long-arrow-right" /></button>
+          <button className="btn btn-blue" type="submit">Let's go! <FontAwesomeIcon icon={faLongArrowAltRight} /></button>
           <p>Don't have an account yet? <Link className="link" to="/register">Register here</Link>!</p>
         </form>
       </div>

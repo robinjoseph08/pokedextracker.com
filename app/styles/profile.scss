@@ -39,6 +39,7 @@
 
   .dex-edit a.link {
     color: lighten(#000, 25%);
+    font-size: 14px;
 
     &:hover {
       color: black;
@@ -54,7 +55,7 @@
 
   .fa-star {
     color: #d81118;
-    font-size: 9px;
+    font-size: 8px;
   }
 
   .label {
@@ -90,6 +91,7 @@
   a:first-child {
     color: $error;
     margin: 0 3px;
+    font-size: 14px;
 
     &:hover {
       color: darken($error, 5%);

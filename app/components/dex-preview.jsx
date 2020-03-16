@@ -1,7 +1,9 @@
-import PropTypes       from 'prop-types';
-import { Link }        from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useState }    from 'react';
+import PropTypes           from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link }            from 'react-router-dom';
+import { faPencilAlt }     from '@fortawesome/free-solid-svg-icons';
+import { useSelector }     from 'react-redux';
+import { useState }        from 'react';
 
 import { DexEdit }      from './dex-edit';
 import { DexIndicator } from './dex-indicator';
@@ -31,7 +33,7 @@ export function DexPreview ({ dex, reload }) {
         <h3><Link className="link" to={`/u/${user.username}/${dex.slug}`}>{dex.title}</Link></h3>
         {ownPage &&
           <div className="dex-edit">
-            <a className="link" onClick={handleEditClick}><i className="fa fa-pencil" /></a>
+            <a className="link" onClick={handleEditClick}><FontAwesomeIcon icon={faPencilAlt} /></a>
             <DexEdit dex={dex} isOpen={showEditDex} onRequestClose={handleRequestClose} />
           </div>
         }

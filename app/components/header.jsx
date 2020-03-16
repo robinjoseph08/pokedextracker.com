@@ -1,4 +1,7 @@
 import PropTypes                    from 'prop-types';
+import { FontAwesomeIcon }          from '@fortawesome/react-fontawesome';
+import { faLink }                   from '@fortawesome/free-solid-svg-icons';
+import { faTwitter }                from '@fortawesome/free-brands-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect }                from 'react';
 
@@ -42,7 +45,7 @@ export function Header ({ profile }) {
         {profile ? `${user.username}'s Profile` : dex.title}
         <div className="share-container">
           <a onClick={handleShareClick}>
-            <i className="fa fa-link" />
+            <FontAwesomeIcon icon={faLink} />
             <Share profile={profile} />
           </a>
           <a
@@ -51,7 +54,7 @@ export function Header ({ profile }) {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <i className="fa fa-twitter" />
+            <FontAwesomeIcon icon={faTwitter} />
           </a>
         </div>
       </h1>

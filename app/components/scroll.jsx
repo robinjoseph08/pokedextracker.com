@@ -1,5 +1,7 @@
-import PropTypes       from 'prop-types';
-import { useSelector } from 'react-redux';
+import PropTypes            from 'prop-types';
+import { FontAwesomeIcon }  from '@fortawesome/react-fontawesome';
+import { faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
+import { useSelector }      from 'react-redux';
 
 export const SCROLL_DEBOUNCE = 500;
 export const SHOW_SCROLL_THRESHOLD = 400;
@@ -9,7 +11,7 @@ export function Scroll ({ onClick }) {
 
   return (
     <div className={`scroll-up ${showScroll ? 'visible' : ''}`} onClick={onClick}>
-      <i className="fa fa-long-arrow-up" />
+      <FontAwesomeIcon icon={faLongArrowAltUp} />
     </div>
   );
 }
