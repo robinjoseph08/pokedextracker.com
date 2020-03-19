@@ -79,14 +79,10 @@ nav {
       margin-right: auto;
     }
 
-    .svg-inline--fa {
-      margin-left: 3px;
-    }
-
     &.tooltip.tooltip-below {
-      .fa {
-        margin-left: 0;
-      }
+      .svg-inline--fa {
+         font-size: 10px;
+       }
 
       .tooltip-text {
         font-size: 10px;
@@ -116,6 +112,10 @@ nav {
         visibility: visible;
         top: 100%;
       }
+    }
+
+    .svg-inline--fa {
+      margin-left: 3px;
     }
 
     .dropdown-scroll {
