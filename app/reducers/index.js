@@ -7,7 +7,6 @@ import { games }          from './games';
 import { gamesById }      from './games-by-id';
 import { notification }   from './notification';
 import { pokemon }        from './pokemon';
-import { query }          from './query';
 import { reload }         from './reload';
 import { sessionUser }    from './session-user';
 import { session }        from './session';
@@ -25,7 +24,6 @@ export const reducer = combineReducers({
   gamesById,
   notification,
   pokemon,
-  query,
   reload,
   sessionUser,
   session,
