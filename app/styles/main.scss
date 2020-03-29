@@ -16,7 +16,8 @@ body {
   font-family: $font-primary;
 }
 
-#root {
+#root,
+.root {
   @include flexbox();
   @include flex-direction(column);
 
@@ -78,8 +79,23 @@ nav {
       margin-right: auto;
     }
 
-    .svg-inline--fa {
-      margin-left: 3px;
+    &.tooltip.tooltip-below {
+      .svg-inline--fa {
+         font-size: 10px;
+       }
+
+      .tooltip-text {
+        font-size: 10px;
+        text-transform: none;
+        letter-spacing: 0;
+        z-index: 10;
+        background-color: $brand-primary-light;
+        color: $brand-secondary;
+
+        &::after {
+          border-color: transparent transparent $brand-primary-light transparent;
+        }
+      }
     }
   }
 
@@ -96,6 +112,10 @@ nav {
         visibility: visible;
         top: 100%;
       }
+    }
+
+    .svg-inline--fa {
+      margin-left: 3px;
     }
 
     .dropdown-scroll {
@@ -520,7 +540,6 @@ select {
 
   .svg-inline--fa {
     font-size: 11px;
-    color: $brand-secondary;
   }
 
   .tooltip-text {
@@ -553,6 +572,17 @@ select {
 
   &:hover .tooltip-text {
     visibility: visible;
+  }
+
+  &.tooltip-below .tooltip-text {
+    top: 47px;
+    bottom: auto;
+
+    &::after {
+      bottom: 100%;
+      top: auto;
+      border-color: transparent transparent $brand-secondary transparent;
+    }
   }
 }
 
@@ -647,6 +677,322 @@ select {
     margin-top: 0;
     text-align: center;
     font-size: 14px;
+  }
+
+  &.night-mode {
+    background-color: $night-mode;
+    color: $gray-medium;
+    border-color: $night-mode-secondary-dark;
+  }
+}
+
+.night-mode {
+  background-color: $night-mode;
+  color: white;
+
+  .profile {
+    background-color: $night-mode;
+  }
+
+  a {
+    color: $night-mode-link;
+
+    &:hover {
+      color: $night-mode-link-dark;
+    }
+  }
+
+  nav {
+    background-color: $night-mode-03dp;
+
+    a {
+      color: white;
+
+      &:hover {
+        background-color: $night-mode-06dp;
+        color: $night-mode-primary;
+      }
+
+      &.tooltip.tooltip-below .tooltip-text {
+        background-color: $night-mode-primary;
+        color: $night-mode-03dp;
+
+        &::after {
+          border-color: transparent transparent $night-mode-primary transparent;
+        }
+      }
+    }
+
+    .dropdown {
+      &:hover > a {
+        background-color: $night-mode-04dp;
+      }
+
+      ul li a {
+        border-color: $night-mode-03dp;
+        background-color: $night-mode-04dp;
+
+        &:hover {
+          background-color: $night-mode-06dp;
+        }
+      }
+    }
+  }
+
+  header {
+    h1 {
+      color: white;
+    }
+  }
+
+  .loading {
+    color: $night-mode-link;
+  }
+
+  .alert {
+    background-color: $night-mode-02dp;
+    color: white;
+
+    &.alert-muted {
+      background-color: $night-mode-01dp;
+      color: white;
+      border-color: $night-mode-01dp;
+
+      a {
+      color: $night-mode-link;
+
+        &:hover {
+          color: $night-mode-link-dark;
+        }
+      }
+    }
+  }
+
+  .main-footer {
+    background-color: $night-mode-01dp;
+
+    .fa {
+      color: $night-mode-24dp;
+    }
+  }
+
+  .home-container {
+    background: $night-mode url('/pattern-night.png') repeat center center;
+    background-size: 500px 250px;
+
+    .footer {
+      background-color: $night-mode-dark;
+    }
+
+    .hero h1 {
+      color: $night-mode-link;
+    }
+  }
+
+  .dex-search-bar {
+    background-color: $night-mode;
+    border-bottom: 1px solid $night-mode-dark;
+  }
+
+  header  {
+    .share-container .share {
+      background-color: $night-mode;
+      border-color: $night-mode-02dp;
+      color: white;
+
+      &::after {
+        border-color: $night-mode-02dp transparent transparent transparent;
+      }
+    }
+
+    a {
+      color: $night-mode-link-gray;
+
+      &:hover {
+        color: $night-mode-link-gray-dark;
+      }
+    }
+  }
+
+  .dex-indicator .label {
+    background-color: $night-mode-04dp;
+  }
+
+  .dex .scroll-up {
+    background-color: $night-mode-06dp;
+  }
+
+  .dex-preview-header .dex-edit a.link {
+    color: $night-mode-link-gray;
+
+    &:hover {
+      color: $night-mode-link-gray-dark;
+    }
+  }
+
+  .box .box-container,
+  .set-captured,
+  .set-captured-mobile,
+  .pokemon .set-info {
+    border-color: $night-mode-01dp;
+
+    .fa-info {
+      border-color: $night-mode-link;
+      color: $night-mode-link;
+    }
+  }
+
+  .pokemon {
+    &.captured {
+      background-color: $night-mode-primary;
+      color: black;
+
+      .set-captured,
+      .set-captured-mobile,
+      .set-info {
+        border-color: $night-mode-primary-dark;
+      }
+    }
+
+    &:not(.empty):not(.disabled):hover {
+      .set-info {
+        &:hover {
+          .fa-info {
+            border-color: $night-mode-link-dark;
+            color: $night-mode-link-dark;
+          }
+        }
+      }
+
+      &:not(.viewing) {
+        .set-captured {
+          border-color: $night-mode-primary-dark;
+        }
+      }
+    }
+  }
+
+  .dex-search-bar {
+    .form-group {
+      .fa-search {
+        color: white;
+      }
+    }
+  }
+
+  .progress-outer {
+    background-color: $night-mode-01dp;
+    border-color: $night-mode-primary-dark;
+
+    .progress-inner {
+      background-color: $night-mode-primary-dark;
+    }
+  }
+
+  .info {
+    .info-collapse {
+      background-color: $night-mode-secondary-dark;
+    }
+
+    .info-main {
+      background-color: $night-mode-02dp;
+
+      .info-header,
+      .info-locations,
+      .info-evolutions,
+      .info-footer {
+        background-color: $night-mode-secondary;
+        border-color: $night-mode-secondary-dark;
+      }
+
+      .info-footer {
+        a {
+          background-color: darken($night-mode-secondary, 4%);
+          border-color: $night-mode-secondary-dark;
+
+          &:hover {
+            background-color: darken($night-mode-secondary, 6%);
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .form-control {
+    background-color: $night-mode-02dp;
+    border-color: $night-mode-02dp;
+    color: white;
+  }
+
+  .form h1 {
+    color: #3777ca;
+  }
+
+  .form-group .radio .radio-custom {
+    background-color: $night-mode-24dp;
+    border-color: $night-mode-24dp;
+  }
+
+  .form-warning .tooltip {
+    .fa {
+      color: $night-mode-error;
+    }
+
+    .tooltip-text {
+      background-color: $night-mode-error;
+
+      &::after {
+        border-color: $night-mode-error transparent transparent transparent;
+      }
+    }
+  }
+
+  .btn {
+    &.btn-blue {
+      background-color: $night-mode-secondary;
+      color: white;
+    }
+
+    &.btn-white {
+      background-color: $gray-light;
+      color: $night-mode-secondary;
+    }
+
+    &.btn-yellow {
+      background-color: $night-mode-primary;
+      color: white;
+    }
+
+    &:hover,
+    &:focus {
+      &.btn-blue {
+        background-color: $night-mode-secondary-dark;
+        color: white;
+      }
+
+      &.btn-white {
+        background-color: darken($gray-light, 6%);
+        color: $night-mode-secondary;
+      }
+
+      &.btn-yellow {
+        background-color: $night-mode-primary-dark;
+        color: white;
+      }
+    }
+  }
+
+  .alert.alert-error {
+    border-color: $night-mode-error;
+  }
+
+  .dex-delete-container a:first-child {
+    color: $night-mode-error;
+
+    &:hover {
+      color: $night-mode-error-dark
+    }
   }
 }
 

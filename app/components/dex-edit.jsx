@@ -22,6 +22,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
 
   const games = useSelector(({ games }) => games);
   const gamesById = useSelector(({ gamesById }) => gamesById);
+  const nightMode = useSelector(({ nightMode }) => nightMode);
   const session = useSelector(({ session }) => session);
 
   const [error, setError] = useState(null);
@@ -133,7 +134,7 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
 
   return (
     <Modal
-      className="modal"
+      className={`modal ${nightMode ? 'night-mode' : ''}`}
       contentLabel="Edit Dex"
       isOpen={isOpen}
       onRequestClose={() => handleRequestClose(false)}
