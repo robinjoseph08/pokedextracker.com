@@ -51,25 +51,33 @@ export function Tracker () {
       dispatch(setShowShare(false));
       dispatch(setCurrentDex(slug, username));
 
-      const u = await dispatch(retrieveUser(username));
-      dispatch(setUser(u));
-      const d = await dispatch(retrieveDex(slug, username));
-      const captures = await dispatch(listCaptures(d, username));
-      dispatch(setCurrentPokemon(captures[0].pokemon.id));
+      try {
+        const u = await dispatch(retrieveUser(username));
+        dispatch(setUser(u));
+        const d = await dispatch(retrieveDex(slug, username));
+        const captures = await dispatch(listCaptures(d, username));
+        dispatch(setCurrentPokemon(captures[0].pokemon.id));
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
     })();
   }, [slug, username]);
 
   const handleScroll = throttle(() => {
-    if (!showScroll && trackerRef.current.scrollTop >= SHOW_SCROLL_THRESHOLD) {
+    if (!showScroll && trackerRef.current && trackerRef.current.scrollTop >= SHOW_SCROLL_THRESHOLD) {
       dispatch(setShowScroll(true));
-    } else if (showScroll && trackerRef.current.scrollTop < SHOW_SCROLL_THRESHOLD) {
+    } else if (showScroll && trackerRef.current && trackerRef.current.scrollTop < SHOW_SCROLL_THRESHOLD) {
       dispatch(setShowScroll(false));
     }
   }, SCROLL_DEBOUNCE);
 
-  const handleScrollButtonClick = useCallback(() => trackerRef.current.scrollTop = 0, [trackerRef.current]);
+  const handleScrollButtonClick = useCallback(() => {
+    if (trackerRef.current) {
+      trackerRef.current.scrollTop = 0;
+    }
+  }, [trackerRef.current]);
 
   if (isLoading) {
     return <div className="loading">Loading...</div>;

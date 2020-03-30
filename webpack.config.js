@@ -30,7 +30,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './app/index.html', filename: 'index.html', inject: 'body' }),
-    new Webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'undefined' }),
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) || 'undefined',
+      'process.env.VERSION': JSON.stringify(process.env.VERSION || 'development')
+    }),
     new Webpack.ProvidePlugin({ React: 'react' })
   ]
 };

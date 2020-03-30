@@ -18,7 +18,7 @@ export function Share ({ profile }) {
 
   const handleClick = () => {
     ReactGA.event({ action: 'select link', category: 'Share' });
-    inputRef.current.select();
+    inputRef.current && inputRef.current.select();
   };
 
   return (
