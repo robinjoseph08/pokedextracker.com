@@ -1,15 +1,15 @@
-import { Raven }        from '../utils/analytics';
+import { Sentry }       from '../utils/sentry';
 import { localStorage } from '../utils/local-storage';
 
 export function tokenToUser (token) {
   if (!token) {
-    Raven.setUserContext();
+    Sentry.setUser(null);
     return null;
   }
 
   const user = JSON.parse(atob(token.split('.')[1]));
 
-  Raven.setUserContext({ id: user.id, username: user.username });
+  Sentry.setUser({ id: user.id, username: user.username });
 
   return user;
 }

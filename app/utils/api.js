@@ -2,17 +2,15 @@ import { stringify } from 'qs';
 
 import { Store } from '../stores';
 
-function handleResponse (response) {
-  return response.json()
-    .then((json) => {
-      if (response.status >= 200 && response.status < 300) {
-        return json;
-      }
+async function handleResponse (response) {
+  const json = await response.json();
+  if (response.status >= 200 && response.status < 300) {
+    return json;
+  }
 
-      const error = new Error(json.error.message);
-      error.response = response;
-      throw error;
-    });
+  const error = new Error(json.error.message);
+  error.response = response;
+  throw error;
 }
 
 function getHeaders () {
@@ -23,24 +21,24 @@ function getHeaders () {
 }
 
 export const API = {
-  delete (url, payload) {
-    return fetch(url, {
+  async delete (url, payload) {
+    const response = await fetch(url, {
       method: 'DELETE',
       body: JSON.stringify(payload),
       headers: getHeaders()
-    })
-      .then((response) => handleResponse(response));
+    });
+    return handleResponse(response);
   },
-  get (url, params) {
-    return fetch(`${url}?${stringify(params)}`)
-      .then((response) => handleResponse(response));
+  async get (url, params) {
+    const response = await fetch(`${url}?${stringify(params)}`);
+    return handleResponse(response);
   },
-  post (url, payload) {
-    return fetch(url, {
+  async post (url, payload) {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(payload),
       headers: getHeaders()
-    })
-      .then((response) => handleResponse(response));
+    });
+    return handleResponse(response);
   }
 };

@@ -48,6 +48,10 @@ export function Account () {
     dispatch(checkVersion());
   }, []);
 
+  if (!session) {
+    return null;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

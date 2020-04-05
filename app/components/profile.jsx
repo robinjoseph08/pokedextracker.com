@@ -36,13 +36,18 @@ export function Profile () {
     dispatch(setCurrentUser(username));
     dispatch(setShowShare(false));
 
-    const [u] = await Promise.all([
-      dispatch(retrieveUser(username)),
-      dispatch(listGames())
-    ]);
+    try {
+      const [u] = await Promise.all([
+        dispatch(retrieveUser(username)),
+        dispatch(listGames())
+      ]);
 
-    dispatch(setUser(u));
-    setIsLoading(false);
+      dispatch(setUser(u));
+
+      setIsLoading(false);
+    } catch (err) {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {

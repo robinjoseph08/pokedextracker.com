@@ -1,6 +1,7 @@
 FROM node:12.16.1 as build
 
 ENV NODE_ENV=production
+ARG VERSION=development
 
 RUN mkdir /app
 WORKDIR /app
