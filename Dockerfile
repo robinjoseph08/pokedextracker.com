@@ -10,7 +10,11 @@ COPY package.json package.json
 COPY yarn.lock yarn.lock
 RUN yarn --production --silent
 
-COPY . .
+COPY .babelrc .babelrc
+COPY webpack.config.js webpack.config.js
+COPY config config
+COPY public public
+COPY app app
 RUN yarn build
 
 FROM nginx:1.17.9-alpine

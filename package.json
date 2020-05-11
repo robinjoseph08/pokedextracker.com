@@ -10,8 +10,7 @@
     "build": "npm run build:bundle && npm run build:version",
     "build:bundle": "webpack",
     "build:version": "date > public/version",
-    "deploy:production": "./scripts/deploy.sh production",
-    "deploy:staging": "./scripts/deploy.sh staging",
+    "deploy": "./scripts/deploy.sh",
     "lint": "eslint -c .eslintrc --ext .js,.jsx app config",
     "start": "webpack-dev-server --port 8080 --hot --inline"
   },
