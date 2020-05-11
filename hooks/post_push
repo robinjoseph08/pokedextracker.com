@@ -1,6 +1,0 @@
-#!/bin/bash
-
-SHORT_HASH=${SOURCE_COMMIT:0:7}
-
-docker tag $IMAGE_NAME $DOCKER_REPO:$SHORT_HASH
-docker push $DOCKER_REPO:$SHORT_HASH
