@@ -9,7 +9,7 @@ module.exports = {
   entry: ['whatwg-fetch', './app/index.jsx'],
   output: {
     path: `${__dirname}/public`,
-    filename: '[name].[contenthash].js',
+    filename: PRODUCTION ? '[name].[contenthash].js' : '[name].[hash].js',
     publicPath: '/'
   },
   resolve: {
