@@ -9,7 +9,7 @@ module.exports = {
   entry: './app/index.jsx',
   output: {
     path: `${__dirname}/public`,
-    filename: 'bundle.js',
+    filename: '[name].[contenthash].js',
     publicPath: '/'
   },
   resolve: {
