@@ -1,7 +1,6 @@
 FROM node:12.16.1 as build
 
 ENV NODE_ENV=production
-ARG VERSION=development
 
 RUN mkdir /app
 WORKDIR /app
@@ -15,6 +14,9 @@ COPY webpack.config.js webpack.config.js
 COPY config config
 COPY public public
 COPY app app
+
+ARG VERSION=development
+
 RUN yarn build
 
 FROM nginx:1.17.9-alpine

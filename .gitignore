@@ -18,9 +18,10 @@ node_modules
 typings
 
 coverage
-bundle.js
-*.map
-version
+public/*.js
+public/*.map
+public/version
+public/index.html
 
 .idea/
 .DS_Store
