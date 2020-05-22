@@ -994,6 +994,10 @@ select {
       color: $night-mode-error-dark
     }
   }
+
+  .reload {
+    background-color: $night-mode-16dp;
+  }
 }
 
 .main-footer {
