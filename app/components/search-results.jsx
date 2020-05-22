@@ -13,7 +13,7 @@ export function SearchResults ({ captures }) {
   const handleClearClick = () => dispatch(setQuery(''));
 
   const filteredCaptures = useMemo(() => {
-    return captures.filter((capture) => capture.pokemon.name.toLowerCase().indexOf(query) === 0);
+    return captures.filter((capture) => capture.pokemon.name.toLowerCase().includes(query));
   }, [captures, query]);
 
   if (filteredCaptures.length === 0) {
