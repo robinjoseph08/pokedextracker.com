@@ -44,3 +44,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [momomoto](https://pokedextracker.com/u/momomoto)
 - [paytonmedia](https://pokedextracker.com/u/paytonmedia)
 - [LDNetwork](https://pokedextracker.com/u/LDNetwork)
+- [Aerma](https://pokedextracker.com/u/Aerma)
