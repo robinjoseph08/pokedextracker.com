@@ -47,3 +47,5 @@ This will be where we add the names for all of the users who've donated any amou
 - [Aerma](https://pokedextracker.com/u/Aerma)
 - [Lila](https://pokedextracker.com/u/Lila)
 - [brock](https://pokedextracker.com/u/brock)
+- [doggyears](https://pokedextracker.com/u/doggyears)
+- [MarekPrime](https://pokedextracker.com/u/MarekPrime)
