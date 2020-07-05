@@ -49,3 +49,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [brock](https://pokedextracker.com/u/brock)
 - [doggyears](https://pokedextracker.com/u/doggyears)
 - [MarekPrime](https://pokedextracker.com/u/MarekPrime)
+- [gaiages](https://pokedextracker.com/u/gaiages)
