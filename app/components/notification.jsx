@@ -18,7 +18,7 @@ export function Notification () {
   return (
     <div className="alert alert-muted">
       <FontAwesomeIcon icon={faTimes} onClick={handleClick} />
-      <p>Track a National Generation 8 dex now! <a href="http://bit.ly/pt-gen8" rel="noopener noreferrer" target="_blank">Read more</a>.</p>
+      <p>Isle of Armor is Here! <a href="http://bit.ly/pt-ioa" rel="noopener noreferrer" target="_blank">Read more</a>.</p>
     </div>
   );
 }

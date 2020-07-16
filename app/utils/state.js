@@ -16,12 +16,12 @@ export function tokenToUser (token) {
 
 export function loadState () {
   const nightMode = localStorage.getItem('nightMode') === 'true' || undefined;
-  const notif20200209 = localStorage.getItem('notif-2020.02.09') === 'true' || undefined;
+  const notif20200715 = localStorage.getItem('notif-2020.07.15') === 'true' || undefined;
   const token = localStorage.getItem('token');
   const session = tokenToUser(token);
   const showInfo = localStorage.getItem('showInfo') === 'true' || undefined;
 
-  return { nightMode, notification: notif20200209, session, showInfo, token };
+  return { nightMode, notification: notif20200715, session, showInfo, token };
 }
 
 export function saveState ({ nightMode, notification, showInfo, token }) {
@@ -31,7 +31,7 @@ export function saveState ({ nightMode, notification, showInfo, token }) {
     localStorage.removeItem('token');
   }
 
-  localStorage.setItem('notif-2020.02.09', notification);
+  localStorage.setItem('notif-2020.07.15', notification);
   localStorage.setItem('showInfo', showInfo);
   localStorage.setItem('nightMode', nightMode);
 }
