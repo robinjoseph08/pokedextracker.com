@@ -1,7 +1,8 @@
+import find                                               from 'lodash/find';
 import { FontAwesomeIcon }                                from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector }                       from 'react-redux';
-import { useEffect }                                      from 'react';
+import { useEffect, useMemo }                             from 'react';
 
 import { EvolutionFamily }     from './evolution-family';
 import { InfoLocations }       from './info-locations';
@@ -10,6 +11,16 @@ import { htmlName, iconClass } from '../utils/pokemon';
 import { padding }             from '../utils/formatting';
 import { retrievePokemon }     from '../actions/pokemon';
 import { setShowInfo }         from '../actions/tracker';
+
+const SEREBII_LINKS = {
+  x_y: 'pokedex-xy',
+  omega_ruby_alpha_sapphire: 'pokedex-xy',
+  sun_moon: 'pokedex-sm',
+  ultra_sun_ultra_moon: 'pokedex-sm',
+  lets_go_pikachu_eevee: 'pokedex-sm',
+  sword_shield: 'pokedex-swsh',
+  sword_shield_expansion_pass: 'pokedex-swsh'
+};
 
 export function Info () {
   const dispatch = useDispatch();
@@ -28,17 +39,28 @@ export function Info () {
     }
   }, [currentPokemon, dex, pokemon]);
 
+  const serebiiPath = useMemo(() => {
+    if (!pokemon) {
+      return null;
+    }
+
+    const swshLocation = find(pokemon.locations, (loc) => loc.game.game_family.id === 'sword_shield');
+
+    // If the Pokemon's location is 'Currently unavailable' for SwSh, that means
+    // they aren't available in this game because of dexit, so we go back to the
+    // the SuMo Serebii links. This will probably need to be updating with
+    // future generations.
+    if (swshLocation && swshLocation.value.length > 0 && swshLocation.value[0] === 'Currently unavailable') {
+      return 'pokedex-sm';
+    }
+
+    return SEREBII_LINKS[dex.game.game_family.id];
+  }, [dex, pokemon]);
+
   const handleInfoClick = () => {
     ReactGA.event({ action: showInfo ? 'collapse' : 'uncollapse', category: 'Info' });
     dispatch(setShowInfo(!showInfo));
   };
-
-  let serebiiPath = 'pokedex-swsh';
-  if (dex.game.game_family.generation === 6) {
-    serebiiPath = 'pokedex-xy';
-  } else if (dex.game.game_family.generation === 7) {
-    serebiiPath = 'pokedex-sm';
-  }
 
   if (!pokemon) {
     return (

@@ -48,11 +48,19 @@ export function DexEdit ({ dex, isOpen, onRequestClose }) {
   }, [dex.id]);
 
   const showGameWarning = useMemo(() => {
+    // If you're moving from the expansion down to the original as a regional
+    // dex, we should show the game warning. The reason this needed is because
+    // we made the national dex for sword_shield the same as the expansion, so
+    // the clause checking for national total isn't evaluating to true.
+    if (dex.game.game_family.id === 'sword_shield_expansion_pass' && gamesById[game].game_family.id === 'sword_shield' && regional) {
+      return true;
+    }
+
     const differentFamily = gamesById[game].game_family.id !== dex.game.game_family.id;
     const lessNationalCount = gamesById[game].game_family.national_total < dex.game.game_family.national_total;
 
     return differentFamily && lessNationalCount;
-  }, [dex.id, game, gamesById]);
+  }, [dex.id, game, gamesById, regional]);
 
   const showRegionalWarning = useMemo(() => regional && !dex.regional, [dex.id, regional]);
   const showUrlWarning = useMemo(() => slug(title || 'Living Dex', { lower: true }) !== dex.slug, [dex.id, title]);

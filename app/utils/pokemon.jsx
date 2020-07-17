@@ -7,22 +7,23 @@ import { BOX_SIZE } from '../components/box';
 import { padding }  from './formatting';
 
 export function groupBoxes (captures) {
-  let lastBox = null;
+  let lastBoxName = null;
+  let lastBoxIndex = 0;
 
-  return captures.reduce((all, capture, i) => {
-    const naturalBox = Math.ceil((i + 1) / BOX_SIZE) - 1;
-    let box = Math.max(naturalBox, all.length - 1);
+  return captures.reduce((all, capture) => {
+    let boxIndex = all[lastBoxIndex].length === BOX_SIZE ? lastBoxIndex + 1 : lastBoxIndex;
 
-    if (capture.pokemon.box !== lastBox) {
-      box++;
+    if (capture.pokemon.box !== lastBoxName) {
+      boxIndex++;
     }
 
-    lastBox = capture.pokemon.box;
+    lastBoxName = capture.pokemon.box;
+    lastBoxIndex = boxIndex;
 
-    all[box] = all[box] || [];
-    all[box].push(capture);
+    all[boxIndex] = all[boxIndex] || [];
+    all[boxIndex].push(capture);
     return all;
-  }, []);
+  }, [[]]);
 }
 
 export function htmlName (name) {
