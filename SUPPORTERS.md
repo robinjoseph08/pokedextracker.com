@@ -52,3 +52,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [gaiages](https://pokedextracker.com/u/gaiages)
 - [damnablebear](https://pokedextracker.com/u/damnablebear)
 - [gee0000](https://pokedextracker.com/u/gee0000)
+- [stormyotter](https://pokedextracker.com/u/stormyotter)
