@@ -55,3 +55,5 @@ This will be where we add the names for all of the users who've donated any amou
 - [stormyotter](https://pokedextracker.com/u/stormyotter)
 - [Battgirl](https://pokedextracker.com/u/Battgirl)
 - [Jabari](https://pokedextracker.com/u/Jabari)
+- [manojalpa](https://pokedextracker.com/u/manojalpa)
+- [ejrodriguez](https://pokedextracker.com/u/ejrodriguez)
