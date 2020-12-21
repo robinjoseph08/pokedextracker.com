@@ -23,7 +23,11 @@ export function Box ({ captures, deferred }) {
   if (!title) {
     const firstNumber = dex.regional ? firstPokemon[`${dex.game.game_family.id}_id`] : firstPokemon.national_id;
     const lastNumber = dex.regional ? lastPokemon[`${dex.game.game_family.id}_id`] : lastPokemon.national_id;
-    title = `${padding(firstNumber, 3)} - ${padding(lastNumber, 3)}`;
+    if (firstNumber === lastNumber) {
+      title = padding(firstNumber, 3);
+    } else {
+      title = `${padding(firstNumber, 3)} - ${padding(lastNumber, 3)}`;
+    }
   } else if (title.indexOf('reset') === 0) {
     const parts = title.split(':');
     const offset = parseInt(parts[1]);
@@ -35,7 +39,11 @@ export function Box ({ captures, deferred }) {
     firstNumber -= offset;
     lastNumber -= offset;
 
-    title = `${padding(firstNumber, 3)} - ${padding(lastNumber, 3)}`;
+    if (firstNumber === lastNumber) {
+      title = padding(firstNumber, 3);
+    } else {
+      title = `${padding(firstNumber, 3)} - ${padding(lastNumber, 3)}`;
+    }
 
     if (prefix) {
       title = `${prefix} ${title}`;

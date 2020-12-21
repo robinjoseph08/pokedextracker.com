@@ -18,7 +18,7 @@ export function Notification () {
   return (
     <div className="alert alert-muted">
       <FontAwesomeIcon icon={faTimes} onClick={handleClick} />
-      <p>Isle of Armor is Here! <a href="http://bit.ly/pt-ioa" rel="noopener noreferrer" target="_blank">Read more</a>.</p>
+      <p>We've updated for the Crown Tundra! <a href="http://bit.ly/pt-ct" rel="noopener noreferrer" target="_blank">Read more here</a>.</p>
     </div>
   );
 }
