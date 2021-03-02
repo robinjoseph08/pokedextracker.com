@@ -59,3 +59,4 @@ This will be where we add the names for all of the users who've donated any amou
 - [ejrodriguez](https://pokedextracker.com/u/ejrodriguez)
 - [mrkirbs](https://pokedextracker.com/u/mrkirbs)
 - [dishophoiba](https://pokedextracker.com/u/dishophoiba)
+- [SlyCooperFan1](https://pokedextracker.com/u/SlyCooperFan1)
